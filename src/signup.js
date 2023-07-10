@@ -51,7 +51,7 @@ function SignUpBox(props) {
                         {idEmpty? <SignUpIdErrorField setId={setId} /> : idDupCheck?  <SignUpIdField setId={setId} /> : <SignUpDisableField id={id} /> } 
                         {idEmpty? <SignUpDupCheckButton setDupDup={setDupDup} setIdDupCheck={setIdDupCheck} setIdEmpty={setIdEmpty} id={id}/> : idDupCheck? <SignUpDupCheckButton setIdEmpty={setIdEmpty} setDupDup={setDupDup} setIdDupCheck={setIdDupCheck} id={id}/> : <p style={{fontSize:'10px', color:'gray'}}>사용 가능한 아이디입니다</p> }
                         {dupDup? <p style={{fontSize:'10px', marginTop:'25px', marginBottom:'0px', color:'red'}}>중복된 아이디입니다</p> : <p></p>}
-                        { nameEmpty? <SignUpNameEmptyField setName={setName} /> : <SignUpNameField setName={setName} /> }
+                        {nameEmpty? <SignUpNameEmptyField setName={setName} /> : <SignUpNameField setName={setName} /> }
                         {pwEmpty? <SignUpPwErrorField setPw={setPw} /> : pwWrong? <SignUpPwWrongField setPw={setPw} /> : <SignUpPwField setPw={setPw} />}
                         <p style={{color:'gray', fontSize:'10px', margin:'0px', marginTop:'8px'}}>비밀번호는 8자 이상이어야 합니다</p>
                         {pwCheckEmpty? <SignUpPwCheckEmptyField setPwDup={setPwDup} /> : pwCheck? <SignUpPwCheckErrorField setPwDup={setPwDup} /> : <SignUpPwCheckField setPwDup={setPwDup} /> }

@@ -14,7 +14,9 @@ function AppProfile() {
   return (
 <div>
     <div id="wrap">
-      <div id="header">
+      <div id="header" style={{cursor:'pointer'}} onClick={()=> {
+        navigate('/');
+      }}>
       Header
       </div>
       <div id = "bt">

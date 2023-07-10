@@ -8,9 +8,9 @@ export default function Bar() {
 
     return (
         <div style={{height:'60px', backgroundColor:'#FFFFFF', fontFamily:'dohyeon', margin:'-20px', display:'flex', flexDirection:'row', justifyContent:'center', boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.1)'}}>
-            <ArrowBackIcon fontSize="large" sx={{color:"black", marginTop:"12px", marginLeft:'-50px', marginRight:'50px', cursor:'pointer'}} onClick={() => {
+            <ArrowBackIcon fontSize="large" sx={{color:'black', marginTop:'12px', marginLeft:'-30px', marginRight:'50px', cursor:'pointer'}} onClick={() => {
                 navigate('/profile');
-            }}/>
+            }} />
             <h1 style={{paddingBottom:'30px', cursor: 'pointer', width:'200px', color:'#000000', width:'144px', fontSize:'25px'}} onClick={()=>{
                 navigate('/');
           }}>대동유어지도</h1>

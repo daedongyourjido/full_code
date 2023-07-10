@@ -28,27 +28,35 @@ export default function LoginButton(props) {
                 props.setPwEmpty(false);
                 
             else {
-                    localStorage.setItem('token', "1234");
-                    localStorage.setItem('id', "sjhong98@icloud.com");
-                    localStorage.setItem('pw', "mango");
-                    localStorage.setItem('name', "승재");
-                    navigate('/');
+                // localStorage.setItem('id', "sjhong98@icloud.com");
+                // localStorage.setItem('pw', "mango");
+                // localStorage.setItem('name', "승재");
+                // navigate('/');
 
-                // axios.post('https://wtdhqxavjk.execute-api.us-east-2.amazonaws.com/auth/2023-h-capstone-auth', {
-                //     id: props.id,
-                //     password: props.pw
-                // })
-                // .then(res => {
-                //     console.log('token:', res.data.token, "id:",res.data.id, "pw:", res.data.password, "name:", res.data.name);
-                //     localStorage.setItem('token', res.data.token);
-                //     localStorage.setItem('id', res.data.id);
-                //     localStorage.setItem('pw', res.data.password);
-                //     localStorage.setItem('name', res.data.name);
-                //     navigate('/');
-                // })
-                // .catch(error => {;
-                //     console.log(error);
-                // })
+                /** 로그인 api 추가 **/
+                axios.post('https://h8viqjk6ob.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-login', {
+                    id: props.id,
+                    password: props.pw
+                })
+                .then(res => {
+                    const statusCode = res.status
+                    switch (statusCode) {
+                        // 계정 정보 존재하는 경우 status 201
+                        case 201:
+                            localStorage.setItem('id', res.data.id);
+                            localStorage.setItem('pw', res.data.password);
+                            localStorage.setItem('name', res.data.nickname);
+                            navigate('/');
+                            break
+                        // 계정 정보 맞지 않은 경우 status 202
+                        case 202:
+                            alert('아이디 혹은 패스워드 오류')
+                            break
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
 
       }}}>sign In</Button>
     </Stack>

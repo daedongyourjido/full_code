@@ -52,7 +52,7 @@ function Main() {
   const [login, setLogin] = useState(false);
 
   useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('id');
     if (token) {
       setLogin(true);
     } else {

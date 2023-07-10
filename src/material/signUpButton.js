@@ -42,24 +42,22 @@ export default function SignUpButton(props) {
                 if(props.id && props.pw) {
                     if(props.name && props.pwDup) {
                         if(props.pwDup === props.pw) {
-                        axios.post('https://vxpskt0u99.execute-api.us-east-2.amazonaws.com/default/outbound_mailer', {
-                            api: 'mail',
-                            sendData: {
-                                senderAddress: 'no_reply@dyz.com',
-                                title: '대용유어지도 인증 메일입니다',
-                                // 이메일 바디(db연동시 값 전달)
-                                body: 'body',
-                                recipients: {
-                                    // 이메일 받는 사람 주소
-                                    address: props.id,
-                                    type: 'R'
-                                },
-                                id : props.id,
-                                pw : props.pw,
-                                name : props.name
-                            }
+                            /** 회원가입 api 추가 **/
+                            axios.post('https://iclveynbwf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-signin', {
+                                // 로그인 API의 경우 type: 'signup'
+                                type: 'signup',
+                                email : props.id,
+                                password : props.pw,
+                                nickname : props.name
                             })
-                            navigate('/needVerify');
+                                // 문제가 없을 경우(정상 회원가입) 인덱스 라우팅
+                            .then(res => {
+                                alert('회원가입 완료!')
+                                navigate('/')
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            })
                         }
                     }
             }
