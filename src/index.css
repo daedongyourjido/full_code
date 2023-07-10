@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.root {
+  font-family: "dohyeon"; 
+}
+
+@font-face {
+	font-family: "dohyeon";
+	src: url(./assets/font/BMDOHYEON.ttf);
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  flex: 1;
+  background-color: #045369;
+  color: #FFFFFF;
+  padding: 20px;
+  height:100%;
+}
+
+.map {
+  height:100%;
+}
+
+.randomImages {
+  margin-right: 30px;
+}
+
+.bar {
+  margin: 0px;
+  height: 60px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding:20px;
+  padding-top:0px;
+  font-family: "dohyeon";
+}
+
+#idButton {
+  font-family:'dohyeon';
+  color: #FFFFFF;
+  background-color: #045369;
+  border: none;
+}
