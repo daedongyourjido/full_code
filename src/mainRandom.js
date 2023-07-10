@@ -49,103 +49,115 @@ function Content(props) {
     const [anim, setAnim] = useState("");
 
     useEffect(()=> {    // 지역 바뀔 때 사진도 바뀌게 하기
-        if(_name === 'seoul') {
-            setImg_1(seoul1);
-            setImg_2(seoul2);
-            setImg_3(seoul3);
-            setImg_4(seoul4);
-        } 
-        else if(_name === 'gyeonggi') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'incheon') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'daejeon') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'busan') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'jeonnam') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'jeonbuk') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'chungbuk') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'chungnam') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'gangwon') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'gyeongnam') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'gyeongbuk') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'jeju') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'daegu') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'ulsan') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-        else if(_name === 'sejong') {
-            setImg_1(img1);
-            setImg_2(img2);
-            setImg_3(img3);
-            setImg_4(img4);
-        } 
-
+        /** 지역별 사진 api 추가 **/
+        axios.post('https://qzqejgzukh.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-main-random', {
+            location: _name
+        })
+            .then(res => {
+                setImg_1(res.data[0]);
+                setImg_2(res.data[1]);
+                setImg_3(res.data[2]);
+                setImg_4(res.data[3]);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        // if(_name === 'seoul') {
+        //     setImg_1(seoul1);
+        //     setImg_2(seoul2);
+        //     setImg_3(seoul3);
+        //     setImg_4(seoul4);
+        // }
+        // else if(_name === 'gyeonggi') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'incheon') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'daejeon') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'busan') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'jeonnam') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'jeonbuk') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'chungbuk') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'chungnam') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'gangwon') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'gyeongnam') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'gyeongbuk') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'jeju') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'daegu') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'ulsan') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
+        // else if(_name === 'sejong') {
+        //     setImg_1(img1);
+        //     setImg_2(img2);
+        //     setImg_3(img3);
+        //     setImg_4(img4);
+        // }
         setAnim("fade-in");
     }, [_name]);
 
