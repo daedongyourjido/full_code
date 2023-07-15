@@ -43,10 +43,18 @@ export default function LoginButton(props) {
                     switch (statusCode) {
                         // 계정 정보 존재하는 경우 status 201
                         case 201:
-                            localStorage.setItem('id', res.data.id);
-                            localStorage.setItem('pw', res.data.password);
-                            localStorage.setItem('name', res.data.nickname);
-                            navigate('/');
+                            console.log(res)
+                            // 사용자 정보 인증 안 됨
+                            if(res.data.verified === 0) {
+                                alert('이메일 인증을 완료해주세요!')
+                            }
+                            // 사용자 정보 인증됨
+                            else {
+                                localStorage.setItem('id', res.data.id);
+                                localStorage.setItem('pw', res.data.password);
+                                localStorage.setItem('name', res.data.nickname);
+                                navigate('/');
+                            }
                             break
                         // 계정 정보 맞지 않은 경우 status 202
                         case 202:

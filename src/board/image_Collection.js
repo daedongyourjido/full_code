@@ -1,7 +1,8 @@
 import React from "react";
 import List_Component from "./list_Component";
 
-function Image_Collection() {
+function Image_Collection(props) {
+    console.log(props)
     const images = [
         {
             id: 1,
@@ -48,13 +49,12 @@ function Image_Collection() {
             img:"https://d2ur7st6jjikze.cloudfront.net/landscapes/4652_large_square_1535619901.jpg?1535619901",
             alt: "Bangkok"
         },
-        
     ]
     return(
         <ul>
-            {images.map((image) => 
+            {props.userLocationInfo.map((element, index) =>
                 <li>
-                    <List_Component key={image.id} img={image.img} alt={image.alt}/>
+                    <List_Component key={index} listInfo={element}/>
                 </li>
                 )}
         </ul>
