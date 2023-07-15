@@ -2,7 +2,6 @@ import React from "react";
 import './list_Component.css'
 
 function List_Component(props) {
-    console.log(props)
     return (
         <div className="list_com">
             <a href="/">
