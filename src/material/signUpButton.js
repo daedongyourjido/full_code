@@ -52,7 +52,7 @@ export default function SignUpButton(props) {
                             })
                                 // 문제가 없을 경우(정상 회원가입) 인덱스 라우팅
                             .then(res => {
-                                alert('회원가입 완료!')
+                                alert('회원가입 완료! 메일 인증을 완료해주세요.')
                                 navigate('/')
                             })
                             .catch(error => {
