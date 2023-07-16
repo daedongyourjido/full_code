@@ -11,7 +11,7 @@ export default function Bar() {
             <ArrowBackIcon fontSize="large" sx={{color:'black', marginTop:'12px', marginLeft:'-30px', marginRight:'50px', cursor:'pointer'}} onClick={() => {
                 navigate('/profile');
             }} />
-            <h1 style={{paddingBottom:'30px', cursor: 'pointer', width:'200px', color:'#000000', width:'144px', fontSize:'25px'}} onClick={()=>{
+            <h1 style={{paddingBottom:'30px', cursor: 'pointer', color:'#000000', width:'144px', fontSize:'25px'}} onClick={()=>{
                 navigate('/');
           }}>대동유어지도</h1>
           <div style={{marginLeft:'60%', display:'flex', flexDirection:'row'}}>

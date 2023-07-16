@@ -175,9 +175,9 @@ export const KakaoMap = (props) => {
             customOverlay.setMap(null);
           });
 
+          // route path 동적 지정
           kakao.maps.event.addListener(polygon, 'click', function () {
-            var url = './' + name;
-            console.log(code);
+            const url = '/board/' + name;
             navigate(url);
           });
       }
