@@ -34,7 +34,7 @@ export default function SignUpButton(props) {
                     props.setPwWrong(true);
                 else if(props.pw.length >= 8)
                     props.setPwWrong(false);
-                if(!props.pwCheck)
+                if(!props.pwDup)
                     props.setPwCheckEmpty(true);
                 else if(props.pw != props.pwDup){
                     props.setPwCheck(true);
