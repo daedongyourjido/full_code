@@ -39,9 +39,9 @@ function AfterLogin(props){
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
         <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
-        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</p>
+        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p>
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
-          localStorage.clear();
+          sessionStorage.clear();
           window.location.reload();
         }} />
     </div>
@@ -52,7 +52,7 @@ function Main() {
   const [login, setLogin] = useState(false);
 
   useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
-    const token = localStorage.getItem('id');
+    const token = sessionStorage.getItem('id');
     if (token) {
       setLogin(true);
     } else {
