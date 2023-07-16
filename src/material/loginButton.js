@@ -43,6 +43,7 @@ export default function LoginButton(props) {
                     switch (statusCode) {
                         // 계정 정보 존재하는 경우 status 201
                         case 201:
+                            console.log("login ==== : ", res);
                             localStorage.setItem('id', res.data.id);
                             localStorage.setItem('pw', res.data.password);
                             localStorage.setItem('name', res.data.nickname);

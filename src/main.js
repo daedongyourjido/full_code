@@ -32,14 +32,14 @@ function BeforeLogin(props){
 
 function AfterLogin(props){
   const navigate = useNavigate();
-  // const name = localStorage.getItem('name');
+  const name = localStorage.getItem('name');
 
 
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
         <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
-        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</p>
+        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{name}</p>
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
           localStorage.clear();
           window.location.reload();
