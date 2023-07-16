@@ -40,6 +40,9 @@ function AppProfile() {
       </div>
       <div id = "bt">
         <BasicButtons/>
+        <SettingsOutlinedIcon style={{cursor:'pointer'}} onClick={() => {
+          navigate('/setting/change');
+        }}/>
       </div>
       <hr/>
       <div id="side">

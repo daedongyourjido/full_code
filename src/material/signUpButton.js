@@ -58,6 +58,8 @@ export default function SignUpButton(props) {
                             .catch(error => {
                                 console.log(error);
                             })
+
+                            console.log("====== sign up! ======");
                         }
                     }
             }
