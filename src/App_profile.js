@@ -22,7 +22,7 @@ function AppProfile() {
   /** 사용자 장소 이미지 불러오는 api **/
   useEffect(()=>{
     axios.post('https://9p156tq894.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-profile', {
-      userId: localStorage.id
+      userId: sessionStorage.id
     })
         .then(res => {
           setPlaceImages(res.data)

@@ -50,9 +50,9 @@ export default function LoginButton(props) {
                             }
                             // 사용자 정보 인증됨
                             else {
-                                localStorage.setItem('id', res.data.id);
-                                localStorage.setItem('pw', res.data.password);
-                                localStorage.setItem('name', res.data.nickname);
+                                sessionStorage.setItem('id', res.data.id);
+                                sessionStorage.setItem('pw', res.data.password);
+                                sessionStorage.setItem('name', res.data.nickname);
                                 navigate('/');
                             }
                             break
