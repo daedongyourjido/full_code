@@ -14,23 +14,6 @@ import NeedResetPw from './needResetPw.js';
 import ResetPw from './resetPw.js';
 import AppProfile from './App_profile.js';
 
-import Seoul from './board/seoul.js';
-import Busan from './board/busan.js';
-import Gyeonggi from './board/gyeonggi.js';
-import Gyeongbuk from './board/gyeongbuk.js';
-import Gyeongnam from './board/gyeongnam.js';
-import Jeonnam from './board/jeonnam.js';
-import Jeonbuk from './board/jeonnam.js';
-import Chungbuk from './board/chungbuk.js';
-import Chungnam from './board/chungnam.js';
-import Ulsan from './board/ulsan.js';
-import Gangwon from './board/gangwon.js';
-import Jeju from './board/jeju.js';
-import Daegu from './board/daegu.js';
-import Incheon from './board/incheon.js';
-import Daejeon from './board/daejeon.js';
-import Sejong from './board/sejong.js';
-
 import Place from './board/Place'
 
 
@@ -52,23 +35,6 @@ function App() {
         <Route path='find/send' element={<NeedResetPw />} />
         <Route path='find/reset' element={<ResetPw />} />
         <Route path='/profile' element={<AppProfile />} />
-
-        {/*<Route path='/seoul' element={<Seoul />} />*/}
-        {/*<Route path='/gyeonggi' element={<Gyeonggi />} />*/}
-        {/*<Route path='/incheon' element={<Incheon />} />*/}
-        {/*<Route path='/daejeon' element={<Daejeon />} />*/}
-        {/*<Route path='/busan' element={<Busan />} />*/}
-        {/*<Route path='/jeonnam' element={<Jeonnam />} />*/}
-        {/*<Route path='/jeonbuk' element={<Jeonbuk />} />*/}
-        {/*<Route path='/chungbuk' element={<Chungbuk />} />*/}
-        {/*<Route path='/chungnam' element={<Chungnam />} />*/}
-        {/*<Route path='/gangwon' element={<Gangwon />} />*/}
-        {/*<Route path='/gyeongbuk' element={<Gyeongbuk />} />*/}
-        {/*<Route path='/gyeongnam' element={<Gyeongnam />} />*/}
-        {/*<Route path='/jeju' element={<Jeju />} />*/}
-        {/*<Route path='/daegu' element={<Daegu />} />*/}
-        {/*<Route path='/ulsan' element={<Ulsan />} />*/}
-        {/*<Route path='/sejong' element={<Sejong />} />*/}
 
         {/** route 동적 이동 **/}
         <Route path={'/board/:place'} element={<Place/>}/>
