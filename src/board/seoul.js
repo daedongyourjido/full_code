@@ -44,7 +44,7 @@ function Seoul() {
         <div className='header'>
           <Text />
           <div className='r_header'>
-            <button onClick={()=>{navigate('/write_gesimool')}}>게시물 작성하기</button>
+            <button onClick={()=>{navigate('/write')}}>게시물 작성하기</button>
             <input type='text'></input>
             <a href='/'>Login</a>
           </div>
