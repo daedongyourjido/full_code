@@ -13,8 +13,9 @@ import SuccessWithdraw from './successWithdraw.js';
 import NeedResetPw from './needResetPw.js';
 import ResetPw from './resetPw.js';
 import AppProfile from './App_profile.js';
-
+import Seoul from './board/seoul.js';
 import Place from './board/Place'
+import Write_gesimool from './board/write_gesimool.js';
 
 
 
@@ -35,9 +36,13 @@ function App() {
         <Route path='find/send' element={<NeedResetPw />} />
         <Route path='find/reset' element={<ResetPw />} />
         <Route path='/profile' element={<AppProfile />} />
+        <Route path='/write' element={<Write_gesimool />} />
 
         {/** route 동적 이동 **/}
         <Route path={'/board/:place'} element={<Place/>}/>
+
+        {/* 개별 라우팅 */}
+        <Route path={'/seoul'} element={<Seoul />} /> 
       </Routes>
     </BrowserRouter>
   )
