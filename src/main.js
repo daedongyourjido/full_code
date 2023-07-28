@@ -34,12 +34,12 @@ function AfterLogin(props){
   const navigate = useNavigate();
   // const name = localStorage.getItem('name');
 
-
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
         <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
-        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p>
+        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
+        {/* name 가져와 표시 */}
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
           sessionStorage.clear();
           window.location.reload();
@@ -67,8 +67,7 @@ function Main() {
           {login? <AfterLogin /> : <BeforeLogin />}
       </div>
         <KakaoMap />
-  
-  </div>
+      </div>
   )
 }
 
