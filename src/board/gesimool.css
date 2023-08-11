@@ -1,6 +1,9 @@
 .cover {
-    position: fixed;
-    display: flex;
+    position: relative;
+    right: 350px;
+    width: 1000px;
+    height: 1100px;
+    border: none;
 }
 
 .main_con {
@@ -9,12 +12,13 @@
     height: 1100px;
     min-height: 1000px;
     border-radius: 5px;
-    position: fixed;
+    position: relative;
     top: 50%;
-    left: 50%;
+    left: 30%;
     transform: translate(-50%, -50%);
     line-height: 100%;
     flex: 1;
+    float: left;
 }
 
 .g_header {
@@ -28,7 +32,7 @@
     display: flex;
 }
 
-.profile_Name > img {
+.profile_img {
     width: 40px;
     height: 40px; 
     border-radius: 100%; 
@@ -36,7 +40,7 @@
     margin: 15px 12px 15px 0px;
 }
 
-.profile_Name > p {
+#pro_p {
     font-weight: bold;
     margin: 27px 0px;
     font-size: 18px;
@@ -94,8 +98,42 @@
     position: absolute;
 }
 
-.comment p {
+#comment_p {
     display: inline;
+}
+
+#comment_ipt {
+    margin: 14px 0 0 20px;
+    width: 430px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 13px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+#comment_btn {
+    font-size: 15px;
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    float: right;
+    position: relative;
+    top: 11px;
+    right: 11px;
+    border-radius: 5px;
+    color: blue;
+}
+
+#comment_btn:hover {
+    background-color: #b2b0b0;
+}
+
+#comment_btn:active {
+    background-color: #908f8f;
 }
 
 .gesimoolSlide img{
@@ -124,7 +162,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     max-width: 300px;
@@ -156,3 +193,61 @@
       background-color: rgba(0, 0, 0, 0.8); /* 종료 상태는 불투명한 검정색 배경 색상 */
     }
   }
+
+.comment_list {
+    position: relative;
+    left: 5px;
+    float: right;
+    width: 400px;
+    height: 1100px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#list_p {
+    text-align: center;
+    font-size: 15px;
+}
+
+#list_hr {
+    margin: 0 auto;
+    width: 398px;
+    border: 0px;
+    background-color: #cbcbcb;
+    height: 1px;
+}
+
+ul {
+    list-style: none;
+    padding: 0 25px;
+}
+
+.comment_li {
+    width: 350px;
+    height: 80px;
+    background-color: #cccccc;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.commentProfileImg {
+    width: 40px;
+    height: 40px; 
+    border-radius: 100%; 
+    cursor: pointer;
+}
+
+.commentProfileP {
+    color: black;
+}
+
+.comments {
+    position: relative;
+    bottom: 23px;
+    margin: 0 0 0 10px;
+    display: inline-block;
+    width: 300px;
+    height: 80px;
+    background-color: #e8e8e8;
+    border-radius: 5px;
+}

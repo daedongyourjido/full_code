@@ -1,11 +1,10 @@
 .write_main {
+    margin: 80px auto;
     background-color:bisque;
     width: 1320px;
-    height: 900px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 1100px;
+    position: relative;
+    text-align: center;
 }
 
 .write_con {
@@ -31,6 +30,7 @@
 }
 
 .picture {
+    float: left;
     width: 150px;
     height: 150px;
     background-color: rgb(182, 177, 177);
@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 
-.picture p {
+#picture_p {
     margin: auto;
     line-height: 150px;
     text-align: center;
@@ -57,13 +57,13 @@
     display: flex;
 }
 
-.title p {
+#title_p {
     margin: 0 10px 0 0;
 }
 
 .bottom {
     margin: 0 30px 0 30px;
-    height: 550px;
+    height: 700px;
 }
 
 .bottom input {table-layout: fixed;
@@ -78,5 +78,5 @@
 }
 
 .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    min-height: 515px;
+    min-height: 700px;
 }

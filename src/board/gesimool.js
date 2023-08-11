@@ -12,8 +12,8 @@ function Gesimool(props) {
             <div className="main_con">
                 <div className="g_header">
                     <div className="profile_Name">
-                        <img src={propic} onClick={()=>{navigate('/profile')}}></img>
-                        <p onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</p>
+                        <img className="profile_img" src={propic} onClick={()=>{navigate('/profile')}}></img>
+                        <span id="pro_p" onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</span>
                     </div>
                 </div>
                 <div className="gallery">
@@ -58,9 +58,37 @@ function Gesimool(props) {
                 </div>
                 <hr id="line"></hr>
                 <div className="comment">
-                    <p style={{lineHeight:'60px'}}>댓글</p>
-                    <p style={{float:'right', lineHeight:'28px', paddingRight:'20px'}}>send</p>
+                    <p id="comment_p" style={{lineHeight:'60px'}}>댓글</p>
+                    <input type="text" id="comment_ipt"></input>
+                    <button id="comment_btn">게시</button>
                 </div>
+            </div>
+            <div className="comment_list">
+                <p id="list_p">댓글</p>
+                <hr id="list_hr"></hr>
+                <ul>
+                    <li className="comment_li">
+                        <img className="commentProfileImg" src={propic} onClick={()=>{navigate('/profile')}}></img>
+                        <p className="comments">
+                            <span className="commentProfileP" onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</span>
+                            댓글
+                        </p>
+                    </li>
+                    <li className="comment_li">
+                        <img className="commentProfileImg" src={propic} onClick={()=>{navigate('/profile')}}></img>
+                        <p className="comments">
+                            <span className="commentProfileP" onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</span>
+                            댓글
+                        </p>
+                    </li>
+                    <li className="comment_li">
+                        <img className="commentProfileImg" src={propic} onClick={()=>{navigate('/profile')}}></img>
+                        <p className="comments">
+                            <span className="commentProfileP" onClick={()=>{navigate('/profile')}} >{localStorage.getItem('name')}</span>
+                            댓글
+                        </p>
+                    </li>
+                </ul>
             </div>
         </div>
     )
