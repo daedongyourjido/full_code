@@ -29,7 +29,7 @@ jobs:
           npm run build
 
       - name: zip distributions
-        run: zip -r 2023-c-capstone.zip ./build ./appspec.yml ./scripts
+        run: zip -r 2023-c-capstone.zip ./build/static ./build/asset-manifest.json ./build/favicon.ico ./build/robots.txt ./build/index.html ./build/logo192.png ./build/logo512.png ./build/manifest.json ./appspec.yml ./scripts
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v2
