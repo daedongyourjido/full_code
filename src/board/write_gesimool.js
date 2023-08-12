@@ -150,6 +150,7 @@ function Write_gesimool() {
                         </Button>
                     </div>
                     <hr/>
+
                     <div className={"middle"} >
                         <Input
                             type="file"
@@ -165,6 +166,7 @@ function Write_gesimool() {
                     </div>
                     <div className="title" style={{margin: "20px auto auto auto"}}>
                         <p>제목 :</p>
+
                         <Box
                             component="form"
                             sx={{
@@ -174,6 +176,7 @@ function Write_gesimool() {
                             autoComplete="off"
                             >
                             <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{marginTop:'35px'}}/>
+
                         </Box>
                     </div>
                     <div className="bottom">

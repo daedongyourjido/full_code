@@ -176,21 +176,13 @@ function Place() {
                 </AppBar>
             </Box>
             <div className='contents'>
-                <div className='side'>
-                    <div className='inner'>
-                        <h1>지역 이름</h1>
-                        <h3>추천게시물</h3>
-                        <div className='slider'>
-                            <SimpleSlider
-                                userLocationInfo={userLocationInfo}
-                            />
-                        </div>
-                        <div className='contentsBtn'>
-                            <button href="/" onClick={onChangeRestaurant}>맛집</button>
-                            <button href="/" onClick={onChangeHotel}>숙소</button>
-                            <button href="/" onClick={onChangeLocation}>여행지</button>
-                        </div>
-                    </div>
+              <div className='side'>
+                <div className='inner'>
+                  <h1>지역 이름</h1>
+                  <h3>추천게시물</h3>
+                  <div className='slider'>
+                    <SimpleSlider/>
+                  </div>
                 </div>
                 <div className='main'>
                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -220,8 +212,9 @@ function Place() {
                     </Box>
                 </div>
             </div>
+          </div>
         </div>
-    );
+      );
 }
 
 export default Place;

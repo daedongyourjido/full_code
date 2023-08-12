@@ -37,10 +37,7 @@ function App() {
         <Route path='find/reset' element={<ResetPw />} />
         <Route path='/profile' element={<AppProfile />} />
         <Route path='/write' element={<Write_gesimool />} />
-
-        {/** route 동적 이동 **/}
         <Route path={'/board/:place'} element={<Place/>}/>
-
       </Routes>
     </BrowserRouter>
   )

@@ -5,14 +5,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
-import seoul1 from './image/seoul/seoul1.jpeg';
-import seoul2 from './image/seoul/seoul2.jpeg';
-import seoul3 from './image/seoul/seoul3.jpeg';
-import seoul4 from './image/seoul/seoul4.jpeg';
-import img1 from './image/rest/img1.jpeg';
-import img2 from './image/rest/img2.jpeg';
-import img3 from './image/rest/img3.jpeg';
-import img4 from './image/rest/img4.jpeg';
 
 function Arrow(props) {
     const {className, style, onClick} = props;
@@ -62,102 +54,6 @@ function Content(props) {
             .catch(error => {
                 console.log(error);
             })
-        // if(_name === 'seoul') {
-        //     setImg_1(seoul1);
-        //     setImg_2(seoul2);
-        //     setImg_3(seoul3);
-        //     setImg_4(seoul4);
-        // }
-        // else if(_name === 'gyeonggi') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'incheon') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'daejeon') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'busan') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'jeonnam') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'jeonbuk') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'chungbuk') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'chungnam') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'gangwon') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'gyeongnam') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'gyeongbuk') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'jeju') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'daegu') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'ulsan') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
-        // else if(_name === 'sejong') {
-        //     setImg_1(img1);
-        //     setImg_2(img2);
-        //     setImg_3(img3);
-        //     setImg_4(img4);
-        // }
         setAnim("fade-in");
     }, [_name]);
 

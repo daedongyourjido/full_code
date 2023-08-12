@@ -5,7 +5,6 @@ import LoginPageButton from './material/loginPageButton.js'
 import SearchField from './material/searchField2.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Icon } from '@mui/material';
 
 function Text() {
   const navigate = useNavigate();
