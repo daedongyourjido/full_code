@@ -34,6 +34,7 @@ function Content(props) {
     const [img_2, setImg_2] = useState(null);
     const [img_3, setImg_3] = useState(null);
     const [img_4, setImg_4] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [img_t, setImg_t] = useState(null);
 
     const [anim, setAnim] = useState("");
@@ -81,6 +82,7 @@ function Content(props) {
 
 function MainRandom(props) {
     const [name, setName] = useState('Welcome to 대동유어지도');
+    // eslint-disable-next-line no-unused-vars
     const [login, setLogin] = useState('false');
     const _name = props.name;
     const _login = props.login;

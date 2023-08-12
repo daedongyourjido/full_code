@@ -35,7 +35,7 @@ function AfterLogin(props){
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
-        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} ale={'...'} />
+        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} alt={'...'} />
         <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
         {/* name 가져와 표시 */}
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{

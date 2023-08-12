@@ -1,6 +1,6 @@
 import React from "react";
 import './gesimool.css';
-import G_slider from "./g_slider";
+import Gslider from "./g_slider";
 import {useNavigate} from 'react-router-dom';
 import propic from '../image/propic.jpg';
 
@@ -17,7 +17,7 @@ function Gesimool(props) {
                     </div>
                 </div>
                 <div className="gallery">
-                    <G_slider />
+                    <Gslider />
                 </div>
                 <div className="g_contents">
                     <div className="like_and_location">

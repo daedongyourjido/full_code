@@ -5,7 +5,7 @@ import { TbBuildingCommunity } from "react-icons/tb";
 import { BsPinMap } from "react-icons/bs";
 import { MdFoodBank } from "react-icons/md";
 import SimpleSlider from './slider';
-import Image_Collection from './image_Collection';
+import ImageCollection from './image_Collection';
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import SearchField from "../material/searchField2";
@@ -19,7 +19,7 @@ import Button from '@mui/material/Button';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-function BeforeLogin(props){
+function BeforeLogin(){
     const navigate = useNavigate();
 
     return (
@@ -38,7 +38,7 @@ function AfterLogin(props){
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
             <Button onClick={()=>{navigate('/write', { state: { location: props.location } })}} variant="contained">게시물 작성하기</Button>
             <SearchField />
-            <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}}  ale={'...'}/>
+            <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}}  alt={'...'}/>
             <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p>
             {/* name 가져와 표시 */}
             <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
@@ -79,10 +79,6 @@ function CustomTabPanel(props) {
 
 function Place() {
 
-    const [restaurant, setRestaurant] = useState(true)
-    const [hotel, setHotel] = useState(false)
-    const [location, setLocation] = useState(false)
-
     const [userLocationInfo, setUserLocationInfo] = useState([])
 
     const loc = useLocation();
@@ -98,9 +94,6 @@ function Place() {
         setValue(newValue);
     };
 
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
 
 
     useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
@@ -124,24 +117,8 @@ function Place() {
             .catch(error => {
                 console.log(error);
             })
-    }, [])
+    }, [lastPath])
 
-
-    const onChangeRestaurant = () => {
-        setRestaurant(true)
-        setHotel(false)
-        setLocation(false)
-    }
-    const onChangeHotel = () => {
-        setRestaurant(false)
-        setHotel(true)
-        setLocation(false)
-    }
-    const onChangeLocation = () => {
-        setRestaurant(false)
-        setHotel(false)
-        setLocation(true)
-    }
     return (
         <div className="App">
             <Box sx={{ flexGrow: 1 }}>
@@ -171,19 +148,19 @@ function Place() {
                             <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="50px"/>} />
                         </Tabs>
                         <CustomTabPanel value={value} index={0}>
-                            <Image_Collection
+                            <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
                             />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <Image_Collection
+                            <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
                             />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
-                            <Image_Collection
+                            <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
                             />

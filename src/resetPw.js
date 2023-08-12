@@ -9,9 +9,11 @@ import Bar from './barDefault.js';
 
 function ResetPwBox() {
     const [pw, setPw] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [pwOld, setPwOld] = useState("");
     const [pwCheck, setPwCheck] = useState("");
     const [pwEmpty, setPwEmpty] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [oldPwEmpty, setOldPwEmpty] = useState(false);
     const [pwCheckEmpty, setPwCheckEmpty] = useState(false);
     const [pwWrong, setPwWrong] = useState(false);

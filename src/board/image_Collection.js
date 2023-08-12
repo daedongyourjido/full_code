@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import List_Component from "./list_Component";
+import ListComponent from "./list_Component";
 import Modal from "react-modal";
 import Gesimool from "./gesimool";
 import Grid from '@mui/material/Grid';
@@ -30,7 +30,7 @@ function Image_Collection(props) {
             <Grid container spacing={2}>
                 {props.userLocationInfo.map((info) => (
                     <Grid key={info.id} onClick={() => openModal(info)} item xs={4}>
-                        <List_Component
+                        <ListComponent
                             img={info.image}
                             alt={info.id}
                             like_count={info.like_count}

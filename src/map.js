@@ -9,7 +9,7 @@ export const KakaoMap = () => {
     const { kakao } = window;
     const navigate = useNavigate();
     const [name, setName] = useState("대동YOUR지도");
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const customStyle = [
       {
         featureType: "all",
@@ -31,7 +31,7 @@ export const KakaoMap = () => {
     axios("") // 히트맵 정보 받기
     .then()
     .catch()
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const heatMap = {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30};
   
     useEffect(() => {
@@ -199,7 +199,7 @@ export const KakaoMap = () => {
       });
 
   
-    }, []);
+    }, [customStyle, heatMap, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon, kakao.maps.event, navigate]);
   
     return (
     <div style={{height:'86.5%'}}>

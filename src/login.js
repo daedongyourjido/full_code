@@ -21,6 +21,7 @@ function LoginBox(props) {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [idEmpty, setIdEmpty] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [pwEmpty, setPwEmpty] = useState(true);
 
     return (

@@ -3,7 +3,7 @@ import geo from './1.json';
 
 export default function MenuMap (props) {
     const { kakao } = window;
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const customStyle = [
       {
         featureType: "all",
@@ -106,7 +106,7 @@ export default function MenuMap (props) {
         displayArea(coordinates, name);
       });
 
-    }, []);
+    }, [customStyle, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon]);
   
     return (
     <div style={{height:'86.5%'}}>
