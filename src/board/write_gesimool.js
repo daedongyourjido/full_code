@@ -58,11 +58,11 @@ function Write_gesimool() {
                     <hr/>
                     <div className="middle">
                         <a className="picture" href="/">  
-                            <p>사진 첨부</p>  
+                            <p id="picture_p">사진 첨부</p>  
                         </a>
                     </div>
                     <div className="title">
-                        <p>제목 :</p>
+                        <p id="title_p">제목 :</p>
                         <Box
                             component="form"
                             sx={{
@@ -71,7 +71,7 @@ function Write_gesimool() {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField id="standard-basic" variant="standard" style={{marginTop:'35px'}}/>
+                            <TextField id="standard-basic" variant="standard" style={{marginTop:'34px'}}/>
                         </Box>
                     </div>
                     <div className="bottom">

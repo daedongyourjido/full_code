@@ -11,8 +11,8 @@ body{
 }
 
 .header p {
-  display: inline-block;
-  margin-left: 100px;
+  float: left;
+  margin: 30px 0 0 100px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -21,6 +21,23 @@ body{
   float: right;
   margin: 20px;
   margin-right: 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#rHeader_btn {
+  position: relative;
+  left: 95px;
+  top: 12px;
+  background-color: #d8d8d8;
+  border: none;
+  width: 130px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+#rHeader_btn:hover {
+  background-color: #b1b1b1;
 }
 
 .contents {
@@ -47,7 +64,7 @@ body{
   margin: auto;
   border: 3px solid white;
   border-radius: 10px;
-  padding: 60px 20px 20px 20px;
+  padding: 60px 30px 120px 30px;
   background-color: #a8c7cf;
 }
 
@@ -98,13 +115,9 @@ body{
   width: 1100px;
 }
 
-.main > .icons {
-  margin-top: 70px;
-  text-align: center;
-}
 
 .space {
-  margin-top: 40px;
+  margin-top: 80px;
   padding-bottom: 10px;
   background-color: #a8c7cf;
   border-radius: 10px;
@@ -112,58 +125,61 @@ body{
 }
 
 .space > .icons {
-  margin-top: 70px;
   text-align: center;
+  width: 1100px;
+  margin: auto;
+  height: 100px;
+  position: relative;
+}
+
+.Category_btn {
+  margin: 0 40px;
+  width: 230px;
+  height: 108px;
+  background-color: #a8c7cf;
+  border: none;
+  line-height: 108px;
+}
+
+.Category_btn:hover {
+  background-color: #045369;
+  border-radius: 3px;
+  ;
+}
+
+.Category_btn:active {
+  background-color: #104250;
 }
 
 #icon1, #icon2, #icon3 {
-  position: relative;
-  z-index: 1;
-  margin: 0px 80px;
-  margin-top: 30px;
+  display: inline-block;
   color: white;
-  z-index: 2;
+  position: relative;
+  top: 20px;
 }
 
 #icon3 {
-  padding-bottom: 5px;
+  padding: 5px 0;
 }
 
-#res {
-  position: absolute;
-  padding-top: 2px;
-  top: 140px;
-  margin: 0px 285px;
-  width: 120px;
-  height: 70px;
-  background-color: #9684bf;
-  animation: hoani;
-  animation-duration: 0.2s;
+#Category1, #Category2 {
+  width: 60px;
+  margin: 0;
+  margin-left: 5px;
+  display: inline-block;
+  font-size: 23px;
+  color: white;
 }
 
-#ho {
-  position: absolute;
-  padding-top: 2px;
-  top: 140px;
-  margin: 0px 495px;
-  width: 120px;
-  height: 70px;
-  background-color: #9684bf;
-  animation: hoani;
-  animation-duration: 0.2s;
+#Category3 {
+  width: 80px;
+  margin: 0;
+  margin-left: 15px;
+  display: inline-block;
+  font-size: 23px;
+  color: white;
 }
 
-#lo {
-  position: absolute;
-  padding-top: 2px;
-  top: 140px;
-  margin: 0px 700px;
-  width: 120px;
-  height: 70px;
-  background-color: #9684bf;
-  animation: hoani;
-  animation-duration: 0.2s;
-}
 
 .space > hr {
   border: 1px solid white;

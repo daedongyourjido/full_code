@@ -63,10 +63,6 @@ function Image_Collection() {
         
     ]
 
-    // const navigate = useNavigate(); 
-    // const goGesimool = () => {
-    //     navigate("/gesimool" );
-    // }
 
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
 
@@ -99,7 +95,6 @@ function Image_Collection() {
                 style={customOverlayStyle} // 오버레이 스타일을 적용
             >
                 <Gesimool />
-                <button onClick={closeModal}>Close Modal</button>
             </Modal>     
         </div>
         
