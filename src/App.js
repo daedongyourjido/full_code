@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import "./index.css";
 import Main from './main.js';
 import Login from './login.js';
 import SignUp from './signup.js';
@@ -13,7 +14,6 @@ import SuccessWithdraw from './successWithdraw.js';
 import NeedResetPw from './needResetPw.js';
 import ResetPw from './resetPw.js';
 import AppProfile from './App_profile.js';
-import Seoul from './board/seoul.js';
 import Place from './board/Place'
 import Write_gesimool from './board/write_gesimool.js';
 
@@ -41,8 +41,6 @@ function App() {
         {/** route 동적 이동 **/}
         <Route path={'/board/:place'} element={<Place/>}/>
 
-        {/* 개별 라우팅 */}
-        <Route path={'/seoul'} element={<Seoul />} /> 
       </Routes>
     </BrowserRouter>
   )
