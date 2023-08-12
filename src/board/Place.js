@@ -140,9 +140,9 @@ function Place() {
                     <SimpleSlider/>
                   </div>
                 </div>
-                <div className='main'>
-                    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
+                <div className='main' style={{margin: 'auto auto auto 0', height: '100%'}}>
+                    <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100%' }}>
+                        <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
                             <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="50px"/>} />
                             <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>} />
                             <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="50px"/>} />
