@@ -140,26 +140,26 @@ function Place() {
                     <SimpleSlider/>
                   </div>
                 </div>
-                <div className='main' style={{margin: 'auto auto auto 0', height: '100%'}}>
-                    <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100%' }}>
+                <div className='main' style={{margin: 'auto auto auto 0'}}>
+                    <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100vh' }}>
                         <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
                             <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="50px"/>} />
                             <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>} />
                             <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="50px"/>} />
                         </Tabs>
-                        <CustomTabPanel value={value} index={0}>
+                        <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
                             <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
                             />
                         </CustomTabPanel>
-                        <CustomTabPanel value={value} index={1}>
+                        <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
                             <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
                             />
                         </CustomTabPanel>
-                        <CustomTabPanel value={value} index={2}>
+                        <CustomTabPanel value={value} index={2} style={{overflow:'auto', maxHeight: '100vh'}}>
                             <ImageCollection
                                 userLocationInfo={userLocationInfo}
                                 lastPath={lastPath}
