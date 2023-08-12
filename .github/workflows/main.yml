@@ -1,0 +1,49 @@
+name: main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: build files
+        working-directory: ./
+        run: |
+          npm i
+          npm run build
+
+      - name: zip distributions
+        run: zip -r dyz.zip ./build ./appspec.yml ./scripts
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: upload to S3
+        run: aws s3 cp --region us-east-2 ./dyz.zip s3://dyz/public/
+
+      - name: deploy with AWS codeDeploy
+        run: aws deploy create-deployment
+          --application-name app
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name group
+          --s3-location bucket=dyz,bundleType=zip,key=public/dyz.zip
