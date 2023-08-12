@@ -6,7 +6,6 @@ import SearchField from './material/searchField2.js';
 import "./style.css";
 import propic from './image/propic.jpg';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Icon } from '@mui/material';
 
 function Text() {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ function BeforeLogin(props){
 
   return (
     <div className="bar" style={{ display: 'flex', justifyContent: 'flex-end'}}>
-      {/* <SearchField /> */}
+      <SearchField />
       <LoginPageButton onClick={()=>{
         navigate('./login');
       }} />
@@ -36,7 +35,7 @@ function AfterLogin(props){
 
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
-        {/* <SearchField /> */}
+        <SearchField />
         <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
         <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
         {/* name 가져와 표시 */}

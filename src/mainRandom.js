@@ -5,14 +5,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
-import seoul1 from './image/seoul/seoul1.jpeg';
-import seoul2 from './image/seoul/seoul2.jpeg';
-import seoul3 from './image/seoul/seoul3.jpeg';
-import seoul4 from './image/seoul/seoul4.jpeg';
-import img1 from './image/rest/img1.jpeg';
-import img2 from './image/rest/img2.jpeg';
-import img3 from './image/rest/img3.jpeg';
-import img4 from './image/rest/img4.jpeg';
 
 function Arrow(props) {
     const {className, style, onClick} = props;

@@ -94,7 +94,7 @@ export const KakaoMap = (props) => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#D4E6EB',
+                    fillColor: '#FFFFFF',
                     fillOpacity: 1, 
                   });
             } else if(heatMap[name] >= 70){
@@ -105,7 +105,7 @@ export const KakaoMap = (props) => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#A1C4CD',
+                    fillColor: '#8EC2D1',
                     fillOpacity: 1, 
                   });
             } else if(heatMap[name] >= 50){
@@ -116,7 +116,7 @@ export const KakaoMap = (props) => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#6AA2B0',
+                    fillColor: '#3E8A9E',
                     fillOpacity: 1, 
                   });
             } else if(heatMap[name] >= 30){
@@ -127,7 +127,7 @@ export const KakaoMap = (props) => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#3F889B',
+                    fillColor: '#1B7389',
                     fillOpacity: 1, 
                   });
             } else {
@@ -138,7 +138,7 @@ export const KakaoMap = (props) => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#15667C',
+                    fillColor: '#003645',
                     fillOpacity: 1, 
                   });
             }
@@ -161,15 +161,15 @@ export const KakaoMap = (props) => {
   
           kakao.maps.event.addListener(polygon, 'mouseout', function () {
             if(heatMap[name] >= 90){
-                polygon.setOptions({ fillColor: '#D4E6EB' });
+                polygon.setOptions({ fillColor: '#FFFFFF' });
             } else if(heatMap[name] >= 70){
-                polygon.setOptions({ fillColor: '#A1C4CD' });
+                polygon.setOptions({ fillColor: '#8EC2D1' });
             } else if(heatMap[name] >= 50){
-                polygon.setOptions({ fillColor: '#6AA2B0' });
+                polygon.setOptions({ fillColor: '#3E8A9E' });
             } else if(heatMap[name] >= 30){
-                polygon.setOptions({ fillColor: '#3F889B' });
+                polygon.setOptions({ fillColor: '#1B7389' });
             } else {
-                polygon.setOptions({ fillColor: '#15667C' });
+                polygon.setOptions({ fillColor: '#003645' });
             }
             
             customOverlay.setMap(null);
