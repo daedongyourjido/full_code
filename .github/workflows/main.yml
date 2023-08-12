@@ -45,5 +45,5 @@ jobs:
         run: aws deploy create-deployment
           --application-name 2023-c-capstone
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name group
+          --deployment-group-name 2023-c-capstone
           --s3-location bucket=2023-c-capstone,bundleType=zip,key=public/2023-c-capstone.zip
