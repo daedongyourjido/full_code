@@ -6,7 +6,6 @@ import SearchField from './material/searchField2.js';
 import "./style.css";
 import propic from './image/propic.jpg';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Icon } from '@mui/material';
 
 function Text() {
   const navigate = useNavigate();

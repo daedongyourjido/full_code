@@ -28,10 +28,6 @@ export default function LoginButton(props) {
                 props.setPwEmpty(false);
                 
             else {
-                // localStorage.setItem('id', "sjhong98@icloud.com");
-                // localStorage.setItem('pw', "mango");
-                // localStorage.setItem('name', "승재");
-                // navigate('/');
 
                 /** 로그인 api 추가 **/
                 axios.post('https://h8viqjk6ob.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-login', {
