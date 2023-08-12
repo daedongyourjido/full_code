@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="3.23.103.214" id="7e829ce5-2123-48ab-a82b-6a51abcdd80a" keyPath="C:\Users\valtin\Desktop\project\2023-c-capstone\2023-c-capstone.ppk" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>
