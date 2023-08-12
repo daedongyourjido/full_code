@@ -1,7 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom';
-import { KakaoMap } from './map.js';
+import React, { useEffect} from 'react';
 import geo from './1.json';
 
 export default function MenuMap (props) {
@@ -29,9 +26,7 @@ export default function MenuMap (props) {
   
       let data = geo.features; // 제대로 받아와짐
       let coordinates = []; 
-      let name = ''; 
-      let code = '';
-      let msgName = '';
+      let name = '';
       let polygons = [];
       
       const mapContainer = document.getElementById('map1'); // 지도를 표시할 div

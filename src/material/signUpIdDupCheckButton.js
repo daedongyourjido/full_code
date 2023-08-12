@@ -3,7 +3,6 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-const ID = ['apple', 'banana', 'melon', 'orange'];
 
 export default function SignUpDupCheckButton(props) {
 

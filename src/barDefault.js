@@ -1,5 +1,5 @@
 
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import SearchField from './material/searchField2.js';
 
 export default function Bar() {

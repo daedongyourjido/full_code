@@ -1,15 +1,14 @@
 import axios from 'axios';
-import React, {useCallback, useMemo, useState, useEffect} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { useNavigate} from 'react-router-dom';
 import geo from './1.json';
 import MainRandom from './mainRandom.js';
 import './style.css';
 
-export const KakaoMap = (props) => {
+export const KakaoMap = () => {
     const { kakao } = window;
     const navigate = useNavigate();
     const [name, setName] = useState("대동YOUR지도");
-    const [msg, setMsg] = useState('');
   
     const customStyle = [
       {
@@ -39,9 +38,7 @@ export const KakaoMap = (props) => {
   
       let data = geo.features; // 제대로 받아와짐
       let coordinates = []; 
-      let name = ''; 
-      let code = '';
-      let msgName = '';
+      let name = '';
       let polygons = [];
       
   
@@ -145,8 +142,6 @@ export const KakaoMap = (props) => {
           }
         polygons.push(polygon);
 
-        let prevFillColor;
-  
         if (name !== an) {
           kakao.maps.event.addListener(polygon, "mouseover", function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });

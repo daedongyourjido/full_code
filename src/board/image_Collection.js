@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import List_Component from "./list_Component";
-import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import Gesimool from "./gesimool";
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
 const customOverlayStyle = {

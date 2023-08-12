@@ -10,7 +10,6 @@ import axios from "axios";
 import { Button, Input, Paper } from '@mui/material';
 import SearchField from "../material/searchField2";
 import LoginPageButton from "../material/loginPageButton";
-import propic from "../image/propic.jpg";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -34,7 +33,7 @@ function AfterLogin(props){
     return (
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
             <SearchField />
-            <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
+            <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}}  alt={'...'} />
             <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p>
             {/* name 가져와 표시 */}
             <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{

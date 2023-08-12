@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
 
-function Arrow(props) {
-    const {className, style, onClick} = props;
+function Arrow() {
     return (
         <div style={{display:"block", background: "#045369"}} />
     )
@@ -64,16 +62,16 @@ function Content(props) {
     return (
         <Slider {...settings} className={anim} >
             <div>
-                <img className='randomImages' src={img_1} style={imgStyle} />
+                <img className='randomImages' src={img_1} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_2} style={imgStyle} />
+                <img className='randomImages' src={img_2} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_3} style={imgStyle} />
+                <img className='randomImages' src={img_3} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_4} style={imgStyle} />
+                <img className='randomImages' src={img_4} style={imgStyle} alt={'...'} />
             </div>
       </Slider>
     );

@@ -1,9 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate} from 'react-router-dom';
 import MenuMap from './menuMap.js';
-
-const ID = 'sjhong98@icloud.com';
 
 function Text() {
     const navigate = useNavigate();
@@ -15,9 +12,6 @@ function Text() {
   }
 
 function VerifyBox() {
-    const [pw, setPw] = useState("");
-    const [pwEmpty, setPwEmpty] = useState(false);
-    const [pwWrong, setPwWrong] = useState(false);
 
     return (
         <div style={{width:'380px'}}>

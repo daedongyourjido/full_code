@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import ChangePwField from './material/changePwField.js';
 import ChangePwOldField from './material/changePwOldField.js';
 import ChangePwOldErrorField from './material/changePwOldErrorField.js';

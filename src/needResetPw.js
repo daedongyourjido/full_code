@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate} from 'react-router-dom';
 import MenuMap from './menuMap.js';
 
-const ID = 'sjhong98@icloud.com';
 
 function Text() {
     const navigate = useNavigate();
@@ -15,10 +13,6 @@ function Text() {
   }
 
 function NeedResetPwBox() {
-    const [pw, setPw] = useState("");
-    const [pwEmpty, setPwEmpty] = useState(false);
-    const [pwWrong, setPwWrong] = useState(false);
-
     return (
         <div style={{width:'380px'}}>
             <div style={{paddingTop:'0px', display:'flex', flexDirection:'column', width:'100%', height:'400px', backgroundColor:'white', borderRadius:'2%', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.3)'}}>
