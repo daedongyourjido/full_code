@@ -7,10 +7,10 @@ function List_Component(props) {
         <div className="list_com">
             <a>
                 <img src={props.img} alt={props.alt} />
-                <p>좋아요 개수</p>
-                <h4>리뷰 제목</h4>
-                <p>위치 정보</p>
-                <p>별 갯수</p>
+                <p>좋아요 개수: {props.like_count}</p>
+                <h4>리뷰 제목: {props.title}</h4>
+                <p>위치 정보: {props.name}</p>
+                <p>별 갯수: {props.star_count}</p>
             </a>
         </div>
     )

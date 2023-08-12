@@ -4,7 +4,6 @@ import { KakaoMap } from './map.js';
 import LoginPageButton from './material/loginPageButton.js'
 import SearchField from './material/searchField2.js';
 import "./style.css";
-import propic from './image/propic.jpg';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Text() {
@@ -36,7 +35,7 @@ function AfterLogin(props){
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
-        <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
+        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
         <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
         {/* name 가져와 표시 */}
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
@@ -59,6 +58,7 @@ function Main() {
     }
   }, []);
 
+  console.log(sessionStorage)
   return (
     <div className='root'>
       <div className="bar">
