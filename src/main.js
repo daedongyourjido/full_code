@@ -15,7 +15,7 @@ function Text() {
     )
 }
 
-function BeforeLogin(props){
+function BeforeLogin(){
   const navigate = useNavigate();
 
   return (
@@ -28,7 +28,7 @@ function BeforeLogin(props){
   );
 }
 
-function AfterLogin(props){
+function AfterLogin(){
   const navigate = useNavigate();
   // const name = localStorage.getItem('name');
 
@@ -58,7 +58,6 @@ function Main() {
     }
   }, []);
 
-  console.log(sessionStorage)
   return (
     <div className='root'>
       <div className="bar">
