@@ -9,6 +9,7 @@ export const KakaoMap = (props) => {
     const { kakao } = window;
     const navigate = useNavigate();
     // const [name, setName] = useState("대동YOUR지도");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // const [msg, setMsg] = useState('');
   
     const customStyle = [
