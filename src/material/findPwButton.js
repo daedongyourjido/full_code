@@ -1,5 +1,4 @@
 import * as React from 'react';
-import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {useNavigate} from 'react-router-dom';

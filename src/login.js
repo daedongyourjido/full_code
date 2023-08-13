@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginIdErrorField from './material/loginIdErrorField.js';
 import LoginIdField from './material/loginIdField.js';
 import LoginPwErrorField from './material/loginPwErrorField.js';
@@ -22,8 +21,8 @@ function LoginBox(props) {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [idEmpty, setIdEmpty] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [pwEmpty, setPwEmpty] = useState(true);
-    const navigate = useNavigate();
 
     return (
         <div style={{width:'380px'}}>

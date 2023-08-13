@@ -1,7 +1,5 @@
 import './App_profile.css';
 
-import FollowerList from './follwer';
-import FollowingList from './following';
 import StandardImageList from './profile';
 import BasicButtons from './Button';
 import ImageAvatars from './avatar';
@@ -15,7 +13,6 @@ import {useEffect, useState} from "react";
 function AppProfile() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-  const userKey = 2
   const userId = 'sjhong98@icloud.com'
   const userImage = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
   const [placeImages, setPlaceImages] = useState(null)

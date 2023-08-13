@@ -1,9 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import React, {useState} from 'react';
 import ChangePwField from './material/changePwField.js';
-import ChangePwOldField from './material/changePwOldField.js';
-import ChangePwOldErrorField from './material/changePwOldErrorField.js';
 import ChangePwCheckField from './material/changePwCheckField.js';
 import ChangePwCheckErrorField from './material/changePwCheckErrorField.js';
 import ChangePwErrorField from './material/changePwErrorField.js';
@@ -13,9 +9,11 @@ import Bar from './barDefault.js';
 
 function ResetPwBox() {
     const [pw, setPw] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [pwOld, setPwOld] = useState("");
     const [pwCheck, setPwCheck] = useState("");
     const [pwEmpty, setPwEmpty] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [oldPwEmpty, setOldPwEmpty] = useState(false);
     const [pwCheckEmpty, setPwCheckEmpty] = useState(false);
     const [pwWrong, setPwWrong] = useState(false);
@@ -56,7 +54,6 @@ function ResetPwBox() {
 }
 
 function SettingBox() {
-    const navigate = useNavigate();
 
     return (
         <div style={{height:'668px', width:'800px', backgroundColor:'#FFFFFF', display:'grid' }} >

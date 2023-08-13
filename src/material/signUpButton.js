@@ -4,8 +4,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {useNavigate} from 'react-router-dom';
 
-const ID = ['apple', 'banana', 'melon', 'orange'];
-
 export default function SignUpButton(props) {
     const navigate = useNavigate();
 
@@ -36,7 +34,7 @@ export default function SignUpButton(props) {
                     props.setPwWrong(false);
                 if(!props.pwDup)
                     props.setPwCheckEmpty(true);
-                else if(props.pw != props.pwDup){
+                else if(props.pw !== props.pwDup){
                     props.setPwCheck(true);
                 }
                 if(props.id && props.pw) {

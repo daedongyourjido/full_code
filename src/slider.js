@@ -44,7 +44,6 @@ export default function A(props) {
                 transition={'slide'}
                 transitionDuration={0.3}
                 coolOff={6}
-                components={preComponents}
                 components={components ? components : preComponents}
                 dots={"true"}
             />

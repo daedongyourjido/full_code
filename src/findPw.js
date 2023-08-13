@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import MenuMap from './menuMap.js';
 import FindPwButton from './material/findPwButton.js';
 import FindPwField from './material/findPwField.js'
 import FindPwErrorField from './material/findPwErrorField.js'
 
-const ID = 'sjhong98@icloud.com';
 
 function Text() {
     const navigate = useNavigate();
