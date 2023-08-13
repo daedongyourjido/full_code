@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import React, { useEffect } from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import geo from './1.json';
 // import MainRandom from './mainRandom.js';
