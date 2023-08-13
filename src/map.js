@@ -205,7 +205,7 @@ export const KakaoMap = () => {
     <div style={{height:'86.5%'}}>
         <div className='map' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr'}}>
             <div style={{display:'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <MainRandom name={name} className="mainRandom" />
+                {/* <MainRandom name={name} className="mainRandom" /> */}
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
