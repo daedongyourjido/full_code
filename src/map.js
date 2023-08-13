@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
+
 import geo from './1.json';
 // import MainRandom from './mainRandom.js';
 import './style.css';
 
-export const KakaoMap = (props) => {
+export const KakaoMap = () => {
     const { kakao } = window;
     const navigate = useNavigate();
+
     // const [name, setName] = useState("대동YOUR지도");
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // const [msg, setMsg] = useState('');
@@ -33,16 +36,14 @@ export const KakaoMap = (props) => {
     axios("") // 히트맵 정보 받기
     .then()
     .catch()
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const heatMap = {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30};
   
     useEffect(() => {
   
       let data = geo.features; // 제대로 받아와짐
       let coordinates = []; 
-      let name = ''; 
-      let code = '';
-      let msgName = '';
+      let name = '';
       let polygons = [];
       
   
@@ -146,8 +147,6 @@ export const KakaoMap = (props) => {
           }
         polygons.push(polygon);
 
-        let prevFillColor;
-  
         if (name !== an) {
           kakao.maps.event.addListener(polygon, "mouseover", function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });
@@ -205,7 +204,7 @@ export const KakaoMap = (props) => {
       });
 
   
-    }, []);
+    }, [customStyle, heatMap, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon, kakao.maps.event, navigate]);
   
     return (
     <div style={{height:'86.5%'}}>

@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { Navigate, useNavigate, Link } from 'react-router-dom';
-import propic from './image/propic.jpg';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import WithdrawField from './material/withdrawField.js';
 import WithdrawErrorField from './material/withdrawErrorField.js';
 import WithdrawButton from './material/withdrawButton.js';

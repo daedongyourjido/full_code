@@ -1,11 +1,8 @@
 import * as React from 'react';
-import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import {useNavigate} from 'react-router-dom';
 
 export default function ChangePwButton(props) {
-    const navigate = useNavigate();
 
   return (
     <div style={{ display: 'flex', marginTop:'10px', justifyContent: 'center', alignItems: 'center' }} >
@@ -34,7 +31,7 @@ export default function ChangePwButton(props) {
                 props.setPwWrong(true);
             else
                 props.setPwWrong(false);
-            if(props.pw != props.pwCheck)
+            if(props.pw !== props.pwCheck)
                 props.setPwDup(true);
             if(props.oldPw && props.pw){
                 if(props.pwCheck && props.pw.length >= 8){

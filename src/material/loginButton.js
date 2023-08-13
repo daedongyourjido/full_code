@@ -39,7 +39,6 @@ export default function LoginButton(props) {
                     switch (statusCode) {
                         // 계정 정보 존재하는 경우 status 201
                         case 201:
-                            console.log(res)
                             // 사용자 정보 인증 안 됨
                             if(res.data.verified === 0) {
                                 alert('이메일 인증을 완료해주세요!')
@@ -49,12 +48,15 @@ export default function LoginButton(props) {
                                 sessionStorage.setItem('id', res.data.id);
                                 sessionStorage.setItem('pw', res.data.password);
                                 sessionStorage.setItem('name', res.data.nickname);
+                                sessionStorage.setItem('picture', res.data.picture);
                                 navigate('/');
                             }
                             break
                         // 계정 정보 맞지 않은 경우 status 202
                         case 202:
                             alert('아이디 혹은 패스워드 오류')
+                            break
+                        default:
                             break
                     }
                 })

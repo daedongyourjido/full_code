@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
 
-function Arrow(props) {
-    const {className, style, onClick} = props;
+function Arrow() {
     return (
         <div style={{display:"block", background: "#045369"}} />
     )
@@ -36,6 +34,7 @@ function Content(props) {
     const [img_2, setImg_2] = useState(null);
     const [img_3, setImg_3] = useState(null);
     const [img_4, setImg_4] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [img_t, setImg_t] = useState(null);
 
     const [anim, setAnim] = useState("");
@@ -64,16 +63,16 @@ function Content(props) {
     return (
         <Slider {...settings} className={anim} >
             <div>
-                <img className='randomImages' src={img_1} style={imgStyle} />
+                <img className='randomImages' src={img_1} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_2} style={imgStyle} />
+                <img className='randomImages' src={img_2} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_3} style={imgStyle} />
+                <img className='randomImages' src={img_3} style={imgStyle} alt={'...'} />
             </div>
             <div>
-                <img className='randomImages' src={img_4} style={imgStyle} />
+                <img className='randomImages' src={img_4} style={imgStyle} alt={'...'} />
             </div>
       </Slider>
     );
@@ -83,6 +82,7 @@ function Content(props) {
 
 function MainRandom(props) {
     const [name, setName] = useState('Welcome to 대동유어지도');
+    // eslint-disable-next-line no-unused-vars
     const [login, setLogin] = useState('false');
     const _name = props.name;
     const _login = props.login;

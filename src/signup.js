@@ -1,7 +1,6 @@
 
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useNavigate} from 'react-router-dom';
 import SignUpIdErrorField from './material/signUpIdErrorField.js';
 import SignUpIdField from './material/signUpIdField.js';
 import SignUpPwErrorField from './material/signUpPwErrorField.js';
@@ -17,7 +16,6 @@ import SignUpNameEmptyField from './material/signUpNameEmptyField.js';
 import SignUpPwCheckEmptyField from './material/signUpPwCheckEmptyField.js';
 import MenuMap from './menuMap.js';
 
-const ID = ['apple', 'banana', 'melon', 'orange'];
 
 function Text() {
   const navigate = useNavigate();
@@ -42,7 +40,6 @@ function SignUpBox(props) {
     const [pwWrong, setPwWrong] = useState(false);
     const [nameEmpty, setNameEmpty] = useState(false);
     const [pwCheckEmpty, setPwCheckEmpty] = useState(false);
-    const navigate = useNavigate();
 
     return (
         <div style={{width:'380px'}}>

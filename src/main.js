@@ -1,10 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { useNavigate} from 'react-router-dom';
 import { KakaoMap } from './map.js';
 import LoginPageButton from './material/loginPageButton.js'
 import SearchField from './material/searchField2.js';
 import "./style.css";
-import propic from './image/propic.jpg';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Text() {
@@ -16,7 +15,7 @@ function Text() {
     )
 }
 
-function BeforeLogin(props){
+function BeforeLogin(){
   const navigate = useNavigate();
 
   return (
@@ -29,14 +28,14 @@ function BeforeLogin(props){
   );
 }
 
-function AfterLogin(props){
+function AfterLogin(){
   const navigate = useNavigate();
   // const name = localStorage.getItem('name');
 
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
         <SearchField />
-        <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} />
+        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} alt={'...'} />
         <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
         {/* name 가져와 표시 */}
         <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
