@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import geo from './1.json';
@@ -15,7 +15,7 @@ export const KakaoMap = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // const [msg, setMsg] = useState('');
   
-    const customStyle = [
+    const customStyle = useMemo(() => [
       {
         featureType: "all",
         elementType: "all",
@@ -30,8 +30,9 @@ export const KakaoMap = () => {
             lightness: -100,
           },
         ],
-      },
-    ];
+      }
+    ], []);
+  
     
     axios("") // 히트맵 정보 받기
     .then()
