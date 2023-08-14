@@ -14,10 +14,13 @@ const customOverlayStyle = {
 function Image_Collection(props) {
 
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
-
+    const [modalInfo, setModalInfo] = useState(null)
     // 모달 열기 함수
-    const openModal = (image) => {
+    const openModal = (info) => {
+
       setIsModalOpen(true);
+        setModalInfo(info)
+
     };
   
     // 모달 닫기 함수
@@ -29,16 +32,20 @@ function Image_Collection(props) {
         <div>
             <Grid container spacing={2}>
                 {props.userLocationInfo.map((info) => (
-                    <Grid key={info.id} onClick={() => openModal(info)} item xs={4}>
-                        <ListComponent
-                            img={info.image}
-                            alt={info.id}
-                            like_count={info.like_count}
-                            name={info.name}
-                            star_count={info.star_count}
-                            title={info.title}
-                        />
-                    </Grid>
+                    <>
+                        <Grid key={info.id} onClick={() => openModal(info)} item xs={4}>
+                            <ListComponent
+                                id={info.id}
+                                img={info.image}
+                                alt={info.id}
+                                like_count={info.like_count}
+                                name={info.name}
+                                star_count={info.star_count}
+                                title={info.title}
+                            />
+                        </Grid>
+
+                    </>
                     )
                 )}
             </Grid>
@@ -49,8 +56,11 @@ function Image_Collection(props) {
                 overlayClassName="modal-overlay"
                 style={customOverlayStyle} // 오버레이 스타일을 적용
             >
-                <Gesimool />
-            </Modal>     
+                <Gesimool
+                    info={modalInfo}
+                    open={isModalOpen}
+                />
+            </Modal>
         </div>
         
     )

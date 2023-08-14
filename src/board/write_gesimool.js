@@ -57,7 +57,6 @@ function Write_gesimool() {
     const [content, setContent] = useState('')
     const [login, setLogin] = useState(false);
 
-    console.log(location.state)
     useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
         const token = sessionStorage.getItem('id');
         if (token) {
