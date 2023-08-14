@@ -53,7 +53,7 @@ function Content(props) {
     const [img_2, setImg_2] = useState(null);
     const [img_3, setImg_3] = useState(null);
     const [img_4, setImg_4] = useState(null);
-    const [anim, setAnim] = useState("");
+    // const [anim, setAnim] = useState("");
 
     // useEffect(() => {
         
@@ -70,11 +70,12 @@ function Content(props) {
                 }
             }
         }
+        console.log(isLoading);
     }, [_name, isLoading]);
 
     return (
         isLoading ? <Loading /> : (
-            <Slider {...settings} className={anim} >
+            <Slider {...settings} >
                 <div>
                     <img className='randomImages' src={img_1} style={imgStyle} alt={'...'} />
                 </div>
@@ -97,10 +98,9 @@ function Content(props) {
 
 function MainRandom(props) {
     const [name, setName] = useState('Welcome to 대동유어지도');
-    const [login, setLogin] = useState('false');
+    // const [login, setLogin] = useState('false');
     const [isLoading, setIsLoading] = useState(true);
     const _name = props.name;
-    const _login = props.login;
     const dispatch = useDispatch();
 
 
@@ -127,9 +127,9 @@ function MainRandom(props) {
         fetchData();
     }, [])
 
-    useEffect(()=> {
-        setLogin('true');
-    }, [_login])
+    // useEffect(()=> {
+    //     setLogin('true');
+    // }, [_login])
     
     useEffect(()=> {
         if(_name === 'seoul')
