@@ -9,11 +9,12 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
 import {useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
-import FollowingModal from './followingModal.js';
-import FollowerModal from './followerModal.js';
+import FollowingModal from './followingModal';
+import FollowerModal from './followerModal';
+import { MyKakaoMap } from './mykakaomap';
 
 
-function AppProfile() {
+function MyMap() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
   const userKey = 2
@@ -55,18 +56,18 @@ function AppProfile() {
         <div id = "namepos">
           {userId}
         </div>
-
         <div id = "followpos">
           <FollowerModal/> 
         </div>
         <div id = "followingpos">
           <FollowingModal/>
         </div>
+        <div id = "postspos">
+          0posts
+        </div>
       </div>
-      <div id="contents">
-        <StandardImageList
-            placeImages={placeImages}
-        />
+      <div id="mapcontents">
+        <MyKakaoMap/>
       </div>
       <div id="slidepos">
         <A
@@ -78,4 +79,4 @@ function AppProfile() {
   );
 }
 
-export default AppProfile;
+export default MyMap;
