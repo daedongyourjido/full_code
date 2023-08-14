@@ -1,6 +1,6 @@
 import './App_profile.css';
 
-import StandardImageList from './profile';
+// import StandardImageList from './profile';
 import BasicButtons from './Button';
 import ImageAvatars from './avatar';
 import A from './slider';
@@ -8,7 +8,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
 import {useEffect, useState} from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import FollowingModal from './followingModal';
 import FollowerModal from './followerModal';
 import { MyKakaoMap } from './mykakaomap';
@@ -17,7 +17,7 @@ import { MyKakaoMap } from './mykakaomap';
 function MyMap() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-  const userKey = 2
+//   const userKey = 2
   const userId = 'sjhong98@icloud.com'
   const userImage = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
   const [placeImages, setPlaceImages] = useState(null)

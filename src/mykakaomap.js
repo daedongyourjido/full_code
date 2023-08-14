@@ -1,41 +1,42 @@
-import axios from 'axios';
-import React, {useState, useMemo, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import geo from './1.json';
 import './style.css';
 
 export const MyKakaoMap = (props) => {
     const { kakao } = window;
     const navigate = useNavigate();
-    const [name, setName] = useState("대동YOUR지도");
+    // const [name, setName] = useState("대동YOUR지도");
   
-    const customStyle = [
-      {
-        featureType: "all",
-        elementType: "all",
-        stylers: [
-          {
-            hue: "#000000",
-          },
-          {
-            saturation: -100,
-          },
-          {
-            lightness: -100,
-          },
-        ],
-      },
-    ];
+    const customStyle = useMemo(() => [
+        {
+          featureType: "all",
+          elementType: "all",
+          stylers: [
+            {
+              hue: "#000000",
+            },
+            {
+              saturation: -100,
+            },
+            {
+              lightness: -100,
+            },
+          ],
+        }
+      ], []);
 
-    const heatMap = {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30};
-  
+      const heatMap = useMemo(() => {
+        return {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30}
+      }, []);
+
     useEffect(() => {
   
       let data = geo.features; // 제대로 받아와짐
       let coordinates = []; 
       let name = ''; 
-      let code = '';
-      let msgName = '';
+    //   let code = '';
+    //   let msgName = '';
       let polygons = [];
       
   

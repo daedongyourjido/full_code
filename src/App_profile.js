@@ -8,7 +8,6 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
 import {useEffect, useState} from "react";
-import { Link } from 'react-router-dom';
 import FollowingModal from './followingModal.js';
 import FollowerModal from './followerModal.js';
 
@@ -16,7 +15,7 @@ import FollowerModal from './followerModal.js';
 function AppProfile() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-  const userKey = 2
+  // const userKey = 2
   const userId = 'sjhong98@icloud.com'
   const userImage = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
   const [placeImages, setPlaceImages] = useState(null)
