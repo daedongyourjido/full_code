@@ -23,11 +23,19 @@ function SimpleSlider(props) {
     }
     console.log(props)
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
+    const [modalInfo, setModalInfo] = useState(null)
+    // 모달 열기 함수
+    const openModal = (info) => {
+
+      setIsModalOpen(true);
+        setModalInfo(info)
+
+    };
 
     // 모달 열기 함수
-    const openModal = (image) => {
+   /* const openModal = (image) => {
       setIsModalOpen(true);
-    };
+    }; */
   
     // 모달 닫기 함수
     const closeModal = () => {
@@ -41,21 +49,24 @@ function SimpleSlider(props) {
                 props.userLocationInfo.map(info => (
                     <div>
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a href={'#'} onClick={() => openModal()}><img src={info.image} alt="흑백"></img></a>
+                        <a href={'#'} onClick={() => openModal(info)}><img src={info.image} alt="흑백"></img></a>
                     </div>
                 ))
             }
         </Slider>
 
         <Modal
-          isOpen={isModalOpen}
-          onRequestClose={closeModal}
-          className="modal-content"
-          overlayClassName="modal-overlay"
-          style={customOverlayStyle} // 오버레이 스타일을 적용
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+                style={customOverlayStyle} // 오버레이 스타일을 적용
             >
-          <Gesimool />
-        </Modal> 
+                <Gesimool
+                    info={modalInfo}
+                    open={isModalOpen}
+                />
+            </Modal>
       </div>
     )
   }

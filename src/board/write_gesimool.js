@@ -143,7 +143,7 @@ function Write_gesimool() {
                 <div className="write_con">
                     <div className="top">
                         <h4 style={{margin:'auto', display:'flex'}}>새 게시물</h4>
-                        <Button style={{position:'absolute', right:'0%', padding:'19.5px'}} variant="contained" color="primary" onClick={handleUpload}>
+                        <Button style={{position:'absolute', right:'0%', padding:'18px'}} variant="contained" color="primary" onClick={handleUpload}>
                             업로드
                         </Button>
                     </div>
@@ -173,7 +173,7 @@ function Write_gesimool() {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{marginTop:'35px'}}/>
+                            <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{margin:'52px 0px 0px 20px'}}/>
 
                         </Box>
                     </div>
