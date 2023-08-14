@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import geo from './1.json';
 import './style.css';
@@ -146,7 +146,7 @@ export const MyKakaoMap = (props) => {
           kakao.maps.event.addListener(polygon, "mouseover", function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });
 
-            setName(name);
+            // setName(name);
 
           });
   
