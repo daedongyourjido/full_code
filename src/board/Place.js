@@ -82,7 +82,7 @@ function Place() {
     const [userLocationInfo, setUserLocationInfo] = useState([])
 
     const loc = useLocation();
-    const paths = loc.pathname.split('/'); // 경로를 '/'로 분할하여 배열로 만듭니다.
+    const paths = loc.pathname.split('/');
     const lastPath = paths[paths.length - 1];
 
     const navigate = useNavigate();
@@ -111,7 +111,6 @@ function Place() {
             place: lastPath
         })
             .then(res => {
-                console.log(res.data)
                 setUserLocationInfo(res.data)
             })
             .catch(error => {
@@ -134,10 +133,12 @@ function Place() {
             <div className='contents'>
               <div className='side'>
                 <div className='inner'>
-                  <h1>지역 이름</h1>
+                  <h1>지역 이름: {lastPath}</h1>
                   <h3>추천게시물</h3>
                   <div className='slider'>
-                    <SimpleSlider/>
+                    <SimpleSlider
+                        userLocationInfo={userLocationInfo}
+                    />
                   </div>
                 </div>
                 <div className='main' style={{margin: 'auto auto auto 0'}}>
