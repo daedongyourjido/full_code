@@ -1,19 +1,18 @@
 import axios from 'axios';
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import geo from './1.json';
-// import MainRandom from './mainRandom.js';
+import MainRandom from './mainRandom.js';
 import './style.css';
 
 export const KakaoMap = () => {
     const { kakao } = window;
     const navigate = useNavigate();
 
-    // const [name, setName] = useState("대동YOUR지도");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // const [msg, setMsg] = useState('');
+    const [name, setName] = useState("대동YOUR지도");
+    const [msg, setMsg] = useState('');
   
     const customStyle = useMemo(() => [
       {
@@ -37,7 +36,6 @@ export const KakaoMap = () => {
     axios("") // 히트맵 정보 받기
     .then()
     .catch()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const heatMap = {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30};
   
     useEffect(() => {
@@ -152,7 +150,7 @@ export const KakaoMap = () => {
           kakao.maps.event.addListener(polygon, "mouseover", function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });
 
-            // setName(name);
+            setName(name);
 
           });
   
@@ -211,7 +209,7 @@ export const KakaoMap = () => {
     <div style={{height:'86.5%'}}>
         <div className='map' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr'}}>
             <div style={{display:'flex', justifyContent: 'center', alignItems: 'center'}}>
-                {/* <MainRandom name={name} className="mainRandom" /> */}
+                <MainRandom name={name} className="mainRandom" />
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

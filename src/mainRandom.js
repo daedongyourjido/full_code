@@ -4,6 +4,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { setImages } from './actions.js';
+import Skeleton from '@mui/material/Skeleton';
 
 function Arrow() {
     return (
@@ -11,7 +14,23 @@ function Arrow() {
     )
 }
 
+function Loading() {
+    return (
+        <div style={{display:'flex', flexDirection:'row'}}>
+            <Skeleton sx={{marginRight:'15px'}} variant="rounded" width={150} height={150} />
+            <Skeleton sx={{marginRight:'15px'}} variant="rounded" width={150} height={150} />
+            <Skeleton sx={{marginRight:'15px'}} variant="rounded" width={150} height={150} />
+            <Skeleton sx={{marginRight:'15px'}} variant="rounded" width={150} height={150} />
+            <Skeleton sx={{marginRight:'15px'}} variant="rounded" width={150} height={150} />
+        </div>
+    )
+}
+
 function Content(props) {
+    const location = props.location;
+    const isLoading = props.isLoading;
+    const images = useSelector((state) => state.images);
+
     const settings = {
       infinite: true,
       slidesToShow: 2,  // 2개로 지정해야 모션 안깨짐
@@ -34,47 +53,43 @@ function Content(props) {
     const [img_2, setImg_2] = useState(null);
     const [img_3, setImg_3] = useState(null);
     const [img_4, setImg_4] = useState(null);
-    // eslint-disable-next-line no-unused-vars
-    const [img_t, setImg_t] = useState(null);
-
     const [anim, setAnim] = useState("");
 
-    useEffect(()=> {    // 지역 바뀔 때 사진도 바뀌게 하기
-        /** 지역별 사진 api 추가 **/
-        axios.post('https://qzqejgzukh.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-main-random', {
-            location: _name
-        })
-            .then(res => {
-                setImg_1(res.data[0]);
-                setImg_2(res.data[1]);
-                setImg_3(res.data[2]);
-                setImg_4(res.data[3]);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        setAnim("fade-in");
-    }, [_name]);
+    // useEffect(() => {
+        
+    // }, [isLoading]);
 
-    useEffect(()=> {
-        setImg_t(null);
-    }, [_name]);
+    useEffect(() => {
+        if(images.length > 0) {
+            for(let i=0; i<location.length; i++) {
+                if(_name === location[i]) {                    
+                    setImg_1(images[i][0]);
+                    setImg_2(images[i][1]);
+                    setImg_3(images[i][2]);
+                    setImg_4(images[i][3]);
+                }
+            }
+        }
+    }, [_name, isLoading]);
 
     return (
-        <Slider {...settings} className={anim} >
-            <div>
-                <img className='randomImages' src={img_1} style={imgStyle} alt={'...'} />
-            </div>
-            <div>
-                <img className='randomImages' src={img_2} style={imgStyle} alt={'...'} />
-            </div>
-            <div>
-                <img className='randomImages' src={img_3} style={imgStyle} alt={'...'} />
-            </div>
-            <div>
-                <img className='randomImages' src={img_4} style={imgStyle} alt={'...'} />
-            </div>
-      </Slider>
+        isLoading ? <Loading /> : (
+            <Slider {...settings} className={anim} >
+                <div>
+                    <img className='randomImages' src={img_1} style={imgStyle} alt={'...'} />
+                </div>
+                <div>
+                    <img className='randomImages' src={img_2} style={imgStyle} alt={'...'} />
+                </div>
+                <div>
+                    <img className='randomImages' src={img_3} style={imgStyle} alt={'...'} />
+                </div>
+                <div>
+                    <img className='randomImages' src={img_4} style={imgStyle} alt={'...'} />
+                </div>
+            </Slider>
+        ) 
+        
     );
   }
   
@@ -82,10 +97,35 @@ function Content(props) {
 
 function MainRandom(props) {
     const [name, setName] = useState('Welcome to 대동유어지도');
-    // eslint-disable-next-line no-unused-vars
     const [login, setLogin] = useState('false');
+    const [isLoading, setIsLoading] = useState(true);
     const _name = props.name;
     const _login = props.login;
+    const dispatch = useDispatch();
+
+
+    const _location = ['seoul', 'gyeonggi', 'incheon', 'daejeon', 'busan', 'jeonnam', 'jeonbuk', 'chungbuk', 'chungnam', 'gangwon', 'gyeongnam', 'gyeongbuk', 'jeju', 'daegu', 'ulsan', 'sejong'];
+    const images = [];
+
+    useEffect(() => {
+        const fetchData = async() => {
+            for(let i=0; i<_location.length; i++) {
+                await axios.post("https://qzqejgzukh.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-main-random", {
+                    location: _location[i]
+                })
+                .then(res => {
+                    images.push(res.data);
+                })
+                .catch(err => {
+                    console.log("mainRandom err : ", err);
+                }) 
+            }
+            dispatch(setImages(images));
+            setIsLoading(false);
+            console.log("dispatched");
+        }
+        fetchData();
+    }, [])
 
     useEffect(()=> {
         setLogin('true');
@@ -129,7 +169,7 @@ function MainRandom(props) {
     return (
         <div style={{ padding: '50px', width:'88vh' }}>
             <h1 style={{ display:'flex', justifyContent: 'center'}}>{name}</h1>
-            {name==='Welcome to 대동유어지도'? <p></p> : <Content name={_name} />}
+            {name==='Welcome to 대동유어지도' ? <p></p> : <Content name={_name} location={_location} isLoading={isLoading} />}
         </div>
     )
 }
