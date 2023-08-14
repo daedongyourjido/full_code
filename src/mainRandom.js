@@ -27,7 +27,7 @@ function Loading() {
 }
 
 function Content(props) {
-    const location = props.location;
+    
     const isLoading = props.isLoading;
     const images = useSelector((state) => state.images);
 
@@ -60,6 +60,8 @@ function Content(props) {
     // }, [isLoading]);
 
     useEffect(() => {
+        const location = props.location;
+        
         if(images.length > 0) {
             for(let i=0; i<location.length; i++) {
                 if(_name === location[i]) {                    
@@ -70,8 +72,7 @@ function Content(props) {
                 }
             }
         }
-        console.log(isLoading);
-    }, [_name, isLoading]);
+    }, [_name, isLoading, images]);
 
     return (
         isLoading ? <Loading /> : (
@@ -99,15 +100,17 @@ function Content(props) {
 function MainRandom(props) {
     const [name, setName] = useState('Welcome to 대동유어지도');
     // const [login, setLogin] = useState('false');
-    const [isLoading, setIsLoading] = useState(true);
     const _name = props.name;
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
+    
 
 
     const _location = ['seoul', 'gyeonggi', 'incheon', 'daejeon', 'busan', 'jeonnam', 'jeonbuk', 'chungbuk', 'chungnam', 'gangwon', 'gyeongnam', 'gyeongbuk', 'jeju', 'daegu', 'ulsan', 'sejong'];
-    const images = [];
 
     useEffect(() => {
+        const images = [];
+
         const fetchData = async() => {
             for(let i=0; i<_location.length; i++) {
                 await axios.post("https://qzqejgzukh.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-main-random", {
@@ -125,7 +128,7 @@ function MainRandom(props) {
             console.log("dispatched");
         }
         fetchData();
-    }, [])
+    }, [dispatch, _location])
 
     // useEffect(()=> {
     //     setLogin('true');
