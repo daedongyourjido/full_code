@@ -36,9 +36,10 @@ export const KakaoMap = () => {
     axios("") // 히트맵 정보 받기
     .then()
     .catch()
-    const heatMap = useMemo(() => [
-      {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30}
-    ], []);
+
+    const heatMap = useMemo(() => {
+      return {seoul:100, gyeonggi:70, incheon:80, daejeon:10, busan:80, jeonnam:20, jeonbuk:40, chungbuk:50, chungnam:60, gangwon:70, gyeongnam:30, gyeongbuk:60, jeju:90, daegu:60, ulsan:20, sejong:30}
+    }, []);
   
     useEffect(() => {
   

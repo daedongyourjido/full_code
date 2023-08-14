@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -72,7 +72,7 @@ function Content(props) {
                 }
             }
         }
-    }, [_name, isLoading, images]);
+    }, [_name, isLoading, images, props.location]);
 
     return (
         isLoading ? <Loading /> : (
@@ -104,9 +104,9 @@ function MainRandom(props) {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     
-
-
-    const _location = ['seoul', 'gyeonggi', 'incheon', 'daejeon', 'busan', 'jeonnam', 'jeonbuk', 'chungbuk', 'chungnam', 'gangwon', 'gyeongnam', 'gyeongbuk', 'jeju', 'daegu', 'ulsan', 'sejong'];
+    const _location = useMemo(() => {
+        return ['seoul', 'gyeonggi', 'incheon', 'daejeon', 'busan', 'jeonnam', 'jeonbuk', 'chungbuk', 'chungnam', 'gangwon', 'gyeongnam', 'gyeongbuk', 'jeju', 'daegu', 'ulsan', 'sejong']
+    }, [])
 
     useEffect(() => {
         const images = [];
