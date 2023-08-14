@@ -20,7 +20,7 @@ function BeforeLogin(){
 
   return (
     <div className="bar" style={{ display: 'flex', justifyContent: 'flex-end'}}>
-      <SearchField />
+      {/* <SearchField /> */}
       <LoginPageButton onClick={()=>{
         navigate('./login');
       }} />
@@ -34,7 +34,7 @@ function AfterLogin(){
 
   return (
     <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
-        <SearchField />
+        {/* <SearchField /> */}
         <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} alt={'...'} />
         <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
         <p>{name}</p>
