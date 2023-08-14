@@ -98,7 +98,7 @@ export const KakaoMap = () => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#FFFFFF',
+                    fillColor: '#C1E2EC',
                     fillOpacity: 1, 
                   });
             } else if(heatMap[name] >= 70){
@@ -142,7 +142,7 @@ export const KakaoMap = () => {
                     strokeColor: '#004c80', 
                     strokeOpacity: 0.8, 
                     strokeStyle: 'solid', 
-                    fillColor: '#003645',
+                    fillColor: '#12596C',
                     fillOpacity: 1, 
                   });
             }
@@ -163,7 +163,7 @@ export const KakaoMap = () => {
   
           kakao.maps.event.addListener(polygon, 'mouseout', function () {
             if(heatMap[name] >= 90){
-                polygon.setOptions({ fillColor: '#FFFFFF' });
+                polygon.setOptions({ fillColor: '#C1E2EC' });
             } else if(heatMap[name] >= 70){
                 polygon.setOptions({ fillColor: '#8EC2D1' });
             } else if(heatMap[name] >= 50){
@@ -171,7 +171,7 @@ export const KakaoMap = () => {
             } else if(heatMap[name] >= 30){
                 polygon.setOptions({ fillColor: '#1B7389' });
             } else {
-                polygon.setOptions({ fillColor: '#003645' });
+                polygon.setOptions({ fillColor: '#12596C' });
             }
             
             customOverlay.setMap(null);

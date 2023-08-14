@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { KakaoMap } from './map.js';
 import LoginPageButton from './material/loginPageButton.js'
-import SearchField from './material/searchField2.js';
+// import SearchField from './material/searchField2.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 
