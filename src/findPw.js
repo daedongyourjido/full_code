@@ -1,24 +1,13 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import Header from './header.js';
 import MenuMap from './menuMap.js';
-import FindPwButton from './material/findPwButton.js';
-import FindPwField from './material/findPwField.js'
-import FindPwErrorField from './material/findPwErrorField.js'
+import { IdSearchButton,
+        IdField } from './material/findPwComponents.js';
 
-
-function Text() {
-    const navigate = useNavigate();
-      return (
-          <h1 style={{paddingBottom:'30px', cursor: 'pointer', width:'200px'}} onClick={()=>{
-            navigate('/');
-          }}>대동유어지도</h1>
-      )
-  }
-
+// 비밀번호 찾기 페이지 -> 이메일 존재여부 확인 
 function FindPwBox() {
-    const [pw, setPw] = useState("");
-    const [pwEmpty, setPwEmpty] = useState(false);
-    const [pwWrong, setPwWrong] = useState(false);
+    const [email, setEmail] = useState("");
+    const [empty, setEmpty] = useState(false);
 
     return (
         <div style={{width:'380px'}}>
@@ -26,13 +15,12 @@ function FindPwBox() {
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignContent:'center'}}>
                     <div style={{display:'flex', flexDirection:'column', alignItems:'center', marginTop:'45px'}}>
                         <h1 style={{color:'#000000'}}>비밀번호 재설정</h1>
-                        {pwWrong? <FindPwErrorField setPw={setPw} pwEmpty={pwEmpty} /> : pwEmpty? <FindPwErrorField setPw={setPw} pwEmpty={pwEmpty} /> : <FindPwField setPw={setPw} />}
-                        <FindPwButton pw={pw} setPwWrong={setPwWrong} setPwEmpty={setPwEmpty} />
+                        <IdField setEmail={setEmail} />
+                        <IdSearchButton email={email} setEmpty={setEmpty} />
+                        {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>이메일을 입력해주세요</p> : <p></p>}
                         
                     </div>
                 </div>
-
-
             </div>
         </div>
     )
@@ -42,7 +30,7 @@ function FindPw() {
     return (
         <div className="root">
             <div className="bar">
-                    <Text />
+                    <Header />
             </div>
 
             <MenuMap component={<FindPwBox />} />

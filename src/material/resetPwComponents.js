@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-export default function ChangePwButton(props) {
+export function ResetPwButton(props) {
   return (
     <div style={{ display: 'flex', marginTop:'10px', justifyContent: 'center', alignItems: 'center' }} >
     <Stack direction="row" spacing={2}>
@@ -15,27 +15,24 @@ export default function ChangePwButton(props) {
       }}
         onClick={()=>{
             if(!props.pw)
-                props.setPwEmpty(true);
+                props.setEmpty(true);
             else if(props.pw)
-                props.setPwEmpty(false);
+                props.setEmpty(false);
             if(!props.pwCheck)
-                props.setPwCheckEmpty(true);
+                props.setEmpty(true);
             else if(props.pwCheck)
-                props.setPwCheckEmpty(false);
-            if(props.pw.length < 8)
-                props.setPwWrong(true);
-            else
-                props.setPwWrong(false);
+                props.setEmpty(false);
             if(props.pw !== props.pwCheck)
                 props.setPwDup(true);
-            if(props.pw){
-                if(props.pwCheck && props.pw.length >= 8){
-                    if(props.pw === props.pwCheck){
-                        props.setChanged(true);
-                    }
+            else if(props.pw === props.pwCheck) {
+                if(props.pw && props.pwCheck) {
+                // 입력 정보 유효한지 확인됨. (입력여부 / 비번 재확인)
+                // db 접근
 
-                }
+                props.setPwDup(false);
+                props.setChanged(true);
             }
+        }
       }}>비밀번호 변경</Button>
     </Stack>
     </div>

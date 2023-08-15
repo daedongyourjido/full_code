@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import ChangePwField from './material/changePwField.js';
-import ChangePwOldField from './material/changePwOldField.js';
-import ChangePwOldErrorField from './material/changePwOldErrorField.js';
-import ChangePwCheckField from './material/changePwCheckField.js';
-import ChangePwCheckErrorField from './material/changePwCheckErrorField.js';
-import ChangePwErrorField from './material/changePwErrorField.js';
-import ChangePwButton from './material/changePwButton.js';
+import { ChangePwField, 
+        ChangePwOldField, 
+        ChangePwOldErrorField, 
+        ChangePwCheckField, 
+        ChangePwCheckErrorField, 
+        ChangePwErrorField, 
+        ChangePwButton } from './material/changePwComponents.js';
 import Bar from './bar.js';
 
 

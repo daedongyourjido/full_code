@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
-import ChangePwField from './material/changePwField.js';
-import ChangePwCheckField from './material/changePwCheckField.js';
-import ChangePwCheckErrorField from './material/changePwCheckErrorField.js';
-import ChangePwErrorField from './material/changePwErrorField.js';
-import ChangePwButton from './material/resetPwButton.js';
+import React, { useState } from 'react';
+import { ChangePwField,
+        ChangePwCheckField } from './material/changePwComponents.js';
+import { ResetPwButton } from './material/resetPwComponents.js';
 import Bar from './barDefault.js';
 
 
@@ -12,41 +10,35 @@ function ResetPwBox() {
     // eslint-disable-next-line no-unused-vars
     const [pwOld, setPwOld] = useState("");
     const [pwCheck, setPwCheck] = useState("");
-    const [pwEmpty, setPwEmpty] = useState(false);
+    const [empty, setEmpty] = useState(false);
     // eslint-disable-next-line no-unused-vars
-    const [oldPwEmpty, setOldPwEmpty] = useState(false);
-    const [pwCheckEmpty, setPwCheckEmpty] = useState(false);
-    const [pwWrong, setPwWrong] = useState(false);
     const [pwDup, setPwDup] = useState(false);
     const [changed, setChanged] = useState(false);
 
     return (
         <div>
         {changed ? 
-            <div style={{color:'#000000', display:'flex', flexDirection:'column', marginLeft:'80px', marginTop:'200px',}}>
+            <div style={{color:'#000000', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                 <h1>비밀번호 변경이 완료되었습니다</h1>
-                <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex', marginLeft:'135px'}}>메인으로 이동하기</a>
+                <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex'}}>메인으로 이동하기</a>
                 
             </div> 
         : 
-            <div style={{marginBottom:'250px', }}>
-                <div style={{marginLeft:'255px'}}>
-                <p style={{color:'black', fontSize:'20px', marginLeft:'80px'}}>비밀번호 변경</p>
-                { pwWrong? <ChangePwErrorField pwWrong={pwWrong} pwEmpty={pwEmpty} setPw={setPw} pw={pw} /> : pwEmpty? <ChangePwErrorField pwWrong={pwWrong} pwEmpty={pwEmpty} setPw={setPw} pw={pw} />  : <ChangePwField setPw={setPw} /> }
-                { pwDup? <ChangePwCheckErrorField pwCheckEmpty={pwCheckEmpty} pwDup={pwDup} pwCheck={pwCheck} setPwCheck={setPwCheck} /> : pwCheckEmpty? <ChangePwCheckErrorField pwCheckEmpty={pwCheckEmpty} pwDup={pwDup} setPwCheck={setPwCheck} pwCheck={pwCheck} /> : <ChangePwCheckField setPwCheck={setPwCheck}  /> }
-                </div>
-                <ChangePwButton 
-                    pw={pw}
-                    pwCheck={pwCheck}
-                    setOldPwEmpty={setOldPwEmpty}
-                    pwOld={pwOld}
-                    setPwEmpty={setPwEmpty}
-                    setPwCheckEmpty={setPwCheckEmpty}
-                    setPwWrong={setPwWrong}
-                    setPwDup={setPwDup}
-                    changed={changed}
-                    setChanged={setChanged}
-                    />
+            <div style={{marginBottom:'250px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', marginTop:'10vh'}}>
+                    <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
+                    <ChangePwField setPw={setPw} />
+                    <ChangePwCheckField setPwCheck={setPwCheck}  />
+                    <ResetPwButton 
+                        pw={pw}
+                        pwCheck={pwCheck}
+                        pwOld={pwOld}
+                        setPwDup={setPwDup}
+                        changed={changed}
+                        setChanged={setChanged}
+                        setEmpty={setEmpty}
+                        />
+                    {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>모두 입력해주세요</p> : <p></p>}
+                    {pwDup ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>비밀번호가 일치하지 않습니다</p> : <p></p>}
             </div>
         }
         </div>

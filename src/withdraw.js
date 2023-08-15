@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import WithdrawField from './material/withdrawField.js';
-import WithdrawErrorField from './material/withdrawErrorField.js';
-import WithdrawButton from './material/withdrawButton.js';
+import { WithdrawPwField, 
+        WithdrawPwErrorField,
+        WithdrawButton } from './material/accountDeleteComponents.js';
 import Bar from './bar.js';
 
 
@@ -24,7 +24,7 @@ function ChangePwBox() {
             <div style={{marginTop:'50px'}}>
                 <div style={{marginLeft:'170px'}}>
                     <p style={{color:'black', fontSize:'20px', marginLeft:'100px'}}>회원 탈퇴</p>
-                    {pwWrong? <withdrawErrorField pwEmpty={pwEmpty} setPw={setPw} /> : pwEmpty? <WithdrawErrorField pwEmpty={pwEmpty} setPw={setPw} /> : <WithdrawField setPw={setPw} /> }
+                    {pwWrong? <WithdrawPwErrorField pwEmpty={pwEmpty} setPw={setPw} /> : pwEmpty? <WithdrawPwErrorField pwEmpty={pwEmpty} setPw={setPw} /> : <WithdrawPwField setPw={setPw} /> }
                 
                 </div>
                 <WithdrawButton setPwWrong={setPwWrong} setPwEmpty={setPwEmpty} pwWrong={pwWrong} setChanged={setChanged} pw={pw} />
