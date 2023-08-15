@@ -8,8 +8,8 @@ function List_Component(props) {
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a href={'#'}>
                 <img src={props.img} alt={props.alt} />
-                <p>좋아요 개수: {props.like_count}</p>
                 <h4>리뷰 제목: {props.title}</h4>
+                <p>좋아요 개수: {props.like_count}</p>
                 <p>위치 정보: {props.name}</p>
                 <p>별 갯수: {props.star_count}</p>
             </a>

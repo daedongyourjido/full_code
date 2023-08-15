@@ -10,36 +10,6 @@ body{
   z-index: 1;
 }
 
-.header p {
-  float: left;
-  margin: 30px 0 0 100px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.r_header {
-  float: right;
-  margin: 20px;
-  margin-right: 70px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-#rHeader_btn {
-  position: relative;
-  left: 95px;
-  top: 12px;
-  background-color: #d8d8d8;
-  border: none;
-  width: 130px;
-  height: 35px;
-  border-radius: 5px;
-}
-
-#rHeader_btn:hover {
-  background-color: #b1b1b1;
-}
-
 .contents {
   width: 1920px;
   margin: 0 auto;
@@ -49,7 +19,7 @@ body{
 .side {
   display: flex;
   position: fixed;
-  width: 100%;
+  width: 800px;
   height: 100%;
 }
 
@@ -60,7 +30,7 @@ body{
 }
 
 .inner {
-  margin: 2% 0 auto auto;
+  margin: auto;
   border: 3px solid white;
   border-radius: 10px;
   padding: 60px 30px 120px 30px;
@@ -83,6 +53,11 @@ body{
 .contentslide {
   max-width: 500px;
   max-height: 500px;
+}
+
+.slick-list {
+  height: 500px;
+  padding-bottom: 0px;
 }
 
 .contentsBtn {
@@ -112,15 +87,21 @@ body{
 .main {
   float: right;
   width: 1100px;
+  height: 100%;
 }
 
-
 .space {
+  height: 100%;
   margin-top: 80px;
   padding-bottom: 10px;
   background-color: #a8c7cf;
   border-radius: 10px;
   margin-bottom: 50px;
+  -ms-overflow-style: none;
+}
+
+.space::-webkit-scrollbar{
+  display:none;
 }
 
 .space > .icons {
@@ -180,10 +161,12 @@ body{
 }
 
 
-.space > hr {
-  border: 1px solid white;
+.space_hr {
+  margin-top: 20px;
+  border-width: 1px;
   width:1098px;
-  margin-left:0px;
+  position: relative;
+  right: 900px;
 }
 
 @keyframes hoani {
