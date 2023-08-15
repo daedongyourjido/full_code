@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {LoginIdField,
         LoginPwField,
         LoginButton } from './material/loginComponents.js';
@@ -11,6 +11,7 @@ function LoginBox(props) {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [empty, setEmpty] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div style={{width:'380px'}}>
@@ -26,7 +27,7 @@ function LoginBox(props) {
                 <LoginButton setEmpty={setEmpty} id={id} pw={pw} />
                 </div>
 
-                <a style={{ fontSize:'10px', color:'gray', display:'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }} href='/find' >비밀번호를 잊으셨나요?</a>
+                <a style={{ fontSize:'10px', color:'gray', display:'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }} onClick={navigate('/find')} >비밀번호를 잊으셨나요?</a>
             </div>
             <div style={{backgroundColor:'#FFFFFF', borderRadius:'4%', width:'100%', height:'80px', marginTop:'40px', display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.3)'}}>
                 <p style={{color:'gray', fontSize:'13px', marginRight:'10px'}}>or</p>
