@@ -26,8 +26,11 @@ function LoginBox(props) {
 
                 <LoginButton setEmpty={setEmpty} id={id} pw={pw} />
                 </div>
-
-                <a style={{ fontSize:'10px', color:'gray', display:'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }} onClick={navigate('/find')} >비밀번호를 잊으셨나요?</a>
+                <p 
+                    style={{ fontSize:'10px', color:'gray', display:'flex', justifyContent:'center', alignItems:'center', marginTop:'30px', cursor:'pointer'}} 
+                    onClick={() => {
+                        navigate('/find');
+                    }}>비밀번호를 잊으셨나요?</p>
             </div>
             <div style={{backgroundColor:'#FFFFFF', borderRadius:'4%', width:'100%', height:'80px', marginTop:'40px', display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.3)'}}>
                 <p style={{color:'gray', fontSize:'13px', marginRight:'10px'}}>or</p>

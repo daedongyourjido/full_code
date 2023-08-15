@@ -1,19 +1,11 @@
 import React, { useState, useEffect} from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { KakaoMap } from './map.js';
 import { LoginPageButton } from './material/loginComponents.js';
 // import SearchField from './material/searchField2.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
-
-function Text() {
-  const navigate = useNavigate();
-    return (
-        <h1 style={{paddingBottom:'30px', cursor: 'pointer', width:'200px'}} onClick={()=>{
-          navigate('/');
-        }}>대동유어지도</h1>
-    )
-}
+import Header from './header.js';
 
 function BeforeLogin(){
   const navigate = useNavigate();
@@ -22,7 +14,7 @@ function BeforeLogin(){
     <div className="bar" style={{ display: 'flex', justifyContent: 'flex-end'}}>
       {/* <SearchField /> */}
       <LoginPageButton onClick={()=>{
-        navigate('./login');
+        navigate('/login');
       }} />
     </div>
   );
@@ -61,7 +53,7 @@ function Main() {
   return (
     <div className='root'>
       <div className="bar">
-          <Text></Text>
+         <Header />
           {login? <AfterLogin /> : <BeforeLogin />}
       </div>
         <KakaoMap />
