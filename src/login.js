@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LoginIdErrorField,
-        LoginIdField,
-        LoginPwErrorField, 
+// import { useNavigate } from 'react-router-dom';
+import {LoginIdField,
         LoginPwField,
         LoginButton } from './material/loginComponents.js';
 import { SignUpPageButton } from './material/signUpComponents.js';

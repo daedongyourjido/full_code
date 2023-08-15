@@ -1,19 +1,13 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { SignUpButton, 
         SignUpDisableField, 
         SignUpDupCheckButton, 
         SignUpPwField, 
         SignUpPwCheckField, 
-        SignUpPwCheckErrorField, 
-        SignUpPwCheckEmptyField, 
         SignUpNameField, 
-        SignUpNameEmptyField, 
-        SignUpIdField, 
-        SignUpIdErrorField, 
-        SignUpPwWrongField,
-        SignUpPwErrorField } from './material/signUpComponents.js';
+        SignUpIdField, } from './material/signUpComponents.js';
 import MenuMap from './menuMap.js';
 import Header from './header.js';
 
