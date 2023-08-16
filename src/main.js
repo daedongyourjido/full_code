@@ -6,7 +6,7 @@ import { KakaoMap } from './map.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Header from './header.js';
-import LoginPageButton from './loginPageButton.js';
+import LoginPageButton from './material/loginPageButton.js';
 
 
 

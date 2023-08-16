@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SignUpPageButton } from './material/signUpComponents.js';
+import SignUpPageButton from './material/signupPageButton.js';
 import MenuMap from './menuMap.js'
 import Header from './header.js';
 import Button from '@mui/material/Button';

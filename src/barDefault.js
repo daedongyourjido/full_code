@@ -1,6 +1,6 @@
 
 import { useNavigate} from 'react-router-dom';
-import { SignUpPageButton } from './material/signUpComponents.js';
+import SignUpPageButton from './material/signupPageButton.js';
 
 export default function Bar() {
     const navigate = useNavigate();

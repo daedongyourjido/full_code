@@ -9,7 +9,7 @@ import ImageCollection from './image_Collection';
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import SearchField from '../material/searchField.js';
-import { LoginPageButton } from '../material/loginComponents.js';
+import LoginPageButton from '../material/loginPageButton.js';
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';

@@ -9,7 +9,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from "axios";
 import { Button, Input, Paper } from '@mui/material';
 import SearchField from '../material/searchField.js';
-import { LoginPageButton } from '../material/loginComponents.js';
+import LoginPageButton from '../material/loginPageButton.js';
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
