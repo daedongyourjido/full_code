@@ -16,7 +16,7 @@ export default function SettingContainer(props) {
             setChange("setting_container_out");
             setWithdraw("setting_container_in");
         }
-    }, []);
+    }, [props.menu]);
 
 
     return (
