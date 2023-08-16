@@ -1,4 +1,5 @@
-import propic from './image/propic.jpg';
+// 프로필 사진 가져와야 함
+
 import { useNavigate} from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -14,7 +15,7 @@ export default function Bar() {
                 navigate('/');
           }}>대동유어지도</h1>
           <div style={{marginLeft:'60%', display:'flex', flexDirection:'row'}}>
-             <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginLeft:'5px',marginTop:'10px', cursor: 'pointer'}} onClick={()=>{navigate('/setting')}} alt={'...'}/>
+             {/* <img src={propic} style={{width:'40px', height:'40px', borderRadius:'100%', marginLeft:'5px',marginTop:'10px', cursor: 'pointer'}} onClick={()=>{navigate('/setting')}} alt={'...'}/> */}
           </div>
         </div>
     )

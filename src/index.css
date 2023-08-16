@@ -66,3 +66,19 @@ html, body, #root {
   background-color: #045369;
   border: none;
 }
+
+.input_error {
+  color: red;
+  text-align: center;
+  font-size: 1vh;
+}
+
+.setting_container_in {
+  color: black;
+  cursor: pointer
+}
+
+.setting_container_out {
+  color: gray;
+  cursor: pointer;
+}

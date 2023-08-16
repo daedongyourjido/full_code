@@ -1,26 +1,28 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { KakaoMap } from './map.js';
-import { LoginPageButton } from './material/loginComponents.js';
+// import { LoginPageButton } from './material/loginComponents.js';
 // import SearchField from './material/searchField2.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Header from './header.js';
+import LoginPageButton from './loginPageButton.js';
 
-function BeforeLogin(){
-  const navigate = useNavigate();
+
+
+function LoggedOutView(){
 
   return (
     <div className="bar" style={{ display: 'flex', justifyContent: 'flex-end'}}>
       {/* <SearchField /> */}
-      <LoginPageButton onClick={()=>{
-        navigate('/login');
-      }} />
+      <LoginPageButton borderColor="white" color="white" />
     </div>
   );
 }
 
-function AfterLogin(){
+
+
+function LoggedInView(){
   const navigate = useNavigate();
   const name = localStorage.getItem('name');
 
@@ -38,6 +40,9 @@ function AfterLogin(){
   )
 }
 
+
+
+
 function Main() {
   const [login, setLogin] = useState(false);
 
@@ -54,7 +59,7 @@ function Main() {
     <div className='root'>
       <div className="bar">
          <Header />
-          {login? <AfterLogin /> : <BeforeLogin />}
+          {login? <LoggedInView /> : <LoggedOutView />}
       </div>
         <KakaoMap />
       </div>

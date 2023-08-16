@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { ChangePwField,
-        ChangePwCheckField } from './material/changePwComponents.js';
-import { ResetPwButton } from './material/resetPwComponents.js';
 import Bar from './barDefault.js';
+import InputField from './material/inputField.js';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import ResetPwButton from './resetPwButton.js';
+
+
 
 
 function ResetPwBox() {
@@ -26,8 +29,8 @@ function ResetPwBox() {
         : 
             <div style={{marginBottom:'250px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', marginTop:'10vh'}}>
                     <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
-                    <ChangePwField setPw={setPw} />
-                    <ChangePwCheckField setPwCheck={setPwCheck}  />
+                    <InputField setData={setPw} label="비밀번호" type="password" />
+                    <InputField setData={setPwCheck} label="비밀번호 재확인" type="password" />
                     <ResetPwButton 
                         pw={pw}
                         pwCheck={pwCheck}
