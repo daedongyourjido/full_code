@@ -1,41 +1,43 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { KakaoMap } from './map.js';
-// import { LoginPageButton } from './material/loginComponents.js';
-// import SearchField from './material/searchField2.js';
 import "./style.css";
 import LogoutIcon from '@mui/icons-material/Logout';
-import Header from './header.js';
 import LoginPageButton from './material/loginPageButton.js';
 
 
 
-function LoggedOutView(){
-
+function LoggedOutBar(){
+  const navigate = useNavigate();
   return (
-    <div className="bar" style={{ display: 'flex', justifyContent: 'flex-end'}}>
-      {/* <SearchField /> */}
-      <LoginPageButton borderColor="white" color="white" />
+    <div className="loggedout-bar">
+      <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
+      <div className="login-button-container">
+        <LoginPageButton borderColor="white" color="white" />
+      </div>
     </div>
   );
 }
 
 
 
-function LoggedInView(){
+function LoggedInBar(){
   const navigate = useNavigate();
-  const name = localStorage.getItem('name');
 
   return (
-    <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', marginTop:'20px'}}>
-        {/* <SearchField /> */}
-        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} alt={'...'} />
-        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> 
-        <p>{name}</p>
-        <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
-          sessionStorage.clear();
-          window.location.reload();
-        }} />
+    <div className="loggedin-bar">
+      <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
+      <div className='profile-container'>
+        <img className='profile-pic' src={sessionStorage.picture} onClick={()=>{navigate('/profile')}} alt={'...'} />
+        <p className='profile-name' onClick={()=>{navigate('/profile')}} >
+          {sessionStorage.name}
+        </p> 
+        <LogoutIcon className='logout-button'
+          onClick={()=>{
+            sessionStorage.clear();
+            window.location.reload();
+          }} />
+      </div>
     </div>
   )
 }
@@ -58,11 +60,10 @@ function Main() {
   return (
     <div className='root'>
       <div className="bar">
-         <Header />
-          {login? <LoggedInView /> : <LoggedOutView />}
+          {login? <LoggedInBar /> : <LoggedOutBar />}
       </div>
         <KakaoMap />
-      </div>
+    </div>
   )
 }
 

@@ -1,23 +1,19 @@
 import React, {useState} from 'react';
-import Header from './header.js';
 import MenuMap from './menuMap.js';
 import { useNavigate } from 'react-router-dom';
 import InputField from './material/inputField.js';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 
 
 export function IdSearchButton(props) {
     const navigate = useNavigate();
 
   return (
-    <div style={{ display: 'flex', marginTop:'10px', justifyContent: 'center', alignItems: 'center' }} >
-    <Stack direction="row" spacing={2}>
       <Button variant="outlined" 
         sx={{
             borderColor: '#045369',
             color: '#045369',
-            width: '35ch'
+            width: '35ch',
         }}
         onClick={()=>{
           if(!props.email)
@@ -33,7 +29,15 @@ export function IdSearchButton(props) {
           }
 
       }} >비밀번호 찾기</Button>
-    </Stack>
+  );
+}
+
+
+function LoggedOutBar(){
+  const navigate = useNavigate();
+  return (
+    <div className="loggedout-bar">
+      <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
     </div>
   );
 }
@@ -45,27 +49,21 @@ function FindPwBox() {
     const [empty, setEmpty] = useState(false);
 
     return (
-        <div style={{width:'380px'}}>
-            <div style={{paddingTop:'0px', display:'flex', flexDirection:'column', width:'100%', height:'400px', backgroundColor:'white', borderRadius:'2%', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.3)'}}>
-                <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignContent:'center'}}>
-                    <div style={{display:'flex', flexDirection:'column', alignItems:'center', marginTop:'45px'}}>
-                        <h1 style={{color:'#000000'}}>비밀번호 재설정</h1>
-                        <InputField setData={setEmail} label="이메일" type="text" /> 
-                        <IdSearchButton email={email} setEmpty={setEmpty} />
-                        {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>이메일을 입력해주세요</p> : <p></p>}
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div className='findpw-box'>
+        <h1 style={{color:'#000000'}}>비밀번호 재설정</h1>
+        <InputField setData={setEmail} label="이메일" type="text" /> 
+        <IdSearchButton email={email} setEmpty={setEmpty} />
+        {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>이메일을 입력해주세요</p> : <p></p>}
+      </div>
     )
 }
+
 
 function FindPw() {
     return (
         <div className="root">
-            <div className="bar">
-                    <Header />
+            <div className='bar'>
+              <LoggedOutBar />
             </div>
 
             <MenuMap component={<FindPwBox />} />

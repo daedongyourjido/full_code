@@ -5,6 +5,7 @@ import InputField from './material/inputField.js';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SettingContainer from './settingContainer.js';
+import MainPageButton from './material/mainPageButton.js';
 
 
 function WithdrawButton(props) {
@@ -47,19 +48,18 @@ function Withdraw() {
         return (
             <div>
             {changed ? 
-                <div style={{color:'#000000', display:'flex', flexDirection:'column', marginLeft:'80px', marginTop:'200px', }}>
-                    <h1 style={{marginLeft:'100px'}}>탈퇴되었습니다</h1>
-                    <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex', marginLeft:'135px'}}>메인으로 이동하기</a>
-                    
+                <div className='withdraw-box-done'>
+                    <h1>탈퇴되었습니다</h1>
+                    <MainPageButton color="black" />
                 </div> 
             : 
-                <div style={{marginTop:'50px'}}>
+                <div className='withdraw-box'>
                     <div style={{marginLeft:'170px'}}>
                         <p style={{color:'black', fontSize:'20px', marginLeft:'100px'}}>회원 탈퇴</p>
                         <InputField setData={setPw} label="비밀번호" type="password" />
                     </div>
                     <WithdrawButton setPwEmpty={setPwEmpty} setChanged={setChanged} pw={pw} />
-                    { pwEmpty ? <p className='input_error'>이메일 중복확인 해주세요</p> : <p></p> }
+                    { pwEmpty ? <p className='input_error'>비밀번호를 입력해주세요</p> : <p></p> }
                 </div>
             }
             </div>
@@ -68,9 +68,10 @@ function Withdraw() {
 
     return (
         <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <Bar />
-            <div style={{display:'flex', position:'absolute', top:'50%', right:'50%', marginRight:'-400px', marginTop:'-300px'}}>
-                
+            <div className='bar'>
+                <Bar setting={true} />
+            </div>
+            <div className='resetpw-container'>
                 <SettingContainer component={WithdrawBox} menu="withdraw" />
             </div>
         </div>

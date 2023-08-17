@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import MenuMap from './menuMap.js';
-import Header from './header.js';
 import InputField from './material/inputField.js';
 import SignUpButton from './signupButton.js';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LoginPageButton from './material/loginPageButton.js';
+import { useNavigate } from 'react-router-dom';
 
 
 // 아이디 중복 확인 버튼
@@ -75,6 +75,15 @@ function SignUpDisableField(props) {
   }
 
 
+  function LoggedOutBar(){
+    const navigate = useNavigate();
+    return (
+      <div className="loggedout-bar">
+        <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
+      </div>
+    );
+  }
+
 
 
 function SignUpBox(props) {
@@ -89,33 +98,31 @@ function SignUpBox(props) {
     const [idFix, setIdFix] = useState(false);
 
     return (
-        <div style={{width:'380px'}}>
-            <div style={{paddingTop:'30px', display:'flex', flexDirection:'column', width:'500px',alignItems:'center', justifyItems:'center', height:'65vh', backgroundColor:'white', borderRadius:'2%', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.3)'}}>
-                        <h1 style={{color:'#000000'}}>회원가입</h1>
-                        { idFix ?  <SignUpDisableField id={id} /> : <InputField setData={setId} label="이메일" type="text" /> } 
-                        <SignUpDupCheckButton setEmpty={setEmpty} setIdDupCheck={setIdDupCheck} setIdFix={setIdFix} id={id}/>
-                        { idDupCheck ? <p style={{fontSize:'10px', marginTop:'25px', marginBottom:'0px', color:'red'}}>중복된 아이디입니다</p> : <p></p>}
-                        <InputField setData={setName} label="닉네임" type="text" />
-                        <InputField setData={setPw} label="비밀번호" type="password" />
-                        <InputField setData={setPwDup} label="비밀번호 재확인" type="password" />
-                        <SignUpButton 
-                            setEmpty={setEmpty}
-                            idDupCheck={idDupCheck}
-                            pwDup={pwDup}
-                            name={name}
-                            id={id} 
-                            pw={pw} 
-                            idFix={idFix}
-                            setIdDupChecked={setIdDupChecked}
-                            setPwDupCheck={setPwDupCheck} 
-                            setIdDupCheck={setIdDupCheck} />
-                        {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>모두 입력해주세요</p> : <p></p> }
-                        {idDupChecked ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>이메일 중복확인 해주세요</p> : <p></p> }
-                        {pwDupCheck ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>비밀번호 재확인 해주세요</p> : <p></p> }
-                        <div style={{display:'flex', flexDirection:'row', marginTop:'15px'}}>
-                            <p style={{color:'gray', fontSize:'10px', marginRight:'10px'}}>혹은 계정이 있는 경우</p>
-                            <LoginPageButton borderColor="gray" color="gray" />
-                        </div>
+        <div className='signup-box'>
+            <h1 style={{color:'#000000'}}>회원가입</h1>
+            { idFix ?  <SignUpDisableField id={id} /> : <InputField setData={setId} label="이메일" type="text" /> } 
+            <SignUpDupCheckButton setEmpty={setEmpty} setIdDupCheck={setIdDupCheck} setIdFix={setIdFix} id={id}/>
+            { idDupCheck ? <p style={{fontSize:'10px', marginTop:'25px', marginBottom:'0px', color:'red'}}>중복된 아이디입니다</p> : <p></p>}
+            <InputField setData={setName} label="닉네임" type="text" />
+            <InputField setData={setPw} label="비밀번호" type="password" />
+            <InputField setData={setPwDup} label="비밀번호 재확인" type="password" />
+            <SignUpButton 
+                setEmpty={setEmpty}
+                idDupCheck={idDupCheck}
+                pwDup={pwDup}
+                name={name}
+                id={id} 
+                pw={pw} 
+                idFix={idFix}
+                setIdDupChecked={setIdDupChecked}
+                setPwDupCheck={setPwDupCheck} 
+                setIdDupCheck={setIdDupCheck} />
+            {empty ? <p className='input_error'>모두 입력해주세요</p> : <div/> }
+            {idDupChecked ? <p className='input_error'>이메일 중복확인 해주세요</p> : <div/> }
+            {pwDupCheck ? <p className='input_error'>비밀번호 재확인 해주세요</p> : <div/> }
+            <div style={{display:'flex', flexDirection:'row', marginTop:'15px'}}>
+                <p style={{color:'gray', fontSize:'10px', marginRight:'10px', marginTop:'15px'}}>혹은 계정이 있는 경우</p>
+                <LoginPageButton borderColor="gray" color="gray" />
             </div>
         </div>
     )
@@ -126,8 +133,8 @@ function SignUp() {
 
     return (
         <div className='root'>
-            <div className="bar" style={{marginBottom:'10px'}}>
-                <Header />
+            <div className='bar'>
+                <LoggedOutBar />
             </div>
             <MenuMap component={<SignUpBox />} />
             

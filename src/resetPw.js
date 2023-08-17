@@ -4,6 +4,7 @@ import InputField from './material/inputField.js';
 // import Button from '@mui/material/Button';
 // import Stack from '@mui/material/Stack';
 import ResetPwButton from './resetPwButton.js';
+import LoginPageButton from './material/loginPageButton.js';
 
 
 
@@ -21,13 +22,12 @@ function ResetPwBox() {
     return (
         <div>
         {changed ? 
-            <div style={{color:'#000000', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            <div className='resetpw-box' style={{color:'black'}}>
                 <h1>비밀번호 변경이 완료되었습니다</h1>
-                <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex'}}>메인으로 이동하기</a>
-                
+                <LoginPageButton borderColor="black" color="black" />
             </div> 
         : 
-            <div style={{marginBottom:'250px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', marginTop:'10vh'}}>
+            <div className='resetpw-box'>
                     <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
                     <InputField setData={setPw} label="비밀번호" type="password" />
                     <InputField setData={setPwCheck} label="비밀번호 재확인" type="password" />
@@ -48,32 +48,15 @@ function ResetPwBox() {
     )
 }
 
-function SettingBox() {
-
-    return (
-        <div style={{height:'668px', width:'800px', backgroundColor:'#FFFFFF', display:'grid' }} >
-            <div style={{ height: '100%', display:'flex', flexDirection:'column', padding:'20px', justifyItems:'center', alignItems:'center' }}>
-                <div style={{color:'gray', fontSize:'15px', marginLeft:'10px'}}>
-                
-                </div>
-
-            </div>
-            <div>
-                <ResetPwBox />
-            </div>
-
-        </div>
-    )
-}
-
 function ResetPw() {
 
     return (
         <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <Bar />
-            <div style={{display:'flex', position:'absolute', top:'50%', right:'50%', marginRight:'-400px', marginTop:'-300px'}}>
-                
-                <SettingBox />
+            <div className='bar'>
+                <Bar setting={false} />
+            </div>
+            <div className='resetpw-container'>
+                <ResetPwBox />
             </div>
         </div>
     )

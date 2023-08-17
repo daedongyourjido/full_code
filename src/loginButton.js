@@ -6,7 +6,6 @@ export default function LoginButton(props) {
     const navigate = useNavigate();
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
       <Button variant="outlined" 
       sx={{
         borderColor: '#045369',
@@ -56,6 +55,5 @@ export default function LoginButton(props) {
                 })
 
       }}}>sign In</Button>
-    </div>
   );
 }

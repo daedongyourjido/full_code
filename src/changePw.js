@@ -3,6 +3,7 @@ import Bar from './bar.js';
 import ResetPwButton from './resetPwButton.js';
 import InputField from './material/inputField.js';
 import SettingContainer from './settingContainer.js';
+import MainPageButton from './material/mainPageButton.js';
 
 
 function ChangePw() {
@@ -17,13 +18,12 @@ function ChangePw() {
         return (
             <div>
             {changed ? 
-                <div style={{color:'#000000', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                <div className='changepw-box-done'>
                     <h1>비밀번호 변경이 완료되었습니다</h1>
-                    <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex'}}>메인으로 이동하기</a>
-                    
+                    <MainPageButton color="black" />
                 </div> 
             : 
-                <div style={{marginBottom:'250px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', marginTop:'10vh'}}>
+                <div className='changepw-box'>
                         <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
                         <InputField setData={setPw} id="password" type="password" label="비밀번호" />
                         <InputField setData={setPwCheck} id="password" type="password" label="비밀번호 재확인" />
@@ -45,9 +45,10 @@ function ChangePw() {
 
     return (
         <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <Bar />
-            <div style={{display:'flex', position:'absolute', top:'50%', right:'50%', marginRight:'-400px', marginTop:'-300px'}}>
-                
+            <div className='bar'>
+                <Bar setting={true} />
+            </div>
+            <div className='resetpw-container'>
                 <SettingContainer component={ChangePwBox} menu="changePw" />
             </div>
         </div>

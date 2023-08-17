@@ -20,10 +20,11 @@ export default function SettingContainer(props) {
 
 
     return (
-        <div style={{height:'668px', width:'800px', backgroundColor:'#FFFFFF', display:'grid', gridTemplateColumns: "1fr 3.8fr", gridColumnGap: '1px', boxShadow: '0px 0px 80px rgba(0, 0, 0, 0.2)'}} >
+        <div className='setting-box' >
             <div style={{ height: '100%', borderRight: '1px solid #045369', borderRightWidth:'3px', display:'flex', flexDirection:'column', padding:'20px', }}>
                 <div style={{color:'gray', fontSize:'15px', marginLeft:'10px'}}>
-                    <p className={change} onClick={()=>{navigate('/setting/change')}}>비밀번호 변경</p>
+                    <p className={change}
+                        style={{marginTop:'30px', marginBottom:'40px'}} onClick={()=>{navigate('/setting/change')}}>비밀번호 변경</p>
                     <p className={withdraw} onClick={()=>{navigate('/setting/withdraw')}}>회원 탈퇴</p>
                 
                 </div>
