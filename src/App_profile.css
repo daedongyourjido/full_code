@@ -83,11 +83,21 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; width:750px;
   line-height: 600px;
 }
 
+#mapcontents{
+  position:relative;
+  float: right;
+  width:1200px;
+  height:600px;
+  right: -350px;
+  top : 100px;
+}
+
 #bt{
   position: relative;
   left:1200px;
   top:20px;
   width: 150px;
+
 }
 
 #avatarpos{
@@ -107,6 +117,7 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; width:750px;
 
 }
 
+
 #namepos{
   position: relative;
   width: 71px;
@@ -114,4 +125,31 @@ hr { border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6; width:750px;
   left: 380px;
   top: -347px;
   font-size : 28px
+}
+
+#followpos{
+  position: relative;
+  width: 201px;
+  height: 33px;
+  left: 420px;
+  top: -327px;
+  font-size : 18px
+}
+
+#followingpos{
+  position: relative;
+  width: 201px;
+  height: 33px;
+  left: 560px;
+  top: -360px;
+  font-size : 18px
+}
+
+#postspos{
+  position: relative;
+  width: 201px;
+  height: 33px;
+  left: 305px;
+  top: -393px;
+  font-size : 18px
 }

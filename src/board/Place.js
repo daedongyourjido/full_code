@@ -8,8 +8,8 @@ import SimpleSlider from './slider';
 import ImageCollection from './image_Collection';
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
-import SearchField from "../material/searchField2";
-import LoginPageButton from "../material/loginPageButton";
+import SearchField from '../material/searchField.js';
+import LoginPageButton from '../material/loginPageButton.js';
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -82,7 +82,7 @@ function Place() {
     const [userLocationInfo, setUserLocationInfo] = useState([])
 
     const loc = useLocation();
-    const paths = loc.pathname.split('/'); // 경로를 '/'로 분할하여 배열로 만듭니다.
+    const paths = loc.pathname.split('/');
     const lastPath = paths[paths.length - 1];
 
     const navigate = useNavigate();
@@ -111,7 +111,6 @@ function Place() {
             place: lastPath
         })
             .then(res => {
-                console.log(res.data)
                 setUserLocationInfo(res.data)
             })
             .catch(error => {
@@ -121,54 +120,64 @@ function Place() {
 
     return (
         <div className="App">
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" sx={{backgroundColor: '#045369'}}>
-                    <Toolbar>
-                        <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon" }} onClick={()=>{navigate('/')}}>
-                            대동유어지도
-                        </Typography>
-                        {login? <AfterLogin location={lastPath} /> : <BeforeLogin />}
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <div className='heade'>
+                <Box sx={{ flexGrow: 1 }} className='header'>
+                    <AppBar position="static" sx={{backgroundColor: '#045369'}}>
+                        <Toolbar>
+                            <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon" }} onClick={()=>{navigate('/')}}>
+                                대동유어지도
+                            </Typography>
+                            {login? <AfterLogin location={lastPath} /> : <BeforeLogin />}
+                        </Toolbar>
+                    </AppBar>
+                </Box>
+            </div>
             <div className='contents'>
-              <div className='side'>
-                <div className='inner'>
-                  <h1>지역 이름</h1>
-                  <h3>추천게시물</h3>
-                  <div className='slider'>
-                    <SimpleSlider/>
-                  </div>
+                <div className='side'>
+                    <div className='inner'>
+                        <h1>지역 이름: {lastPath}</h1>
+                        <h3>추천게시물</h3>
+                        <div className='slider'>
+                            <SimpleSlider
+                                userLocationInfo={userLocationInfo}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className='main' style={{margin: 'auto auto auto 0'}}>
-                    <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100vh' }}>
-                        <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
-                            <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="50px"/>} />
-                            <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>} />
-                            <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="50px"/>} />
-                        </Tabs>
-                        <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
-                            <ImageCollection
-                                userLocationInfo={userLocationInfo}
-                                lastPath={lastPath}
-                            />
-                        </CustomTabPanel>
-                        <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
-                            <ImageCollection
-                                userLocationInfo={userLocationInfo}
-                                lastPath={lastPath}
-                            />
-                        </CustomTabPanel>
-                        <CustomTabPanel value={value} index={2} style={{overflow:'auto', maxHeight: '100vh'}}>
-                            <ImageCollection
-                                userLocationInfo={userLocationInfo}
-                                lastPath={lastPath}
-                            />
-                        </CustomTabPanel>
-                    </Box>
+                <div className='main' style={{margin: 'auto'}}>
+                    <div className='space'>
+                        <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100%' }}>
+                            <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
+                                <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
+                                iconPosition='start' label="맛집"/>
+                                <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
+                                iconPosition='start' label="숙소"/>
+                                <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="45px"/>}
+                                iconPosition='start' label="여행지"/>
+                            </Tabs>
+                            <hr className='space_hr'></hr>
+                            <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
+                                <ImageCollection
+                                    userLocationInfo={userLocationInfo}
+                                    lastPath={lastPath}
+                                />
+                            </CustomTabPanel>
+                            <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
+                                <ImageCollection
+                                    userLocationInfo={userLocationInfo}
+                                    lastPath={lastPath}
+                                />
+                            </CustomTabPanel>
+                            <CustomTabPanel value={value} index={2} style={{overflow:'auto', maxHeight: '100vh'}}>
+                                <ImageCollection
+                                    userLocationInfo={userLocationInfo}
+                                    lastPath={lastPath}
+                                />
+                            </CustomTabPanel>
+                        </Box>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
       );
 }

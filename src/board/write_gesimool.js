@@ -8,8 +8,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from "axios";
 import { Button, Input, Paper } from '@mui/material';
-import SearchField from "../material/searchField2";
-import LoginPageButton from "../material/loginPageButton";
+import SearchField from '../material/searchField.js';
+import LoginPageButton from '../material/loginPageButton.js';
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -57,7 +57,6 @@ function Write_gesimool() {
     const [content, setContent] = useState('')
     const [login, setLogin] = useState(false);
 
-    console.log(location.state)
     useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
         const token = sessionStorage.getItem('id');
         if (token) {
@@ -144,7 +143,7 @@ function Write_gesimool() {
                 <div className="write_con">
                     <div className="top">
                         <h4 style={{margin:'auto', display:'flex'}}>새 게시물</h4>
-                        <Button style={{position:'absolute', right:'0%', padding:'19.5px'}} variant="contained" color="primary" onClick={handleUpload}>
+                        <Button style={{position:'absolute', right:'0%', padding:'18px'}} variant="contained" color="primary" onClick={handleUpload}>
                             업로드
                         </Button>
                     </div>
@@ -174,7 +173,7 @@ function Write_gesimool() {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{marginTop:'35px'}}/>
+                            <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{margin:'52px 0px 0px 20px'}}/>
 
                         </Box>
                     </div>

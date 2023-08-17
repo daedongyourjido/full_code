@@ -1,21 +1,31 @@
+import './follow.css';
 import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-export default function FollowingList() {
+export default function FollowerList() {
   return (
+    <div id = "fwrap">
+      
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <ListItem alignItems="flex-start">
+        <ListItemText
+          primary="나의 Following"
+        />
+      </ListItem>
+      <div id = "line">
+      </div>
+
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Brunch this weekend?"
+          primary="박세영"
           secondary={
             <React.Fragment>
               <Typography
@@ -24,20 +34,19 @@ export default function FollowingList() {
                 variant="body2"
                 color="text.primary"
               >
-                Ali Connors
               </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
+              {"id1"}
             </React.Fragment>
           }
         />
       </ListItem>
-      <Divider variant="inset" component="li" />
+
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Summer BBQ"
+          primary="이주헌"
           secondary={
             <React.Fragment>
               <Typography
@@ -46,20 +55,18 @@ export default function FollowingList() {
                 variant="body2"
                 color="text.primary"
               >
-                to Scott, Alex, Jennifer
               </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
+              {"id2"}
             </React.Fragment>
           }
         />
       </ListItem>
-      <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Oui Oui"
+          primary="유동선"
           secondary={
             <React.Fragment>
               <Typography
@@ -68,13 +75,14 @@ export default function FollowingList() {
                 variant="body2"
                 color="text.primary"
               >
-                Sandra Adams
               </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
+              {"id3"}
             </React.Fragment>
           }
         />
       </ListItem>
+
     </List>
+    </div>
   );
 }
