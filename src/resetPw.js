@@ -11,11 +11,8 @@ import LoginPageButton from './material/loginPageButton.js';
 
 function ResetPwBox() {
     const [pw, setPw] = useState("");
-    // eslint-disable-next-line no-unused-vars
-    const [pwOld, setPwOld] = useState("");
     const [pwCheck, setPwCheck] = useState("");
     const [empty, setEmpty] = useState(false);
-    // eslint-disable-next-line no-unused-vars
     const [pwDup, setPwDup] = useState(false);
     const [changed, setChanged] = useState(false);
 
@@ -34,7 +31,6 @@ function ResetPwBox() {
                     <ResetPwButton 
                         pw={pw}
                         pwCheck={pwCheck}
-                        pwOld={pwOld}
                         setPwDup={setPwDup}
                         changed={changed}
                         setChanged={setChanged}

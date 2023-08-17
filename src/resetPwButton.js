@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 
 // changePw와 resetPw에서 사용하는 비밀번호 변경 버튼
 
+
 export default function ResetPwButton(props) {
     return (
       <div style={{ display: 'flex', marginTop:'10px', justifyContent: 'center', alignItems: 'center' }} >
@@ -27,9 +28,12 @@ export default function ResetPwButton(props) {
                   props.setPwDup(true);
               else if(props.pw === props.pwCheck) {
                   if(props.pw && props.pwCheck) {
+
+                    
                   // 입력 정보 유효한지 확인됨. (입력여부 / 비번 재확인)
                   // db 접근
   
+                  
                   props.setPwDup(false);
                   props.setChanged(true);
               }
