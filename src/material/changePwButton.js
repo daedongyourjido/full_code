@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import axios from "axios";
 
 export default function ChangePwButton(props) {
 
@@ -14,7 +15,7 @@ export default function ChangePwButton(props) {
         width: '35ch'
         
       }}
-        onClick={()=>{
+        onClick={async ()=>{
             if(!props.oldPw)
                 props.setOldPwEmpty(true);
             else if(props.oldPw)
@@ -36,7 +37,20 @@ export default function ChangePwButton(props) {
             if(props.oldPw && props.pw){
                 if(props.pwCheck && props.pw.length >= 8){
                     if(props.pw === props.pwCheck){
-                        props.setChanged(true);
+                        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO', {
+                            DML: 'UPDATE',
+                            table: 'user',
+                            set: `password = '${props.pw}'`,
+                            where: `id='${sessionStorage._key}'`
+                        })
+                            .then(res => {
+                                props.setChanged(true);
+                                sessionStorage.setItem('password', props.pw)
+                                console.log(res)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
 
                 }

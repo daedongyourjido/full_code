@@ -53,7 +53,7 @@ function Gesimool(props) {
             picture: sessionStorage.getItem('picture'),
         };
 
-        setComments([...comments, newComment]); // 이전 배열의 복사본에 새로운 댓글을 추가한 후 상태를 업데이트합니다.
+        setComments([...comments, newComment]);
         document.getElementById('comment_ipt').value = ''
         axios.post('https://8ymn2iwfoj.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-add-comment', {
             location_id: props.info.id,
@@ -68,7 +68,19 @@ function Gesimool(props) {
                 console.log(err)
             })
     }
-
+    const handleDelete = () => {
+        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO', {
+            DML: 'DELETE',
+            table: 'location',
+            where: `id=${props.info.id}`
+        })
+            .then(res => {
+                navigate('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return(
         <>
         {props.info === undefined ? (<></>)
@@ -87,8 +99,8 @@ function Gesimool(props) {
     </div>
 
     <div className="g_contents">
-        <Button variant="contained" onClick={() => {navigate('/write')}}>수정하기</Button>
-        <Button variant="contained">삭제하기</Button>
+        <Button variant="contained" onClick={() => {navigate(`/write?locationid=${props.info.id}`)}}>수정하기</Button>
+        <Button variant="contained" onClick={handleDelete}>삭제하기</Button>
         <Button variant="contained">좋아요</Button>
         <div className="like_and_location">
             좋아요: {props.info.like_count} / {props.info.name}

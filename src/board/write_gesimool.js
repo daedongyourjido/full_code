@@ -14,6 +14,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { useSearchParams } from 'react-router-dom';
 
 function BeforeLogin(props){
     const navigate = useNavigate();
@@ -57,6 +58,27 @@ function Write_gesimool() {
     const [content, setContent] = useState('')
     const [login, setLogin] = useState(false);
 
+    const [searchParams] = useSearchParams();
+    const queryValue = searchParams.get('locationid') || '';
+    useEffect(() => {
+        if(queryValue !== '') {
+            axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+                DML: 'SELECT',
+                columns: '*',
+                table: 'location',
+                where: `id=${queryValue}`
+            })
+                .then(res => {
+                    setPreviewImage(res.data[0].image)
+                    setTitle(res.data[0].title)
+                    setContent(res.data[0].content)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+    }, [queryValue])
+
     useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
         const token = sessionStorage.getItem('id');
         if (token) {
@@ -91,28 +113,47 @@ function Write_gesimool() {
             fileName = selectedImage.name
         }
         // Perform upload logic here, e.g. using APIs or other methods
-
-        console.log({
-            name: location.state.location, // 지역명(seoul, jeju...)
-        })
-
-        /** 게시글 업로드 api 추가 **/
-        axios.post('https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload', {
-            /**API JSON 형식 참조하여 post 요청을 보내주세요**/
-            fileName: fileName, // 저장할 파일명
-            file: JSON.stringify(selectedImageBase64), // 파일 값
-            name: location.state.location, // 지역명(seoul, jeju...)
-            user_id: sessionStorage.id, // 사용자 id(test@test.com...)
-            title: title, // 게시글 제목
-            content: content // 게시글 내용
-        })
-            // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
-            .then(res => {
-                navigate(`/board/${location.state.location}`)
+        if(queryValue !== '') {
+            /** 게시글 업로드 api 추가 **/
+            axios.post('https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload', {
+                /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+                type: 'post-update',
+                fileName: fileName, // 저장할 파일명
+                file: JSON.stringify(selectedImageBase64), // 파일 값
+                name: location.state.location, // 지역명(seoul, jeju...)-
+                id: queryValue,
+                title: title, // 게시글 제목
+                content: content // 게시글 내용
             })
-            .catch(error => {
-                console.log(error);
+                // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
+                .then(res => {
+                    navigate(`/board/${location.state.location}`)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+        else {
+            /** 게시글 업로드 api 추가 **/
+            axios.post('https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload', {
+                /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+                type: 'post',
+                fileName: fileName, // 저장할 파일명
+                file: JSON.stringify(selectedImageBase64), // 파일 값
+                name: location.state.location, // 지역명(seoul, jeju...)
+                user_id: sessionStorage.id, // 사용자 id(test@test.com...)
+                title: title, // 게시글 제목
+                content: content // 게시글 내용
             })
+                // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
+                .then(res => {
+                    navigate(`/board/${location.state.location}`)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+
     };
 
     const convertImageToBase64 = (image) => {
@@ -173,12 +214,13 @@ function Write_gesimool() {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{margin:'52px 0px 0px 20px'}}/>
+                            <TextField value={title !== '' ? title : () => {}} onChange={(e) => setTitle(e.target.value)} id="standard-basic" variant="standard" style={{margin:'52px 0px 0px 20px'}}/>
 
                         </Box>
                     </div>
                     <div className="bottom">
-                        <CKEditor 
+                        <CKEditor
+                            data={content !== '' ? content : () => {}}
                             editor={ ClassicEditor }
                                 config={{placeholder:"내용을 입력해주세요"}}
                             onReady={ editor => {

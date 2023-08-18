@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import FollowingModal from './followingModal.js';
 import FollowerModal from './followerModal.js';
 import Box from "@mui/material/Box";
@@ -17,18 +17,14 @@ import ImageCollection from "./board/image_Collection";
 import { Avatar, Button, Grid, Paper, Typography } from '@mui/material';
 import { Settings, People, PersonAdd } from '@mui/icons-material';
 import Modal from "react-modal";
-import Gesimool from "./board/gesimool";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
 import CommentIcon from '@mui/icons-material/Comment';
-
+import ListComponent from "./board/list_Component";
 function BeforeLogin(){
   const navigate = useNavigate();
 
@@ -46,6 +42,8 @@ function AfterLogin(props){
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchText, setSearchText] = useState('')
+    const [searchResult, setSearchResult] = useState([])
+    const [searchLocationResult, setSearchLocationResult] = useState([])
   const customOverlayStyle = {
     overlay: {
 
@@ -54,7 +52,32 @@ function AfterLogin(props){
   };
   const openModal = (info) => {
 
-    setIsModalOpen(true);
+
+      axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+          DML: 'SELECT',
+          columns: '*',
+          table: 'user',
+          where: `username like '%${searchText}%' or email like '%${searchText}%' or nickname like '%${searchText}%'`
+      })
+          .then(res => {
+              setSearchResult(res.data)
+              axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+                  DML: 'SELECT',
+                  columns: '*',
+                  table: 'location',
+                  where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`
+              })
+                  .then(res => {
+                      setSearchLocationResult(res.data)
+                      setIsModalOpen(true);
+                  })
+                  .catch(err => {
+                      console.log(err)
+                  })
+          })
+          .catch(err => {
+              console.log(err)
+          })
 
   };
 
@@ -62,7 +85,20 @@ function AfterLogin(props){
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+    const handleFollow = (targetId: number)  => {
+        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+            DML: 'INSERT',
+            table: 'following',
+            columns: 'follower_id, following_id',
+            values: `${sessionStorage._key}, ${targetId}`
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .then(err => {
+                console.log(err)
+            })
+    }
   return (
       <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
         <Paper
@@ -91,20 +127,24 @@ function AfterLogin(props){
               사용자 검색 결과
             </Typography>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-              {[0, 1, 2, 3].map((value) => {
+              {searchResult.map((value) => {
                 const labelId = `checkbox-list-label-${value}`;
 
                 return (
                     <ListItem
                         key={value}
                         secondaryAction={
-                          <IconButton edge="end" aria-label="comments">
-                            <CommentIcon />
+                          <IconButton
+                            onClick={() => { handleFollow(value.id) }}
+                              edge="end" aria-label="comments">
+                            <PersonAdd />
                           </IconButton>
                         }
                         disablePadding
                     >
-                      <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                        <Avatar src={value.picture}/>
+                      <ListItemText id={labelId} primary={`${value.nickname}`} />
+                        <ListItemText id={labelId} primary={`${value.email}`} />
                     </ListItem>
                 );
               })}
@@ -113,12 +153,11 @@ function AfterLogin(props){
               게시물 검색 결과
             </Typography>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-              {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
+              {searchLocationResult.map((info, index) => {
 
                 return (
                     <ListItem
-                        key={value}
+                        key={index}
                         secondaryAction={
                           <IconButton edge="end" aria-label="comments">
                             <CommentIcon />
@@ -126,7 +165,15 @@ function AfterLogin(props){
                         }
                         disablePadding
                     >
-                      <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                        <ListComponent
+                            id={info.id}
+                            img={info.image}
+                            alt={info.id}
+                            like_count={info.like_count}
+                            name={info.name}
+                            star_count={info.star_count}
+                            title={info.title}
+                        />
                     </ListItem>
                 );
               })}
@@ -175,18 +222,18 @@ function CustomTabPanel(props) {
   );
 }
 
-function AppProfile() {
+export default function AppProfile() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
   const [login, setLogin] = useState(false);
   const [userLocationInfo, setUserLocationInfo] = useState([])
+    // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(0);
   const [follower, setFollower] = useState([])
   const [following, setFollowing] = useState([])
+    // eslint-disable-next-line no-unused-vars
   const [userImage, setUserImage] = useState(sessionStorage.picture)
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const fileInputRef = useRef(null);
+
   /** 사용자 장소 이미지 불러오는 api **/
   useEffect(()=>{
     axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
@@ -242,146 +289,144 @@ function AppProfile() {
   useEffect(() => {
     setUserImage(sessionStorage.picture)
   }, [])
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  function ImageUploadPreview() {
-    const [selectedImage, setSelectedImage] = useState(null);
+
     const [uploadedImage, setUploadedImage] = useState(null);
-    const fileInputRef = useRef(null);
-
-    const handleImageChange = (event) => {
-      const imageFile = event.target.files[0];
-      setSelectedImage(imageFile);
-
-      const imageUrl = URL.createObjectURL(imageFile);
-      setUploadedImage(imageUrl);
-    };
-
-    const handleUpload = async () => {
-      if (selectedImage) {
-        const formData = new FormData();
-        formData.append('image', selectedImage);
-
-        try {
-          const response = await axios.post('YOUR_UPLOAD_URL', formData);
-          // Assuming the response contains the uploaded image URL
-          const uploadedImageUrl = response.data.imageUrl;
-          setUploadedImage(uploadedImageUrl);
-        } catch (error) {
-          console.error('Error uploading image:', error);
-        }
-      }
-    };
+    const avatarInputRef = useRef(null);
 
     const handleAvatarClick = () => {
-      fileInputRef.current.click();
+        // Trigger the hidden file input when Avatar is clicked
+        avatarInputRef.current.click();
     };
-  return (
-<div>
-    <div id="wrap">
-      <div className='header'>
-        <Box sx={{ flexGrow: 1 }} className='header'>
-          <AppBar position="static" sx={{backgroundColor: '#045369'}}>
-            <Toolbar>
-              <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon" }} onClick={()=>{navigate('/')}}>
-                대동유어지도
-              </Typography>
-              {login ? <AfterLogin location={'/'} /> : <BeforeLogin />}
-            </Toolbar>
-          </AppBar>
-        </Box>
-      </div>
 
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
 
-      <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} id={'main'} style={{paddingTop:'5rem'}}>
-        <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }} id={'left'}>
-          <Paper elevation={3} style={{ padding: '20px', width: '90%', height: '80%', margin: 'auto' }}>
-            <Box sx={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center', width: '100%', margin: 'auto' }}>
-              <div>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    ref={fileInputRef}
-                    style={{ display: 'none' }}
-                />
-                <Avatar
-                    alt="User Avatar"
-                    src={uploadedImage}
-                    sx={{ width: '240px', height: '240px', margin: '0 auto', cursor: 'pointer' }}
-                    onClick={handleAvatarClick}
-                />
-                {uploadedImage && (
-                    <button onClick={handleUpload}>Upload Image</button>
-                )}
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                setUploadedImage(file);
+
+                // Convert the uploaded image to Base64
+                const base64Image = reader.result.split(',')[1];
+
+                try {
+                    // Send the Base64-encoded image to the server
+                    await axios.post('https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload', {
+                        /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+                        type: 'user',
+                        fileName: file.name, // 저장할 파일명
+                        file: JSON.stringify(base64Image), // 파일 값
+                        email :sessionStorage.id
+                    })
+                    sessionStorage.setItem('picture', `https://2023-c-capstone.s3.us-east-2.amazonaws.com/info/${sessionStorage.id}/${file.name}`)
+                    // Handle the server response if needed
+                } catch (error) {
+                    console.error('Error submitting image:', error);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    console.log(sessionStorage.picture)
+    return (
+          <div>
+              <div id="wrap">
+                  <div className='header'>
+                      <Box sx={{ flexGrow: 1 }} className='header'>
+                          <AppBar position="static" sx={{backgroundColor: '#045369'}}>
+                              <Toolbar>
+                                  <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon" }} onClick={()=>{navigate('/')}}>
+                                      대동유어지도
+                                  </Typography>
+                                  {login ? <AfterLogin location={'/'} /> : <BeforeLogin />}
+                              </Toolbar>
+                          </AppBar>
+                      </Box>
+                  </div>
+                  <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} id={'main'} style={{paddingTop:'5rem'}}>
+                      <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }} id={'left'}>
+                          <Paper elevation={3} style={{ padding: '20px', width: '90%', height: '80%', margin: 'auto' }}>
+                              <Box sx={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center', width: '100%', margin: 'auto' }}>
+                                  <div>
+                                      <Avatar
+                                          alt="User Avatar"
+                                          src={uploadedImage ? URL.createObjectURL(uploadedImage) : sessionStorage.picture}
+                                          sx={{ width: '240px', height: '240px', margin: '0 auto', cursor: 'pointer' }}
+                                          onClick={handleAvatarClick}
+                                      />
+                                      <input
+                                          type="file"
+                                          accept="image/*"
+                                          ref={avatarInputRef}
+                                          style={{ display: 'none' }}
+                                          onChange={handleImageChange}
+                                      />
+                                  </div>
+                                  <Typography variant="h5" gutterBottom style={{textAlign: 'center'}}>
+                                      {sessionStorage.id}
+                                  </Typography>
+                              </Box>
+                              <Box>
+                                  <Grid container justifyContent="space-between" alignItems="center">
+                                      <Grid item>
+                                          <Button
+                                              variant="outlined"
+                                              startIcon={<People />}
+                                          >
+                                              <FollowerModal
+                                                  follower={follower}
+                                              />
+                                              팔로워 {follower.length}
+                                          </Button>
+                                      </Grid>
+                                      <Grid item>
+                                          <Button
+                                              variant="outlined"
+                                              startIcon={<PersonAdd />}
+                                          >
+                                              <FollowingModal
+                                                  following={following}
+                                              />
+                                              팔로잉 {following.length}
+                                          </Button>
+                                      </Grid>
+                                  </Grid>
+                              </Box>
+                              <Button
+                                  variant="contained"
+                                  startIcon={<Settings />}
+                                  style={{ marginTop: '20px' }}
+                                  onClick={() => {
+                                      navigate('/setting/change');
+                                  }}
+                              >
+                                  설정
+                              </Button>
+                          </Paper>
+                      </Box>
+                      <Box id={'right'} sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }}>
+                          <Box className={'right'} sx={{ width: '100%', height: '80%', margin:'auto' }}>
+                              <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} aria-label="icon label tabs example" centered>
+                                  <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
+                                       iconPosition='start' label="맛집"/>
+                                  <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
+                                       iconPosition='start' label="숙소"/>
+                              </Tabs>
+                              <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
+                                  <ImageCollection
+                                      userLocationInfo={userLocationInfo}
+                                  />
+                              </CustomTabPanel>
+                              <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
+                                  <ImageCollection
+                                      userLocationInfo={userLocationInfo}
+                                  />
+                              </CustomTabPanel>
+                          </Box>
+                      </Box>
+                  </Box>
               </div>
-              <Typography variant="h5" gutterBottom style={{textAlign: 'center'}}>
-                {sessionStorage.id}
-              </Typography>
-            </Box>
-            <Box>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Grid item>
-                  <Button
-                      variant="outlined"
-                      startIcon={<People />}
-                  >
-                    <FollowerModal
-                      follower={follower}
-                    />
-                    팔로워 {follower.length}
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                      variant="outlined"
-                      startIcon={<PersonAdd />}
-                  >
-                    <FollowingModal
-                      following={following}
-                    />
-                    팔로잉 {following.length}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Box>
-            <Button
-                variant="contained"
-                startIcon={<Settings />}
-                style={{ marginTop: '20px' }}
-                onClick={() => {
-                  navigate('/setting/change');
-                }}
-            >
-              설정
-            </Button>
-          </Paper>
-        </Box>
-        <Box id={'right'} sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }}>
-          <Box className={'right'} sx={{ width: '100%', height: '80%', margin:'auto' }}>
-            <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
-              <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
-                   iconPosition='start' label="맛집"/>
-              <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
-                   iconPosition='start' label="숙소"/>
-            </Tabs>
-            <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
-              <ImageCollection
-                  userLocationInfo={userLocationInfo}
-              />
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
-              <ImageCollection
-                  userLocationInfo={userLocationInfo}
-              />
-            </CustomTabPanel>
-          </Box>
-        </Box>
-      </Box>
-    </div>
-</div>
-  );
-}
+          </div>
 
-export default AppProfile;
+      )
+}

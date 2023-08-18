@@ -106,10 +106,11 @@ function Place() {
     }, []);
 
     useEffect(()=>{
-        axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
-            type: 'main',
-            user_id: sessionStorage.id,
-            place: lastPath
+        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+            DML: 'SELECT',
+            columns: '*',
+            table: 'location',
+            where: `name='${lastPath}' ORDER BY created_at desc`
         })
             .then(res => {
                 setUserLocationInfo(res.data)

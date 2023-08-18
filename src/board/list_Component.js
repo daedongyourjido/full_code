@@ -1,7 +1,5 @@
 import React from "react";
 import './list_Component.css'
-import Button from "@mui/material/Button";
-
 function List_Component(props) {
 
     return (
