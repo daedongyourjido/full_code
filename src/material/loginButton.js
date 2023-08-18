@@ -45,6 +45,7 @@ export default function LoginButton(props) {
                             }
                             // 사용자 정보 인증됨
                             else {
+                                sessionStorage.setItem('_key', res.data.key);
                                 sessionStorage.setItem('id', res.data.id);
                                 sessionStorage.setItem('pw', res.data.password);
                                 sessionStorage.setItem('name', res.data.nickname);

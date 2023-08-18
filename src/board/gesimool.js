@@ -10,6 +10,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 function Gesimool(props) {
     const navigate = useNavigate();
@@ -84,7 +85,11 @@ function Gesimool(props) {
             info={props.info}
         />
     </div>
+
     <div className="g_contents">
+        <Button variant="contained" onClick={() => {navigate('/write')}}>수정하기</Button>
+        <Button variant="contained">삭제하기</Button>
+        <Button variant="contained">좋아요</Button>
         <div className="like_and_location">
             좋아요: {props.info.like_count} / {props.info.name}
         </div>
@@ -104,6 +109,7 @@ function Gesimool(props) {
         <input type="text" id="comment_ipt" onInput={e => {setComment(e.target.value)}}/>
         <button id="comment_btn" onClick={addComment}>게시</button>
     </div>
+
 </div>
     <div className="comment_list">
         <p id="list_p">댓글</p>

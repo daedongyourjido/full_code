@@ -107,6 +107,7 @@ function Place() {
 
     useEffect(()=>{
         axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
+            type: 'main',
             user_id: sessionStorage.id,
             place: lastPath
         })

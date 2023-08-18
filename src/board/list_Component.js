@@ -1,5 +1,6 @@
 import React from "react";
 import './list_Component.css'
+import Button from "@mui/material/Button";
 
 function List_Component(props) {
 
@@ -13,6 +14,7 @@ function List_Component(props) {
                 <p>위치 정보: {props.name}</p>
                 <p>별 갯수: {props.star_count}</p>
             </a>
+
         </div>
     )
 }
