@@ -8,8 +8,8 @@ import SimpleSlider from './slider';
 import ImageCollection from './image_Collection';
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
-import SearchField from '../material/searchField.js';
-import LoginPageButton from '../material/loginPageButton.js';
+import SearchField from "../material/searchField2";
+import LoginPageButton from "../material/loginPageButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -107,6 +107,7 @@ function Place() {
 
     useEffect(()=>{
         axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
+            type: 'main',
             user_id: sessionStorage.id,
             place: lastPath
         })

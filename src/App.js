@@ -18,10 +18,7 @@ import Place from './board/Place'
 import WriteGesimool from './board/write_gesimool.js';
 
 import MyMap from './mymap';
-// import ChangeProfile from './profileChange';
 import { List } from '@mui/material';
-import FollowerList from './follwer';
-import FollowingList from './following';
 
 
 
@@ -46,8 +43,6 @@ function App() {
         <Route path={'/board/:place'} element={<Place/>}/>
         <Route path={'/mymap/:List'} element={<List/>}/>
         <Route path='/mymap' element={<MyMap />} />
-        <Route path='/following' element={<FollowingList />} />
-        <Route path='/follower' element={<FollowerList />} />
       </Routes>
     </BrowserRouter>
   )

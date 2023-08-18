@@ -1,45 +1,72 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import ChangePwField from './material/changePwField.js';
+import ChangePwCheckField from './material/changePwCheckField.js';
+import ChangePwCheckErrorField from './material/changePwCheckErrorField.js';
+import ChangePwErrorField from './material/changePwErrorField.js';
+import ChangePwButton from './material/resetPwButton.js';
 import Bar from './barDefault.js';
-import InputField from './material/inputField.js';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
-import ResetPwButton from './resetPwButton.js';
-import LoginPageButton from './material/loginPageButton.js';
-
-
 
 
 function ResetPwBox() {
     const [pw, setPw] = useState("");
+    // eslint-disable-next-line no-unused-vars
+    const [pwOld, setPwOld] = useState("");
     const [pwCheck, setPwCheck] = useState("");
-    const [empty, setEmpty] = useState(false);
+    const [pwEmpty, setPwEmpty] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    const [oldPwEmpty, setOldPwEmpty] = useState(false);
+    const [pwCheckEmpty, setPwCheckEmpty] = useState(false);
+    const [pwWrong, setPwWrong] = useState(false);
     const [pwDup, setPwDup] = useState(false);
     const [changed, setChanged] = useState(false);
 
     return (
         <div>
         {changed ? 
-            <div className='resetpw-box' style={{color:'black'}}>
+            <div style={{color:'#000000', display:'flex', flexDirection:'column', marginLeft:'80px', marginTop:'200px',}}>
                 <h1>비밀번호 변경이 완료되었습니다</h1>
-                <LoginPageButton borderColor="black" color="black" />
+                <a href='/' style={{fontSize:'20px', color:'#045369', display:'flex', marginLeft:'135px'}}>메인으로 이동하기</a>
+                
             </div> 
         : 
-            <div className='resetpw-box'>
-                    <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
-                    <InputField setData={setPw} label="비밀번호" type="password" />
-                    <InputField setData={setPwCheck} label="비밀번호 재확인" type="password" />
-                    <ResetPwButton 
-                        pw={pw}
-                        pwCheck={pwCheck}
-                        setPwDup={setPwDup}
-                        changed={changed}
-                        setChanged={setChanged}
-                        setEmpty={setEmpty}
-                        />
-                    {empty ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>모두 입력해주세요</p> : <p></p>}
-                    {pwDup ? <p style={{color:'red', textAlign:'center', fontSize:'1vh'}}>비밀번호가 일치하지 않습니다</p> : <p></p>}
+            <div style={{marginBottom:'250px', }}>
+                <div style={{marginLeft:'255px'}}>
+                <p style={{color:'black', fontSize:'20px', marginLeft:'80px'}}>비밀번호 변경</p>
+                { pwWrong? <ChangePwErrorField pwWrong={pwWrong} pwEmpty={pwEmpty} setPw={setPw} pw={pw} /> : pwEmpty? <ChangePwErrorField pwWrong={pwWrong} pwEmpty={pwEmpty} setPw={setPw} pw={pw} />  : <ChangePwField setPw={setPw} /> }
+                { pwDup? <ChangePwCheckErrorField pwCheckEmpty={pwCheckEmpty} pwDup={pwDup} pwCheck={pwCheck} setPwCheck={setPwCheck} /> : pwCheckEmpty? <ChangePwCheckErrorField pwCheckEmpty={pwCheckEmpty} pwDup={pwDup} setPwCheck={setPwCheck} pwCheck={pwCheck} /> : <ChangePwCheckField setPwCheck={setPwCheck}  /> }
+                </div>
+                <ChangePwButton 
+                    pw={pw}
+                    pwCheck={pwCheck}
+                    setOldPwEmpty={setOldPwEmpty}
+                    pwOld={pwOld}
+                    setPwEmpty={setPwEmpty}
+                    setPwCheckEmpty={setPwCheckEmpty}
+                    setPwWrong={setPwWrong}
+                    setPwDup={setPwDup}
+                    changed={changed}
+                    setChanged={setChanged}
+                    />
             </div>
         }
+        </div>
+    )
+}
+
+function SettingBox() {
+
+    return (
+        <div style={{height:'668px', width:'800px', backgroundColor:'#FFFFFF', display:'grid' }} >
+            <div style={{ height: '100%', display:'flex', flexDirection:'column', padding:'20px', justifyItems:'center', alignItems:'center' }}>
+                <div style={{color:'gray', fontSize:'15px', marginLeft:'10px'}}>
+                
+                </div>
+
+            </div>
+            <div>
+                <ResetPwBox />
+            </div>
+
         </div>
     )
 }
@@ -48,11 +75,10 @@ function ResetPw() {
 
     return (
         <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <div className='bar'>
-                <Bar setting={false} />
-            </div>
-            <div className='resetpw-container'>
-                <ResetPwBox />
+            <Bar />
+            <div style={{display:'flex', position:'absolute', top:'50%', right:'50%', marginRight:'-400px', marginTop:'-300px'}}>
+                
+                <SettingBox />
             </div>
         </div>
     )

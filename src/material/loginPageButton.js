@@ -1,18 +1,21 @@
-import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import {useNavigate} from 'react-router-dom';
 
-export default function LoginPageButton(props) {
+export default function LoginPageButton() {
     const navigate = useNavigate();
-  
-    return (
-        <Button variant="outlined" 
-        sx={{
-          borderColor: props.borderColor,
-          color: props.color,
-          height: 40
-        }}
-        onClick={()=>{
-          navigate('/login');
-        }}>Sign In</Button>
-    );
-  }
+
+  return (
+    <Stack direction="row" spacing={2}>
+      <Button variant="outlined" 
+      sx={{
+        borderColor: 'white',
+        color: 'white',
+      }}
+      onClick={()=>{
+        navigate('./login');
+      }}>Sign In</Button>
+    </Stack>
+  );
+}

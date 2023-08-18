@@ -1,6 +1,6 @@
 
 import { useNavigate} from 'react-router-dom';
-import SignUpPageButton from './material/signupPageButton.js';
+import SearchField from './material/searchField2.js';
 
 export default function Bar() {
     const navigate = useNavigate();
@@ -10,8 +10,9 @@ export default function Bar() {
             <h1 style={{paddingBottom:'30px', cursor: 'pointer', color:'#000000', width:'144px', fontSize:'25px'}} onClick={()=>{
                 navigate('/');
           }}>대동유어지도</h1>
-          <div style={{marginLeft:'60%', display:'flex', flexDirection:'row', marginTop:'1vh'}}>
-            <SignUpPageButton />
+          <div style={{marginLeft:'60%', display:'flex', flexDirection:'row'}}>
+             <SearchField />
+             <a href='/login' style={{color:'#045369', fontSize:'15px', marginTop:'17px'}}>Sign In</a>
           </div>
         </div>
     )

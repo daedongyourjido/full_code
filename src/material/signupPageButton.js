@@ -1,8 +1,9 @@
+import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-export default function SignUpPageButton() {
+export default function SighUpPageButton() {
     const navigate = useNavigate();
 
   return (

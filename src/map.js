@@ -1,47 +1,15 @@
 import axios from 'axios';
+
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import geo from './1.json';
 import MainRandom from './mainRandom.js';
 import './style.css';
 
-export const KakaoMap = (props) => {
+export const KakaoMap = () => {
     const { kakao } = window;
     const navigate = useNavigate();
-    const [lat, setLat] = useState(36);
-    const [lng, setLng] = useState(127.9);
-    const [scale, setScale] = useState(12.8);
-
-    // 1336 x 843
-
-    useEffect(() => {   // 지도 크기 동적 지정
-      const handleResize = () => {
-        if(window.innerWidth < 1350){
-          setLng(129);
-          setScale(13.3);
-        }
-        else {
-          setLng(127.9);
-          setScale(12.8);
-        }
-
-        if(window.innerHeight < 860) {
-          setLat(35);
-          setScale(13.3);
-        }
-        else  {
-          setLat(36);
-          setScale(12.8);
-        }
-          
-      };
-  
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
-    
 
     const [name, setName] = useState("대동YOUR지도");
     // const [msg, setMsg] = useState('');
@@ -51,9 +19,15 @@ export const KakaoMap = (props) => {
         featureType: "all",
         elementType: "all",
         stylers: [
-          { hue: "#000000" },
-          { saturation: -100 },
-          { lightness: -100 },
+          {
+            hue: "#000000",
+          },
+          {
+            saturation: -100,
+          },
+          {
+            lightness: -100,
+          },
         ],
       }
     ], []);
@@ -73,12 +47,13 @@ export const KakaoMap = (props) => {
       let coordinates = []; 
       let name = '';
       let polygons = [];
-        
-      const mapContainer = document.getElementById('kakao-map'); // 지도를 표시할 div
+      
+  
+      const mapContainer = document.getElementById('map1'); // 지도를 표시할 div
 
       const mapOption = {
-        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-        level: scale,
+        center: new kakao.maps.LatLng(36, 127.9), // 지도의 중심좌표
+        level: 12.8,
         mapStyles: customStyle,
         draggable: false, 
         scrollwheel: false, 
@@ -231,16 +206,19 @@ export const KakaoMap = (props) => {
       });
 
   
-    }, [customStyle, heatMap, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon, kakao.maps.event, navigate, lat, lng, scale]);
+    }, [customStyle, heatMap, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon, kakao.maps.event, navigate]);
   
     return (
-      <div className='map-container'>
-        <div className='random-container'>
-          <div className='random-container2'>
-            <MainRandom name={name} />
-          </div>
-        </div>
-        <div className='kakao-map' id="kakao-map" />
+    <div style={{height:'86.5%'}}>
+        <div className='map' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr'}}>
+            <div style={{display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <MainRandom name={name} className="mainRandom" />
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div id="map1" style={{ width: "100%", height: "100%"}} />
+            </div>
       </div>
+    </div>
     );
   };

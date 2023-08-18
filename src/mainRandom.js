@@ -170,7 +170,7 @@ function MainRandom(props) {
     },[_name])  // props.name 값이 바뀔 때만 useEffect 실행
 
     return (
-        <div className='main-random'>
+        <div style={{ padding: '50px', width:'88vh' }}>
             <h1 style={{ display:'flex', justifyContent: 'center'}}>{name}</h1>
             {name==='Welcome to 대동유어지도' ? <p></p> : <Content name={_name} location={_location} isLoading={isLoading} />}
         </div>

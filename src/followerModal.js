@@ -3,7 +3,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import FollowerList from './follwer';
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
 
 const style = {
   position: 'absolute',
@@ -17,7 +21,7 @@ const style = {
   p: 4,
 };
 
-export default function FollowerModal() {
+export default function FollowerModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,8 +39,32 @@ export default function FollowerModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <FollowerList/>
+              {'follower'}
           </Typography>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {props.follower.map(ele => (
+                    <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src={ele.picture}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={ele.nickname}
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                    {ele.id}
+                                </React.Fragment>
+                            }
+                        />
+                    </ListItem>
+                ))}
+            </List>
         </Box>
       </Modal>
     </div>

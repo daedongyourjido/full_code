@@ -110,11 +110,11 @@ export default function MenuMap (props) {
   
     return (
     <div style={{height:'86.5%'}}>
-        <div className='map' style={{ display: 'flex'}}>
-            <div className='menu-component-container'>
+        <div className='map' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr'}}>
+            <div style={{display:'flex', justifyContent: 'center', alignItems: 'center', padding: '50px', width:'88vh' }}>
                 {props.component}
             </div>
-            <div className='menu-map-container'>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div id="map1" style={{ width: "100%", height: "100%"}} />
             </div>
       </div>

@@ -1,5 +1,3 @@
-import './App_profile.css';
-
 // import StandardImageList from './profile';
 import BasicButtons from './Button';
 import ImageAvatars from './avatar';
