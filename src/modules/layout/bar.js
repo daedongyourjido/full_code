@@ -97,9 +97,14 @@ function BeforeLogin(){
       }
     return (
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
+          <Button 
+              variant="contained" 
+              sx={{backgroundColor:'#6EA4B4', marginRight:'20px'}}
+              onClick={()=>{navigate('/write')}}
+              >게시물 올리기</Button>
           <Paper
               component="form"
-              sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+              sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '15vw' }}
           >
             <InputBase
                 sx={{ ml: 1, flex: 1 }}

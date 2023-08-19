@@ -198,12 +198,11 @@ export default function Profile() {
                   <Bar />
                   
                   <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft:'50px', marginRight:'50px' }} id={'main'} style={{paddingTop:'5rem'}}>
+                      
                       <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '35vw', height: '100vh' }} id={'left'}>
-                        
-                          <Paper elevation={3} style={{ padding: '20px', width: '90%', height: '80%', margin: 'auto', backgroundColor:'#045369', boxShadow:'none' }}>
-                              <Box sx={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center', width: '100%', margin: 'auto' }}>
+                          <div className='profile-container'>
 
-                                  <div className='row-center'>
+                                  <div className='row-center user-info'>
                                     <div className='avatar-container'>
                                       <Avatar
                                           alt="User Avatar"
@@ -231,7 +230,7 @@ export default function Profile() {
                                                     />
                                                     <p className='white-font' style={{fontSize:'12px'}}>{follower.length}</p>
                                                   </div>
-                                                  <div className='following-container row-center' style={{marginLeft:'2vw'}}>
+                                                  <div className='following-container row-center'>
                                                     <FollowingModal
                                                         following={following}
                                                     />
@@ -250,10 +249,9 @@ export default function Profile() {
                                           onChange={handleImageChange}
                                       />
                                   </div>
-                                  
-                              </Box>
-                          </Paper>
+                            </div>
                       </Box>
+                      
                       <Box id={'right'} sx={{ display: 'inline-flex', flexDirection: 'column', width: '60vw', height: '100vh' }}>
                           <Box className={'right'} sx={{ width: '100%', height: '80%', margin:'auto' }}>
                               <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} aria-label="icon label tabs example" centered>

@@ -3,15 +3,21 @@
 }
 
 .profile-container {
-    /* display: flex; */
+    padding: 20px;
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    box-shadow: none;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
 }
 
 .user-info {
-    background-color: aliceblue;
+    /* background-color: firebrick; */
 }
 
 .profile-post-list {
-    background-color: firebrick;
 }
 
 .user-info-container {
@@ -29,8 +35,10 @@
     flex-wrap: nowrap;
 }
 
+
 .follower-container {
     white-space: nowrap;
+    margin-right: 2vw;
 }
 
 .following-container {
