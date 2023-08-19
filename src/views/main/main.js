@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { KakaoMap } from './map.js';
-import "./style.css";
+import "./main.css";
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginPageButton from '../login/loginPageButton.js';
 

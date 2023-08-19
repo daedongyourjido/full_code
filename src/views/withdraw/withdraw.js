@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 // import { useNavigate } from 'react-router-dom';
-import Bar from '../../modules/layout/bar.js';
+import Bar from '../../modules/layout/barSetting.js';
 import InputField from '../../modules/components/inputField.js';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SettingContainer from '../setting/settingContainer.js';
 import MainPageButton from '../main/mainPageButton.js';
+import './withdraw.css';
 
 
 function WithdrawButton(props) {

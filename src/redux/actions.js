@@ -4,3 +4,10 @@ export const setImages = (item) => {
     payload: item,
   };
 };
+
+export const setLogin = (item) => {
+  return {
+    type: "SET_LOGIN",
+    payload: item,
+  }
+}

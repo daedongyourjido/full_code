@@ -29,7 +29,7 @@ export default function FollowingModal(props) {
   return (
     <div>
       <div id="modalbtn">
-        <Button onClick={handleOpen}>following</Button>
+        <Button sx={{color:'white', fontSize:4}} onClick={handleOpen}>following</Button>
       </div>
       <Modal
         open={open}

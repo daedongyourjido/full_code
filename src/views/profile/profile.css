@@ -1,0 +1,38 @@
+.avatar-container {
+    flex: 4;
+}
+
+.profile-container {
+    /* display: flex; */
+}
+
+.user-info {
+    background-color: aliceblue;
+}
+
+.profile-post-list {
+    background-color: firebrick;
+}
+
+.user-info-container {
+    flex: 6;
+    margin-left: 30px;
+}
+
+.user-info-container2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-info-container3 {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.follower-container {
+    white-space: nowrap;
+}
+
+.following-container {
+    white-space: nowrap;
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import geo from '../../assets/data/geo.json';
 import MainRandom from './mainRandom.js';
-import './style.css';
+import './mainPageButton';
 
 export const KakaoMap = (props) => {
     const { kakao } = window;

@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LoginPageButton from '../login/loginPageButton.js';
 import { useNavigate } from 'react-router-dom';
+import './signup.css';
 
 
 // 아이디 중복 확인 버튼

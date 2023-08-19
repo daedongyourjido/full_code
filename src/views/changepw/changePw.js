@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import Bar from '../../modules/layout/bar.js';
+import Bar from '../../modules/layout/barSetting.js';
 import ResetPwButton from '../../views/resetpw/resetPwButton.js';
 import InputField from '../../modules/components/inputField';
 import SettingContainer from '../../views/setting/settingContainer.js';
 import MainPageButton from '../main/mainPageButton.js';
+import './changePw.css';
 
 
 function ChangePw() {

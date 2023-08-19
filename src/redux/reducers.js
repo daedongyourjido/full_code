@@ -1,5 +1,6 @@
 const initialState = {
   images: [],
+  login: false,
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -9,6 +10,12 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         images: action.payload,
       };
+
+    case "SET_LOGIN" :
+      return {
+        ...state,
+        login: action.payload,
+      }
 
     default:
       return {

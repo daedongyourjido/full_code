@@ -5,6 +5,7 @@ import MenuMap from '../../modules/layout/menuMap.js'
 import Button from '@mui/material/Button';
 import LoginButton from './loginButton.js';
 import InputField from '../../modules/components/inputField.js';
+import './login.css';
 
 
 function FindPwPageButton() {

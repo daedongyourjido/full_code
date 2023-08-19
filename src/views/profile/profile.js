@@ -4,11 +4,6 @@ import React, {useEffect, useRef, useState} from "react";
 import FollowingModal from './followingModal.js';
 import FollowerModal from './followerModal.js';
 import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import SearchField from "../../modules/components/searchField";
-import LoginPageButton from "../login/loginPageButton";
-import LogoutIcon from "@mui/icons-material/Logout";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import {MdFoodBank} from "react-icons/md";
@@ -16,184 +11,13 @@ import {TbBuildingCommunity} from "react-icons/tb";
 import ImageCollection from "../board/image_Collection";
 import { Avatar, Button, Grid, Paper, Typography } from '@mui/material';
 import { Settings, People, PersonAdd } from '@mui/icons-material';
-import Modal from "react-modal";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import CommentIcon from '@mui/icons-material/Comment';
-import ListComponent from "../board/postList";
-
-function BeforeLogin(){
-  const navigate = useNavigate();
-
-  return (
-      <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
-        <SearchField />
-        <LoginPageButton onClick={()=>{
-          navigate('./login');
-        }} />
-      </div>
-  );
-}
-function AfterLogin(props){
-
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchText, setSearchText] = useState('')
-    const [searchResult, setSearchResult] = useState([])
-    const [searchLocationResult, setSearchLocationResult] = useState([])
-  const customOverlayStyle = {
-    overlay: {
-
-      zIndex: 9999, // 모달을 최상위 레이어에 표시
-    }
-  };
-  const openModal = (info) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../../redux/actions';
+import Bar from '../../modules/layout/bar.js';
+import SettingsIcon from '@mui/icons-material/Settings';
+import './profile.css';
 
 
-      axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
-          DML: 'SELECT',
-          columns: '*',
-          table: 'user',
-          where: `username like '%${searchText}%' or email like '%${searchText}%' or nickname like '%${searchText}%'`
-      })
-          .then(res => {
-              setSearchResult(res.data)
-              axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
-                  DML: 'SELECT',
-                  columns: '*',
-                  table: 'location',
-                  where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`
-              })
-                  .then(res => {
-                      setSearchLocationResult(res.data)
-                      setIsModalOpen(true);
-                  })
-                  .catch(err => {
-                      console.log(err)
-                  })
-          })
-          .catch(err => {
-              console.log(err)
-          })
-
-  };
-
-  // 모달 닫기 함수
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-    const handleFollow = (targetId: number)  => {
-        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
-            DML: 'INSERT',
-            table: 'following',
-            columns: 'follower_id, following_id',
-            values: `${sessionStorage._key}, ${targetId}`
-        })
-            .then(res => {
-                console.log(res)
-            })
-            .then(err => {
-                console.log(err)
-            })
-    }
-  return (
-      <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
-        <Paper
-            component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-        >
-          <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="검색"
-              inputProps={{ 'aria-label': 'search google maps' }}
-              onInput={e => {setSearchText(e.target.value)}}
-          />
-          <IconButton onClick={openModal} type="button" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        <Modal
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
-            className="modal-content"
-            overlayClassName="modal-overlay"
-            style={customOverlayStyle} // 오버레이 스타일을 적용
-        >
-          <Box sx={{ width: '100vw', height: '60vh', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
-            <Typography variant="h6" gutterBottom>
-              사용자 검색 결과
-            </Typography>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-              {searchResult.map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
-
-                return (
-                    <ListItem
-                        key={value}
-                        secondaryAction={
-                          <IconButton
-                            onClick={() => { handleFollow(value.id) }}
-                              edge="end" aria-label="comments">
-                            <PersonAdd />
-                          </IconButton>
-                        }
-                        disablePadding
-                    >
-                        <Avatar src={value.picture}/>
-                      <ListItemText id={labelId} primary={`${value.nickname}`} />
-                        <ListItemText id={labelId} primary={`${value.email}`} />
-                    </ListItem>
-                );
-              })}
-            </List>
-            <Typography variant="h6" gutterBottom>
-              게시물 검색 결과
-            </Typography>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-              {searchLocationResult.map((info, index) => {
-
-                return (
-                    <ListItem
-                        key={index}
-                        secondaryAction={
-                          <IconButton edge="end" aria-label="comments">
-                            <CommentIcon />
-                          </IconButton>
-                        }
-                        disablePadding
-                    >
-                        <ListComponent
-                            id={info.id}
-                            img={info.image}
-                            alt={info.id}
-                            like_count={info.like_count}
-                            name={info.name}
-                            star_count={info.star_count}
-                            title={info.title}
-                        />
-                    </ListItem>
-                );
-              })}
-            </List>
-            <Button onClick={closeModal} variant="contained">
-              닫기
-            </Button>
-          </Box>
-        </Modal>
-        <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}}  alt={'...'}/>
-        <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p>
-        {/* name 가져와 표시 */}
-        <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
-          sessionStorage.clear();
-          window.location.reload();
-        }} />
-      </div>
-  )
-}
 
 function a11yProps(index) {
   return {
@@ -225,8 +49,8 @@ function CustomTabPanel(props) {
 
 export default function Profile() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-  const [login, setLogin] = useState(false);
     // eslint-disable-next-line no-unused-vars
   const [userLocationInfo, setUserLocationInfo] = useState([])
     const [userLocationInfoDataDesc, setUserLocationInfoDataDesc] = useState([])
@@ -282,9 +106,9 @@ export default function Profile() {
   useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
     const token = sessionStorage.getItem('id');
     if (token) {
-      setLogin(true);
+      dispatch(setLogin(true));
     } else {
-      setLogin(false);
+      dispatch(setLogin(false));
     }
   }, []);
 
@@ -366,32 +190,58 @@ export default function Profile() {
         }
     };
     console.log(sessionStorage.picture)
+
+
     return (
           <div>
               <div id="wrap">
-                  <div className='header'>
-                      <Box sx={{ flexGrow: 1 }} className='header'>
-                          <AppBar position="static" sx={{backgroundColor: '#045369'}}>
-                              <Toolbar>
-                                  <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon" }} onClick={()=>{navigate('/')}}>
-                                      대동유어지도
-                                  </Typography>
-                                  {login ? <AfterLogin location={'/'} /> : <BeforeLogin />}
-                              </Toolbar>
-                          </AppBar>
-                      </Box>
-                  </div>
-                  <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} id={'main'} style={{paddingTop:'5rem'}}>
-                      <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }} id={'left'}>
-                          <Paper elevation={3} style={{ padding: '20px', width: '90%', height: '80%', margin: 'auto' }}>
+                  <Bar />
+                  
+                  <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft:'50px', marginRight:'50px' }} id={'main'} style={{paddingTop:'5rem'}}>
+                      <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '35vw', height: '100vh' }} id={'left'}>
+                        
+                          <Paper elevation={3} style={{ padding: '20px', width: '90%', height: '80%', margin: 'auto', backgroundColor:'#045369', boxShadow:'none' }}>
                               <Box sx={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center', width: '100%', margin: 'auto' }}>
-                                  <div>
+
+                                  <div className='row-center'>
+                                    <div className='avatar-container'>
                                       <Avatar
                                           alt="User Avatar"
                                           src={uploadedImage ? URL.createObjectURL(uploadedImage) : sessionStorage.picture}
-                                          sx={{ width: '240px', height: '240px', margin: '0 auto', cursor: 'pointer' }}
+                                          sx={{ width: '150px', height: '150px', borderRadius:'100%', margin: '0 auto', cursor: 'pointer' }}
                                           onClick={handleAvatarClick}
                                       />
+                                    </div>
+                                    <div className='user-info-container'>
+                                      <div className='user-info-container2'>
+                                        <Typography variant="h5" gutterBottom style={{textAlign: 'center', color:'white', textAlign:'left', marginLeft:'10px'}}>
+                                            {sessionStorage.id}
+                                        </Typography>
+                                        <SettingsIcon sx={{color:'white', marginLeft:'15px', marginTop:'3px', cursor:'pointer'}} onClick={() => {
+                                                navigate('/setting/change');
+                                        }} />
+                                      </div>
+
+                                      <div className='user-info-container3' >
+                                          <Box>
+                                              <Grid container justifyContent="space-between" alignItems="center">
+                                                  <div className='follower-container row-center'>
+                                                    <FollowerModal
+                                                        follower={follower}
+                                                    />
+                                                    <p className='white-font' style={{fontSize:'12px'}}>{follower.length}</p>
+                                                  </div>
+                                                  <div className='following-container row-center' style={{marginLeft:'2vw'}}>
+                                                    <FollowingModal
+                                                        following={following}
+                                                    />
+                                                     <p className='white-font' style={{fontSize:'12px'}}>{following.length}</p>
+                                                  </div>
+                                              </Grid>
+                                          </Box>
+                                      </div>
+                                    </div>
+                                      
                                       <input
                                           type="file"
                                           accept="image/*"
@@ -400,54 +250,16 @@ export default function Profile() {
                                           onChange={handleImageChange}
                                       />
                                   </div>
-                                  <Typography variant="h5" gutterBottom style={{textAlign: 'center'}}>
-                                      {sessionStorage.id}
-                                  </Typography>
+                                  
                               </Box>
-                              <Box>
-                                  <Grid container justifyContent="space-between" alignItems="center">
-                                      <Grid item>
-                                          <Button
-                                              variant="outlined"
-                                              startIcon={<People />}
-                                          >
-                                              <FollowerModal
-                                                  follower={follower}
-                                              />
-                                              팔로워 {follower.length}
-                                          </Button>
-                                      </Grid>
-                                      <Grid item>
-                                          <Button
-                                              variant="outlined"
-                                              startIcon={<PersonAdd />}
-                                          >
-                                              <FollowingModal
-                                                  following={following}
-                                              />
-                                              팔로잉 {following.length}
-                                          </Button>
-                                      </Grid>
-                                  </Grid>
-                              </Box>
-                              <Button
-                                  variant="contained"
-                                  startIcon={<Settings />}
-                                  style={{ marginTop: '20px' }}
-                                  onClick={() => {
-                                      navigate('/setting/change');
-                                  }}
-                              >
-                                  설정
-                              </Button>
                           </Paper>
                       </Box>
-                      <Box id={'right'} sx={{ display: 'inline-flex', flexDirection: 'column', width: '50vw', height: '100vh' }}>
+                      <Box id={'right'} sx={{ display: 'inline-flex', flexDirection: 'column', width: '60vw', height: '100vh' }}>
                           <Box className={'right'} sx={{ width: '100%', height: '80%', margin:'auto' }}>
                               <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} aria-label="icon label tabs example" centered>
-                                  <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
+                                  <Tab sx={{color:'white'}} icon={<MdFoodBank color={'white'} {...a11yProps(0)} id="icon1" size="70px"/>}
                                        iconPosition='start' label="최신순"/>
-                                  <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
+                                  <Tab sx={{color:'white'}} icon={<TbBuildingCommunity color={'white'} {...a11yProps(1)} id="icon2" size="50px"/>}
                                        iconPosition='start' label="추천순"/>
                               </Tabs>
                               <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
