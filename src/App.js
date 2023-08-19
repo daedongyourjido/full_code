@@ -1,23 +1,21 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import Main from "./main.js";
-import Login from "./login.js";
-import SignUp from "./signup.js";
-import Setting from "./setting.js";
-import ChangePw from "./changePw.js";
-import Withdraw from "./withdraw.js";
-import NeedVerify from "./needVerify.js";
-import Verify from "./verify.js";
-import FindPw from "./findPw.js";
-import SuccessWithdraw from "./successWithdraw.js";
-import NeedResetPw from "./needResetPw.js";
-import ResetPw from "./resetPw.js";
-import AppProfile from "./App_profile.js";
-import Place from "./board/Place";
-import WriteGesimool from "./board/write_gesimool.js";
-
-import MyMap from "./mymap";
+import Main from "./views/main/main.js";
+import Login from "./views/login/login.js";
+import SignUp from "./views/signup/signup.js";
+import Setting from "./views/setting/setting.js";
+import ChangePw from "./views/changepw/changePw.js";
+import Withdraw from "./views/withdraw/withdraw.js";
+import NeedVerify from "./views/verify-send/needVerify.js";
+import Verify from "./views/verify/verify.js";
+import FindPw from "./views/findpw/findPw.js";
+import NeedResetPw from "./views/resetpw-send/needResetPw.js";
+import ResetPw from "./views/resetpw/resetPw.js";
+import AppProfile from "./views/profile/App_profile.js";
+import Place from "./views/board/Place";
+import WriteGesimool from "./views/board/write_gesimool.js";
+import MyMap from "./views/mymap/mymap.js";
 import { List } from "@mui/material";
 
 function App() {
@@ -33,13 +31,13 @@ function App() {
         <Route path="/verify/send" element={<NeedVerify />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/find" element={<FindPw />} />
-        <Route path="/setting/withdraw/success" element={<SuccessWithdraw />} />
         <Route path="find/send" element={<NeedResetPw />} />
         <Route path="find/reset" element={<ResetPw />} />
         <Route path="/profile" element={<AppProfile />} />
         <Route path="/write" element={<WriteGesimool />} />
         <Route path={"/board/:place"} element={<Place />} />
         <Route path={"/mymap/:List"} element={<List />} />
+        {/* ? */}
         <Route path="/mymap" element={<MyMap />} />
       </Routes>
     </BrowserRouter>
