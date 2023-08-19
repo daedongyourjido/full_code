@@ -15,9 +15,6 @@ import { MyKakaoMap } from './mykakaomap';
 function MyMap() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-//   const userKey = 2
-  const userId = 'sjhong98@icloud.com'
-  const userImage = 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
   const [placeImages, setPlaceImages] = useState(null)
   /** 사용자 장소 이미지 불러오는 api **/
   useEffect(()=>{
@@ -48,11 +45,11 @@ function MyMap() {
       <div id="side">
         <div id = "avatarpos">
           <ImageAvatars
-              userImage={userImage}
+              userImage={sessionStorage.picture}
           />
         </div>
         <div id = "namepos">
-          {userId}
+          {sessionStorage.id}
         </div>
         <div id = "followpos">
           <FollowerModal/> 

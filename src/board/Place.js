@@ -80,6 +80,8 @@ function CustomTabPanel(props) {
 function Place() {
 
     const [userLocationInfo, setUserLocationInfo] = useState([])
+    const [userLocationInfoDesc, setUserLocationInfoDesc] = useState([])
+    const [userLocationInfoAsc, setUserLocationInfoAsc] = useState([])
 
     const loc = useLocation();
     const paths = loc.pathname.split('/');
@@ -113,11 +115,36 @@ function Place() {
             where: `name='${lastPath}' ORDER BY created_at desc`
         })
             .then(res => {
+                setUserLocationInfoDesc(res.data)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+            DML: 'SELECT',
+            columns: '*',
+            table: 'location',
+            where: `name='${lastPath}' ORDER BY created_at asc`
+        })
+            .then(res => {
+                setUserLocationInfoAsc(res.data)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+            DML: 'SELECT',
+            columns: '*',
+            table: 'location',
+            where: `name='${lastPath}' ORDER BY like_count desc`
+        })
+            .then(res => {
                 setUserLocationInfo(res.data)
             })
             .catch(error => {
                 console.log(error);
             })
+
     }, [lastPath])
 
     return (
@@ -151,22 +178,21 @@ function Place() {
                         <Box sx={{ width: '100%', bgcolor: 'transparent', height: '100%' }}>
                             <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} onChange={handleChange} aria-label="icon label tabs example" centered>
                                 <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
-                                iconPosition='start' label="맛집"/>
+                                iconPosition='start' label="최신순"/>
                                 <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
-                                iconPosition='start' label="숙소"/>
+                                iconPosition='start' label="오래된순"/>
                                 <Tab icon={<BsPinMap color={'black'} {...a11yProps(2)} id="icon3" size="45px"/>}
-                                iconPosition='start' label="여행지"/>
+                                iconPosition='start' label="추천순"/>
                             </Tabs>
-                            <hr className='space_hr'></hr>
                             <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
                                 <ImageCollection
-                                    userLocationInfo={userLocationInfo}
+                                    userLocationInfo={userLocationInfoDesc}
                                     lastPath={lastPath}
                                 />
                             </CustomTabPanel>
                             <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
                                 <ImageCollection
-                                    userLocationInfo={userLocationInfo}
+                                    userLocationInfo={userLocationInfoAsc}
                                     lastPath={lastPath}
                                 />
                             </CustomTabPanel>
