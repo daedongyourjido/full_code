@@ -68,7 +68,7 @@ function Withdraw() {
     return (
         <div style={{display:'flex', flexDirection:'column'}}>
             <Bar setting={true} />
-            <div className='resetpw-container'>
+            <div className='withdraw-container'>
                 <SettingContainer component={WithdrawBox} menu="withdraw" />
             </div>
         </div>
