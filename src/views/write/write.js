@@ -15,72 +15,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useSearchParams } from "react-router-dom";
-
-function BeforeLogin(props) {
-  const navigate = useNavigate();
-
-  return (
-    <div
-      className="bar"
-      style={{ display: "flex", justifyContent: "flex-end" }}
-    >
-      <SearchField />
-      <LoginPageButton
-        onClick={() => {
-          navigate("./login");
-        }}
-      />
-    </div>
-  );
-}
-
-function AfterLogin(props) {
-  const navigate = useNavigate();
-  return (
-    <div
-      className="bar"
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "right",
-        margin: "auto",
-        padding: "10px",
-      }}
-    >
-      <SearchField />
-      <img
-        src={sessionStorage.picture}
-        style={{
-          width: "40px",
-          height: "40px",
-          borderRadius: "100%",
-          marginRight: "16px",
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          navigate("/profile");
-        }}
-        alt={"..."}
-      />
-      <p
-        style={{ fontSize: "18px", cursor: "pointer" }}
-        onClick={() => {
-          navigate("/profile");
-        }}
-      >
-        {sessionStorage.getItem("name")}
-      </p>
-      {/* name 가져와 표시 */}
-      <LogoutIcon
-        style={{ marginLeft: "15px", cursor: "pointer" }}
-        onClick={() => {
-          sessionStorage.clear();
-          window.location.reload();
-        }}
-      />
-    </div>
-  );
-}
+import Bar from '../../modules/layout/bar';
 
 export default function Write() {
   // 이미지 업로드 객체
@@ -214,95 +149,83 @@ export default function Write() {
       reader.readAsDataURL(image);
     });
   };
+
+
   return (
-    <div className="write_cover">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={{ backgroundColor: "#045369" }}>
-          <Toolbar>
-            <Typography
-              variant="h4"
-              component="div"
-              sx={{ flexGrow: 1, fontFamily: "dohyeon" }}
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              대동유어지도
-            </Typography>
-            {login ? <AfterLogin /> : <BeforeLogin />}
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <div className="write_main">
-        <div className="write_con">
-          <div className="top">
-            <h4 style={{ margin: "auto", display: "flex" }}>새 게시물</h4>
-            <Button
-              style={{ position: "absolute", right: "0%", padding: "18px" }}
-              variant="contained"
-              color="primary"
-              onClick={handleUpload}
-            >
-              업로드
-            </Button>
-          </div>
-          <hr />
+    <div>
+      <Bar />
+      <div className="write_cover">
 
-          <div className={"middle"}>
-            <Input type="file" accept="image/*" onChange={handleImageChange} />
-            {previewImage && (
-              <Paper sx={{ height: "100%" }} elevation={3}>
-                <img
-                  src={previewImage}
-                  alt="Preview"
-                  style={{ maxWidth: "100%", height: "100%" }}
+        <div className="write_main">
+          <div className="write_con">
+            <div className="top">
+              <h4 style={{ margin: "auto", display: "flex" }}>새 게시물</h4>
+              <Button
+                style={{ position: "absolute", right: "0%", padding: "18px" }}
+                variant="contained"
+                color="primary"
+                onClick={handleUpload}
+              >
+                업로드
+              </Button>
+            </div>
+            <hr />
+
+            <div className={"middle"}>
+              <Input type="file" accept="image/*" onChange={handleImageChange} />
+              {previewImage && (
+                <Paper sx={{ height: "100%" }} elevation={3}>
+                  <img
+                    src={previewImage}
+                    alt="Preview"
+                    style={{ maxWidth: "100%", height: "100%" }}
+                  />
+                </Paper>
+              )}
+            </div>
+            <div className="title" style={{ margin: "20px auto auto auto" }}>
+              <p>제목 :</p>
+
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "600px" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  value={title !== "" ? title : () => {}}
+                  onChange={(e) => setTitle(e.target.value)}
+                  id="standard-basic"
+                  variant="standard"
+                  style={{ margin: "52px 0px 0px 20px" }}
                 />
-              </Paper>
-            )}
-          </div>
-          <div className="title" style={{ margin: "20px auto auto auto" }}>
-            <p>제목 :</p>
-
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "600px" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                value={title !== "" ? title : () => {}}
-                onChange={(e) => setTitle(e.target.value)}
-                id="standard-basic"
-                variant="standard"
-                style={{ margin: "52px 0px 0px 20px" }}
+              </Box>
+            </div>
+            <div className="bottom">
+              <CKEditor
+                data={content !== "" ? content : () => {}}
+                editor={ClassicEditor}
+                config={{ placeholder: "내용을 입력해주세요" }}
+                onReady={(editor) => {
+                  // You can store the "editor" and use when it is needed.
+                  console.log("Editor is ready to use!", editor);
+                }}
+                onChange={(event, editor) => {
+                  setContent(editor.getData());
+                  // console.log({ event, editor, content });
+                }}
+                onBlur={(event, editor) => {
+                  // console.log( 'Blur.', editor );
+                }}
+                onFocus={(event, editor) => {
+                  // console.log( 'Focus.', editor );
+                }}
               />
-            </Box>
-          </div>
-          <div className="bottom">
-            <CKEditor
-              data={content !== "" ? content : () => {}}
-              editor={ClassicEditor}
-              config={{ placeholder: "내용을 입력해주세요" }}
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-              }}
-              onChange={(event, editor) => {
-                setContent(editor.getData());
-                // console.log({ event, editor, content });
-              }}
-              onBlur={(event, editor) => {
-                // console.log( 'Blur.', editor );
-              }}
-              onFocus={(event, editor) => {
-                // console.log( 'Focus.', editor );
-              }}
-            />
+            </div>
           </div>
         </div>
-        <div className="write_map">지도</div>
       </div>
     </div>
   );

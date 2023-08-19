@@ -10,11 +10,11 @@ import Withdraw from "./views/withdraw/withdraw.js";
 import NeedVerify from "./views/verify-send/needVerify.js";
 import Verify from "./views/verify/verify.js";
 import FindPw from "./views/findpw/findPw.js";
-import NeedResetPw from "./views/resetpw-send/needResetPw.js";
+import NeedResetPw from "./views/find-send/needResetPw.js";
 import ResetPw from "./views/resetpw/resetPw.js";
 import Profile from "./views/profile/profile.js";
 import Place from "./views/board/Place";
-import Write from "./views/board/write.js";
+import Write from "./views/write/write.js";
 import MyMap from "./views/mymap/mymap.js";
 import { List } from "@mui/material";
 

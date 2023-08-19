@@ -44,3 +44,9 @@
 .following-container {
     white-space: nowrap;
 }
+
+.profile-left-container {
+    width: 35vw;
+    height: 100vw;
+    min-width: 410px;
+}

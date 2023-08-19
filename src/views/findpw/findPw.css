@@ -3,8 +3,10 @@
 .findpw-box {
     display: flex;
     flex-direction: column;
-    width: 380px;
-    height:400px;
+    width: 30vw;
+    height:50vh;
+    min-width: 314px;
+    min-height: 277px;
     justify-content: center;
     align-items: center;
     background-color: white;

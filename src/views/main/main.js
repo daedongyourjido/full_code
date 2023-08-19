@@ -26,8 +26,10 @@ function LoggedInBar(){
 
   return (
     <div className="loggedin-bar">
-      <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
-      <div className='profile-container'>
+
+      <h1 onClick={()=>{ navigate('/') }} >대동유어지도</h1>
+
+      <div className='main-profile-container'>
         <img className='profile-pic' src={sessionStorage.picture} onClick={()=>{navigate('/profile')}} alt={'...'} />
         <p className='profile-name' onClick={()=>{navigate('/profile')}} >
           {sessionStorage.name}

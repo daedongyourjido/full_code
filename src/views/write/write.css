@@ -1,10 +1,21 @@
 .write_main {
-  margin: 80px auto;
-  background-color: bisque;
-  width: 1320px;
+  margin-top: 15vh;
+  width: 70vw;
+  background-color: #FFF;
+  border-radius: 1%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   height: 1100px;
   position: relative;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.write_cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .write_con {

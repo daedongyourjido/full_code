@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-export default function LoginPageButton(props) {
+export default function MainPageButton(props) {
     const navigate = useNavigate();
   
     return (
@@ -12,7 +12,7 @@ export default function LoginPageButton(props) {
           height: 40
         }}
         onClick={()=>{
-          navigate('/login');
-        }}>Sign In</Button>
+          navigate('/');
+        }}>메인 페이지로 이동</Button>
     );
   }

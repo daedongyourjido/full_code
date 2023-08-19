@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Bar from '../../modules/layout/barSetting.js';
+import Bar from '../../modules/layout/bar.js';
 import ResetPwButton from '../../views/resetpw/resetPwButton.js';
 import InputField from '../../modules/components/inputField';
 import SettingContainer from '../../views/setting/settingContainer.js';
@@ -45,11 +45,9 @@ function ChangePw() {
     }
 
     return (
-        <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <div className='bar'>
-                <Bar setting={true} />
-            </div>
-            <div className='resetpw-container'>
+        <div style={{display:'flex', flexDirection:'column'}}>
+            <Bar/>
+            <div className='changepw-container'>
                 <SettingContainer component={ChangePwBox} menu="changePw" />
             </div>
         </div>

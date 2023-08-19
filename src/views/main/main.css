@@ -1,145 +1,144 @@
 /* map */
 
 .map-container {
-    height:100%;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .random-container {
-    margin-left: 0vh;
-    width: 60vw;
-    height: 100%;
-    flex: 3;
-  }
-  
-  .random-container2 {
-    margin-top: 30vh;
-    margin-left: 6vw;
-    width: 80%;
-  }
-  
-  .randomImages {
-    margin-right: 30px;
-  }
-  
-  .kakao-map {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 40vw;
-    flex: 2;
-  }
+  height:100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
-  
+.random-container {
+  margin-left: 0vh;
+  width: 60vw;
+  height: 100%;
+  flex: 3;
+}
+
+.random-container2 {
+  margin-top: 30vh;
+  margin-left: 6vw;
+  width: 80%;
+}
+
+.randomImages {
+  margin-right: 30px;
+}
+
+.kakao-map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40vw;
+  flex: 2;
+}
 
 
 
-  /* main */
+
+
+/* main */
 
 .loggedin-bar {
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 10vh;
-    padding-left: 60px;
-  }
-  
-  .loggedout-bar {
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 10vh;
-    padding-left: 60px;
-  }
-  
-  .login-button-container {
-    margin-top: 15px;
-  }
-  
-  .profile-container {
-    display: flex;
-    flex-direction: row;
-    width: 150px;
-    justify-content: space-between;
-  
-  }
-  
-  .profile-pic {
-    border-radius: 100%;
-    height: 35px;
-    margin-top: 2.5vh;
-    cursor: pointer;
-  }
-  
-  .profile-name {
-    margin-top: 3.5vh;
-    cursor: pointer;
-  }
-  
-  .logout-button {
-    margin-top: 2.9vh;
-    cursor: pointer;
-  }
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10vh;
+  padding-left: 60px;
+}
+
+.loggedout-bar {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10vh;
+  padding-left: 60px;
+}
+
+.login-button-container {
+  margin-top: 15px;
+}
+
+.main-profile-container {
+  display: flex;
+  flex-direction: row;
+  width: 150px;
+  justify-content: space-between;
+
+}
+
+.profile-pic {
+  border-radius: 100%;
+  height: 35px;
+  margin-top: 2.5vh;
+  cursor: pointer;
+}
+
+.profile-name {
+  margin-top: 3.5vh;
+  cursor: pointer;
+}
+
+.logout-button {
+  margin-top: 3.1vh;
+  cursor: pointer;
+}
 
 
 
 
 
-  .slide-enter {
+.slide-enter {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 500ms,
+    transform 500ms;
+}
+
+.slide-exit {
+  opacity: 1;
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: scale(0.8);
   }
-  
-  .slide-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition:
-      opacity 500ms,
-      transform 500ms;
-  }
-  
-  .slide-exit {
+  to {
     opacity: 1;
   }
-  
-  .slide-exit-active {
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
     opacity: 0;
-    transition: opacity 500ms;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .fade-in {
-    animation: fadeIn 500ms ease-in-out;
-  }
-  
-  .fade-out {
-    animation: fadeOut 500ms ease-in-out;
-  }
-  
+}
+
+.fade-in {
+  animation: fadeIn 500ms ease-in-out;
+}
+
+.fade-out {
+  animation: fadeOut 500ms ease-in-out;
+}

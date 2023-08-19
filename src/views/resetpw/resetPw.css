@@ -1,0 +1,13 @@
+.resetpw-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resetpw-box {
+    width: 40vw;
+    height: 65vh;
+    min-width: 348px;
+    min-height: 300px;
+
+}

@@ -1,5 +1,6 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import geo from '../../assets/data/geo.json';
+
 
 export default function MenuMap (props) {
     const { kakao } = window;
@@ -21,6 +22,41 @@ export default function MenuMap (props) {
         ],
       },
     ];
+
+    const [lat, setLat] = useState(36);
+    const [lng, setLng] = useState(127.9);
+    const [scale, setScale] = useState(12.8);
+
+    // 1336 x 843
+
+    useEffect(() => {   // 지도 크기 동적 지정
+      const handleResize = () => {
+        if(window.innerWidth < 1350 && window.innerHeight < 860){  // 너비 높이 둘다 줄어들떄
+          setLng(129);
+          setScale(13.3);
+          setLat(35);
+        }
+        else if (window.innerWidth >= 1350 && window.innerHeight < 860) {  // 높이만 줄어들떄
+          setLat(35);
+          setScale(13.3);
+        }
+        else if (window.innerWidth < 1350 && window.innerHeight >= 860) {   // 너비만 줄어들때
+          setScale(13.3);
+          setLng(129);
+        }
+        else {
+          setLng(127.9);
+          setScale(12.8);
+          setLat(36);
+        }
+          
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, [lat, lng]);
   
     useEffect(() => {
   
@@ -32,8 +68,8 @@ export default function MenuMap (props) {
       const mapContainer = document.getElementById('map1'); // 지도를 표시할 div
 
       const mapOption = {
-        center: new kakao.maps.LatLng(36, 127.9), // 지도의 중심좌표
-        level: 12.8,
+        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+        level: scale,
         mapStyles: customStyle,
         draggable: false, 
         scrollwheel: false, 

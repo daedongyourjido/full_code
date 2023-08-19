@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MenuMap from "../../modules/layout/menuMap.js";
+import MainPageButton from '../main/mainPageButton'
 
 function Text() {
   const navigate = useNavigate();
   return (
     <h1
-      style={{ paddingBottom: "30px", cursor: "pointer", width: "200px" }}
+      style={{ paddingBottom: "30px", cursor: "pointer", width: "200px", marginLeft:'30px' }}
       onClick={() => {
         navigate("/");
       }}
@@ -57,9 +58,7 @@ function VerifyBox() {
             >
               인증에 성공하였습니다.
             </h1>
-            <a href="/" style={{ fontSize: "15px", color: "#045369" }}>
-              메인으로 이동하기
-            </a>
+            <MainPageButton />
           </div>
         </div>
       </div>

@@ -9,9 +9,8 @@ import Tab from "@mui/material/Tab";
 import {MdFoodBank} from "react-icons/md";
 import {TbBuildingCommunity} from "react-icons/tb";
 import ImageCollection from "../board/image_Collection";
-import { Avatar, Button, Grid, Paper, Typography } from '@mui/material';
-import { Settings, People, PersonAdd } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { Avatar, Grid, Paper, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { setLogin } from '../../redux/actions';
 import Bar from '../../modules/layout/bar.js';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -199,7 +198,7 @@ export default function Profile() {
                   
                   <Box sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft:'50px', marginRight:'50px' }} id={'main'} style={{paddingTop:'5rem'}}>
                       
-                      <Box sx={{ display: 'inline-flex', flexDirection: 'column', width: '35vw', height: '100vh' }} id={'left'}>
+                      <Box className="profile-left-container" sx={{ display: 'inline-flex', flexDirection: 'column', width: '35vw', height: '100vh' }} id={'left'}>
                           <div className='profile-container'>
 
                                   <div className='row-center user-info'>

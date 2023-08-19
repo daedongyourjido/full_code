@@ -3,6 +3,7 @@ import MenuMap from '../../modules/layout/menuMap.js';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../../modules/components/inputField.js';
 import Button from '@mui/material/Button';
+import './findPw.css';
 
 
 export function IdSearchButton(props) {

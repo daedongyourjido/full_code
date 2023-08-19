@@ -44,7 +44,7 @@ function LoginBox() {
     const [empty, setEmpty] = useState(false);
 
     return (
-        <div className='login-box'>
+        <div className='login-box-css'>
 
             <div className='login-upper-box'>
                 <h1 style={{color:'#000000'}}>대동유어지도</h1>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 // import { useNavigate } from 'react-router-dom';
-import Bar from '../../modules/layout/barSetting.js';
+import Bar from '../../modules/layout/bar.js';
 import InputField from '../../modules/components/inputField.js';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -55,10 +55,8 @@ function Withdraw() {
                 </div> 
             : 
                 <div className='withdraw-box'>
-                    <div style={{marginLeft:'170px'}}>
-                        <p style={{color:'black', fontSize:'20px', marginLeft:'100px'}}>회원 탈퇴</p>
-                        <InputField setData={setPw} label="비밀번호" type="password" />
-                    </div>
+                    <p style={{color:'black', fontSize:'20px'}}>회원 탈퇴</p>
+                    <InputField setData={setPw} label="비밀번호" type="password" />
                     <WithdrawButton setPwEmpty={setPwEmpty} setChanged={setChanged} pw={pw} />
                     { pwEmpty ? <p className='input_error'>비밀번호를 입력해주세요</p> : <p></p> }
                 </div>
@@ -68,10 +66,8 @@ function Withdraw() {
     }
 
     return (
-        <div className='root' style={{display:'flex', flexDirection:'column'}}>
-            <div className='bar'>
-                <Bar setting={true} />
-            </div>
+        <div style={{display:'flex', flexDirection:'column'}}>
+            <Bar setting={true} />
             <div className='resetpw-container'>
                 <SettingContainer component={WithdrawBox} menu="withdraw" />
             </div>

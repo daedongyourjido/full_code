@@ -3,6 +3,7 @@ import Bar from '../../modules/layout/barDefault.js';
 import InputField from '../../modules/components/inputField.js';
 import ResetPwButton from './resetPwButton.js';
 import LoginPageButton from '../login/loginPageButton.js';
+import './resetPw.css';
 
 
 
@@ -21,7 +22,7 @@ function ResetPwBox() {
         <div>
         {changed ? 
             <div className='resetpw-box' style={{color:'black'}}>
-                <h1>비밀번호 변경이 완료되었습니다</h1>
+                <h1 style={{fontSize:'3vh'}}>비밀번호 변경이 완료되었습니다</h1>
                 <LoginPageButton borderColor="black" color="black" />
             </div> 
         : 
