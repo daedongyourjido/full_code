@@ -1,21 +1,20 @@
 const initialState = {
-    images: [],
-}
+  images: [],
+};
 
 const dataReducer = (state = initialState, action) => {
-    switch(action.type) {
+  switch (action.type) {
+    case "SET_IMAGES":
+      return {
+        ...state,
+        images: action.payload,
+      };
 
-        case 'SET_IMAGES' :
-            return {
-                ...state,
-                images: action.payload,
-            }
-
-        default:
-            return{
-                ...state,
-            }
-    }
-}
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 export default dataReducer;

@@ -7,7 +7,7 @@ files:
 
 permissions:
   - object: /var/www
-    pattern: '**'
+    pattern: "**"
     owner: ubuntu
     group: ubuntu
 

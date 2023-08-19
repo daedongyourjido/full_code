@@ -1,24 +1,26 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 export default function SignUpPwErrorField(props) {
   return (
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, height: '5.8ch', width: '25ch' },
+        "& .MuiTextField-root": { m: 1, height: "5.8ch", width: "25ch" },
       }}
       noValidate
       autoComplete="off"
-      onChange={(e)=>{props.setPw(e.target.value)}}
+      onChange={(e) => {
+        props.setPw(e.target.value);
+      }}
     >
       <div>
         <TextField
           error
           id="outlined-error-helper-text"
           label="비밀번호 입력"
-          type='password'
+          type="password"
           defaultValue=""
           helperText="비밀번호를 입력하세요"
         />

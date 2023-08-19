@@ -226,7 +226,10 @@ export default function AppProfile() {
   const navigate = useNavigate();
   /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
   const [login, setLogin] = useState(false);
+    // eslint-disable-next-line no-unused-vars
   const [userLocationInfo, setUserLocationInfo] = useState([])
+    const [userLocationInfoDataDesc, setUserLocationInfoDataDesc] = useState([])
+    const [userLocationInfoLikeDesc, setUserLocationInfoLikeDesc] = useState([])
     // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(0);
   const [follower, setFollower] = useState([])
@@ -236,6 +239,30 @@ export default function AppProfile() {
 
   /** 사용자 장소 이미지 불러오는 api **/
   useEffect(()=>{
+      axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+          DML: 'SELECT',
+          columns: '*',
+          table: 'location',
+          where: `user_id='${sessionStorage.id}' ORDER BY created_at desc`
+      })
+          .then(res => {
+              setUserLocationInfoDataDesc(res.data)
+          })
+          .catch(error => {
+              console.log(error);
+          })
+      axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
+          DML: 'SELECT',
+          columns: '*',
+          table: 'location',
+          where: `user_id='${sessionStorage.id}' ORDER BY like_count desc`
+      })
+          .then(res => {
+              setUserLocationInfoLikeDesc(res.data)
+          })
+          .catch(error => {
+              console.log(error);
+          })
     axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
       type: 'profile',
       user_id: sessionStorage.id
@@ -266,7 +293,6 @@ export default function AppProfile() {
     })
         .then(res => {
           setFollowing(res.data)
-          console.log('my following', res)
         })
         .catch(err => {
           console.log(err)
@@ -408,19 +434,20 @@ export default function AppProfile() {
                           <Box className={'right'} sx={{ width: '100%', height: '80%', margin:'auto' }}>
                               <Tabs sx={{ display: 'inline-flex', flexDirection: 'row', justifyContent: 'space-between' }} style={{width: '100%'}} value={value} aria-label="icon label tabs example" centered>
                                   <Tab icon={<MdFoodBank color={'black'} {...a11yProps(0)} id="icon1" size="70px"/>}
-                                       iconPosition='start' label="맛집"/>
+                                       iconPosition='start' label="최신순"/>
                                   <Tab icon={<TbBuildingCommunity color={'black'} {...a11yProps(1)} id="icon2" size="50px"/>}
-                                       iconPosition='start' label="숙소"/>
+                                       iconPosition='start' label="추천순"/>
                               </Tabs>
                               <CustomTabPanel value={value} index={0} style={{overflow:'auto', maxHeight: '100vh'}}>
-                                  <ImageCollection
-                                      userLocationInfo={userLocationInfo}
-                                  />
+                                  {userLocationInfoDataDesc.length === 0 ? '' : <ImageCollection
+                                      userLocationInfo={userLocationInfoDataDesc}
+                                  />}
+
                               </CustomTabPanel>
                               <CustomTabPanel value={value} index={1} style={{overflow:'auto', maxHeight: '100vh'}}>
-                                  <ImageCollection
-                                      userLocationInfo={userLocationInfo}
-                                  />
+                                  {userLocationInfoLikeDesc.length === 0 ? '' : <ImageCollection
+                                      userLocationInfo={userLocationInfoLikeDesc}
+                                  />}
                               </CustomTabPanel>
                           </Box>
                       </Box>

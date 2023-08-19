@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #045369;
 }
 
@@ -100,8 +100,8 @@ body{
   -ms-overflow-style: none;
 }
 
-.space::-webkit-scrollbar{
-  display:none;
+.space::-webkit-scrollbar {
+  display: none;
 }
 
 .space > .icons {
@@ -124,14 +124,15 @@ body{
 .Category_btn:hover {
   background-color: #045369;
   border-radius: 3px;
-  ;
 }
 
 .Category_btn:active {
   background-color: #104250;
 }
 
-#icon1, #icon2, #icon3 {
+#icon1,
+#icon2,
+#icon3 {
   display: inline-block;
   color: white;
   position: relative;
@@ -142,7 +143,8 @@ body{
   padding: 5px 0;
 }
 
-#Category1, #Category2 {
+#Category1,
+#Category2 {
   width: 60px;
   margin: 0;
   margin-left: 5px;
@@ -160,11 +162,10 @@ body{
   color: white;
 }
 
-
 .space_hr {
   margin-top: 20px;
   border-width: 1px;
-  width:1098px;
+  width: 1098px;
   position: relative;
   right: 900px;
 }

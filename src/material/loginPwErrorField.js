@@ -1,17 +1,19 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 export default function LoginPwErrorField(props) {
   return (
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, height: '6.5ch', width: '25ch' },
+        "& .MuiTextField-root": { m: 1, height: "6.5ch", width: "25ch" },
       }}
       noValidate
       autoComplete="off"
-      onChange={(e)=>{props.setPw(e.target.value)}}
+      onChange={(e) => {
+        props.setPw(e.target.value);
+      }}
     >
       <div>
         <TextField

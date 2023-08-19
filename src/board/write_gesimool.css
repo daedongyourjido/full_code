@@ -1,82 +1,85 @@
 .write_main {
-    margin: 80px auto;
-    background-color:bisque;
-    width: 1320px;
-    height: 1100px;
-    position: relative;
-    text-align: center;
+  margin: 80px auto;
+  background-color: bisque;
+  width: 1320px;
+  height: 1100px;
+  position: relative;
+  text-align: center;
 }
 
 .write_con {
-    float: left;
-    background-color: white;
-    width: 800px;
-    height: 100%;
+  float: left;
+  background-color: white;
+  width: 800px;
+  height: 100%;
 }
 
 .top {
-    height: 60px;
-    display: flex;
-    position: relative;
+  height: 60px;
+  display: flex;
+  position: relative;
 }
 
 .write_con > hr {
-    margin: auto;
-    width: 798px;
+  margin: auto;
+  width: 798px;
 }
 
 .middle {
-    height: 150px;
+  height: 150px;
 }
 
 .picture {
-    float: left;
-    width: 150px;
-    height: 150px;
-    background-color: rgb(182, 177, 177);
-    display: inline-block;
+  float: left;
+  width: 150px;
+  height: 150px;
+  background-color: rgb(182, 177, 177);
+  display: inline-block;
 }
 
 .picture:hover {
-    background-color: #7a7a7a;
-    cursor: pointer;
+  background-color: #7a7a7a;
+  cursor: pointer;
 }
 
 #picture_p {
-    margin: auto;
-    line-height: 150px;
-    text-align: center;
+  margin: auto;
+  line-height: 150px;
+  text-align: center;
 }
 
 .title {
-    height: 100px;
-    line-height: 100px;
-    padding-left: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
+  height: 100px;
+  line-height: 100px;
+  padding-left: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
 }
 
 #title_p {
-    margin: 0 10px 0 0;
+  margin: 0 10px 0 0;
 }
 
 .bottom {
-    margin: 0 30px 0 30px;
-    height: 700px;
+  margin: 0 30px 0 30px;
+  height: 700px;
 }
 
-.bottom input {table-layout: fixed;
-    height: 300px; white-space: pre-line; word-break: break-all;
+.bottom input {
+  table-layout: fixed;
+  height: 300px;
+  white-space: pre-line;
+  word-break: break-all;
 }
 
 .write_map {
-    background-color: white;
-    float: right;
-    width: 500px;
-    height: 100%;
+  background-color: white;
+  float: right;
+  width: 500px;
+  height: 100%;
 }
 
 .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    min-height: 700px;
+  min-height: 700px;
 }
