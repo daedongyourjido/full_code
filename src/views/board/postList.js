@@ -1,5 +1,5 @@
 import React from "react";
-import "./list_Component.css";
+import "./postList.css";
 function List_Component(props) {
   return (
     <div className="list_com">

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Modal from "react-modal";
-import Gesimool from "./gesimool";
+import Gesimool from "./postView";
 
 const customOverlayStyle = {
   overlay: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./write_gesimool.css";
+import "./write.css";
 import "../../App.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -9,7 +9,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Button, Input, Paper } from "@mui/material";
 import SearchField from "../../modules/components/searchField.js";
-import LoginPageButton from "../../views/login/loginPageButton.js";
+import LoginPageButton from "../login/loginPageButton.js";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -82,7 +82,7 @@ function AfterLogin(props) {
   );
 }
 
-function Write_gesimool() {
+export default function Write() {
   // 이미지 업로드 객체
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -307,5 +307,3 @@ function Write_gesimool() {
     </div>
   );
 }
-
-export default Write_gesimool;

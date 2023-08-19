@@ -1,4 +1,4 @@
-import "./App_board.css";
+import "./board.css";
 import "../../App.css";
 import React, { useState, useEffect } from "react";
 import { TbBuildingCommunity } from "react-icons/tb";

@@ -25,7 +25,7 @@ export default function FollowingModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log("following", props);
+
   return (
     <div>
       <div id="modalbtn">

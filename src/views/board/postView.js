@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./gesimool.css";
-import Gslider from "./g_slider";
+import "./postView.css";
+import Gslider from "./postSlider";
 import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import { Favorite } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-function Gesimool(props) {
+export default function PostView(props) {
   const navigate = useNavigate();
   const countRef = useRef(0);
   const [comments, setComments] = useState([]);
@@ -266,5 +266,3 @@ function Gesimool(props) {
     </>
   );
 }
-
-export default Gesimool;

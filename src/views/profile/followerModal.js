@@ -25,6 +25,7 @@ export default function FollowerModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const follower = props.follower;
 
   return (
     <div>
@@ -44,7 +45,7 @@ export default function FollowerModal(props) {
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
-            {props.follower.map((ele) => (
+              { follower.map((ele) => (
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={ele.picture} />
@@ -64,7 +65,7 @@ export default function FollowerModal(props) {
                   }
                 />
               </ListItem>
-            ))}
+            )) }
           </List>
         </Box>
       </Modal>

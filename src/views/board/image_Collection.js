@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import Gesimool from "./gesimool";
+import Gesimool from "./postView";
 import Grid from "@mui/material/Grid";
 
 const customOverlayStyle = {

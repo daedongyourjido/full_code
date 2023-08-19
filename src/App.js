@@ -12,9 +12,9 @@ import Verify from "./views/verify/verify.js";
 import FindPw from "./views/findpw/findPw.js";
 import NeedResetPw from "./views/resetpw-send/needResetPw.js";
 import ResetPw from "./views/resetpw/resetPw.js";
-import AppProfile from "./views/profile/App_profile.js";
+import Profile from "./views/profile/profile.js";
 import Place from "./views/board/Place";
-import WriteGesimool from "./views/board/write_gesimool.js";
+import Write from "./views/board/write.js";
 import MyMap from "./views/mymap/mymap.js";
 import { List } from "@mui/material";
 
@@ -33,8 +33,8 @@ function App() {
         <Route path="/find" element={<FindPw />} />
         <Route path="find/send" element={<NeedResetPw />} />
         <Route path="find/reset" element={<ResetPw />} />
-        <Route path="/profile" element={<AppProfile />} />
-        <Route path="/write" element={<WriteGesimool />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/write" element={<Write />} />
         <Route path={"/board/:place"} element={<Place />} />
         <Route path={"/mymap/:List"} element={<List />} />
         {/* ? */}
