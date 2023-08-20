@@ -27,7 +27,7 @@ function BeforeLogin(){
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
           <SearchField />
           <LoginPageButton onClick={()=>{
-            navigate('./login');
+            navigate('/login');
           }} />
         </div>
     );
@@ -203,7 +203,7 @@ function BeforeLogin(){
             <Box sx={{ flexGrow: 1, whiteSpace:'nowrap' }} className='header'>
                 <AppBar position="static" sx={{backgroundColor: '#FFF'}}>
                     <Toolbar>
-                        <Typography className='pointer' variant="h4" component="div" sx={{ flexGrow: 1, fontFamily: "dohyeon", color:'#000', marginLeft:'50px'}} onClick={()=>{navigate('/')}}>
+                        <Typography variant="h4" component="div" sx={{ flexGrow:1, fontFamily: "dohyeon", color:'#000', marginLeft:'50px', cursor:'pointer', width:'100px'}} onClick={()=>{navigate('/')}}>
                             대동유어지도
                         </Typography>
                         {login ? <AfterLogin location={'/'} /> : <BeforeLogin />}

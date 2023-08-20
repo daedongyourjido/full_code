@@ -7,40 +7,49 @@ body {
   line-height: 30px;
   background-color: white;
   position: fixed;
-  z-index: 1;
+  z-index: 5;
 }
 
 .contents {
-  width: 1920px;
-  margin: 0 auto;
-  padding-top: 50px;
-}
-
-.side {
+  width: 100vw;
+  color: white;
   display: flex;
-  position: fixed;
-  width: 800px;
-  height: 100%;
 }
 
-.side h1 {
-  color: black;
-  text-align: center;
-  margin-bottom: 60px;
-}
 
-.inner {
+.left-container {
   margin: auto;
-  border: 3px solid white;
-  border-radius: 10px;
   padding: 60px 30px 120px 30px;
-  background-color: #a8c7cf;
+  background-color: #045369;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 35vw;
+  z-index: 4;
 }
 
-.inner > h3 {
-  margin-left: 40px;
-  font-size: 15px;
-  color: black;
+.left-container h1 {
+  font-size: 5vh;
+}
+
+.left-container h3 {
+  font-size: 2vh;
+}
+
+.slider-container {
+  background-color: #fff;
+  width: 30vw;
+  height: 30vw;
+}
+
+.slider-image {
+  width: 30vw;
+  height: 30vw;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 .slider {
@@ -85,16 +94,22 @@ body {
 }
 
 .main {
-  float: right;
-  width: 1100px;
   height: 100%;
+  width: 100vw;
+  display: flex; 
+  z-index: 3;
+}
+
+.left-space {
+  flex: 1.2;
 }
 
 .space {
+  flex: 2;
   height: 100%;
   margin-top: 80px;
   padding-bottom: 10px;
-  background-color: #a8c7cf;
+  /* background-color: #a8c7cf; */
   border-radius: 10px;
   margin-bottom: 50px;
   -ms-overflow-style: none;
@@ -103,6 +118,56 @@ body {
 .space::-webkit-scrollbar {
   display: none;
 }
+
+.tab {
+  position: fixed;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 12vh;
+  width: 65vw;
+  background-color: #045369;
+  position: fixed;
+  top: 12vh;
+}
+
+
+
+.post-tab-container {
+  margin-top: 14vh;
+  max-height: 100vh;
+}
+
+
+
+.post-container {
+  text-align: center;
+  width: 19vw;
+  height: 19vw;
+}
+
+.post-container img {
+  padding: 20px 15px 0px 15px;
+  width: 90%;
+}
+
+.post-mouseover {
+  background-color: #111;
+  opacity: 0.4;
+  position: absolute;
+  width: 19vw;
+  height: 19vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .space > .icons {
   text-align: center;
@@ -188,3 +253,4 @@ body {
   display: inline-flex;
   margin-bottom: 40px;
 }
+

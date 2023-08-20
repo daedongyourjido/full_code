@@ -4,12 +4,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Modal from "react-modal";
 import Gesimool from "./postView";
+import './board.css';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const customOverlayStyle = {
   overlay: {
     zIndex: 9999, // 모달을 최상위 레이어에 표시
   },
 };
+
+
 
 function SimpleSlider(props) {
   const settings = {
@@ -18,7 +23,9 @@ function SimpleSlider(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    prevArrow: <ArrowBackIosNewIcon sx={{color:'white', width:'2vw'}} />,
+    nextArrow: <ArrowForwardIosIcon sx={{color:'white', width:'2vw'}} />
   };
   console.log(props);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
@@ -40,14 +47,14 @@ function SimpleSlider(props) {
   };
 
   return (
-    <div className="contentslide">
+    <div className="board-slider">
       <Slider {...settings}>
         {props.userLocationInfo.map((info) => (
           <div>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href={"#"} onClick={() => openModal(info)}>
-              <img src={info.image} alt="흑백"></img>
-            </a>
+            <img src={info.image} 
+                className="slider-image" 
+                onClick={() => openModal(info)} 
+              />
           </div>
         ))}
       </Slider>

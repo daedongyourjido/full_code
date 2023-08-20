@@ -25,7 +25,7 @@ code {
 
 @font-face {
 	font-family: "dohyeon";
-	src: url(./assets/font/BMDOHYEON.ttf);
+	src: url(../assets/font/BMDOHYEON.ttf);
 }
 
 html, body, #root {
