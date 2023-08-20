@@ -12,12 +12,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import CommentIcon from '@mui/icons-material/Comment';
-import ListComponent from "../../views/board/postList";
+// import CommentIcon from '@mui/icons-material/Comment';
+// import ListComponent from "../../views/board/postList";
 import {useNavigate} from 'react-router-dom';
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from '@mui/material';
 import { PersonAdd } from '@mui/icons-material';
+import './search.css';
+import '../../views/board/board.css';
+import Grid from "@mui/material/Grid";
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 function BeforeLogin(){
     const navigate = useNavigate();
@@ -80,7 +86,7 @@ function BeforeLogin(){
     const closeModal = () => {
       setIsModalOpen(false);
     };
-      const handleFollow = (targetId: number)  => {
+      const handleFollow = (targetId)  => {
           axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
               DML: 'INSERT',
               table: 'following',
@@ -94,6 +100,18 @@ function BeforeLogin(){
                   console.log(err)
               })
       }
+
+
+      const [activePost, setActivePost] = useState(null);
+
+      const handleMouseOver = (index) => {
+        setActivePost(index);
+      }
+      
+      const handleMouseOut = (index) => {
+        setActivePost(null);
+      }
+
     return (
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>
           <Button 
@@ -122,12 +140,13 @@ function BeforeLogin(){
               overlayClassName="modal-overlay"
               style={customOverlayStyle} // 오버레이 스타일을 적용
           >
-            <Box sx={{ width: '100vw', height: '60vh', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+            <Box className='result-container'>
+
               <Typography variant="h6" gutterBottom>
                 사용자 검색 결과
               </Typography>
-              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {searchResult.map((value) => {
+              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', cursor:'pointer' }}>
+                {searchResult.map((value, index) => {
                   const labelId = `checkbox-list-label-${value}`;
   
                   return (
@@ -143,16 +162,50 @@ function BeforeLogin(){
                           disablePadding
                       >
                           <Avatar src={value.picture}/>
-                        <ListItemText id={labelId} primary={`${value.nickname}`} />
-                          <ListItemText id={labelId} primary={`${value.email}`} />
+                          <ListItemText id={labelId} primary={`${value.nickname}`} 
+                                        sx={{marginLeft:'1vw', fontSize:'1.5vh'}} />
+                          <ListItemText id={labelId} primary={`${value.email}`} 
+                                        sx={{fontSize:'1.5vh'}} />
                       </ListItem>
                   );
                 })}
               </List>
+
               <Typography variant="h6" gutterBottom>
                 게시물 검색 결과
               </Typography>
-              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+
+              <Grid container spacing={2}>
+              {searchLocationResult.map((info, index) => (
+                <>
+                  <Grid key={info.id} 
+                        onMouseOver={() => handleMouseOver(index)} 
+                        onMouseOut={() => handleMouseOut()}
+                        onClick={() => openModal(info)} item xs={4}>
+                    { activePost === index ? 
+                        <div className='post-mouseover'>
+                          <div className="post-title">
+                            <ChatBubbleIcon sx={{height:'2vh', marginTop:'2vh'}} />
+                            <p>{info.title}</p>
+                          </div>
+                          <div className="post-like">
+                            <FavoriteIcon sx={{height:'2vh', marginTop:'2.1vh'}} />
+                            <p>{info.like_count}</p>
+                          </div>
+                          <div className="post-location">
+                            <FmdGoodIcon sx={{height:'2vh', marginTop:'2.2vh'}} />
+                            <p>{info.name}</p>
+                          </div>
+                        </div> : <></> }
+                    <img src={info.image} 
+                          className='post-thumbnail'
+                          alt='...'  />
+                  </Grid>
+                </>
+              ))}
+              </Grid>
+
+              {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {searchLocationResult.map((info, index) => {
   
                   return (
@@ -177,10 +230,12 @@ function BeforeLogin(){
                       </ListItem>
                   );
                 })}
-              </List>
-              <Button onClick={closeModal} variant="contained">
+              </List> */}
+
+
+              {/* <Button onClick={closeModal} variant="contained">
                 닫기
-              </Button>
+              </Button> */}
             </Box>
           </Modal>
           <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer', marginLeft:'30px'}} onClick={()=>{navigate('/profile')}}  alt={'...'}/>
