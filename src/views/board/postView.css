@@ -1,23 +1,30 @@
 .cover {
+  display: flex;
   position: relative;
-  right: 500px;
-  width: 1000px;
-  height: 1100px;
+  width: 70vw;
+  height: 100vh;
+  justify-self: center;
+  align-self: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  right: 35vw;
+  
+
 }
 
 .main_con {
-  background-color: white;
-  width: 600px;
-  height: 1100px;
-  min-height: 1000px;
-  border-radius: 5px;
+  background-color: #bbb;
   position: relative;
-  top: 50%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  line-height: 100%;
-  flex: 1;
-  float: left;
+  width: 50vw;
+  height: 90vh;
+
+}
+
+.comment_list {
+  width: 20vw;
+  height: 90vh;
+  background-color: white;
 }
 
 .g_header {
@@ -26,17 +33,32 @@
   border-radius: 5px;
 }
 
+.g_contents {
+  height: 27vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+}
+
+.post-set {
+  display: flex;
+  flex-direction: row;
+}
+
 .profile_Name {
   padding-left: 30px;
   display: flex;
 }
 
 .profile_img {
-  width: 40px;
-  height: 40px;
+  width: 2.5vw;
+  height: 2.5vw;
   border-radius: 100%;
   cursor: pointer;
-  margin: 15px 12px 15px 0px;
+  margin-top: 2vh;
+  margin-right: 1vw;
 }
 
 #pro_p {
@@ -47,17 +69,44 @@
   color: black;
 }
 
+/* .gesimoolSlide img{
+  width: 50vw;
+  height: 며ㅅ;
+} */
+
+.post-image-row img{
+  width: 50vw;
+  height: 50vw;
+}
+
+.post-image-column img{
+  height: 70vh;
+  width: auto;
+  position: relative;
+  right: -10vw;
+}
+
+.slick-slider {
+  height: 75vh;
+}
+
+
+.slick-list {
+  height: 75vh;
+}
+
 .gallery {
-  width: 600px;
-  height: 600px;
-  background-color: gray;
-  border-radius: 2px;
+  width: 50vw;
+  height: 100%;
+  background-color: #FFF;
 }
 
 .like_and_location {
   height: 50px;
+  white-space: nowrap;
   line-height: 50px;
-  padding-left: 20px;
+  padding-left: 0px;
+  font-size: 1.8vh;
 }
 
 .detail {
@@ -65,6 +114,14 @@
   overflow-x: hidden;
   height: 250px;
   padding: 10px 30px;
+}
+
+.detail h3 {
+  font-size: 2vh;
+}
+
+.detail p {
+  font-size: 1.5vh;
 }
 
 .detail::-webkit-scrollbar {
@@ -80,6 +137,7 @@
   height: 50px;
   line-height: 50px;
   padding-left: 20px;
+  font-size: 1.5vh;
 }
 
 #line {
@@ -95,6 +153,14 @@
   padding-left: 20px;
   bottom: 0px;
   position: absolute;
+}
+
+.no-comments {
+  height: 50vh;
+  font-size: 1.8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #comment_p {
@@ -124,7 +190,7 @@
   top: 11px;
   right: 11px;
   border-radius: 5px;
-  color: blue;
+  color: #666s;
 }
 
 #comment_btn:hover {
@@ -133,11 +199,6 @@
 
 #comment_btn:active {
   background-color: #908f8f;
-}
-
-.gesimoolSlide img {
-  width: 600px;
-  height: 600px;
 }
 
 .modal-overlay {
@@ -197,25 +258,18 @@
   }
 }
 
-.comment_list {
-  position: relative;
-  left: 5px;
-  float: right;
-  width: 400px;
-  height: 1100px;
-  background-color: white;
-  border-radius: 5px;
-}
+
+
 
 #list_p {
   text-align: center;
-  font-size: 15px;
+  font-size: 1.5vh;
 }
 
 #list_hr {
   margin: auto;
   position: relative;
-  width: 398px;
+  width: 100%;
   border: 0px;
   background-color: #cbcbcb;
   height: 1px;

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { useSelector } from 'react-redux';
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import SearchField from "../../modules/components/searchField";
@@ -196,7 +195,14 @@ function BeforeLogin(){
   
   export default function Bar() {
     const navigate = useNavigate();
-    const login = useSelector(state => state.login);
+    const [login, setLogin] = useState(false);
+    
+    useEffect(() => {
+      if(sessionStorage.getItem('name'))
+        setLogin(true);
+      else  
+        setLogin(false);
+    }, []);
   
     return (
       <div className='header'>

@@ -10,9 +10,11 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import { Favorite } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
+import SettingsIcon from '@mui/icons-material/Settings';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function PostView(props) {
   const navigate = useNavigate();
@@ -136,6 +138,8 @@ export default function PostView(props) {
         console.log(err);
       });
   };
+
+  
   return (
     <>
       {props.info === undefined ? (
@@ -143,65 +147,14 @@ export default function PostView(props) {
       ) : (
         <>
           <div className="cover">
+            
+
             <div className="main_con">
-              <div className="g_header">
-                <div className="profile_Name">
-                  <img
-                    className="profile_img"
-                    src={sessionStorage.getItem("picture")}
-                    onClick={() => {
-                      navigate("/profile");
-                    }}
-                    alt={"..."}
-                  ></img>
-                  <span
-                    id="pro_p"
-                    onClick={() => {
-                      navigate("/profile");
-                    }}
-                  >
-                    {sessionStorage.getItem("name")}
-                  </span>
-                </div>
-              </div>
+              
               <div className="gallery">
                 <Gslider info={props.info} />
               </div>
 
-              <div className="g_contents">
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    navigate(`/write?locationid=${props.info.id}`);
-                  }}
-                >
-                  수정하기
-                </Button>
-                <Button variant="contained" onClick={handleDelete}>
-                  삭제하기
-                </Button>
-                <div className="like_and_location">
-                  {
-                    <IconButton
-                      onClick={handleLike}
-                      style={!likeFlag ? { color: "grey" } : { color: "red" }}
-                      aria-label="delete"
-                      size="large"
-                    >
-                      <Favorite />
-                    </IconButton>
-                  }{" "}
-                  {likeCount} / {props.info.name}
-                </div>
-                <div className="detail">
-                  <h2>{props.info.title}</h2>
-                  <hr />
-                  {props.info.content}
-                </div>
-                <div className="date" style={{ color: "gray" }}>
-                  {props.info.updated_at}
-                </div>
-              </div>
               <hr id="line"></hr>
               <div className="comment">
                 <p id="comment_p" style={{ lineHeight: "60px" }}>
@@ -219,47 +172,122 @@ export default function PostView(props) {
                 </button>
               </div>
             </div>
+
+
             <div className="comment_list">
-              <p id="list_p">댓글</p>
+
+              <div className="g_header">
+                  <div className="profile_Name">
+                    <img
+                      className="profile_img"
+                      src={sessionStorage.getItem("picture")}
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                      alt={"..."}
+                    ></img>
+                    <span
+                      id="pro_p"
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
+                    {sessionStorage.getItem("name")}
+                  </span>
+                </div>
+              </div>
+
               <hr id="list_hr"></hr>
-              <List
-                sx={{
-                  width: "100%",
-                  maxWidth: 360,
-                  bgcolor: "background.paper",
-                }}
-              >
-                {comments.map((info) => (
-                  <>
-                    <ListItem alignItems="flex-start">
-                      <ListItemAvatar>
-                        <Avatar alt="inpic" src={info.picture} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={info.comment}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: "inline" }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            >
-                              {info.user_id}
-                            </Typography>
-                            <br />
-                            {info.date instanceof Date
-                              ? info.date.toLocaleString()
-                              : info.date}
-                          </React.Fragment>
-                        }
+              <p id="list_p">댓글</p>
+
+              {comments.length === 0 ?
+                <div className="no-comments">
+                  <p>아직 댓글이 없습니다</p>
+                </div> 
+              :
+                <List
+                  sx={{
+                    width: "100%",
+                    maxWidth: 360,
+                    height: '45vh',
+                    marginLeft:'0.7vw',
+                  }}
+                >
+                  {comments.map((info) => (
+                    <>
+                      <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                          <Avatar alt="inpic" src={info.picture} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={info.comment}
+                          secondary={
+                            <React.Fragment>
+                              <Typography
+                                sx={{ display: "inline" }}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                              >
+                                {info.user_id}
+                              </Typography>
+                              <br />
+                              {info.date instanceof Date
+                                ? info.date.toLocaleString()
+                                : info.date}
+                            </React.Fragment>
+                          }
+                        />
+                      </ListItem>
+                      <Divider variant="inset" component="li" />
+                    </>
+                  ))}
+                </List>
+              }
+
+              <hr id="list_hr"></hr>
+              
+              
+
+              <div className="g_contents">
+
+                <div className="post-set">
+                  <div className="like_and_location">
+                    {
+                      <IconButton
+                        onClick={handleLike}
+                        style={!likeFlag ? { color: "grey" } : { color: "red" }}
+                        aria-label="delete"
+                        size="large"
+                      >
+                        <Favorite />
+                      </IconButton>
+                    }{" "}
+                    {likeCount} / {props.info.name}
+                  </div>
+                  <SettingsIcon
+                      sx={{color:'black', marginTop:'1.4vh', marginLeft:'6vw', cursor:'pointer'}}
+                      onClick={() => {
+                        navigate(`/write?locationid=${props.info.id}`);
+                      }}/>
+                  <DeleteIcon 
+                      sx={{color:'black', marginTop:'1.4vh', cursor:'pointer'}}
+                      onClick={handleDelete}
                       />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                  </>
-                ))}
-              </List>
+                </div>
+                
+                <div className="detail">
+                  <h3>{props.info.title}</h3>
+                  <p>{props.info.content}</p>
+                </div>
+                <div className="date" style={{ color: "gray" }}>
+                  {props.info.updated_at}
+                </div>
+              </div>
+
             </div>
+
+
           </div>
         </>
       )}

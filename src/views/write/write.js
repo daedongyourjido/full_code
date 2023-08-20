@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./write.css";
 import "../../styles/App.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -17,7 +17,6 @@ export default function Write() {
   const [previewImage, setPreviewImage] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -92,7 +91,8 @@ export default function Write() {
             type: "post-update",
             fileName: fileName, // 저장할 파일명
             file: JSON.stringify(selectedImageBase64), // 파일 값
-            name: location.state.location, // 지역명(seoul, jeju...)-
+            name: 'seoul',
+            // name: location.state.location, // 지역명(seoul, jeju...)-
             id: queryValue,
             title: title, // 게시글 제목
             content: content, // 게시글 내용
@@ -100,7 +100,8 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          navigate(`/board/${location.state.location}`);
+          navigate('/');
+          // navigate(`/board/${location.state.location}`);
         })
         .catch((error) => {
           console.log(error);
@@ -115,7 +116,8 @@ export default function Write() {
             type: "post",
             fileName: fileName, // 저장할 파일명
             file: JSON.stringify(selectedImageBase64), // 파일 값
-            name: location.state.location, // 지역명(seoul, jeju...)
+            name: 'seoul',
+            // name: location.state.location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
             content: content, // 게시글 내용
@@ -123,7 +125,8 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          navigate(`/board/${location.state.location}`);
+          navigate('/');
+          // navigate(`/board/${location.state.location}`);
         })
         .catch((error) => {
           console.log(error);

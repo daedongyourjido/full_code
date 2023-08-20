@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import Gesimool from "./postView";
+import PostView from "./postView";
 import Grid from "@mui/material/Grid";
 import './board.css';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
@@ -64,7 +64,7 @@ function Image_Collection(props) {
                     </div>
                   </div> : <></> }
               <img src={info.image} 
-                    className='post-container'
+                    className='post-thumbnail'
                     alt='...'  />
             </Grid>
           </>
@@ -77,7 +77,7 @@ function Image_Collection(props) {
         overlayClassName="modal-overlay"
         style={customOverlayStyle} // 오버레이 스타일을 적용
       >
-        <Gesimool info={modalInfo} open={isModalOpen} />
+        <PostView info={modalInfo} open={isModalOpen} />
       </Modal>
     </div>
   );
