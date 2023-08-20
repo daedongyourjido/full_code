@@ -211,20 +211,22 @@ export default function PostView(props) {
                     maxWidth: 360,
                     height: '45vh',
                     marginLeft:'0.7vw',
+                    overflow: 'auto',
                   }}
                 >
                   {comments.map((info) => (
                     <>
                       <ListItem alignItems="flex-start">
                         <ListItemAvatar>
-                          <Avatar alt="inpic" src={info.picture} />
+                          <Avatar alt="inpic" src={info.picture} className="comment-profile" />
                         </ListItemAvatar>
                         <ListItemText
-                          primary={info.comment}
+                          primary={ 
+                            <p className="comment-text" >{info.comment}</p> }
                           secondary={
                             <React.Fragment>
                               <Typography
-                                sx={{ display: "inline" }}
+                                sx={{ display: "inline", fontSize:'1.3vh' }}
                                 component="span"
                                 variant="body2"
                                 color="text.primary"
@@ -233,8 +235,8 @@ export default function PostView(props) {
                               </Typography>
                               <br />
                               {info.date instanceof Date
-                                ? info.date.toLocaleString()
-                                : info.date}
+                                ? <p className="comment-date">{info.date.toLocaleString()}</p>
+                                : <p className="comment-date">{info.date}</p> }
                             </React.Fragment>
                           }
                         />

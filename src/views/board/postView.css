@@ -64,7 +64,7 @@
 #pro_p {
   font-weight: bold;
   margin: 27px 0px;
-  font-size: 18px;
+  font-size: 2vh;
   cursor: pointer;
   color: black;
 }
@@ -153,6 +153,22 @@
   padding-left: 20px;
   bottom: 0px;
   position: absolute;
+}
+
+.comment-text {
+  font-size: 1.8vh;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.comment-profile {
+  width: 2.5vw;
+  height: 2.5vw;
+}
+
+.comment-date {
+  font-size: 1.1vh;
+  margin-top: 1vh;
 }
 
 .no-comments {
