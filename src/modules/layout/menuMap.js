@@ -142,7 +142,7 @@ export default function MenuMap (props) {
         displayArea(coordinates, name);
       });
 
-    }, [customStyle, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon]);
+    }, [customStyle, kakao.maps.CustomOverlay, kakao.maps.LatLng, kakao.maps.Map, kakao.maps.Polygon, lat, lng, scale]);
   
     return (
     <div style={{height:'86.5%'}}>

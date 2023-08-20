@@ -54,6 +54,7 @@ function SimpleSlider(props) {
             <img src={info.image} 
                 className="slider-image" 
                 onClick={() => openModal(info)} 
+                alt='...'
               />
           </div>
         ))}

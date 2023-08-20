@@ -7,7 +7,7 @@ import { MdFoodBank } from "react-icons/md";
 import SimpleSlider from "./slider";
 import ImageCollection from "./image_Collection";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
@@ -52,8 +52,7 @@ function Place() {
   const paths = loc.pathname.split("/");
   const lastPath = paths[paths.length - 1];
 
-  const navigate = useNavigate();
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
 
   const [value, setValue] = useState(0);
 
@@ -61,15 +60,15 @@ function Place() {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    // token 여부에 반응하여 로그인 여부 판단
-    const token = sessionStorage.getItem("id");
-    if (token) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // token 여부에 반응하여 로그인 여부 판단
+  //   const token = sessionStorage.getItem("id");
+  //   if (token) {
+  //     setLogin(true);
+  //   } else {
+  //     setLogin(false);
+  //   }
+  // }, []);
 
   useEffect(() => {
     axios

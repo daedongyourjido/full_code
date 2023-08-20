@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useState } from "react";
 import axios from 'axios'
 import { useSelector } from 'react-redux';
 import AppBar from "@mui/material/AppBar";
@@ -17,7 +17,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import ListComponent from "../../views/board/postList";
 import {useNavigate} from 'react-router-dom';
 import Box from "@mui/material/Box";
-import { Avatar, Button, Grid, Paper, Typography } from '@mui/material';
+import { Avatar, Button, Paper, Typography } from '@mui/material';
 import { PersonAdd } from '@mui/icons-material';
 
 function BeforeLogin(){

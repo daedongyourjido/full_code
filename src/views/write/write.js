@@ -8,12 +8,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Button, Input, Paper } from "@mui/material";
-import SearchField from "../../modules/components/searchField.js";
-import LoginPageButton from "../login/loginPageButton.js";
-import LogoutIcon from "@mui/icons-material/Logout";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useSearchParams } from "react-router-dom";
 import Bar from '../../modules/layout/bar';
 
@@ -27,7 +21,7 @@ export default function Write() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
 
   const [searchParams] = useSearchParams();
   const queryValue = searchParams.get("locationid") || "";
@@ -54,15 +48,15 @@ export default function Write() {
     }
   }, [queryValue]);
 
-  useEffect(() => {
-    // token 여부에 반응하여 로그인 여부 판단
-    const token = sessionStorage.getItem("id");
-    if (token) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // token 여부에 반응하여 로그인 여부 판단
+  //   const token = sessionStorage.getItem("id");
+  //   if (token) {
+  //     setLogin(true);
+  //   } else {
+  //     setLogin(false);
+  //   }
+  // }, []);
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];

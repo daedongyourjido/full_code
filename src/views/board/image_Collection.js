@@ -55,7 +55,7 @@ function Image_Collection(props) {
                       <p>{info.title}</p>
                     </div>
                     <div className="post-like">
-                      <FavoriteIcon sx={{height:'2vh', marginTop:'2vh'}} />
+                      <FavoriteIcon sx={{height:'2vh', marginTop:'2.1vh'}} />
                       <p>{info.like_count}</p>
                     </div>
                     <div className="post-location">

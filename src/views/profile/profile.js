@@ -9,7 +9,7 @@ import Tab from "@mui/material/Tab";
 import {MdFoodBank} from "react-icons/md";
 import {TbBuildingCommunity} from "react-icons/tb";
 import ImageCollection from "../board/image_Collection";
-import { Avatar, Grid, Paper, Typography } from '@mui/material';
+import { Avatar, Grid, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setLogin } from '../../redux/actions';
 import Bar from '../../modules/layout/bar.js';
@@ -59,7 +59,7 @@ export default function Profile() {
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
     // eslint-disable-next-line no-unused-vars
-  const [userImage, setUserImage] = useState(sessionStorage.picture)
+  // const [userImage, setUserImage] = useState(sessionStorage.picture)
 
   useEffect(()=>{
     console.log("follower, following : ", follower, following);
@@ -109,7 +109,7 @@ export default function Profile() {
     } else {
       dispatch(setLogin(false));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     // get my following
@@ -147,9 +147,9 @@ export default function Profile() {
         })
   }, [])
 
-  useEffect(() => {
-    setUserImage(sessionStorage.picture)
-  }, [])
+  // useEffect(() => {
+  //   setUserImage(sessionStorage.picture)
+  // }, [])
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const avatarInputRef = useRef(null);
@@ -212,7 +212,7 @@ export default function Profile() {
                                     </div>
                                     <div className='user-info-container'>
                                       <div className='user-info-container2'>
-                                        <Typography variant="h5" gutterBottom style={{textAlign: 'center', color:'white', textAlign:'left', marginLeft:'10px'}}>
+                                        <Typography variant="h5" gutterBottom style={{color:'white', textAlign:'left', marginLeft:'10px'}}>
                                             {sessionStorage.id}
                                         </Typography>
                                         <SettingsIcon sx={{color:'white', marginLeft:'15px', marginTop:'3px', cursor:'pointer'}} onClick={() => {
