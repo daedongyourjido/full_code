@@ -3,6 +3,9 @@ import Modal from "react-modal";
 import Gesimool from "./postView";
 import Grid from "@mui/material/Grid";
 import './board.css';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 const customOverlayStyle = {
   overlay: {
@@ -47,9 +50,18 @@ function Image_Collection(props) {
                   onClick={() => openModal(info)} item xs={4}>
               { activePost === index ? 
                   <div className='post-mouseover'>
-                    <p style={{marginBottom:'0px'}}>{info.title}</p>
-                    <p>{info.like_count}</p>
-                    <p style={{marginTop:'0px'}}>{info.name}</p>
+                    <div className="post-title">
+                      <ChatBubbleIcon sx={{height:'2vh', marginTop:'2vh'}} />
+                      <p>{info.title}</p>
+                    </div>
+                    <div className="post-like">
+                      <FavoriteIcon sx={{height:'2vh', marginTop:'2vh'}} />
+                      <p>{info.like_count}</p>
+                    </div>
+                    <div className="post-location">
+                      <FmdGoodIcon sx={{height:'2vh', marginTop:'2.2vh'}} />
+                      <p>{info.name}</p>
+                    </div>
                   </div> : <></> }
               <img src={info.image} 
                     className='post-container'

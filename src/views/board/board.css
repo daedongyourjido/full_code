@@ -156,16 +156,47 @@ body {
 }
 
 .post-mouseover {
+  cursor: pointer;
   background-color: #111;
-  opacity: 0.4;
+  opacity: 0.5;
   position: absolute;
   width: 19vw;
   height: 19vw;
   display: flex;
+  font-size: 1.8vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.post-container div {
+
+}
+
+.post-title {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  margin-bottom: -3vh;
+}
+
+.post-like {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.post-location {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  margin-top: -3vh;
+}
+
+
+/* .post-mouseover p {
+  opacity: 1;
+} */
 
 
 
