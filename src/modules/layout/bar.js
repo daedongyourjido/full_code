@@ -130,7 +130,7 @@ function AfterLogin(props) {
         variant="contained"
         sx={{ backgroundColor: "#6EA4B4", marginRight: "20px" }}
         onClick={() => {
-          navigate("/write");
+          window.open("/write", "_blank");
         }}
       >
         게시물 올리기
