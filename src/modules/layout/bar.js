@@ -160,6 +160,7 @@ function BeforeLogin(){
                           disablePadding
                           onClick={() => {
                             navigate(`/profile?user=${value.email}`);
+                            closeModal();
                           }} 
                       >
                           <Avatar src={value.picture}/>

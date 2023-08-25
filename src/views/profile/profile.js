@@ -64,6 +64,8 @@ export default function Profile() {
 
     const _user = new URL(document.location.toString()).searchParams.get("user");
     setUser(_user);
+
+    console.log("compare : ", _user, sessionStorage.id);
     
     if(_user === sessionStorage.id)  // 본인의 프로필이라면
       setIsMyProfile(true);
