@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Bar from '../../modules/layout/bar.js';
+import { useDispatch, useSelector } from "react-redux";
+import Skeleton from '@mui/material/Skeleton';
 // import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 
@@ -43,14 +45,78 @@ function CustomTabPanel(props) {
   );
 }
 
+function PostLoading() {
+  return (
+    <div className="post-loading">
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+      <Skeleton variant="rectangular" width='19vw' height='19vw' />
+    </div>
+
+  )
+}
+
+function RandomPostLoading() {
+  return (
+      <Skeleton variant="rectangular" width='30vw' height='30vw' />
+  )
+}
+
 function Place() {
   const [userLocationInfo, setUserLocationInfo] = useState([]);
   const [userLocationInfoDesc, setUserLocationInfoDesc] = useState([]);
   const [userLocationInfoAsc, setUserLocationInfoAsc] = useState([]);
+  const [location, setLocation] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const loc = useLocation();
   const paths = loc.pathname.split("/");
   const lastPath = paths[paths.length - 1];
+
+  const locationName = (loc) => {
+    if(loc === 'seoul')
+      setLocation('서울');
+    else if(loc === 'daegu')
+      setLocation('대구');
+    else if(loc === 'ulsan')
+      setLocation('울산');
+    else if(loc === 'busan')
+      setLocation('부산');
+    else if(loc === 'chungbuk')
+      setLocation('충청북도');
+    else if(loc === 'chungnam')
+      setLocation('충청남도');
+    else if(loc === 'gyeonggi')
+      setLocation('경기도');
+    else if(loc === 'gangwon')
+      setLocation('강원도');
+    else if(loc === 'jeonnam')
+      setLocation('전라남도');
+    else if(loc === 'jeonbuk')
+      setLocation('전라북도');
+    else if(loc === 'incheon')
+      setLocation('인천');
+    else if(loc === 'sejong')
+      setLocation('세종');
+    else if(loc === 'daejeon')
+      setLocation('대전');
+    else if(loc === 'jeju')
+      setLocation('제주');
+    else if(loc === 'gyeongnam')
+      setLocation('경상남도');
+    else
+      setLocation('경상북도');
+  }
+
+  useEffect(() => {
+    locationName(lastPath);
+  }, [lastPath]);
 
   // const [login, setLogin] = useState(false);
 
@@ -59,16 +125,6 @@ function Place() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // useEffect(() => {
-  //   // token 여부에 반응하여 로그인 여부 판단
-  //   const token = sessionStorage.getItem("id");
-  //   if (token) {
-  //     setLogin(true);
-  //   } else {
-  //     setLogin(false);
-  //   }
-  // }, []);
 
   useEffect(() => {
     axios
@@ -115,11 +171,12 @@ function Place() {
       )
       .then((res) => {
         setUserLocationInfo(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [lastPath]);
+  }, [lastPath, isLoading]);
 
   return (
     <div className="App">
@@ -128,11 +185,15 @@ function Place() {
       <div className="contents">
 
           <div className="left-container">
-            <h1>{lastPath}</h1>
+            <h1>{location}</h1>
             <h3>추천게시물</h3>
-            <div className="slider-container">
-              <SimpleSlider userLocationInfo={userLocationInfo} />
-            </div>
+            { isLoading ? 
+              <RandomPostLoading /> 
+              :
+              <div className="slider-container">
+                <SimpleSlider userLocationInfo={userLocationInfo} />
+              </div>
+            }
           </div>
 
 
@@ -196,38 +257,47 @@ function Place() {
                   </Tabs>
                 </div>
 
-                <CustomTabPanel     // 최신순
-                  value={value}
-                  index={0}
-                  className="post-tab-container"
-                >
-                  <ImageCollection
-                    userLocationInfo={userLocationInfoDesc}
-                    lastPath={lastPath}
-                  />
-                </CustomTabPanel>
+                { isLoading ? 
+                  <PostLoading />
+                  :
+                      <div>
+                      <CustomTabPanel     // 최신순
+                      value={value}
+                      index={0}
+                      className="post-tab-container"
+                    >
+                      <ImageCollection
+                        userLocationInfo={userLocationInfoDesc}
+                        lastPath={lastPath}
+                      />
+                    </CustomTabPanel>
 
-                <CustomTabPanel     // 오래된순
-                  value={value}
-                  index={1}
-                  className="post-tab-container"
-                >
-                  <ImageCollection
-                    userLocationInfo={userLocationInfoAsc}
-                    lastPath={lastPath}
-                  />
-                </CustomTabPanel>
+                    <CustomTabPanel     // 오래된순
+                      value={value}
+                      index={1}
+                      className="post-tab-container"
+                    >
+                      <ImageCollection
+                        userLocationInfo={userLocationInfoAsc}
+                        lastPath={lastPath}
+                      />
+                    </CustomTabPanel>
+                    
+                    <CustomTabPanel     // 추천순
+                      value={value}
+                      index={2}
+                      className="post-tab-container"
+                    >
+                      <ImageCollection
+                        userLocationInfo={userLocationInfo}
+                        lastPath={lastPath}
+                      />
+                    </CustomTabPanel>
+                  </div>
+                  
+                }
+
                 
-                <CustomTabPanel     // 추천순
-                  value={value}
-                  index={2}
-                  className="post-tab-container"
-                >
-                  <ImageCollection
-                    userLocationInfo={userLocationInfo}
-                    lastPath={lastPath}
-                  />
-                </CustomTabPanel>
               </div>
             </div>
           </div>

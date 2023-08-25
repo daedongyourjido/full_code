@@ -10,14 +10,16 @@ import axios from "axios";
 import { Button, Input, Paper } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import Bar from '../../modules/layout/bar';
+import LocationSelect from "./locationSelect";
 
 export default function Write() {
   // 이미지 업로드 객체
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [location, setLocation] = useState("");
 
   const navigate = useNavigate();
-  const location = useLocation()
+  // const location = useLocation()
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -82,6 +84,22 @@ export default function Write() {
       fileName = selectedImage.name;
     }
     // Perform upload logic here, e.g. using APIs or other methods
+
+    if(!selectedImage) {
+      alert("사진을 업로드 해주세요")
+      return null;
+    }
+
+    if(!title){
+      alert("제목을 입력해주세요");
+      return null;
+    }
+
+    if(!location) {
+      alert("지역을 선택해주세요");
+      return null;
+    }
+
     if (queryValue !== "") {
       /** 게시글 업로드 api 추가 **/
       axios
@@ -92,8 +110,7 @@ export default function Write() {
             type: "post-update",
             fileName: fileName, // 저장할 파일명
             file: JSON.stringify(selectedImageBase64), // 파일 값
-            // name: 'seoul',
-            name: location.state.location, // 지역명(seoul, jeju...)-
+            name: location, // 지역명(seoul, jeju...)-  > @승재) user로부터 location 직접 지정받음
             id: queryValue,
             title: title, // 게시글 제목
             content: content, // 게시글 내용
@@ -101,11 +118,10 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          // navigate('/');
-          navigate(`/board/${location.state.location}`);
+          navigate(`/board/${location}`);
         })
         .catch((error) => {
-          console.log(error);
+          console.log("error 1 : ", error);
         });
     } else {
       /** 게시글 업로드 api 추가 **/
@@ -117,8 +133,7 @@ export default function Write() {
             type: "post",
             fileName: fileName, // 저장할 파일명
             file: JSON.stringify(selectedImageBase64), // 파일 값
-            // name: 'seoul',
-            name: location.state.location, // 지역명(seoul, jeju...)
+            name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
             content: content, // 게시글 내용
@@ -127,10 +142,11 @@ export default function Write() {
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
           // navigate('/');
-          navigate(`/board/${location.state.location}`);
+          navigate(`/board/${location}`);
         })
         .catch((error) => {
-          console.log(error);
+          console.log("error : ", sessionStorage.id, location);
+          console.log("error 2 : ", error);
         });
     }
   };
@@ -169,37 +185,40 @@ export default function Write() {
             </div>
             <hr />
 
-            <div className={"middle"}>
-              <Input type="file" accept="image/*" onChange={handleImageChange} />
-              {previewImage && (
-                <Paper sx={{ height: "100%" }} elevation={3}>
-                  <img
-                    src={previewImage}
-                    alt="Preview"
-                    style={{ maxWidth: "100%", height: "100%" }}
-                  />
-                </Paper>
-              )}
-            </div>
-            <div className="title" style={{ margin: "20px auto auto auto" }}>
-              <p>제목 :</p>
-
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "600px" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  value={title !== "" ? title : () => {}}
-                  onChange={(e) => setTitle(e.target.value)}
-                  id="standard-basic"
-                  variant="standard"
-                  style={{ margin: "52px 0px 0px 20px" }}
-                />
-              </Box>
+                <div className={"middle"}>
+                  <Input type="file" accept="image/*" onChange={handleImageChange} />
+                  {previewImage && (
+                    <Paper sx={{ height: "100%" }} elevation={3}>
+                      <img
+                        src={previewImage}
+                        alt="Preview"
+                        style={{ maxWidth: "100%", height: "100%" }}
+                      />
+                    </Paper>
+                  )}
+                </div>
+                <div className="title" style={{ margin: "40px auto -30px auto" }}>
+                  <Box
+                    component="form"
+                    sx={{
+                      "& > :not(style)": { m: 1, width: "50vw" },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <TextField 
+                      label="제목" 
+                      variant="standard" 
+                      value={title !== "" ? title : () => {}}
+                      onChange={(e) => setTitle(e.target.value)}
+                      style={{ margin: "0px 0px 0px 0px" }} 
+                    />
+                  </Box>
+              <div className="location-select">
+                  <LocationSelect  
+                      location={location} 
+                      setLocation={setLocation} />
+              </div>
             </div>
             <div className="bottom">
               <CKEditor

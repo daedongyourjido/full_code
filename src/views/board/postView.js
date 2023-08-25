@@ -10,7 +10,6 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-// import Button from "@mui/material/Button";
 import { Favorite } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -23,7 +22,8 @@ export default function PostView(props) {
   const [comment, setComment] = useState();
   const [likeCount, setLikeCount] = useState(props.info.like_count);
   const [likeFlag, setLikeFlag] = useState(false);
-  const handleLike = (e) => {
+
+  const handleLike = (e) => { // 좋아요
     e.preventDefault();
     if (likeFlag) {
       axios
@@ -63,7 +63,8 @@ export default function PostView(props) {
         });
     }
   };
-  useEffect(() => {
+
+  useEffect(() => { // 댓글 가져오기
     if (countRef.current === 1 || props.info === undefined) {
       return;
     }
@@ -81,7 +82,7 @@ export default function PostView(props) {
         let apiComments = [];
         for (let i = 0; i < res.data.length; i++) {
           apiComments.push({
-            user_id: res.data[i].from_id,
+            user_id: res.data[i].from_id,                 // 댓글 작성자 id
             comment: res.data[i].content,
             date: res.data[i].comment_time,
             picture: sessionStorage.getItem("picture"),
@@ -139,6 +140,10 @@ export default function PostView(props) {
       });
   };
 
+  useEffect(() => {
+    console.log("comments : ", comments);
+  }, [comments])
+
   
   return (
     <>
@@ -182,14 +187,14 @@ export default function PostView(props) {
                       className="profile_img"
                       src={sessionStorage.getItem("picture")}
                       onClick={() => {
-                        navigate("/profile");
+                        navigate(`/profile?user=${props.info.user_id}`);
                       }}
                       alt={"..."}
                     ></img>
                     <span
                       id="pro_p"
                       onClick={() => {
-                        navigate("/profile");
+                        navigate(`/profile?user=${props.info.user_id}`);
                       }}
                     >
                     {sessionStorage.getItem("name")}
@@ -218,7 +223,9 @@ export default function PostView(props) {
                     <>
                       <ListItem alignItems="flex-start">
                         <ListItemAvatar>
-                          <Avatar alt="inpic" src={info.picture} className="comment-profile" />
+                          <Avatar alt="inpic" 
+                                  src={info.picture} 
+                                  className="comment-profile" />
                         </ListItemAvatar>
                         <ListItemText
                           primary={ 

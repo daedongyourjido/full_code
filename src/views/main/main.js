@@ -11,7 +11,7 @@ function LoggedOutBar(){
   const navigate = useNavigate();
   return (
     <div className="loggedout-bar">
-      <h1 onClick={()=>{ navigate('/') }}>대동유어지도</h1>
+      <h1 className='clickable' onClick={()=>{ navigate('/') }}>대동유어지도</h1>
       <div className="login-button-container">
         <LoginPageButton borderColor="white" color="white" />
       </div>
@@ -27,11 +27,11 @@ function LoggedInBar(){
   return (
     <div className="loggedin-bar">
 
-      <h1 onClick={()=>{ navigate('/') }} >대동유어지도</h1>
+      <h1 className='clickable' onClick={()=>{ navigate('/') } } >대동유어지도</h1>
 
       <div className='main-profile-container'>
-        <img className='profile-pic' src={sessionStorage.picture} onClick={()=>{navigate('/profile')}} alt={'...'} />
-        <p className='profile-name' onClick={()=>{navigate('/profile')}} >
+        <img className='profile-pic' src={sessionStorage.picture} onClick={()=>{navigate(`/profile?user=${sessionStorage.id}`)}} alt={'...'} />
+        <p className='profile-name' onClick={()=>{navigate(`/profile?user=${sessionStorage.id}`)}} >
           {sessionStorage.name}
         </p> 
         <LogoutIcon className='logout-button'

@@ -42,12 +42,13 @@ function Image_Collection(props) {
   return (
     <div>
       <Grid container spacing={2}>
-        {props.userLocationInfo.map((info, index) => (
+        {props.userLocationInfo.map((info, index) => (    
           <>
             <Grid key={info.id} 
                   onMouseOver={() => handleMouseOver(index)} 
                   onMouseOut={() => handleMouseOut()}
                   onClick={() => openModal(info)} item xs={4}>
+                    {/* 여기서 각 게시물 info 넘어감 */}
               { activePost === index ? 
                   <div className='post-mouseover'>
                     <div className="post-title">

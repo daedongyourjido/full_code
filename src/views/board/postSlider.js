@@ -10,14 +10,15 @@ function G_slider(props) {
   const [imageSet, setImageSet] = useState("");
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
     prevArrow: <ArrowBackIosNewIcon sx={{color:'white', width:'2vw'}} />,
-    nextArrow: <ArrowForwardIosIcon sx={{color:'gray', width:'2vw'}} />
+    nextArrow: <ArrowForwardIosIcon sx={{color:'gray', width:'2vw'}} />,
+
   };
 
   useEffect(() => {

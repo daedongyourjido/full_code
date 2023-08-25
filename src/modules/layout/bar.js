@@ -24,6 +24,7 @@ import Grid from "@mui/material/Grid";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import ImageCollection from '../../views/board/image_Collection';
 
 function BeforeLogin(){
     const navigate = useNavigate();
@@ -86,7 +87,7 @@ function BeforeLogin(){
     const closeModal = () => {
       setIsModalOpen(false);
     };
-      const handleFollow = (targetId)  => {
+    const handleFollow = (targetId)  => {
           axios.post('https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO',{
               DML: 'INSERT',
               table: 'following',
@@ -94,7 +95,8 @@ function BeforeLogin(){
               values: `${sessionStorage._key}, ${targetId}`
           })
               .then(res => {
-                  console.log(res)
+                  console.log(res);
+                  alert("팔로우되었습니다");
               })
               .then(err => {
                   console.log(err)
@@ -158,13 +160,20 @@ function BeforeLogin(){
                                 edge="end" aria-label="comments">
                               <PersonAdd />
                             </IconButton>
+
                           }
+                          sx={{marginBottom: '1vh'}}
                           disablePadding
+                          onClick={() => {
+                            navigate(`/profile?user=${value.email}`);
+                          }} 
                       >
                           <Avatar src={value.picture}/>
-                          <ListItemText id={labelId} primary={`${value.nickname}`} 
+                          <ListItemText id={labelId} 
+                                        primary={`${value.nickname}`} 
                                         sx={{marginLeft:'1vw', fontSize:'1.5vh'}} />
-                          <ListItemText id={labelId} primary={`${value.email}`} 
+                          <ListItemText id={labelId} 
+                                        primary={`${value.email}`} 
                                         sx={{fontSize:'1.5vh'}} />
                       </ListItem>
                   );
@@ -175,35 +184,11 @@ function BeforeLogin(){
                 게시물 검색 결과
               </Typography>
 
-              <Grid container spacing={2}>
-              {searchLocationResult.map((info, index) => (
-                <>
-                  <Grid key={info.id} 
-                        onMouseOver={() => handleMouseOver(index)} 
-                        onMouseOut={() => handleMouseOut()}
-                        onClick={() => openModal(info)} item xs={4}>
-                    { activePost === index ? 
-                        <div className='post-mouseover'>
-                          <div className="post-title">
-                            <ChatBubbleIcon sx={{height:'2vh', marginTop:'2vh'}} />
-                            <p>{info.title}</p>
-                          </div>
-                          <div className="post-like">
-                            <FavoriteIcon sx={{height:'2vh', marginTop:'2.1vh'}} />
-                            <p>{info.like_count}</p>
-                          </div>
-                          <div className="post-location">
-                            <FmdGoodIcon sx={{height:'2vh', marginTop:'2.2vh'}} />
-                            <p>{info.name}</p>
-                          </div>
-                        </div> : <></> }
-                    <img src={info.image} 
-                          className='post-thumbnail'
-                          alt='...'  />
-                  </Grid>
-                </>
-              ))}
-              </Grid>
+              <ImageCollection
+                        userLocationInfo={searchLocationResult}
+              />
+
+             
 
               {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {searchLocationResult.map((info, index) => {
@@ -238,7 +223,9 @@ function BeforeLogin(){
               </Button> */}
             </Box>
           </Modal>
-          <img src={sessionStorage.picture} style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer', marginLeft:'30px'}} onClick={()=>{navigate('/profile')}}  alt={'...'}/>
+          <img src={sessionStorage.picture} 
+              style={{width:'40px', height:'40px', borderRadius:'100%', marginRight:'16px', cursor: 'pointer', marginLeft:'30px'}} 
+              onClick={()=>{navigate(`/profile?user=${sessionStorage.id}`)}}  alt={'...'}/>
           {/* <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> */}
           <LogoutIcon style={{marginLeft:'15px', cursor:'pointer'}} onClick={()=>{
             sessionStorage.clear();
@@ -264,7 +251,16 @@ function BeforeLogin(){
             <Box sx={{ flexGrow: 1, whiteSpace:'nowrap' }} className='header'>
                 <AppBar position="static" sx={{backgroundColor: '#FFF'}}>
                     <Toolbar>
-                        <Typography variant="h4" component="div" sx={{ flexGrow:1, fontFamily: "dohyeon", color:'#000', marginLeft:'50px', cursor:'pointer', width:'100px'}} onClick={()=>{navigate('/')}}>
+                        <Typography 
+                            variant="h4" 
+                            component="div" 
+                            sx={{ flexGrow:1, 
+                                  fontFamily: "dohyeon", 
+                                  color:'#000', 
+                                  marginLeft:'50px', 
+                                  cursor:'pointer', 
+                                  width:'100px'}} 
+                            onClick={()=>{navigate('/')}}>
                             대동유어지도
                         </Typography>
                         {login ? <AfterLogin location={'/'} /> : <BeforeLogin />}

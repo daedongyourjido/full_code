@@ -17,7 +17,7 @@ function WithdrawButton(props) {
         sx={{
           borderColor: '#045369',
           color: '#045369',
-          width: '35ch'
+          width: '32ch'
           
         }}
           onClick={()=>{
@@ -56,8 +56,15 @@ function Withdraw() {
             : 
                 <div className='withdraw-box'>
                     <p style={{color:'black', fontSize:'20px'}}>회원 탈퇴</p>
-                    <InputField setData={setPw} label="비밀번호" type="password" />
-                    <WithdrawButton setPwEmpty={setPwEmpty} setChanged={setChanged} pw={pw} />
+                    <InputField setData={setPw} 
+                                label="비밀번호" 
+                                type="password" 
+                    />
+                    <WithdrawButton 
+                            setPwEmpty={setPwEmpty} 
+                            setChanged={setChanged} 
+                            pw={pw} 
+                    />
                     { pwEmpty ? <p className='input_error'>비밀번호를 입력해주세요</p> : <p></p> }
                 </div>
             }

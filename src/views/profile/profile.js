@@ -49,21 +49,25 @@ function CustomTabPanel(props) {
 export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  /** 코드 통합 이후 사용자 정보 세선 저장하는 방식 추가 **/
-    // eslint-disable-next-line no-unused-vars
   const [userLocationInfo, setUserLocationInfo] = useState([])
-    const [userLocationInfoDataDesc, setUserLocationInfoDataDesc] = useState([])
-    const [userLocationInfoLikeDesc, setUserLocationInfoLikeDesc] = useState([])
-    // eslint-disable-next-line no-unused-vars
+  const [userLocationInfoDataDesc, setUserLocationInfoDataDesc] = useState([])
+  const [userLocationInfoLikeDesc, setUserLocationInfoLikeDesc] = useState([])
   const [value, setValue] = useState(0);
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
-    // eslint-disable-next-line no-unused-vars
-  // const [userImage, setUserImage] = useState(sessionStorage.picture)
+  const [user, setUser] = useState("");
+  const [isMyProfile, setIsMyProfile] = useState(false);
 
-  useEffect(()=>{
-    console.log("follower, following : ", follower, following);
-  }, [follower, following]);
+  useEffect(() => {   // url params를 통해 누구의 프로필을 볼 것인지 지정
+
+    const _user = new URL(document.location.toString()).searchParams.get("user");
+    setUser(_user);
+    
+    if(_user === sessionStorage.id)  // 본인의 프로필이라면
+      setIsMyProfile(true);
+    
+  }, []);
+
 
   /** 사용자 장소 이미지 불러오는 api **/
   useEffect(()=>{
@@ -71,7 +75,7 @@ export default function Profile() {
           DML: 'SELECT',
           columns: '*',
           table: 'location',
-          where: `user_id='${sessionStorage.id}' ORDER BY created_at desc`
+          where: `user_id='${user}' ORDER BY created_at desc`
       })
           .then(res => {
               setUserLocationInfoDataDesc(res.data)
@@ -83,7 +87,7 @@ export default function Profile() {
           DML: 'SELECT',
           columns: '*',
           table: 'location',
-          where: `user_id='${sessionStorage.id}' ORDER BY like_count desc`
+          where: `user_id='${user}' ORDER BY like_count desc`
       })
           .then(res => {
               setUserLocationInfoLikeDesc(res.data)
@@ -93,7 +97,7 @@ export default function Profile() {
           })
     axios.post('https://nppy6kx2q6.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-random', {
       type: 'profile',
-      user_id: sessionStorage.id
+      user_id: user
     })
         .then(res => {
           setUserLocationInfo(res.data)
@@ -117,7 +121,7 @@ export default function Profile() {
       DML: 'SELECT',
       columns: '*',
       table: 'user',
-      where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`
+      where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})` // 수정 필요
     })
         .then(res => {
           if(res.data === "")
@@ -134,7 +138,7 @@ export default function Profile() {
       DML: 'SELECT',
       columns: '*',
       table: 'user',
-      where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`
+      where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})` // 수정 필요
     })
         .then(res => {
           if(res.data === "")
@@ -213,11 +217,16 @@ export default function Profile() {
                                     <div className='user-info-container'>
                                       <div className='user-info-container2'>
                                         <Typography variant="h5" gutterBottom style={{color:'white', textAlign:'left', marginLeft:'10px'}}>
-                                            {sessionStorage.id}
+                                            {sessionStorage.name}
                                         </Typography>
-                                        <SettingsIcon sx={{color:'white', marginLeft:'15px', marginTop:'3px', cursor:'pointer'}} onClick={() => {
-                                                navigate('/setting/change');
-                                        }} />
+                                        { isMyProfile ? 
+                                          <SettingsIcon sx={{color:'white', marginLeft:'15px', marginTop:'3px', cursor:'pointer'}} onClick={() => {
+                                            navigate('/setting/change');
+                                          }} />
+                                        :
+                                          <p></p>
+                                        }
+                                        
                                       </div>
 
                                       <div className='user-info-container3' >

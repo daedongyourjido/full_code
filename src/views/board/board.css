@@ -159,6 +159,7 @@ body {
 .post-mouseover {
   cursor: pointer;
   background-color: #111;
+  color: white;
   opacity: 0.5;
   position: absolute;
   width: 19vw;
@@ -286,3 +287,13 @@ body {
   margin-bottom: 40px;
 }
 
+
+
+.post-loading {
+  margin-right: 0px;
+  margin-top: 15vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+}

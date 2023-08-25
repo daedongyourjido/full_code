@@ -11,7 +11,7 @@ export default function ResetPwButton(props) {
         sx={{
           borderColor: '#045369',
           color: '#045369',
-          width: '35ch'
+          width: '32ch'
           
         }}
           onClick={()=>{

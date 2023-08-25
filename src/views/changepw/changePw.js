@@ -26,8 +26,16 @@ function ChangePw() {
             : 
                 <div className='changepw-box'>
                         <p style={{color:'black', fontSize:'20px' }}>비밀번호 초기화</p>
-                        <InputField setData={setPw} id="password" type="password" label="비밀번호" />
-                        <InputField setData={setPwCheck} id="password" type="password" label="비밀번호 재확인" />
+                        <InputField 
+                            setData={setPw} 
+                            id="password" 
+                            type="password" 
+                            label="비밀번호" />
+                        <InputField 
+                            setData={setPwCheck} 
+                            id="password" 
+                            type="password" 
+                            label="비밀번호 재확인" />
                         <ResetPwButton 
                             pw={pw}
                             pwCheck={pwCheck}

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Modal from "react-modal";
-import Gesimool from "./postView";
+import PostView from "./postView";
 import './board.css';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -67,7 +67,7 @@ function SimpleSlider(props) {
         overlayClassName="modal-overlay"
         style={customOverlayStyle} // 오버레이 스타일을 적용
       >
-        <Gesimool info={modalInfo} open={isModalOpen} />
+        <PostView info={modalInfo} open={isModalOpen} />
       </Modal>
     </div>
   );
