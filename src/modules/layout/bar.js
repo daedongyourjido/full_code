@@ -115,16 +115,6 @@ function AfterLogin(props) {
       });
   };
 
-  // const [activePost, setActivePost] = useState(null);
-
-  // const handleMouseOver = (index) => {
-  //   setActivePost(index);
-  // }
-
-  // const handleMouseOut = (index) => {
-  //   setActivePost(null);
-  // }
-
   return (
     <div
       className="bar"
@@ -296,7 +286,6 @@ function AfterLogin(props) {
 }
 
 export default function Bar() {
-  const navigate = useNavigate();
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
@@ -321,7 +310,7 @@ export default function Bar() {
                 width: "100px",
               }}
               onClick={() => {
-                navigate("/");
+                window.open("/", "_blank");
               }}
             >
               대동유어지도

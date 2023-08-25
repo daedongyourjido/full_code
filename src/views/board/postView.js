@@ -88,9 +88,10 @@ export default function PostView(props) {
         for (let i = 0; i < res.data.length; i++) {
           apiComments.push({
             user_id: res.data[i].from_id, // 댓글 작성자 id
+            nickname: res.data[i].nickname,
             comment: res.data[i].content,
             date: res.data[i].comment_time,
-            picture: sessionStorage.getItem("picture"),
+            picture: res.data[i].picture,
           });
         }
         setComments((prevComments) => [...prevComments, ...apiComments]);
@@ -102,7 +103,8 @@ export default function PostView(props) {
 
   const addComment = () => {
     const newComment = {
-      user_id: sessionStorage.getItem("name"),
+      nickname: sessionStorage.getItem("name"),
+      user_id: sessionStorage.getItem("id"),
       comment: comment,
       date: new Date(),
       picture: sessionStorage.getItem("picture"),
@@ -115,7 +117,7 @@ export default function PostView(props) {
         "https://8ymn2iwfoj.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-add-comment",
         {
           location_id: props.info.id,
-          from_id: sessionStorage.getItem("name"),
+          from_id: sessionStorage.id,
           to_id: props.info.user_id,
           comment: comment,
         },
@@ -184,19 +186,25 @@ export default function PostView(props) {
                 <div className="profile_Name">
                   <img
                     className="profile_img"
-                    src={sessionStorage.getItem("picture")}
+                    src={props.info.picture}
                     onClick={() => {
-                      navigate(`/profile?user=${props.info.user_id}`);
+                      window.open(
+                        `/profile?user=${props.info.email}`,
+                        "_blank",
+                      );
                     }}
                     alt={"..."}
                   ></img>
                   <span
                     id="pro_p"
                     onClick={() => {
-                      navigate(`/profile?user=${props.info.user_id}`);
+                      window.open(
+                        `/profile?user=${props.info.email}`,
+                        "_blank",
+                      );
                     }}
                   >
-                    {sessionStorage.getItem("name")}
+                    {props.info.nickname + " " + props.info.email}
                   </span>
                 </div>
               </div>
@@ -226,6 +234,9 @@ export default function PostView(props) {
                             alt="inpic"
                             src={info.picture}
                             className="comment-profile"
+                            onClick={() => {
+                              navigate(`/profile?user=${info.user_id}`);
+                            }}
                           />
                         </ListItemAvatar>
                         <ListItemText
@@ -240,8 +251,9 @@ export default function PostView(props) {
                                 variant="body2"
                                 color="text.primary"
                               >
-                                {info.user_id}
+                                {info.nickname + " "}
                               </Typography>
+                              {info.user_id}
                               <br />
                               {info.date instanceof Date ? (
                                 <p className="comment-date">
@@ -288,7 +300,10 @@ export default function PostView(props) {
                           cursor: "pointer",
                         }}
                         onClick={() => {
-                          navigate(`/write?locationid=${props.info.id}`);
+                          window.open(
+                            `/write?locationid=${props.info.id}`,
+                            "_blank",
+                          );
                         }}
                       />
                       <DeleteIcon

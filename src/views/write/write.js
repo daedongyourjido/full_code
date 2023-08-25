@@ -83,7 +83,6 @@ export default function Write() {
       selectedImageBase64 = await convertImageToBase64(selectedImage);
       fileName = selectedImage.name;
     }
-    // Perform upload logic here, e.g. using APIs or other methods
 
     if (!selectedImage) {
       alert("사진을 업로드 해주세요");
@@ -101,16 +100,6 @@ export default function Write() {
     }
 
     if (queryValue !== "") {
-      console.log({
-        /**API JSON 형식 참조하여 post 요청을 보내주세요**/
-        type: "post-update",
-        fileName: fileName, // 저장할 파일명
-        file: JSON.stringify(selectedImageBase64), // 파일 값
-        name: location, // 지역명(seoul, jeju...)-  > @승재) user로부터 location 직접 지정받음
-        id: queryValue,
-        title: title, // 게시글 제목
-        content: content, // 게시글 내용
-      });
       /** 게시글 업로드 api 추가 **/
       axios
         .post(

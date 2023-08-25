@@ -112,11 +112,12 @@ function Place() {
         {
           DML: "SELECT",
           columns: "*",
-          table: "location",
-          where: `name='${lastPath}' ORDER BY created_at desc`,
+          table: "user, location",
+          where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.created_at desc`,
         },
       )
       .then((res) => {
+        console.log("desc", res.data);
         setUserLocationInfoDesc(res.data);
       })
       .catch((error) => {
@@ -128,8 +129,8 @@ function Place() {
         {
           DML: "SELECT",
           columns: "*",
-          table: "location",
-          where: `name='${lastPath}' ORDER BY created_at asc`,
+          table: "user, location",
+          where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.created_at asc`,
         },
       )
       .then((res) => {
@@ -144,8 +145,8 @@ function Place() {
         {
           DML: "SELECT",
           columns: "*",
-          table: "location",
-          where: `name='${lastPath}' ORDER BY like_count desc`,
+          table: "user, location",
+          where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.like_count desc`,
         },
       )
       .then((res) => {

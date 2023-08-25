@@ -42,6 +42,7 @@ export default function LoginButton(props) {
                     sessionStorage.setItem("pw", res.data.password);
                     sessionStorage.setItem("name", res.data.nickname);
                     sessionStorage.setItem("picture", res.data.picture);
+                    sessionStorage.setItem("_key", res.data.key);
                     navigate("/");
                   }
                   break;

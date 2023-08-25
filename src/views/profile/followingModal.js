@@ -8,6 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 
 const style = {
   position: "absolute",
@@ -49,7 +50,15 @@ export default function FollowingModal(props) {
             {props.following.map((ele) => (
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={ele.picture} />
+                  <IconButton>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={ele.picture}
+                      onClick={() => {
+                        window.open(`/profile?user=${ele.email}`, "_blank");
+                      }}
+                    />
+                  </IconButton>
                 </ListItemAvatar>
                 <ListItemText
                   primary={ele.nickname}
@@ -61,7 +70,7 @@ export default function FollowingModal(props) {
                         variant="body2"
                         color="text.primary"
                       ></Typography>
-                      {ele.id}
+                      {ele.email}
                     </React.Fragment>
                   }
                 />
