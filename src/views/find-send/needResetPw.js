@@ -7,7 +7,12 @@ function Text() {
   const navigate = useNavigate();
   return (
     <h1
-      style={{ paddingBottom: "30px", cursor: "pointer", width: "200px", marginLeft:'30px' }}
+      style={{
+        paddingBottom: "30px",
+        cursor: "pointer",
+        width: "200px",
+        marginLeft: "30px",
+      }}
       onClick={() => {
         navigate("/");
       }}

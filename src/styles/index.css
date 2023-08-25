@@ -1,34 +1,36 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .root {
-  font-family: "dohyeon"; 
+  font-family: "dohyeon";
   flex: 1;
   background-color: #045369;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 20px;
-  height:100%;
+  height: 100%;
   padding-right: 0px;
   padding-left: 0px;
 }
 
 @font-face {
-	font-family: "dohyeon";
-	src: url(../assets/font/BMDOHYEON.ttf);
+  font-family: "dohyeon";
+  src: url(../assets/font/BMDOHYEON.ttf);
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -44,8 +46,8 @@ html, body, #root {
 }
 
 #idButton {
-  font-family:'dohyeon';
-  color: #FFFFFF;
+  font-family: "dohyeon";
+  color: #ffffff;
   background-color: #045369;
   border: none;
 }
@@ -58,7 +60,7 @@ html, body, #root {
 
 .setting_container_in {
   color: black;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .setting_container_out {
@@ -88,11 +90,6 @@ html, body, #root {
   color: white;
 }
 
-
-
-
-
-
 .bar {
   margin: 0px;
   height: 60px;
@@ -100,17 +97,11 @@ html, body, #root {
   /* display: grid;
   grid-template-columns: 1fr 1fr; */
   align-items: center;
-  padding:20px;
-  padding-top:0px;
+  padding: 20px;
+  padding-top: 0px;
   font-family: "dohyeon";
   z-index: 10;
 }
-
-
-
-
-
-
 
 /* menu map */
 
@@ -130,12 +121,3 @@ html, body, #root {
   flex: 2;
   min-height: 60vh;
 }
-
-
-
-
-
-
-
-
-

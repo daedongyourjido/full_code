@@ -11,11 +11,11 @@ const dataReducer = (state = initialState, action) => {
         images: action.payload,
       };
 
-    case "SET_LOGIN" :
+    case "SET_LOGIN":
       return {
         ...state,
         login: action.payload,
-      }
+      };
 
     default:
       return {

@@ -1,13 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MenuMap from "../../modules/layout/menuMap.js";
-import MainPageButton from '../main/mainPageButton';
+import MainPageButton from "../main/mainPageButton";
 
 function Text() {
   const navigate = useNavigate();
   return (
     <h1
-      style={{ paddingBottom: "30px", cursor: "pointer", width: "200px", marginLeft:'30px' }}
+      style={{
+        paddingBottom: "30px",
+        cursor: "pointer",
+        width: "200px",
+        marginLeft: "30px",
+      }}
       onClick={() => {
         navigate("/");
       }}

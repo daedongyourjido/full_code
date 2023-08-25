@@ -30,7 +30,13 @@ export default function FollowerModal(props) {
   return (
     <div>
       <div id="modalbtn">
-        <Button variant="text" sx={{color:'white', fontSize:4}} onClick={handleOpen}>follower</Button>
+        <Button
+          variant="text"
+          sx={{ color: "white", fontSize: 4 }}
+          onClick={handleOpen}
+        >
+          follower
+        </Button>
       </div>
       <Modal
         open={open}
@@ -43,9 +49,9 @@ export default function FollowerModal(props) {
             {"follower"}
           </Typography>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper"  }}
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
-              { follower.map((ele) => (
+            {follower.map((ele) => (
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={ele.picture} />
@@ -65,7 +71,7 @@ export default function FollowerModal(props) {
                   }
                 />
               </ListItem>
-            )) }
+            ))}
           </List>
         </Box>
       </Modal>

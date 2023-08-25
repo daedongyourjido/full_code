@@ -1,27 +1,25 @@
-
-
 .withdraw-box {
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    margin-top: 15vh;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .withdraw-box-done {
-    margin-top: 200px;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15vh;
+  justify-content: center;
+  align-items: center;
+}
 
-  .withdraw-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15vh;
-  }
+.withdraw-box-done {
+  margin-top: 200px;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.withdraw-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15vh;
+}

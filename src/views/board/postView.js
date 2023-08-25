@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./postView.css";
 import Gslider from "./postSlider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -12,8 +12,8 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { Favorite } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
-import SettingsIcon from '@mui/icons-material/Settings';
-import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from "@mui/icons-material/Settings";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function PostView(props) {
   const navigate = useNavigate();
@@ -23,7 +23,11 @@ export default function PostView(props) {
   const [likeCount, setLikeCount] = useState(props.info.like_count);
   const [likeFlag, setLikeFlag] = useState(false);
 
-  const handleLike = (e) => { // 좋아요
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const handleLike = (e) => {
+    // 좋아요
     e.preventDefault();
     if (likeFlag) {
       axios
@@ -64,7 +68,8 @@ export default function PostView(props) {
     }
   };
 
-  useEffect(() => { // 댓글 가져오기
+  useEffect(() => {
+    // 댓글 가져오기
     if (countRef.current === 1 || props.info === undefined) {
       return;
     }
@@ -82,7 +87,7 @@ export default function PostView(props) {
         let apiComments = [];
         for (let i = 0; i < res.data.length; i++) {
           apiComments.push({
-            user_id: res.data[i].from_id,                 // 댓글 작성자 id
+            user_id: res.data[i].from_id, // 댓글 작성자 id
             comment: res.data[i].content,
             date: res.data[i].comment_time,
             picture: sessionStorage.getItem("picture"),
@@ -142,9 +147,8 @@ export default function PostView(props) {
 
   useEffect(() => {
     console.log("comments : ", comments);
-  }, [comments])
+  }, [comments]);
 
-  
   return (
     <>
       {props.info === undefined ? (
@@ -152,10 +156,7 @@ export default function PostView(props) {
       ) : (
         <>
           <div className="cover">
-            
-
             <div className="main_con">
-              
               <div className="gallery">
                 <Gslider info={props.info} />
               </div>
@@ -178,25 +179,23 @@ export default function PostView(props) {
               </div>
             </div>
 
-
             <div className="comment_list">
-
               <div className="g_header">
-                  <div className="profile_Name">
-                    <img
-                      className="profile_img"
-                      src={sessionStorage.getItem("picture")}
-                      onClick={() => {
-                        navigate(`/profile?user=${props.info.user_id}`);
-                      }}
-                      alt={"..."}
-                    ></img>
-                    <span
-                      id="pro_p"
-                      onClick={() => {
-                        navigate(`/profile?user=${props.info.user_id}`);
-                      }}
-                    >
+                <div className="profile_Name">
+                  <img
+                    className="profile_img"
+                    src={sessionStorage.getItem("picture")}
+                    onClick={() => {
+                      navigate(`/profile?user=${props.info.user_id}`);
+                    }}
+                    alt={"..."}
+                  ></img>
+                  <span
+                    id="pro_p"
+                    onClick={() => {
+                      navigate(`/profile?user=${props.info.user_id}`);
+                    }}
+                  >
                     {sessionStorage.getItem("name")}
                   </span>
                 </div>
@@ -205,35 +204,38 @@ export default function PostView(props) {
               <hr id="list_hr"></hr>
               <p id="list_p">댓글</p>
 
-              {comments.length === 0 ?
+              {comments.length === 0 ? (
                 <div className="no-comments">
                   <p>아직 댓글이 없습니다</p>
-                </div> 
-              :
+                </div>
+              ) : (
                 <List
                   sx={{
                     width: "100%",
                     maxWidth: 360,
-                    height: '45vh',
-                    marginLeft:'0.7vw',
-                    overflow: 'auto',
+                    height: "45vh",
+                    marginLeft: "0.7vw",
+                    overflow: "auto",
                   }}
                 >
                   {comments.map((info) => (
                     <>
                       <ListItem alignItems="flex-start">
                         <ListItemAvatar>
-                          <Avatar alt="inpic" 
-                                  src={info.picture} 
-                                  className="comment-profile" />
+                          <Avatar
+                            alt="inpic"
+                            src={info.picture}
+                            className="comment-profile"
+                          />
                         </ListItemAvatar>
                         <ListItemText
-                          primary={ 
-                            <p className="comment-text" >{info.comment}</p> }
+                          primary={
+                            <p className="comment-text">{info.comment}</p>
+                          }
                           secondary={
                             <React.Fragment>
                               <Typography
-                                sx={{ display: "inline", fontSize:'1.3vh' }}
+                                sx={{ display: "inline", fontSize: "1.3vh" }}
                                 component="span"
                                 variant="body2"
                                 color="text.primary"
@@ -241,9 +243,13 @@ export default function PostView(props) {
                                 {info.user_id}
                               </Typography>
                               <br />
-                              {info.date instanceof Date
-                                ? <p className="comment-date">{info.date.toLocaleString()}</p>
-                                : <p className="comment-date">{info.date}</p> }
+                              {info.date instanceof Date ? (
+                                <p className="comment-date">
+                                  {info.date.toLocaleString()}
+                                </p>
+                              ) : (
+                                <p className="comment-date">{info.date}</p>
+                              )}
                             </React.Fragment>
                           }
                         />
@@ -252,14 +258,11 @@ export default function PostView(props) {
                     </>
                   ))}
                 </List>
-              }
+              )}
 
               <hr id="list_hr"></hr>
-              
-              
 
               <div className="g_contents">
-
                 <div className="post-set">
                   <div className="like_and_location">
                     {
@@ -274,17 +277,34 @@ export default function PostView(props) {
                     }{" "}
                     {likeCount} / {props.info.name}
                   </div>
-                  <SettingsIcon
-                      sx={{color:'black', marginTop:'1.4vh', marginLeft:'6vw', cursor:'pointer'}}
-                      onClick={() => {
-                        navigate(`/write?locationid=${props.info.id}`);
-                      }}/>
-                  <DeleteIcon 
-                      sx={{color:'black', marginTop:'1.4vh', cursor:'pointer'}}
-                      onClick={handleDelete}
+                  {/*쿼리스트링 값이 세션스토리지 id와 일치할 경우에만 수정 ui 도출*/}
+                  {queryParams.get("user") === sessionStorage.id ? (
+                    <>
+                      <SettingsIcon
+                        sx={{
+                          color: "black",
+                          marginTop: "1.4vh",
+                          marginLeft: "6vw",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          navigate(`/write?locationid=${props.info.id}`);
+                        }}
                       />
+                      <DeleteIcon
+                        sx={{
+                          color: "black",
+                          marginTop: "1.4vh",
+                          cursor: "pointer",
+                        }}
+                        onClick={handleDelete}
+                      />
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
-                
+
                 <div className="detail">
                   <h3>{props.info.title}</h3>
                   <p>{props.info.content}</p>
@@ -293,10 +313,7 @@ export default function PostView(props) {
                   {props.info.updated_at}
                 </div>
               </div>
-
             </div>
-
-
           </div>
         </>
       )}

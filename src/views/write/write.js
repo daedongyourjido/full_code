@@ -9,7 +9,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Button, Input, Paper } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
-import Bar from '../../modules/layout/bar';
+import Bar from "../../modules/layout/bar";
 import LocationSelect from "./locationSelect";
 
 export default function Write() {
@@ -85,22 +85,32 @@ export default function Write() {
     }
     // Perform upload logic here, e.g. using APIs or other methods
 
-    if(!selectedImage) {
-      alert("사진을 업로드 해주세요")
+    if (!selectedImage) {
+      alert("사진을 업로드 해주세요");
       return null;
     }
 
-    if(!title){
+    if (!title) {
       alert("제목을 입력해주세요");
       return null;
     }
 
-    if(!location) {
+    if (!location) {
       alert("지역을 선택해주세요");
       return null;
     }
 
     if (queryValue !== "") {
+      console.log({
+        /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+        type: "post-update",
+        fileName: fileName, // 저장할 파일명
+        file: JSON.stringify(selectedImageBase64), // 파일 값
+        name: location, // 지역명(seoul, jeju...)-  > @승재) user로부터 location 직접 지정받음
+        id: queryValue,
+        title: title, // 게시글 제목
+        content: content, // 게시글 내용
+      });
       /** 게시글 업로드 api 추가 **/
       axios
         .post(
@@ -164,12 +174,10 @@ export default function Write() {
     });
   };
 
-
   return (
     <div>
       <Bar />
       <div className="write_cover">
-
         <div className="write_main">
           <div className="write_con">
             <div className="top">
@@ -185,39 +193,41 @@ export default function Write() {
             </div>
             <hr />
 
-                <div className={"middle"}>
-                  <Input type="file" accept="image/*" onChange={handleImageChange} />
-                  {previewImage && (
-                    <Paper sx={{ height: "100%" }} elevation={3}>
-                      <img
-                        src={previewImage}
-                        alt="Preview"
-                        style={{ maxWidth: "100%", height: "100%" }}
-                      />
-                    </Paper>
-                  )}
-                </div>
-                <div className="title" style={{ margin: "40px auto -30px auto" }}>
-                  <Box
-                    component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "50vw" },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <TextField 
-                      label="제목" 
-                      variant="standard" 
-                      value={title !== "" ? title : () => {}}
-                      onChange={(e) => setTitle(e.target.value)}
-                      style={{ margin: "0px 0px 0px 0px" }} 
-                    />
-                  </Box>
+            <div className={"middle"}>
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              {previewImage && (
+                <Paper sx={{ height: "100%" }} elevation={3}>
+                  <img
+                    src={previewImage}
+                    alt="Preview"
+                    style={{ maxWidth: "100%", height: "100%" }}
+                  />
+                </Paper>
+              )}
+            </div>
+            <div className="title" style={{ margin: "40px auto -30px auto" }}>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "50vw" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  label="제목"
+                  variant="standard"
+                  value={title !== "" ? title : () => {}}
+                  onChange={(e) => setTitle(e.target.value)}
+                  style={{ margin: "0px 0px 0px 0px" }}
+                />
+              </Box>
               <div className="location-select">
-                  <LocationSelect  
-                      location={location} 
-                      setLocation={setLocation} />
+                <LocationSelect location={location} setLocation={setLocation} />
               </div>
             </div>
             <div className="bottom">

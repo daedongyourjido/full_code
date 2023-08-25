@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import PostView from "./postView";
 import Grid from "@mui/material/Grid";
-import './board.css';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import "./board.css";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
 const customOverlayStyle = {
   overlay: {
     zIndex: 9999, // 모달을 최상위 레이어에 표시
   },
 };
-
-
 
 function Image_Collection(props) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
@@ -22,11 +20,11 @@ function Image_Collection(props) {
 
   const handleMouseOver = (index) => {
     setActivePost(index);
-  }
-  
+  };
+
   const handleMouseOut = () => {
     setActivePost(null);
-  }
+  };
 
   // 모달 열기 함수
   const openModal = (info) => {
@@ -42,31 +40,36 @@ function Image_Collection(props) {
   return (
     <div>
       <Grid container spacing={2}>
-        {props.userLocationInfo.map((info, index) => (    
+        {props.userLocationInfo.map((info, index) => (
           <>
-            <Grid key={info.id} 
-                  onMouseOver={() => handleMouseOver(index)} 
-                  onMouseOut={() => handleMouseOut()}
-                  onClick={() => openModal(info)} item xs={4}>
-                    {/* 여기서 각 게시물 info 넘어감 */}
-              { activePost === index ? 
-                  <div className='post-mouseover'>
-                    <div className="post-title">
-                      <ChatBubbleIcon sx={{height:'2vh', marginTop:'2vh'}} />
-                      <p>{info.title}</p>
-                    </div>
-                    <div className="post-like">
-                      <FavoriteIcon sx={{height:'2vh', marginTop:'2.1vh'}} />
-                      <p>{info.like_count}</p>
-                    </div>
-                    <div className="post-location">
-                      <FmdGoodIcon sx={{height:'2vh', marginTop:'2.2vh'}} />
-                      <p>{info.name}</p>
-                    </div>
-                  </div> : <></> }
-              <img src={info.image} 
-                    className='post-thumbnail'
-                    alt='...'  />
+            <Grid
+              key={info.id}
+              onMouseOver={() => handleMouseOver(index)}
+              onMouseOut={() => handleMouseOut()}
+              onClick={() => openModal(info)}
+              item
+              xs={4}
+            >
+              {/* 여기서 각 게시물 info 넘어감 */}
+              {activePost === index ? (
+                <div className="post-mouseover">
+                  <div className="post-title">
+                    <ChatBubbleIcon sx={{ height: "2vh", marginTop: "2vh" }} />
+                    <p>{info.title}</p>
+                  </div>
+                  <div className="post-like">
+                    <FavoriteIcon sx={{ height: "2vh", marginTop: "2.1vh" }} />
+                    <p>{info.like_count}</p>
+                  </div>
+                  <div className="post-location">
+                    <FmdGoodIcon sx={{ height: "2vh", marginTop: "2.2vh" }} />
+                    <p>{info.name}</p>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
+              <img src={info.image} className="post-thumbnail" alt="..." />
             </Grid>
           </>
         ))}

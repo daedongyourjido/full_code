@@ -1,7 +1,7 @@
 .write_main {
   margin-top: 15vh;
   width: 70vw;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 1%;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   height: 1100px;
@@ -95,7 +95,6 @@
   min-height: 700px;
 }
 
-
 .upper-container {
   display: flex;
   flex-direction: row;
@@ -105,5 +104,4 @@
 .location-select {
   width: 10vw;
   margin-left: 2vw;
-  
 }

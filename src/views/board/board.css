@@ -16,7 +16,6 @@ body {
   display: flex;
 }
 
-
 .left-container {
   margin: auto;
   padding: 60px 30px 120px 30px;
@@ -95,7 +94,7 @@ body {
 .main {
   height: 100%;
   width: 100vw;
-  display: flex; 
+  display: flex;
   z-index: 3;
 }
 
@@ -135,14 +134,10 @@ body {
   z-index: 4;
 }
 
-
-
 .post-tab-container {
   margin-top: 14vh;
   max-height: 100vh;
 }
-
-
 
 .post-thumbnail {
   text-align: center;
@@ -172,7 +167,6 @@ body {
 }
 
 .post-container div {
-
 }
 
 .post-title {
@@ -195,12 +189,9 @@ body {
   margin-top: -3vh;
 }
 
-
 /* .post-mouseover p {
   opacity: 1;
 } */
-
-
 
 .space > .icons {
   text-align: center;
@@ -286,8 +277,6 @@ body {
   display: inline-flex;
   margin-bottom: 40px;
 }
-
-
 
 .post-loading {
   margin-right: 0px;

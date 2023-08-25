@@ -16,7 +16,7 @@ import Profile from "./views/profile/profile.js";
 import Place from "./views/board/Place";
 import Write from "./views/write/write.js";
 import MyMap from "./views/mymap/mymap.js";
-import ChangeUserInfo from './views/change-user-info/changeUserInfo.js';
+import ChangeUserInfo from "./views/change-user-info/changeUserInfo.js";
 import { List } from "@mui/material";
 
 function App() {
@@ -29,7 +29,10 @@ function App() {
         <Route path="/setting" element={<Setting />} />
         <Route path="/setting/change" element={<ChangePw />} />
         <Route path="/setting/withdraw" element={<Withdraw />} />
-        <Route path={"/setting/change-user-info"} element={<ChangeUserInfo />} />
+        <Route
+          path={"/setting/change-user-info"}
+          element={<ChangeUserInfo />}
+        />
         <Route path="/verify/send" element={<NeedVerify />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/find" element={<FindPw />} />

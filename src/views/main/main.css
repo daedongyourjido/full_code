@@ -1,7 +1,7 @@
 /* map */
 
 .map-container {
-  height:100%;
+  height: 100%;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -35,10 +35,6 @@
   flex: 2;
 }
 
-
-
-
-
 /* main */
 
 .loggedin-bar {
@@ -68,7 +64,6 @@
   flex-direction: row;
   width: 150px;
   justify-content: space-between;
-
 }
 
 .profile-pic {
@@ -88,10 +83,6 @@
   margin-top: 3.1vh;
   cursor: pointer;
 }
-
-
-
-
 
 .slide-enter {
   opacity: 0;
