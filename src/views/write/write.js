@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./write.css";
 import "../../styles/App.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { CKEditor } from "@ckeditor/ckeditor5-react";

@@ -12,18 +12,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-// import CommentIcon from '@mui/icons-material/Comment';
-// import ListComponent from "../../views/board/postList";
 import {useNavigate} from 'react-router-dom';
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from '@mui/material';
 import { PersonAdd } from '@mui/icons-material';
 import './search.css';
 import '../../views/board/board.css';
-import Grid from "@mui/material/Grid";
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import ImageCollection from '../../views/board/image_Collection';
 
 function BeforeLogin(){
@@ -104,15 +98,15 @@ function BeforeLogin(){
       }
 
 
-      const [activePost, setActivePost] = useState(null);
+      // const [activePost, setActivePost] = useState(null);
 
-      const handleMouseOver = (index) => {
-        setActivePost(index);
-      }
+      // const handleMouseOver = (index) => {
+      //   setActivePost(index);
+      // }
       
-      const handleMouseOut = (index) => {
-        setActivePost(null);
-      }
+      // const handleMouseOut = (index) => {
+      //   setActivePost(null);
+      // }
 
     return (
         <div className="bar" style={{display:'flex', flexDirection:'row', justifyContent:'right', margin: 'auto', padding: '10px'}}>

@@ -49,9 +49,11 @@ function CustomTabPanel(props) {
 export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // eslint-disable-next-line
   const [userLocationInfo, setUserLocationInfo] = useState([])
   const [userLocationInfoDataDesc, setUserLocationInfoDataDesc] = useState([])
   const [userLocationInfoLikeDesc, setUserLocationInfoLikeDesc] = useState([])
+  // eslint-disable-next-line
   const [value, setValue] = useState(0);
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -100,12 +102,12 @@ export default function Profile() {
       user_id: user
     })
         .then(res => {
-          setUserLocationInfo(res.data)
+          // setUserLocationInfo(res.data)
         })
         .catch(error => {
           console.log(error);
         })
-  }, [])
+  }, [user])
   useEffect(() => { // token 여부에 반응하여 로그인 여부 판단
     const token = sessionStorage.getItem('id');
     if (token) {
