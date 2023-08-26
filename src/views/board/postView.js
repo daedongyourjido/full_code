@@ -25,7 +25,7 @@ export default function PostView(props) {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-
+  console.log("post", props);
   const handleLike = (e) => {
     // 좋아요
     e.preventDefault();
@@ -41,8 +41,22 @@ export default function PostView(props) {
           },
         )
         .then((res) => {
-          setLikeFlag(!likeFlag);
-          setLikeCount(likeCount - 1);
+          axios
+            .post(
+              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+              {
+                DML: "DELETE",
+                table: "heart",
+                where: `from_id='${sessionStorage.id}' and to_id='${props.info.email}' and post_id=${props.info.id}`,
+              },
+            )
+            .then((res) => {
+              setLikeFlag(!likeFlag);
+              setLikeCount(likeCount - 1);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -59,8 +73,23 @@ export default function PostView(props) {
           },
         )
         .then((res) => {
-          setLikeFlag(!likeFlag);
-          setLikeCount(likeCount + 1);
+          axios
+            .post(
+              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+              {
+                DML: "INSERT",
+                table: "heart",
+                columns: "from_id, to_id, post_id",
+                values: `'${sessionStorage.id}', '${props.info.email}', ${props.info.id}`,
+              },
+            )
+            .then((res) => {
+              setLikeFlag(!likeFlag);
+              setLikeCount(likeCount + 1);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -101,6 +130,27 @@ export default function PostView(props) {
       });
   }, [props.open, props.info]);
 
+  useEffect(() => {
+    axios
+      .post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "SELECT",
+          columns: "*",
+          table: "user, heart",
+          where: `user.email = heart.from_id and heart.post_id=${props.info.id}`,
+        },
+      )
+      .then((res) => {
+        if (res.data.length > 0) {
+          setLikeFlag(!likeFlag);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // eslint-disable-next-line
+  }, []);
   const addComment = () => {
     const newComment = {
       nickname: sessionStorage.getItem("name"),

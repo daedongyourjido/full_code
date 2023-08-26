@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from "@mui/material";
-import {Notifications, PersonAdd} from "@mui/icons-material";
+import { Notifications, PersonAdd } from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
@@ -126,9 +126,9 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-        <IconButton aria-label="notifications" style={{color: 'red'}}>
-            <Notifications/>
-        </IconButton>
+      <IconButton aria-label="notifications" style={{ color: "red" }}>
+        <Notifications />
+      </IconButton>
 
       <Button
         variant="contained"
@@ -184,43 +184,47 @@ function AfterLogin(props) {
               cursor: "pointer",
             }}
           >
-            {searchResult.length > 0 ? searchResult.map((value, index) => {
-              const labelId = `checkbox-list-label-${value}`;
+            {searchResult.length > 0 ? (
+              searchResult.map((value, index) => {
+                const labelId = `checkbox-list-label-${value}`;
 
-              return (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <IconButton
-                      onClick={() => {
-                        handleFollow(value.id);
-                      }}
-                      edge="end"
-                      aria-label="comments"
-                    >
-                      <PersonAdd />
-                    </IconButton>
-                  }
-                  sx={{ marginBottom: "2vh", width: "35vw" }}
-                  disablePadding
-                  onClick={() => {
-                    window.open(`/profile?user=${value.email}`, "_blank");
-                  }}
-                >
-                  <Avatar src={value.picture} />
-                  <ListItemText
-                    id={labelId}
-                    primary={`${value.nickname}`}
-                    sx={{ marginLeft: "1vw", fontSize: "1.5vh" }}
-                  />
-                  <ListItemText
-                    id={labelId}
-                    primary={`${value.email}`}
-                    sx={{ fontSize: "1.5vh" }}
-                  />
-                </ListItem>
-              );
-            }) : <></>}
+                return (
+                  <ListItem
+                    key={value}
+                    secondaryAction={
+                      <IconButton
+                        onClick={() => {
+                          handleFollow(value.id);
+                        }}
+                        edge="end"
+                        aria-label="comments"
+                      >
+                        <PersonAdd />
+                      </IconButton>
+                    }
+                    sx={{ marginBottom: "2vh", width: "35vw" }}
+                    disablePadding
+                    onClick={() => {
+                      window.open(`/profile?user=${value.email}`, "_blank");
+                    }}
+                  >
+                    <Avatar src={value.picture} />
+                    <ListItemText
+                      id={labelId}
+                      primary={`${value.nickname}`}
+                      sx={{ marginLeft: "1vw", fontSize: "1.5vh" }}
+                    />
+                    <ListItemText
+                      id={labelId}
+                      primary={`${value.email}`}
+                      sx={{ fontSize: "1.5vh" }}
+                    />
+                  </ListItem>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </List>
 
           <Typography variant="h6" gutterBottom>

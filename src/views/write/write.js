@@ -8,7 +8,7 @@ import { Button, Input, Paper } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import Bar from "../../modules/layout/bar";
 import LocationSelect from "./locationSelect";
-import {CircularProgress, Textarea} from "@mui/joy";
+import { CircularProgress, Textarea } from "@mui/joy";
 export default function Write() {
   // 이미지 업로드 객체
   const [selectedImage, setSelectedImage] = useState(null);
@@ -23,7 +23,7 @@ export default function Write() {
   const [searchParams] = useSearchParams();
   const queryValue = searchParams.get("locationid") || "";
 
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (queryValue !== "") {
       axios
@@ -80,9 +80,8 @@ export default function Write() {
     }
     selectedImageBase64 = await convertImageToBase64(selectedImage);
     fileName = selectedImage.name;
-      setLoading(true);
+    setLoading(true);
     if (queryValue !== "") {
-
       /** 게시글 업로드 api 추가 **/
       axios
         .post(
@@ -147,26 +146,27 @@ export default function Write() {
 
   return (
     <div>
-        {loading && <div
-            style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.6)',
-                zIndex:9999, // 적절한 zIndex 값 설정
-            }}
+      {loading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            zIndex: 9999, // 적절한 zIndex 값 설정
+          }}
         >
-            <CircularProgress />
-        </div>}
+          <CircularProgress />
+        </div>
+      )}
       <Bar />
       <div className="write_cover">
         <div className="write_main">
-
           <div className="write_con">
             <div className="top">
               <h4 style={{ margin: "auto", display: "flex" }}>새 게시물</h4>
@@ -178,7 +178,6 @@ export default function Write() {
               >
                 업로드
               </Button>
-
             </div>
             <hr />
 
