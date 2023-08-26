@@ -63,6 +63,11 @@ export default function Profile() {
   // eslint-disable-next-line
   const [isMyProfile, setIsMyProfile] = useState(false);
 
+  useEffect(() => {
+    if(sessionStorage.id === queryParams.get("user"))
+      setIsMyProfile(true);
+  }, []);
+
   const handleFollow = (targetId) => {
     axios
       .post(
@@ -382,20 +387,25 @@ export default function Profile() {
                         ? sessionStorage.name
                         : user.nickname}
                     </Typography>
-                    <Button 
-                      variant="outlined"
-                      onClick={() => 
-                        { handleFollow(queryParams.get("user"))} 
-                      }
-                      sx={{
-                          fontSize: '0.8vh',
-                          color: 'white',
-                          borderColor: 'white',
-                          marginLeft: '1.5vw',
-                          height: '3vh',
-                      }}>
-                        Follow
-                    </Button>
+                    { isMyProfile ? 
+                      <></>
+                      :
+                      <Button 
+                        variant="outlined"
+                        onClick={() => 
+                          { handleFollow(queryParams.get("user"))} 
+                        }
+                        sx={{
+                            fontSize: '0.8vh',
+                            color: 'white',
+                            borderColor: 'white',
+                            marginLeft: '1.5vw',
+                            height: '3vh',
+                            marginTop:'0.5vh'
+                        }}>
+                          Follow
+                      </Button>
+                    }
                     {isMyProfile ? (
                       <SettingsIcon
                         sx={{
