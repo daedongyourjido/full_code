@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from "@mui/material";
-import { PersonAdd } from "@mui/icons-material";
+import {Notifications, PersonAdd} from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
@@ -63,7 +63,7 @@ function AfterLogin(props) {
           DML: "SELECT",
           columns: "*",
           table: "user",
-          where: `username like '%${searchText}%' or email like '%${searchText}%' or nickname like '%${searchText}%'`,
+          where: `email like '%${searchText}%' or nickname like '%${searchText}%'`,
         },
       )
       .then((res) => {
@@ -126,6 +126,10 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
+        <IconButton aria-label="notifications" style={{color: 'red'}}>
+            <Notifications/>
+        </IconButton>
+
       <Button
         variant="contained"
         sx={{ backgroundColor: "#6EA4B4", marginRight: "20px" }}
@@ -180,7 +184,7 @@ function AfterLogin(props) {
               cursor: "pointer",
             }}
           >
-            {searchResult.map((value, index) => {
+            {searchResult.length > 0 ? searchResult.map((value, index) => {
               const labelId = `checkbox-list-label-${value}`;
 
               return (
@@ -216,7 +220,7 @@ function AfterLogin(props) {
                   />
                 </ListItem>
               );
-            })}
+            }) : <></>}
           </List>
 
           <Typography variant="h6" gutterBottom>
