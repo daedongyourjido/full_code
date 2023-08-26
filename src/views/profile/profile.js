@@ -66,7 +66,7 @@ export default function Profile() {
   useEffect(() => {
     if(sessionStorage.id === queryParams.get("user"))
       setIsMyProfile(true);
-  }, []);
+  }, [queryParams]);
 
   const handleFollow = (targetId) => {
     axios
