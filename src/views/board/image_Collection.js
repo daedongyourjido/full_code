@@ -80,7 +80,7 @@ function Image_Collection(props) {
         overlayClassName="modal-overlay"
         style={customOverlayStyle} // 오버레이 스타일을 적용
       >
-        <PostView info={modalInfo} open={isModalOpen} />
+        <PostView info={modalInfo} open={isModalOpen} closeModal={closeModal} />
       </Modal>
     </div>
   );

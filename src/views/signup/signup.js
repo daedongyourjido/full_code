@@ -136,7 +136,7 @@ function SignUpBox(props) {
             color: "red",
           }}
         >
-          중복된 아이디입니다
+          중복된 이메일입니다
         </p>
       ) : (
         <p></p>

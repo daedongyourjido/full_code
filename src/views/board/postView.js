@@ -112,6 +112,11 @@ export default function PostView(props) {
 
     setComments([...comments, newComment]);
     document.getElementById("comment_ipt").value = "";
+
+    if(!comments.comment){
+      alert("로그인 후 댓글 작성 가능합니다");
+      return null;
+    }
     axios
       .post(
         "https://8ymn2iwfoj.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-add-comment",
@@ -176,7 +181,7 @@ export default function PostView(props) {
                   }}
                 />
                 <button id="comment_btn" onClick={addComment}>
-                  게시
+                  작성
                 </button>
               </div>
             </div>
@@ -204,7 +209,8 @@ export default function PostView(props) {
                       );
                     }}
                   >
-                    {props.info.nickname + " " + props.info.email}
+                    {/* {props.info.nickname + " " + props.info.email} */}
+                    {props.info.nickname}
                   </span>
                 </div>
               </div>
@@ -235,7 +241,7 @@ export default function PostView(props) {
                             src={info.picture}
                             className="comment-profile"
                             onClick={() => {
-                              navigate(`/profile?user=${info.user_id}`);
+                              window.open(`/profile?user=${info.user_id}`, "_blank");
                             }}
                           />
                         </ListItemAvatar>

@@ -62,7 +62,7 @@
 .main-profile-container {
   display: flex;
   flex-direction: row;
-  width: 150px;
+  /* width: 15vw; */
   justify-content: space-between;
 }
 
@@ -72,11 +72,13 @@
   width: 35px;
   margin-top: 2.5vh;
   cursor: pointer;
+  margin-right: 1.5vw;
 }
 
 .profile-name {
   margin-top: 3.5vh;
   cursor: pointer;
+  margin-right: 1.5vh;
 }
 
 .logout-button {

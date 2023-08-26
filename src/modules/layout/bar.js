@@ -197,11 +197,11 @@ function AfterLogin(props) {
                       <PersonAdd />
                     </IconButton>
                   }
-                  sx={{ marginBottom: "1vh" }}
+                  sx={{ marginBottom: "2vh",
+                        width: '35vw' }}
                   disablePadding
                   onClick={() => {
-                    navigate(`/profile?user=${value.email}`);
-                    closeModal();
+                    window.open(`/profile?user=${value.email}`, "_blank");
                   }}
                 >
                   <Avatar src={value.picture} />

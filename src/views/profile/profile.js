@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/actions";
 import Bar from "../../modules/layout/bar.js";
 import SettingsIcon from "@mui/icons-material/Settings";
+import Button from '@mui/material/Button';
 import "./profile.css";
 
 function a11yProps(index) {
@@ -61,7 +62,27 @@ export default function Profile() {
   const [user, setUser] = useState({});
   // eslint-disable-next-line
   const [isMyProfile, setIsMyProfile] = useState(false);
-  /** 사용자 장소 이미지 불러오는 api **/
+
+  const handleFollow = (targetId) => {
+    axios
+      .post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "following",
+          columns: "follower_id, following_id",
+          values: `${sessionStorage._key}, ${targetId}`,
+        },
+      )
+      .then((res) => {
+        console.log(res);
+        alert("팔로우되었습니다");
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  };
+
   // eslint-disable-next-line
   useEffect(async () => {
     // 마이페이지
@@ -361,6 +382,20 @@ export default function Profile() {
                         ? sessionStorage.name
                         : user.nickname}
                     </Typography>
+                    <Button 
+                      variant="outlined"
+                      onClick={() => 
+                        { handleFollow(queryParams.get("user"))} 
+                      }
+                      sx={{
+                          fontSize: '0.8vh',
+                          color: 'white',
+                          borderColor: 'white',
+                          marginLeft: '1.5vw',
+                          height: '3vh',
+                      }}>
+                        Follow
+                    </Button>
                     {isMyProfile ? (
                       <SettingsIcon
                         sx={{
