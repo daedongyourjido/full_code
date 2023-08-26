@@ -64,14 +64,17 @@ export default function Write() {
 
     if (!selectedImage) {
       alert("사진을 업로드 해주세요");
+      return;
     }
 
     if (!title) {
       alert("제목을 입력해주세요");
+      return;
     }
 
     if (!location) {
       alert("지역을 선택해주세요");
+      return;
     }
     selectedImageBase64 = await convertImageToBase64(selectedImage);
     fileName = selectedImage.name;

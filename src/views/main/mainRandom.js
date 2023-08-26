@@ -52,10 +52,12 @@ function Loading() {
 function Content(props) {
   const isLoading = props.isLoading;
   const images = useSelector((state) => state.images);
-
+  console.log("images", images);
   const settings = {
     infinite: true,
-    slidesToShow: 2, // 2개로 지정해야 모션 안깨짐
+    /**@MARK: 2로 지정하니 이미지 두 번 나와서 1로 바꿔뒀어요**/
+    // 2개로 지정해야 모션 안깨짐
+    slidesToShow: 1,
     speed: 500,
     autoplay: true,
     autoplaySpeed: 1700,
@@ -71,73 +73,32 @@ function Content(props) {
     boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
   };
   const _name = props.name;
-  const [img_1, setImg_1] = useState(null);
-  const [img_2, setImg_2] = useState(null);
-  const [img_3, setImg_3] = useState(null);
-  const [img_4, setImg_4] = useState(null);
-  // const [anim, setAnim] = useState("");
-
-  // useEffect(() => {
-
-  // }, [isLoading]);
-
-  useEffect(() => {
-    const location = props.location;
-
-    if (images.length > 0) {
-      for (let i = 0; i < location.length; i++) {
-        if (_name === location[i]) {
-          setImg_1(images[i][0]);
-          setImg_2(images[i][1]);
-          setImg_3(images[i][2]);
-          setImg_4(images[i][3]);
-        }
-      }
-    }
-  }, [_name, isLoading, images, props.location]);
 
   return isLoading ? (
     <Loading />
   ) : (
     <Slider {...settings}>
-      <div>
-        <img
-          className="randomImages"
-          src={img_1}
-          style={imgStyle}
-          alt={"..."}
-        />
-      </div>
-      <div>
-        <img
-          className="randomImages"
-          src={img_2}
-          style={imgStyle}
-          alt={"..."}
-        />
-      </div>
-      <div>
-        <img
-          className="randomImages"
-          src={img_3}
-          style={imgStyle}
-          alt={"..."}
-        />
-      </div>
-      <div>
-        <img
-          className="randomImages"
-          src={img_4}
-          style={imgStyle}
-          alt={"..."}
-        />
-      </div>
+      {images[_name] ? (
+        images[_name].map((ele) => (
+          <div>
+            <img
+              className="randomImages"
+              src={ele.image}
+              style={imgStyle}
+              alt={"..."}
+            />
+          </div>
+        ))
+      ) : (
+        <Loading />
+      )}
     </Slider>
   );
 }
 
 function MainRandom(props) {
   const [name, setName] = useState("Welcome to 대동유어지도");
+  const [infos, setInfos] = useState({});
   // const [login, setLogin] = useState('false');
   const _name = props.name;
   const dispatch = useDispatch();
@@ -165,34 +126,33 @@ function MainRandom(props) {
   }, []);
 
   useEffect(() => {
-    const images = [];
-
+    if (Object.keys(infos).length !== 0) {
+      dispatch(setImages(infos));
+      console.log("dispatched");
+      return;
+    }
     const fetchData = async () => {
-      for (let i = 0; i < _location.length; i++) {
-        await axios
-          .post(
+      return new Promise(async (resolve, reject) => {
+        let infos = {};
+        for (let i = 0; i < _location.length; i++) {
+          const res = await axios.post(
             "https://qzqejgzukh.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-main-random",
             {
               location: _location[i],
             },
-          )
-          .then((res) => {
-            images.push(res.data);
-          })
-          .catch((err) => {
-            console.log("mainRandom err : ", err);
-          });
-      }
-      dispatch(setImages(images));
-      setIsLoading(false);
-      console.log("dispatched");
+          );
+          infos[_location[i]] = res.data;
+        }
+        setInfos(infos);
+        resolve(infos);
+        reject(new Error("error"));
+      });
     };
-    fetchData();
-  }, [dispatch, _location]);
-
-  // useEffect(()=> {
-  //     setLogin('true');
-  // }, [_login])
+    fetchData().catch((err) => {
+      console.log(err);
+    });
+    setIsLoading(false);
+  }, [dispatch, _location, infos]);
 
   useEffect(() => {
     if (_name === "seoul") setName("서울");
