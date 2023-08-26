@@ -2,9 +2,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import { useState } from "react";
 
 export default function SignUpButton(props) {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
 
   return (
     <div
@@ -16,6 +25,19 @@ export default function SignUpButton(props) {
       }}
     >
       <Stack direction="row" spacing={2}>
+        <Dialog
+          open={open}
+          BackdropProps={{
+            style: { zIndex: 9999 },
+          }}
+        >
+          <DialogTitle>대동유어지도</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              회원가입 완료! 메일 인증을 완료 해 주세요
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
         <Button
           variant="outlined"
           sx={{
@@ -35,7 +57,7 @@ export default function SignUpButton(props) {
               if (props.name && props.pwDup) {
                 if (props.pwDup === props.pw) {
                   props.setPwDupCheck(false);
-
+                  setOpen(true);
                   /** 회원가입 api 추가 **/
                   axios
                     .post(
@@ -50,7 +72,6 @@ export default function SignUpButton(props) {
                     )
                     // 문제가 없을 경우(정상 회원가입) 인덱스 라우팅
                     .then((res) => {
-                      alert("회원가입 완료! 메일 인증을 완료해주세요.");
                       navigate("/");
                     })
                     .catch((error) => {

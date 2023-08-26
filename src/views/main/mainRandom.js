@@ -57,7 +57,7 @@ function Content(props) {
     infinite: true,
     /**@MARK: 2로 지정하니 이미지 두 번 나와서 1로 바꿔뒀어요**/
     // 2개로 지정해야 모션 안깨짐
-    slidesToShow: 1,
+    slidesToShow: 2,
     speed: 500,
     autoplay: true,
     autoplaySpeed: 1700,

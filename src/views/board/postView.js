@@ -113,7 +113,7 @@ export default function PostView(props) {
     setComments([...comments, newComment]);
     document.getElementById("comment_ipt").value = "";
 
-    if(sessionStorage._key === undefined){
+    if (sessionStorage._key === undefined) {
       alert("로그인 후 댓글 작성 가능합니다");
       return null;
     }
@@ -241,7 +241,10 @@ export default function PostView(props) {
                             src={info.picture}
                             className="comment-profile"
                             onClick={() => {
-                              window.open(`/profile?user=${info.user_id}`, "_blank");
+                              window.open(
+                                `/profile?user=${info.user_id}`,
+                                "_blank",
+                              );
                             }}
                           />
                         </ListItemAvatar>

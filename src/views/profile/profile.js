@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/actions";
 import Bar from "../../modules/layout/bar.js";
 import SettingsIcon from "@mui/icons-material/Settings";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import "./profile.css";
 
 function a11yProps(index) {
@@ -64,8 +64,7 @@ export default function Profile() {
   const [isMyProfile, setIsMyProfile] = useState(false);
 
   useEffect(() => {
-    if(sessionStorage.id === queryParams.get("user"))
-      setIsMyProfile(true);
+    if (sessionStorage.id === queryParams.get("user")) setIsMyProfile(true);
   }, [queryParams]);
 
   const handleFollow = (targetId) => {
@@ -387,25 +386,26 @@ export default function Profile() {
                         ? sessionStorage.name
                         : user.nickname}
                     </Typography>
-                    { isMyProfile ? 
+                    {isMyProfile ? (
                       <></>
-                      :
-                      <Button 
+                    ) : (
+                      <Button
                         variant="outlined"
-                        onClick={() => 
-                          { handleFollow(queryParams.get("user"))} 
-                        }
+                        onClick={() => {
+                          handleFollow(queryParams.get("user"));
+                        }}
                         sx={{
-                            fontSize: '0.8vh',
-                            color: 'white',
-                            borderColor: 'white',
-                            marginLeft: '1.5vw',
-                            height: '3vh',
-                            marginTop:'0.5vh'
-                        }}>
-                          Follow
+                          fontSize: "0.8vh",
+                          color: "white",
+                          borderColor: "white",
+                          marginLeft: "1.5vw",
+                          height: "3vh",
+                          marginTop: "0.5vh",
+                        }}
+                      >
+                        Follow
                       </Button>
-                    }
+                    )}
                     {isMyProfile ? (
                       <SettingsIcon
                         sx={{

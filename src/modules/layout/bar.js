@@ -197,8 +197,7 @@ function AfterLogin(props) {
                       <PersonAdd />
                     </IconButton>
                   }
-                  sx={{ marginBottom: "2vh",
-                        width: '35vw' }}
+                  sx={{ marginBottom: "2vh", width: "35vw" }}
                   disablePadding
                   onClick={() => {
                     window.open(`/profile?user=${value.email}`, "_blank");
