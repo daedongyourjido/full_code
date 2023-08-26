@@ -113,7 +113,7 @@ export default function PostView(props) {
     setComments([...comments, newComment]);
     document.getElementById("comment_ipt").value = "";
 
-    if(!comments.comment){
+    if(sessionStorage._key === undefined){
       alert("로그인 후 댓글 작성 가능합니다");
       return null;
     }
