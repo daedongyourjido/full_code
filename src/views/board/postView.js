@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./postView.css";
 import Gslider from "./postSlider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -23,9 +23,11 @@ export default function PostView(props) {
   const [likeCount, setLikeCount] = useState(props.info.like_count);
   const [likeFlag, setLikeFlag] = useState(false);
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  console.log("post", props);
+  // const location = useLocation();
+  const lastPath = useParams();
+  
+  // const queryParams = new URLSearchParams(location.search);
+  
   const handleLike = (e) => {
     // 좋아요
     e.preventDefault();
@@ -195,7 +197,8 @@ export default function PostView(props) {
         },
       )
       .then((res) => {
-        navigate("/");
+        window.location.reload();
+        navigate(`/board/${lastPath.place}`);
       })
       .catch((err) => {
         console.log(err);
@@ -349,7 +352,7 @@ export default function PostView(props) {
                     {likeCount} / {props.info.name}
                   </div>
                   {/*쿼리스트링 값이 세션스토리지 id와 일치할 경우에만 수정 ui 도출*/}
-                  {queryParams.get("user") === sessionStorage.id ? (
+                  {props.info.user_id === sessionStorage.id ? (
                     <>
                       <SettingsIcon
                         sx={{

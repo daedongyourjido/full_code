@@ -294,6 +294,7 @@ function AfterLogin(props) {
 
 export default function Bar() {
   const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (sessionStorage.getItem("name")) setLogin(true);
@@ -317,7 +318,9 @@ export default function Bar() {
                 width: "100px",
               }}
               onClick={() => {
-                window.open("/", "_blank");
+                // window.open("/", "_blank");
+                navigate('/');
+                window.location.reload();
               }}
             >
               대동유어지도
