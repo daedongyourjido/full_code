@@ -519,7 +519,7 @@ export default function Profile() {
               <CustomTabPanel
                 value={value}
                 index={0}
-                style={{ overflow: "auto", maxHeight: "100vh" }}
+                style={{ overflow: "auto"}}
               >
                 {userLocationInfoDataDesc.length === 0 ? (
                   ""
@@ -532,7 +532,7 @@ export default function Profile() {
               <CustomTabPanel
                 value={value}
                 index={1}
-                style={{ overflow: "auto", maxHeight: "100vh" }}
+                style={{ overflow: "auto" }}
               >
                 {userLocationInfoLikeDesc.length === 0 ? (
                   ""

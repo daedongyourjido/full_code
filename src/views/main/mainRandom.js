@@ -52,7 +52,6 @@ function Loading() {
 function Content(props) {
   const isLoading = props.isLoading;
   const images = useSelector((state) => state.images);
-  console.log("images", images);
   const settings = {
     infinite: true,
     /**@MARK: 2로 지정하니 이미지 두 번 나와서 1로 바꿔뒀어요**/

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./postView.css";
-import Gslider from "./postSlider";
 import { useNavigate, useParams } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,6 +21,7 @@ export default function PostView(props) {
   const [comment, setComment] = useState();
   const [likeCount, setLikeCount] = useState(props.info.like_count);
   const [likeFlag, setLikeFlag] = useState(false);
+  const [imageSet, setImageSet] = useState("");
 
   // const location = useLocation();
   const lastPath = useParams();
@@ -209,6 +209,23 @@ export default function PostView(props) {
     console.log("comments : ", comments);
   }, [comments]);
 
+  useEffect(() => {
+    const image = new Image();
+    image.src = props.info.image;
+    const width = image.naturalWidth;
+    const height = image.naturalHeight;
+
+    if (width >= height) {
+      // 가로로 긴 사진
+      setImageSet("post-image-row");
+      console.log("가로 사진");
+    } else {
+      // 세로로 긴 사진
+      setImageSet("post-image-column");
+      console.log("세로 사진");
+    }
+  }, [props.info.image]);
+
   return (
     <>
       {props.info === undefined ? (
@@ -217,8 +234,10 @@ export default function PostView(props) {
         <>
           <div className="cover">
             <div className="main_con">
-              <div className="gallery">
-                <Gslider info={props.info} />
+              <div className="gallery">     
+                <img src={props.info.image} 
+                    className={`${imageSet}`}
+                    alt='...' />
               </div>
 
               <hr id="line"></hr>
@@ -319,7 +338,7 @@ export default function PostView(props) {
                               >
                                 {info.nickname + " "}
                               </Typography>
-                              {info.user_id}
+                              {/* {info.user_id} */}
                               <br />
                               {info.date instanceof Date ? (
                                 <p className="comment-date">
