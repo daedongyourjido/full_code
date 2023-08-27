@@ -246,20 +246,22 @@ export default function PostView(props) {
                     className="profile_img"
                     src={props.info.picture}
                     onClick={() => {
-                      window.open(
-                        `/profile?user=${props.info.email}`,
-                        "_blank",
-                      );
+                      // window.open(
+                      //   `/profile?user=${props.info.email}`,
+                      //   "_blank",);
+                      navigate(`/profile?user=${props.info.email}`);
+                      window.location.reload();
                     }}
                     alt={"..."}
                   ></img>
                   <span
                     id="pro_p"
                     onClick={() => {
-                      window.open(
-                        `/profile?user=${props.info.email}`,
-                        "_blank",
-                      );
+                      // window.open(
+                      //   `/profile?user=${props.info.email}`,
+                      //   "_blank",);
+                      navigate(`/profile?user=${props.info.email}`);
+                      window.location.reload();
                     }}
                   >
                     {/* {props.info.nickname + " " + props.info.email} */}
@@ -294,10 +296,12 @@ export default function PostView(props) {
                             src={info.picture}
                             className="comment-profile"
                             onClick={() => {
-                              window.open(
-                                `/profile?user=${info.user_id}`,
-                                "_blank",
-                              );
+                              // window.open(
+                              //   `/profile?user=${info.user_id}`,
+                              //   "_blank",
+                              // );
+                              navigate(`/profile?user=${info.user_id}`);
+                              window.location.reload();
                             }}
                           />
                         </ListItemAvatar>
@@ -362,10 +366,12 @@ export default function PostView(props) {
                           cursor: "pointer",
                         }}
                         onClick={() => {
-                          window.open(
-                            `/write?locationid=${props.info.id}`,
-                            "_blank",
-                          );
+                          // window.open(
+                          //   `/write?locationid=${props.info.id}`,
+                          //   "_blank",
+                          // );
+                          navigate(`/write?locationid=${props.info.id}`);
+                          window.location.reload();
                         }}
                       />
                       <DeleteIcon

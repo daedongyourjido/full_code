@@ -134,7 +134,9 @@ function AfterLogin(props) {
         variant="contained"
         sx={{ backgroundColor: "#6EA4B4", marginRight: "20px" }}
         onClick={() => {
-          window.open("/write", "_blank");
+          // window.open("/write", "_blank");
+          navigate('/write');
+          window.location.reload();
         }}
       >
         게시물 올리기
@@ -205,7 +207,9 @@ function AfterLogin(props) {
                     sx={{ marginBottom: "2vh", width: "35vw" }}
                     disablePadding
                     onClick={() => {
-                      window.open(`/profile?user=${value.email}`, "_blank");
+                      // window.open(`/profile?user=${value.email}`, "_blank");
+                      navigate(`/profile?user=${value.email}`);
+                      window.location.reload();
                     }}
                   >
                     <Avatar src={value.picture} />

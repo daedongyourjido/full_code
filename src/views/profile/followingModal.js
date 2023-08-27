@@ -9,6 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -26,6 +27,7 @@ export default function FollowingModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -55,7 +57,9 @@ export default function FollowingModal(props) {
                       alt="Remy Sharp"
                       src={ele.picture}
                       onClick={() => {
-                        window.open(`/profile?user=${ele.email}`, "_blank");
+                        // window.open(`/profile?user=${ele.email}`, "_blank");
+                        navigate(`/profile?user=${ele.email}`);
+                        window.location.reload();
                       }}
                     />
                   </IconButton>

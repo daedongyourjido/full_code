@@ -9,6 +9,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -27,6 +28,7 @@ export default function FollowerModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const follower = props.follower;
+  const navigate = useNavigate
 
   return (
     <div>
@@ -60,7 +62,9 @@ export default function FollowerModal(props) {
                       alt="Remy Sharp"
                       src={ele.picture}
                       onClick={() => {
-                        window.open(`/profile?user=${ele.email}`, "_blank");
+                        // window.open(`/profile?user=${ele.email}`, "_blank");
+                        navigate(`profile?user=${ele.email}`);
+                        window.location.reload();
                       }}
                     />
                   </IconButton>
