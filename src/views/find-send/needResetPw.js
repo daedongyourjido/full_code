@@ -2,25 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import MenuMap from "../../modules/layout/menuMap.js";
 import MainPageButton from "../main/mainPageButton.js";
-
-function Text() {
-  const navigate = useNavigate();
-  return (
-    <h1
-      style={{
-        paddingBottom: "30px",
-        cursor: "pointer",
-        width: "200px",
-        marginLeft: "30px",
-      }}
-      onClick={() => {
-        navigate("/");
-      }}
-    >
-      대동유어지도
-    </h1>
-  );
-}
+import Bar from "../../modules/layout/bar.js";
 
 function NeedResetPwBox() {
   return (
@@ -75,7 +57,7 @@ function NeedResetPw() {
   return (
     <div className="root">
       <div className="bar">
-        <Text />
+        <Bar />
       </div>
 
       <MenuMap component={<NeedResetPwBox />} />

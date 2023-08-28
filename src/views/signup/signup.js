@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import LoginPageButton from "../login/loginPageButton.js";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
+import Bar from "../../modules/layout/bar.js";
 
 // 아이디 중복 확인 버튼
 function SignUpDupCheckButton(props) {
@@ -84,21 +85,6 @@ function SignUpDisableField(props) {
         />
       </div>
     </Box>
-  );
-}
-
-function LoggedOutBar() {
-  const navigate = useNavigate();
-  return (
-    <div className="loggedout-bar">
-      <h1
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        대동유어지도
-      </h1>
-    </div>
   );
 }
 
@@ -187,9 +173,7 @@ function SignUpBox(props) {
 function SignUp() {
   return (
     <div className="root">
-      <div className="bar">
-        <LoggedOutBar />
-      </div>
+      <Bar main={true} />
       <MenuMap component={<SignUpBox />} />
     </div>
   );

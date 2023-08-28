@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Bar from "../../modules/layout/barDefault.js";
 import InputField from "../../modules/components/inputField.js";
 import ResetPwButton from "./resetPwButton.js";
 import LoginPageButton from "../login/loginPageButton.js";
 import "./resetPw.css";
+import Bar from "../../modules/layout/bar.js";
 
 function ResetPwBox() {
   const [pw, setPw] = useState("");
@@ -63,9 +63,7 @@ function ResetPwBox() {
 function ResetPw() {
   return (
     <div className="root" style={{ display: "flex", flexDirection: "column" }}>
-      <div className="bar">
-        <Bar setting={false} />
-      </div>
+      <Bar main={false} />
       <div className="resetpw-container">
         <ResetPwBox />
       </div>

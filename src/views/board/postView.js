@@ -215,14 +215,17 @@ export default function PostView(props) {
     const width = image.naturalWidth;
     const height = image.naturalHeight;
 
-    if (width >= height) {
+    if (width > height) {
       // 가로로 긴 사진
       setImageSet("post-image-row");
       console.log("가로 사진");
-    } else {
+    } else if (width < height) {
       // 세로로 긴 사진
       setImageSet("post-image-column");
       console.log("세로 사진");
+    } else if (width === height) {
+      setImageSet("post-image-square");
+      console.log("정방형");
     }
   }, [props.info.image]);
 

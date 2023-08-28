@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../../modules/components/inputField.js";
 import Button from "@mui/material/Button";
 import "./findPw.css";
+import Bar from "../../modules/layout/bar.js";
 
 export function IdSearchButton(props) {
   const navigate = useNavigate();
@@ -34,21 +35,6 @@ export function IdSearchButton(props) {
   );
 }
 
-function LoggedOutBar() {
-  const navigate = useNavigate();
-  return (
-    <div className="loggedout-bar">
-      <h1
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        대동유어지도
-      </h1>
-    </div>
-  );
-}
-
 // 비밀번호 찾기 페이지 -> 이메일 존재여부 확인
 function FindPwBox() {
   const [email, setEmail] = useState("");
@@ -73,11 +59,10 @@ function FindPwBox() {
 function FindPw() {
   return (
     <div className="root">
-      <div className="bar">
-        <LoggedOutBar />
+      <Bar main={false} />
+      <div className="findpw-containter">
+        <MenuMap component={<FindPwBox />} />
       </div>
-
-      <MenuMap component={<FindPwBox />} />
     </div>
   );
 }

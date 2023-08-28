@@ -17,6 +17,7 @@ function Image_Collection(props) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
   const [modalInfo, setModalInfo] = useState(null);
   const [activePost, setActivePost] = useState(null);
+  
   const handleMouseOver = (index) => {
     setActivePost(index);
   };

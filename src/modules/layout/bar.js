@@ -20,7 +20,7 @@ import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
 
-function BeforeLogin() {
+function BeforeLogin(props) {
   const navigate = useNavigate();
 
   return (
@@ -36,6 +36,7 @@ function BeforeLogin() {
     >
       <SearchField />
       <LoginPageButton
+        font={props.font}
         onClick={() => {
           navigate("/login");
         }}
@@ -148,10 +149,11 @@ function AfterLogin(props) {
           display: "flex",
           alignItems: "center",
           width: "15vw",
+          height: '32px'
         }}
       >
         <InputBase
-          sx={{ ml: 1, flex: 1 }}
+          sx={{ ml: 1, flex: 1}}
           placeholder="검색"
           inputProps={{ "aria-label": "search google maps" }}
           onInput={(e) => {
@@ -237,36 +239,6 @@ function AfterLogin(props) {
 
           <ImageCollection userLocationInfo={searchLocationResult} />
 
-          {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {searchLocationResult.map((info, index) => {
-  
-                  return (
-                      <ListItem
-                          key={index}
-                          secondaryAction={
-                            <IconButton edge="end" aria-label="comments">
-                              <CommentIcon />
-                            </IconButton>
-                          }
-                          disablePadding
-                      >
-                          <ListComponent
-                              id={info.id}
-                              img={info.image}
-                              alt={info.id}
-                              like_count={info.like_count}
-                              name={info.name}
-                              star_count={info.star_count}
-                              title={info.title}
-                          />
-                      </ListItem>
-                  );
-                })}
-              </List> */}
-
-          {/* <Button onClick={closeModal} variant="contained">
-                닫기
-              </Button> */}
         </Box>
       </Modal>
       <img
@@ -296,9 +268,19 @@ function AfterLogin(props) {
   );
 }
 
-export default function Bar() {
+export default function Bar(props) {
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
+  const [background, setBackground] = useState("#FFFFFF");
+  const [font, setFont] = useState("#000000");
+
+  useEffect(() => {
+    if(props.main) {
+      setBackground("#045369");
+      setFont("#FFFFFF");
+    }
+      
+  }, [props.main]);
 
   useEffect(() => {
     if (sessionStorage.getItem("name")) setLogin(true);
@@ -306,9 +288,20 @@ export default function Bar() {
   }, []);
 
   return (
-    <div className="header">
-      <Box sx={{ flexGrow: 1, whiteSpace: "nowrap" }} className="header">
-        <AppBar position="static" sx={{ backgroundColor: "#FFF" }}>
+    <div 
+      className="header" 
+      style={{
+      }} >
+      <Box 
+        sx={{ flexGrow: 1, whiteSpace: "nowrap"}} 
+        className="header">
+        <AppBar 
+          position="static" 
+          sx={{ 
+            backgroundColor: background,
+            color: font,
+            boxShadow: 'none',
+           }}>
           <Toolbar>
             <Typography
               variant="h4"
@@ -316,7 +309,7 @@ export default function Bar() {
               sx={{
                 flexGrow: 1,
                 fontFamily: "dohyeon",
-                color: "#000",
+                color: font,
                 marginLeft: "50px",
                 cursor: "pointer",
                 width: "100px",
@@ -329,7 +322,14 @@ export default function Bar() {
             >
               대동유어지도
             </Typography>
-            {login ? <AfterLogin location={"/"} /> : <BeforeLogin />}
+            {login ? 
+            <AfterLogin 
+              location={"/"}
+              /> 
+            : 
+            <BeforeLogin
+              font={font} 
+              />}
           </Toolbar>
         </AppBar>
       </Box>

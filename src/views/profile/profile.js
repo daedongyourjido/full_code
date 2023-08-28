@@ -416,6 +416,7 @@ export default function Profile() {
                         }}
                         onClick={() => {
                           navigate("/setting/change");
+                          window.location.reload();
                         }}
                       />
                     ) : (
@@ -516,6 +517,7 @@ export default function Profile() {
                   label="추천순"
                 />
               </Tabs>
+
               <CustomTabPanel
                 value={value}
                 index={0}

@@ -86,6 +86,12 @@
   margin-left: 5vw;
 }
 
+.post-image-square {
+  width: 50vw;
+  height: auto;
+  
+}
+
 .slick-slider {
   height: 75vh;
 }

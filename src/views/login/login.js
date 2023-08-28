@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import LoginButton from "./loginButton.js";
 import InputField from "../../modules/components/inputField.js";
 import "./login.css";
+import Bar from "../../modules/layout/bar.js";
 
 function FindPwPageButton() {
   const navigate = useNavigate();
@@ -26,21 +27,6 @@ function FindPwPageButton() {
     >
       비밀번호를 잊으셨나요?
     </Button>
-  );
-}
-
-function LoggedOutBar() {
-  const navigate = useNavigate();
-  return (
-    <div className="loggedout-bar">
-      <h1
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        대동유어지도
-      </h1>
-    </div>
   );
 }
 
@@ -74,9 +60,7 @@ function LoginBox() {
 function Login() {
   return (
     <div className="root">
-      <div className="bar">
-        <LoggedOutBar />
-      </div>
+      <Bar main={true} />
       <MenuMap component={<LoginBox />} />
     </div>
   );

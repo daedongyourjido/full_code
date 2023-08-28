@@ -160,7 +160,7 @@ function Place() {
 
   return (
     <div className="App">
-      <Bar />
+      <Bar main={false} />
 
       <div className="contents">
         <div className="left-container">

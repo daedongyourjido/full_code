@@ -8,8 +8,8 @@ export default function LoginPageButton(props) {
     <Button
       variant="outlined"
       sx={{
-        borderColor: props.borderColor,
-        color: props.color,
+        borderColor: props.font,
+        color: props.font,
         height: 40,
       }}
       onClick={() => {

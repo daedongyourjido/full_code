@@ -22,7 +22,7 @@ export const KakaoMap = (props) => {
         setLng(129);
         setScale(13.3);
         setLat(35);
-      } else if (window.innerWidth >= 1350 && window.innerHeight < 860) {
+      } else if (window.innerWidth >= 1350 && window.innerHeight < 730) {
         // 높이만 줄어들떄
         setLat(35);
         setScale(13.3);
