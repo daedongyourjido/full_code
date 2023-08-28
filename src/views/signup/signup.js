@@ -8,7 +8,6 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import LoginPageButton from "../login/loginPageButton.js";
-import { useNavigate } from "react-router-dom";
 import "./signup.css";
 import Bar from "../../modules/layout/bar.js";
 

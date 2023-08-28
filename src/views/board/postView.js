@@ -26,7 +26,6 @@ export default function PostView(props) {
   const [likeCount, setLikeCount] = useState(props.info.like_count);
   const [likeFlag, setLikeFlag] = useState(false);
   const [imageSet, setImageSet] = useState("");
-  const [open, setOpen] = useState(false);
 
   // const location = useLocation();
   const lastPath = useParams();
@@ -201,7 +200,6 @@ export default function PostView(props) {
     try {
       dispatch(setDeleteDialogOpen(true));
       props.closeModal();
-      setOpen(true);
       await axios
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",

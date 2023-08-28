@@ -29,6 +29,7 @@ export default function Write() {
   const [content, setContent] = useState("");
   const [searchParams] = useSearchParams();
   const queryValue = searchParams.get("locationid") || "";
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
