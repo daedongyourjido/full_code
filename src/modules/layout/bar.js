@@ -58,6 +58,7 @@ function AfterLogin(props) {
     },
   };
 
+  // eslint-disable-next-line
   async function handleAlarm() {
     // @알림 - 나의 알림 수신
   }
@@ -173,7 +174,7 @@ function AfterLogin(props) {
         <div>
 
           {/* @알림 - 알림 객체배열 map으로 띄우는 곳 */}
-          
+
         </div>
       </Popover>
 
