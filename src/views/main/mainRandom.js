@@ -14,36 +14,39 @@ function Arrow() {
 
 function Loading() {
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div style={{ 
+        display: "flex", 
+        flexDirection: "row", 
+        marginLeft:'-10vw' }}>
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"
-        width={150}
-        height={150}
+        width={120}
+        height={80}
       />
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"
-        width={150}
-        height={150}
+        width={120}
+        height={80}
       />
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"
-        width={150}
-        height={150}
+        width={120}
+        height={80}
       />
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"
-        width={150}
-        height={150}
+        width={120}
+        height={80}
       />
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"
-        width={150}
-        height={150}
+        width={120}
+        height={80}
       />
     </div>
   );
