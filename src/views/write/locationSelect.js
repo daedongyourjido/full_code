@@ -9,7 +9,8 @@ export default function LocationSelect(props) {
   };
 
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth
+      sx={{marginTop: "40px"}}>
       <InputLabel id="demo-simple-select-label">지역</InputLabel>
       <Select
         labelId="demo-simple-select-label"

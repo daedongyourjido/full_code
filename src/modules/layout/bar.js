@@ -19,6 +19,9 @@ import { Notifications, PersonAdd } from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
@@ -56,6 +59,13 @@ function AfterLogin(props) {
       zIndex: 9999, // 모달을 최상위 레이어에 표시
     },
   };
+
+  async function handleAlarm() {
+    // @알림 - 나의 알림 수신
+  }
+
+
+
   const openModal = (info) => {
     axios
       .post(
@@ -127,9 +137,24 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-      <IconButton aria-label="notifications" style={{ color: "red" }}>
-        <Notifications />
-      </IconButton>
+      <Accordion
+          sx={{
+            boxShadow: "none",
+            width: '20vw'}}
+          onClick={handleAlarm}  
+        >
+        <AccordionSummary
+            expandIcon={<Notifications />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          />
+        <AccordionDetails>
+          <div>
+            {/* @알림 - 여기서 아코디언으로 펼쳐지도록 했습니다 */}
+            {/* 알림내역 객체배열을 map해서 알림내역 띄우면 될 것 같습니다 */}
+          </div>
+        </AccordionDetails>
+      </Accordion>
 
       <Button
         variant="contained"
@@ -253,6 +278,7 @@ function AfterLogin(props) {
         }}
         onClick={() => {
           navigate(`/profile?user=${sessionStorage.id}`);
+          window.location.reload();
         }}
         alt={"..."}
       />

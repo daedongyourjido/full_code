@@ -62,30 +62,45 @@ export default function Profile() {
   const [user, setUser] = useState({});
   // eslint-disable-next-line
   const [isMyProfile, setIsMyProfile] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.id === queryParams.get("user")) setIsMyProfile(true);
   }, [queryParams]);
 
-  const handleFollow = (targetId) => {
-    axios
-      .post(
+  useEffect(() => {
+
+  }, )
+
+  async function handleFollow(targetId) {
+    try {
+      await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-        {
-          DML: "INSERT",
-          table: "following",
-          columns: "follower_id, following_id",
-          values: `${sessionStorage._key}, ${targetId}`,
-        },
+          {
+            DML: "INSERT",
+            table: "following",
+            columns: "follower_id, following_id",
+            values: `${sessionStorage._key}, ${targetId}`,
+          },
       )
-      .then((res) => {
-        console.log(res);
-        alert("팔로우되었습니다");
-      })
-      .then((err) => {
-        console.log(err);
-      });
-  };
+      alert("팔로우되었습니다");
+      setIsFollowing(true);
+      
+      // @알림 - 팔로우
+      // eslint-disable-next-line
+      const followAlarm = {
+        type: 'follow',
+        receiverId: targetId,   // 수신자 아이디
+        receiverName: user.nickname,  // 수신자 닉네임
+        senderId: sessionStorage.id,  // 발신자 아이디
+        senderName: sessionStorage.name,    // 발신자 닉네임
+      }
+      console.log(sessionStorage._key, targetId);
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   // eslint-disable-next-line
   useEffect(async () => {
@@ -153,7 +168,7 @@ export default function Profile() {
             DML: "SELECT",
             columns: "*",
             table: "user",
-            where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, // 수정 필요
+            where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, 
           },
         )
         .then((res) => {
@@ -389,6 +404,28 @@ export default function Profile() {
                     {isMyProfile ? (
                       <></>
                     ) : (
+                      isFollowing ? 
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          setIsFollowing(false);
+                          alert("팔로우가 취소되었습니다");
+
+                          // @팔로우 취소
+
+                        }}
+                        sx={{
+                          fontSize: "0.8vh",
+                          color: "white",
+                          borderColor: "white",
+                          marginLeft: "1.5vw",
+                          height: "3vh",
+                          marginTop: "0.5vh",
+                        }}
+                      >
+                        팔로우 중
+                      </Button>
+                      :
                       <Button
                         variant="outlined"
                         onClick={() => {
@@ -524,7 +561,11 @@ export default function Profile() {
                 style={{ overflow: "auto"}}
               >
                 {userLocationInfoDataDesc.length === 0 ? (
-                  ""
+                  <div 
+                    className="row-center"
+                    style={{color:'white'}}>
+                    <p>게시물이 없습니다</p>
+                  </div>
                 ) : (
                   <ImageCollection
                     userLocationInfo={userLocationInfoDataDesc}

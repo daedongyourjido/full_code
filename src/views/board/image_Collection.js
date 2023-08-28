@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import PostView from "./postView";
 import Grid from "@mui/material/Grid";
@@ -17,11 +17,11 @@ function Image_Collection(props) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
   const [modalInfo, setModalInfo] = useState(null);
   const [activePost, setActivePost] = useState(null);
+
   
   const handleMouseOver = (index) => {
     setActivePost(index);
   };
-  console.log(props);
   const handleMouseOut = () => {
     setActivePost(null);
   };
@@ -35,6 +35,7 @@ function Image_Collection(props) {
   // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
+    window.location.reload();
   };
 
   return (
@@ -81,7 +82,10 @@ function Image_Collection(props) {
         overlayClassName="modal-overlay"
         style={customOverlayStyle} // 오버레이 스타일을 적용
       >
-        <PostView info={modalInfo} open={isModalOpen} closeModal={closeModal} />
+        <PostView 
+          info={modalInfo} 
+          open={isModalOpen} 
+          closeModal={closeModal} />
       </Modal>
     </div>
   );
