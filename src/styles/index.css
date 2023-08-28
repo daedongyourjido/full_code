@@ -122,3 +122,10 @@ body,
   flex: 2;
   min-height: 60vh;
 }
+
+.alarm-accordion {
+  width: 20vw;
+  min-height: 200px;
+  border-radius: 2%;
+  background-color: #ffffff;
+}

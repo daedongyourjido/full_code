@@ -19,9 +19,7 @@ import { Notifications, PersonAdd } from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import Popover from '@mui/material/Popover';
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
@@ -126,6 +124,21 @@ function AfterLogin(props) {
       });
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleNoteClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleNoteClose = () => {
+    setAnchorEl(null);
+  };
+
+  const noteOpen = Boolean(anchorEl);
+  const noteId = noteOpen ? 'simple-popover' : undefined;
+
+
+
   return (
     <div
       className="bar"
@@ -137,24 +150,32 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-      <Accordion
-          sx={{
-            boxShadow: "none",
-            width: '20vw'}}
-          onClick={handleAlarm}  
-        >
-        <AccordionSummary
-            expandIcon={<Notifications />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          />
-        <AccordionDetails>
-          <div>
-            {/* @알림 - 여기서 아코디언으로 펼쳐지도록 했습니다 */}
-            {/* 알림내역 객체배열을 map해서 알림내역 띄우면 될 것 같습니다 */}
-          </div>
-        </AccordionDetails>
-      </Accordion>
+      
+      <Notifications
+        onClick={handleNoteClick} 
+        sx={{
+          marginRight: '2vw',
+          color: 'red' }} />
+      <Popover
+        id={noteId}
+        open={noteOpen}
+        anchorEl={anchorEl}
+        onClose={handleNoteClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <div>
+
+          {/* @알림 - 알림 객체배열 map으로 띄우는 곳 */}
+          
+        </div>
+      </Popover>
 
       <Button
         variant="contained"
@@ -299,11 +320,13 @@ export default function Bar(props) {
   const navigate = useNavigate();
   const [background, setBackground] = useState("#FFFFFF");
   const [font, setFont] = useState("#000000");
+  const [accordion, setAccordion] = useState("#FFFFFF");
 
   useEffect(() => {
     if(props.main) {
       setBackground("#045369");
       setFont("#FFFFFF");
+      setAccordion("#045369");
     }
       
   }, [props.main]);
@@ -351,6 +374,7 @@ export default function Bar(props) {
             {login ? 
             <AfterLogin 
               location={"/"}
+              accordion={accordion}
               /> 
             : 
             <BeforeLogin
