@@ -68,36 +68,33 @@ export default function Profile() {
     if (sessionStorage.id === queryParams.get("user")) setIsMyProfile(true);
   }, [queryParams]);
 
-  useEffect(() => {
-
-  }, )
+  useEffect(() => {});
 
   async function handleFollow(targetId) {
     try {
       await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-          {
-            DML: "INSERT",
-            table: "following",
-            columns: "follower_id, following_id",
-            values: `${sessionStorage._key}, ${targetId}`,
-          },
-      )
+        {
+          DML: "INSERT",
+          table: "following",
+          columns: "follower_id, following_id",
+          values: `${sessionStorage._key}, ${user.id}`,
+        },
+      );
       alert("팔로우되었습니다");
       setIsFollowing(true);
-      
+
       // @알림 - 팔로우
       // eslint-disable-next-line
       const followAlarm = {
-        type: 'follow',
-        receiverId: targetId,   // 수신자 아이디
-        receiverName: user.nickname,  // 수신자 닉네임
-        senderId: sessionStorage.id,  // 발신자 아이디
-        senderName: sessionStorage.name,    // 발신자 닉네임
-      }
-      console.log(sessionStorage._key, targetId);
-
-    } catch(err) {
+        type: "follow",
+        receiverId: targetId, // 수신자 아이디
+        receiverName: user.nickname, // 수신자 닉네임
+        senderId: sessionStorage.id, // 발신자 아이디
+        senderName: sessionStorage.name, // 발신자 닉네임
+      };
+      window.location.reload();
+    } catch (err) {
       console.log(err);
     }
   }
@@ -168,7 +165,7 @@ export default function Profile() {
             DML: "SELECT",
             columns: "*",
             table: "user",
-            where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, 
+            where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`,
           },
         )
         .then((res) => {
@@ -194,6 +191,22 @@ export default function Profile() {
         )
       ).data[0];
       setUser(userInfo);
+      const isRelated = async () => {
+        const relationship = await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "following",
+            where: `follower_id=${sessionStorage._key} and following_id=${userInfo.id}`,
+          },
+        );
+        if (relationship.data.length !== 0) {
+          setIsFollowing(true);
+        }
+      };
+      isRelated();
+
       axios
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -403,8 +416,7 @@ export default function Profile() {
                     </Typography>
                     {isMyProfile ? (
                       <></>
-                    ) : (
-                      isFollowing ? 
+                    ) : isFollowing ? (
                       <Button
                         variant="outlined"
                         onClick={() => {
@@ -412,7 +424,6 @@ export default function Profile() {
                           alert("팔로우가 취소되었습니다");
 
                           // @팔로우 취소
-
                         }}
                         sx={{
                           fontSize: "0.8vh",
@@ -425,11 +436,13 @@ export default function Profile() {
                       >
                         팔로우 중
                       </Button>
-                      :
+                    ) : (
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          handleFollow(queryParams.get("user"));
+                          handleFollow(queryParams.get("user")).then((res) =>
+                            console.log(res),
+                          );
                         }}
                         sx={{
                           fontSize: "0.8vh",
@@ -558,12 +571,10 @@ export default function Profile() {
               <CustomTabPanel
                 value={value}
                 index={0}
-                style={{ overflow: "auto"}}
+                style={{ overflow: "auto" }}
               >
                 {userLocationInfoDataDesc.length === 0 ? (
-                  <div 
-                    className="row-center"
-                    style={{color:'white'}}>
+                  <div className="row-center" style={{ color: "white" }}>
                     <p>게시물이 없습니다</p>
                   </div>
                 ) : (

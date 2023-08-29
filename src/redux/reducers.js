@@ -31,11 +31,11 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         likeChange: action.payload,
       };
-    
+
     case "SET_LIKE_CHANGE_POST":
       return {
         ...state,
-        likeChangePost: action.payload
+        likeChangePost: action.payload,
       };
 
     default:

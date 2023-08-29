@@ -14,10 +14,13 @@ function Arrow() {
 
 function Loading() {
   return (
-    <div style={{ 
-        display: "flex", 
-        flexDirection: "row", 
-        marginLeft:'-10vw' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        marginLeft: "-10vw",
+      }}
+    >
       <Skeleton
         sx={{ marginRight: "15px" }}
         variant="rounded"

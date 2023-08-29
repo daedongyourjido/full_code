@@ -25,14 +25,12 @@ export default function SignUpButton(props) {
       }}
     >
       <Stack direction="row" spacing={2}>
-        <Dialog
-          open={open}
-        >
+        <Dialog open={open}>
           <DialogTitle>대동유어지도</DialogTitle>
-          <DialogContent 
-              className="row-center"
-              sx={{width: "15vw",
-                  height: "15vh" }}>
+          <DialogContent
+            className="row-center"
+            sx={{ width: "15vw", height: "15vh" }}
+          >
             <DialogContentText>
               회원가입 완료! 메일 인증을 완료 해 주세요
             </DialogContentText>
@@ -62,26 +60,24 @@ export default function SignUpButton(props) {
                   const timeout = 10000;
                   async function fetchData() {
                     try {
-                      const res = await axios
-                        .post(
-                          "https://iclveynbwf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-signin",
-                          {
-                            // 로그인 API의 경우 type: 'signup'
-                            type: "signup",
-                            email: props.id,
-                            password: props.pw,
-                            nickname: props.name,
-                          }, {timeout}
-                        )
-                        console.log(res);
-                        navigate("/");
-
-                    } catch (error) {
-                      console.log("signup error : ", error)
+                      const res = await axios.post(
+                        "https://iclveynbwf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-signin",
+                        {
+                          // 로그인 API의 경우 type: 'signup'
+                          type: "signup",
+                          email: props.id,
+                          password: props.pw,
+                          nickname: props.name,
+                        },
+                        { timeout },
+                      );
+                      console.log(res);
                       navigate("/");
-                      
+                    } catch (error) {
+                      console.log("signup error : ", error);
+                      navigate("/");
                     }
-                  } 
+                  }
 
                   fetchData();
                 }

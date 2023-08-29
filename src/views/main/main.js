@@ -3,7 +3,6 @@ import "./main.css";
 import Bar from "../../modules/layout/bar.js";
 
 function Main() {
-
   return (
     <div className="root">
       <Bar main={true} />

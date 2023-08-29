@@ -16,11 +16,7 @@ import Bar from "../../modules/layout/bar.js";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText
-} from "@mui/material";
+import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 // import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 function a11yProps(index) {
@@ -76,7 +72,7 @@ function Place() {
   const [userLocationInfoAsc, setUserLocationInfoAsc] = useState([]);
   const [location, setLocation] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const deleteDialogOpen = useSelector(state => state.deleteDialogOpen);
+  const deleteDialogOpen = useSelector((state) => state.deleteDialogOpen);
 
   const loc = useLocation();
   const paths = loc.pathname.split("/");
@@ -294,21 +290,16 @@ function Place() {
           }}
         >
           <Stack direction="row" spacing={2}>
-            <Dialog
-              open={deleteDialogOpen}
-            >
+            <Dialog open={deleteDialogOpen}>
               <DialogContent
                 className="row-center"
-                sx={{width: "15vw",
-                      height: "15vh" }}>
-                <DialogContentText>
-                  게시물 삭제 중
-                </DialogContentText>
+                sx={{ width: "15vw", height: "15vh" }}
+              >
+                <DialogContentText>게시물 삭제 중</DialogContentText>
               </DialogContent>
             </Dialog>
           </Stack>
         </div>
-
       </div>
     </div>
   );
