@@ -156,7 +156,7 @@ export default function Write() {
           {
             /**API JSON 형식 참조하여 post 요청을 보내주세요**/
             type: "post-update",
-            fileName: "update.jpg", // 저장할 파일명
+            fileName: "updateFile", // 저장할 파일명
             file: previewImage,  
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
@@ -166,7 +166,10 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("===== update =====", "\n수정된 제목 : ", title, "\n수정된 내용 : ", content, "\nPreviewImage : ", previewImage);
+          console.log("===== update =====", 
+                      "\n수정된 제목 : ", title, 
+                      "\n수정된 내용 : ", content, 
+                      "\nPreviewImage : ", previewImage);
           navigate(`/board/${location}`);
         })
         .catch((error) => {
@@ -180,7 +183,7 @@ export default function Write() {
           {
             type: "post",
             fileName: fileName, // 저장할 파일명
-            file: JSON.stringify(base64),
+            file: JSON.stringify("data:image/png;base64,PCFkb2N0eXBlIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjxtZXRhIGNoYXJzZXQ9InV0Zi04Ii8+PGxpbmsgcmVsPSJpY29uIiBocmVmPSIvZmF2aWNvbi5pY28iLz48bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLGluaXRpYWwtc2NhbGU9MSIvPjxtZXRhIG5hbWU9InRoZW1lLWNvbG9yIiBjb250ZW50PSIjMDAwMDAwIi8+PG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9IldlYiBzaXRlIGNyZWF0ZWQgdXNpbmcgY3JlYXRlLXJlYWN0LWFwcCIvPjxsaW5rIHJlbD0iYXBwbGUtdG91Y2gtaWNvbiIgaHJlZj0iL2xvZ28xOTIucG5nIi8+PGxpbmsgcmVsPSJtYW5pZmVzdCIgaHJlZj0iL21hbmlmZXN0Lmpzb24iLz48dGl0bGU+64yA64+Z7Jyg7Ja07KeA64+EPC90aXRsZT48bWV0YSBjaGFyc2V0PSJ1dGYtOCIvPjxsaW5rIHJlbD0iaWNvbiIgaHJlZj0iL2Zhdmljb24uaWNvIi8+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCxpbml0aWFsLXNjYWxlPTEiLz48c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSIvL2RhcGkua2FrYW8uY29tL3YyL21hcHMvc2RrLmpzP2FwcGtleT00NDBlYTA5NzM5ZjkxMTM5YmVkNTA0YTg1ZTM3MDAzZiI+PC9zY3JpcHQ+PHNjcmlwdCBkZWZlcj0iZGVmZXIiIHNyYz0iL3N0YXRpYy9qcy9tYWluLjE2N2M4YjkxLmpzIj48L3NjcmlwdD48bGluayBocmVmPSIvc3RhdGljL2Nzcy9tYWluLjQxZmZkNmE1LmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij48L2hlYWQ+PGJvZHk+PG5vc2NyaXB0PllvdSBuZWVkIHRvIGVuYWJsZSBKYXZhU2NyaXB0IHRvIHJ1biB0aGlzIGFwcC48L25vc2NyaXB0PjxkaXYgaWQ9InJvb3QiPjwvZGl2PjxkaXYgaWQ9Im1hcCI+PC9kaXY+PC9ib2R5PjwvaHRtbD4="),
             // file: JSON.stringify(selectedImageBase64), // 파일 값
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
