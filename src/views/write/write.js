@@ -103,7 +103,7 @@ export default function Write() {
 
   useEffect(() => {
     convert(previewImage, (base64Image) => {
-      console.log(base64Image);
+      console.log("BASE64 TEST : ", base64Image);
       setBase64(base64Image);
     })
   }, [previewImage])
