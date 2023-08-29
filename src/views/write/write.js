@@ -67,17 +67,82 @@ export default function Write() {
       });
   } 
 
+  // 이미지 URL
+const imageUrl = 'https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg';
+
+// 이미지를 불러와서 Base64로 변환
+function convert4(url, callback) {
+  const img = new Image();
+  img.crossOrigin = 'Anonymous';
+  img.onload = function () {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+
+    const base64 = canvas.toDataURL('image/png'); // 다른 포맷으로 변경하려면 'image/jpeg' 등으로 수정
+    callback(base64);
+  };
+  img.src = url;
+}
+
+// 변환된 Base64 데이터를 사용하는 예시
+useEffect(() => {
+  console.log("check");
+  convert4(imageUrl, function (base64) {
+  console.log('변환된 Base64 데이터:', base64);
+    // 여기서 base64 데이터를 원하는 방식으로 활용하면 됩니다.
+  });
+}, [])
+
+
+
+
+  // useEffect(() => {
+  //   convert1(previewImage, (base64Image) => {
+  //     console.log("convert 1 : ", base64Image);
+  //   })
+  //   convert2(previewImage, (base64Image) => {
+  //     console.log("convert 2 : ", base64Image);
+  //   })
+  //   convert2("https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg", (base64Image) => {
+  //     setBase64(base64Image)
+  //   })
+  // }, [previewImage]);
+
+
   useEffect(() => {
-    convert1(previewImage, (base64Image) => {
-      console.log("convert 1 : ", base64Image);
-    })
-    convert2(previewImage, (base64Image) => {
-      console.log("convert 2 : ", base64Image);
-    })
-    convert2("https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg", (base64Image) => {
-      setBase64(base64Image)
-    })
-  }, [previewImage]);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", previewImage, true);
+    xhr.responseType = "blob";
+  
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const blob = xhr.response;
+        
+        // Blob 데이터를 File로 변환 (optional)
+        const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+  
+        // Blob 데이터를 base64로 변환
+        const reader = new FileReader();
+        reader.onload = function () {
+          const base64data = reader.result;
+          const base64Image = "data:image/png;base64," + base64data.split(',')[1];
+          setBase64(base64Image);
+  
+          console.log("변환 : ", base64Image); // 변환된 base64 이미지 출력
+        };
+        reader.readAsDataURL(blob);
+      }
+    };
+  
+    xhr.send();
+
+  }, [previewImage])
+
 
 
 
@@ -169,7 +234,7 @@ export default function Write() {
           console.log("===== update =====", 
                       "\n수정된 제목 : ", title, 
                       "\n수정된 내용 : ", content, 
-                      "\nPreviewImage : ", previewImage);
+                      "\nPreviewImage : ", JSON.stringify(base64));
           navigate(`/board/${location}`);
         })
         .catch((error) => {
@@ -183,8 +248,7 @@ export default function Write() {
           {
             type: "post",
             fileName: fileName, // 저장할 파일명
-            file: JSON.stringify("data:image/png;base64,PCFkb2N0eXBlIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjxtZXRhIGNoYXJzZXQ9InV0Zi04Ii8+PGxpbmsgcmVsPSJpY29uIiBocmVmPSIvZmF2aWNvbi5pY28iLz48bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLGluaXRpYWwtc2NhbGU9MSIvPjxtZXRhIG5hbWU9InRoZW1lLWNvbG9yIiBjb250ZW50PSIjMDAwMDAwIi8+PG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9IldlYiBzaXRlIGNyZWF0ZWQgdXNpbmcgY3JlYXRlLXJlYWN0LWFwcCIvPjxsaW5rIHJlbD0iYXBwbGUtdG91Y2gtaWNvbiIgaHJlZj0iL2xvZ28xOTIucG5nIi8+PGxpbmsgcmVsPSJtYW5pZmVzdCIgaHJlZj0iL21hbmlmZXN0Lmpzb24iLz48dGl0bGU+64yA64+Z7Jyg7Ja07KeA64+EPC90aXRsZT48bWV0YSBjaGFyc2V0PSJ1dGYtOCIvPjxsaW5rIHJlbD0iaWNvbiIgaHJlZj0iL2Zhdmljb24uaWNvIi8+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCxpbml0aWFsLXNjYWxlPTEiLz48c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSIvL2RhcGkua2FrYW8uY29tL3YyL21hcHMvc2RrLmpzP2FwcGtleT00NDBlYTA5NzM5ZjkxMTM5YmVkNTA0YTg1ZTM3MDAzZiI+PC9zY3JpcHQ+PHNjcmlwdCBkZWZlcj0iZGVmZXIiIHNyYz0iL3N0YXRpYy9qcy9tYWluLjE2N2M4YjkxLmpzIj48L3NjcmlwdD48bGluayBocmVmPSIvc3RhdGljL2Nzcy9tYWluLjQxZmZkNmE1LmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij48L2hlYWQ+PGJvZHk+PG5vc2NyaXB0PllvdSBuZWVkIHRvIGVuYWJsZSBKYXZhU2NyaXB0IHRvIHJ1biB0aGlzIGFwcC48L25vc2NyaXB0PjxkaXYgaWQ9InJvb3QiPjwvZGl2PjxkaXYgaWQ9Im1hcCI+PC9kaXY+PC9ib2R5PjwvaHRtbD4="),
-            // file: JSON.stringify(selectedImageBase64), // 파일 값
+            file: JSON.stringify(selectedImageBase64), // 파일 값
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
@@ -193,7 +257,6 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("new-post", base64, "-end");
           navigate(`/board/${location}`);
         })
         .catch((error) => {
