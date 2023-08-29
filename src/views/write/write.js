@@ -34,6 +34,7 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
+  // eslint-disable-next-line
   function convert1(imgUrl, callback) {
     const image = new Image();
     image.crossOrigin='anonymous';
@@ -48,7 +49,7 @@ export default function Write() {
     }
     image.src = imgUrl;
   }
-
+// eslint-disable-next-line
   function convert2(imageUrl, callback) {
     fetch(imageUrl, {
       method: 'GET',
@@ -113,35 +114,35 @@ useEffect(() => {
   // }, [previewImage]);
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", previewImage, true);
-    xhr.responseType = "blob";
+  //   const xhr = new XMLHttpRequest();
+  //   xhr.open("GET", previewImage, true);
+  //   xhr.responseType = "blob";
   
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        const blob = xhr.response;
+  //   xhr.onload = function () {
+  //     if (xhr.status === 200) {
+  //       const blob = xhr.response;
         
-        // Blob 데이터를 File로 변환 (optional)
-        const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+  //       // Blob 데이터를 File로 변환 (optional)
+  //       const file = new File([blob], "image.jpg", { type: "image/jpeg" });
   
-        // Blob 데이터를 base64로 변환
-        const reader = new FileReader();
-        reader.onload = function () {
-          const base64data = reader.result;
-          const base64Image = "data:image/png;base64," + base64data.split(',')[1];
-          setBase64(base64Image);
+  //       // Blob 데이터를 base64로 변환
+  //       const reader = new FileReader();
+  //       reader.onload = function () {
+  //         const base64data = reader.result;
+  //         const base64Image = "data:image/png;base64," + base64data.split(',')[1];
+  //         setBase64(base64Image);
   
-          console.log("변환 : ", base64Image); // 변환된 base64 이미지 출력
-        };
-        reader.readAsDataURL(blob);
-      }
-    };
+  //         console.log("변환 : ", base64Image); // 변환된 base64 이미지 출력
+  //       };
+  //       reader.readAsDataURL(blob);
+  //     }
+  //   };
   
-    xhr.send();
+  //   xhr.send();
 
-  }, [previewImage])
+  // }, [previewImage])
 
 
 
