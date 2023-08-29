@@ -49,17 +49,11 @@ export default function Write() {
     image.src = imgUrl;
   }
 
-  useEffect(() => {
-    convert1(previewImage, (base64Image) => {
-      console.log("convert 1 : ", base64Image);
-    })
-  }, [previewImage]);
-
   function convert2(imageUrl, callback) {
     fetch(imageUrl, {
       method: 'GET',
       mode: 'cors',
-      credentials: 'same-origin',
+      credentials: 'same-origin', 
     })
       .then(response => response.blob())
       .then(blob => {
@@ -71,14 +65,21 @@ export default function Write() {
         };
         reader.readAsDataURL(blob);
       });
-  }
+  } 
 
   useEffect(() => {
+    convert1(previewImage, (base64Image) => {
+      console.log("convert 1 : ", base64Image);
+    })
     convert2(previewImage, (base64Image) => {
       console.log("convert 2 : ", base64Image);
-      setBase64(base64Image);
     })
-  }, [previewImage])
+    convert2("https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg", (base64Image) => {
+      setBase64(base64Image)
+    })
+  }, [previewImage]);
+
+
 
   useEffect(() => {
     if (queryValue !== "") {  // 게시물 수정 시 기존 게시물 내용 가져오기
@@ -179,7 +180,8 @@ export default function Write() {
           {
             type: "post",
             fileName: fileName, // 저장할 파일명
-            file: JSON.stringify(selectedImageBase64), // 파일 값
+            file: JSON.stringify(base64),
+            // file: JSON.stringify(selectedImageBase64), // 파일 값
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
@@ -188,7 +190,7 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("new-post");
+          console.log("new-post", base64, "-end");
           navigate(`/board/${location}`);
         })
         .catch((error) => {
