@@ -34,51 +34,51 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
-  // function convert1(imgUrl, callback) {
-  //   const image = new Image();
-  //   image.crossOrigin='anonymous';
-  //   image.onload = () => {
-  //     const canvas = document.createElement('canvas');
-  //     const ctx = canvas.getContext('2d');
-  //     canvas.height = image.naturalHeight;
-  //     canvas.width = image.naturalWidth;
-  //     ctx.drawImage(image, 0, 0);
-  //     const dataUrl = canvas.toDataURL();
-  //     callback && callback(dataUrl)
-  //   }
-  //   image.src = imgUrl;
-  // }
+  function convert1(imgUrl, callback) {
+    const image = new Image();
+    image.crossOrigin='anonymous';
+    image.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.height = image.naturalHeight;
+      canvas.width = image.naturalWidth;
+      ctx.drawImage(image, 0, 0);
+      const dataUrl = canvas.toDataURL();
+      callback && callback(dataUrl)
+    }
+    image.src = imgUrl;
+  }
 
-  // useEffect(() => {
-  //   convert1(previewImage, () => {
-  //     console.log("PREVIEW : ", previewImage);
-  //   })
-  // }, [previewImage]);
+  useEffect(() => {
+    convert1(previewImage, (base64Image) => {
+      console.log("convert 1 : ", base64Image);
+    })
+  }, [previewImage]);
 
-    // function convert2(imageUrl, callback) {
-  //   fetch(imageUrl, {
-  //     method: 'GET',
-  //     mode: 'cors',
-  //     credentials: 'same-origin', 
-  //   })
-  //     .then(response => response.blob())
-  //     .then(blob => {
-  //       const reader = new FileReader();
-  //       reader.onloadend = () => {
-  //         if (typeof callback === 'function') {
-  //           callback(reader.result);
-  //         }
-  //       };
-  //       reader.readAsDataURL(blob);
-  //     });
-  // }
+    function convert2(imageUrl, callback) {
+    fetch(imageUrl, {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'same-origin', 
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (typeof callback === 'function') {
+            callback(reader.result);
+          }
+        };
+        reader.readAsDataURL(blob);
+      });
+  }
 
-  // useEffect(() => {
-  //   convert2(previewImage, (base64Image) => {
-  //     console.log("BASE64 converted : ", base64Image);
-  //     setBase64(base64Image);
-  //   })
-  // }, [previewImage])
+  useEffect(() => {
+    convert2(previewImage, (base64Image) => {
+      console.log("convert 2 : ", base64Image);
+      setBase64(base64Image);
+    })
+  }, [previewImage])
 
   useEffect(() => {
     if (queryValue !== "") {  // 게시물 수정 시 기존 게시물 내용 가져오기
