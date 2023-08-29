@@ -55,11 +55,11 @@ export default function Write() {
     })
   }, [previewImage]);
 
-    function convert2(imageUrl, callback) {
+  function convert2(imageUrl, callback) {
     fetch(imageUrl, {
       method: 'GET',
       mode: 'cors',
-      credentials: 'same-origin', 
+      credentials: 'same-origin',
     })
       .then(response => response.blob())
       .then(blob => {
