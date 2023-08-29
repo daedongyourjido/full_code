@@ -34,27 +34,6 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
-  function _convertImageToBase64(imgUrl, callback) {
-    const image = new Image();
-    image.crossOrigin='anonymous';
-    image.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.height = image.naturalHeight;
-      canvas.width = image.naturalWidth;
-      ctx.drawImage(image, 0, 0);
-      const dataUrl = canvas.toDataURL();
-      callback && callback(dataUrl)
-    }
-    image.src = imgUrl;
-  }
-
-  useEffect(() => {
-    _convertImageToBase64(previewImage, () => {
-      console.log("PREVIEW : ", previewImage);
-    })
-  }, [previewImage]);
-
   useEffect(() => {
     if (queryValue !== "") {  // 게시물 수정 시 기존 게시물 내용 가져오기
       axios
@@ -80,32 +59,6 @@ export default function Write() {
         });
     }
   }, [queryValue]);
-
-
-  function convert(imageUrl, callback) {
-    fetch(imageUrl, {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'same-origin', 
-    })
-      .then(response => response.blob())
-      .then(blob => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (typeof callback === 'function') {
-            callback(reader.result);
-          }
-        };
-        reader.readAsDataURL(blob);
-      });
-  }
-
-  useEffect(() => {
-    convert(previewImage, (base64Image) => {
-      console.log("BASE64 converted : ", base64Image);
-      setBase64(base64Image);
-    })
-  }, [previewImage])
 
 
   const handleImageChange = (event) => {
@@ -166,7 +119,7 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("===== update =====", "\n수정된 제목 : ", title, "\n수정된 내용 : ", content);
+          console.log("===== update =====", "\n수정된 제목 : ", title, "\n수정된 내용 : ", content, "\nPreviewImage : ", previewImage);
           navigate(`/board/${location}`);
         })
         .catch((error) => {
