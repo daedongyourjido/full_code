@@ -37,6 +37,7 @@ function BeforeLogin(props) {
     >
       <SearchField />
       <LoginPageButton
+        className="before-login-btn"
         font={props.font}
         onClick={() => {
           navigate("/login");

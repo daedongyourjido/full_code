@@ -34,6 +34,58 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
+// const imageUrl = 'https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg'
+
+// function convert(url, callback) {
+//   const img = new Image();
+//   img.crossOrigin = 'Anonymous'; 
+//   img.onload = function () {
+//     const canvas = document.createElement('canvas');
+//     canvas.width = img.width;
+//     canvas.height = img.height;
+
+//     const ctx = canvas.getContext('2d');
+//     ctx.drawImage(img, 0, 0, img.width, img.height);
+
+//     const base64Data = canvas.toDataURL('image/png'); 
+
+//     callback(base64Data);
+//   };
+//   img.src = url;
+// }
+
+// useEffect(() => {
+//   convert(imageUrl, function (base64Data) {
+//     console.log('Base64 이미지 데이터:', base64Data);
+//   });
+// }, [])
+
+const imageUrl = 'https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg';
+
+function convert(file, callback) {
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const base64Data = event.target.result;
+    console.log("FileReader : ", base64Data)
+    callback(base64Data);
+  };
+  reader.readAsDataURL(file);
+}
+
+useEffect(() => {
+  fetch(imageUrl)
+    .then(response => response.blob()) // 이미지 URL을 Blob으로 변환
+    .then(blob => {
+      const file = new File([blob], 'image.jpg', { type: blob.type }); // Blob을 File로 변환
+      convert(file, function (base64Data) {
+        console.log('Base64 이미지 데이터:', base64Data);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}, []);
+
 
   useEffect(() => {
     if (queryValue !== "") {  // 게시물 수정 시 기존 게시물 내용 가져오기
@@ -70,6 +122,7 @@ export default function Write() {
       const reader = new FileReader();
       reader.onload = (e) => {
         setPreviewImage(e.target.result);
+        console.log("test : ", e.target.result)
       };
       reader.readAsDataURL(selectedFile);
     }
