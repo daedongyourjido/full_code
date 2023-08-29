@@ -165,7 +165,6 @@ export default function Write() {
     setOpen(true);
 
     if (queryValue !== "") {  // 업데이트
-      console.log("update", previewImage);
       axios
         .post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
@@ -182,6 +181,7 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
+          console.log("update", title, content);
           navigate(`/board/${location}`);
         })
         .catch((error) => {
@@ -189,7 +189,6 @@ export default function Write() {
         });
 
     } else {  // 새로운 글 작성
-      console.log("new-post", queryValue);
       axios
         .post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
@@ -205,6 +204,7 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
+          console.log("new-post");
           navigate(`/board/${location}`);
         })
         .catch((error) => {
