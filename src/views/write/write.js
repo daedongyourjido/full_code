@@ -53,7 +53,6 @@ export default function Write() {
     _convertImageToBase64(previewImage, () => {
       console.log("PREVIEW : ", previewImage);
     })
-
   }, [previewImage]);
 
   useEffect(() => {
@@ -87,7 +86,7 @@ export default function Write() {
     fetch(imageUrl, {
       method: 'GET',
       mode: 'cors',
-      credentials: 'same-origin', // 또는 'include' 또는 'omit'
+      credentials: 'same-origin', 
     })
       .then(response => response.blob())
       .then(blob => {
@@ -103,7 +102,7 @@ export default function Write() {
 
   useEffect(() => {
     convert(previewImage, (base64Image) => {
-      console.log("BASE64 TEST : ", base64Image);
+      console.log("BASE64 converted : ", base64Image);
       setBase64(base64Image);
     })
   }, [previewImage])
