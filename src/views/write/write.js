@@ -31,6 +31,7 @@ export default function Write() {
   const queryValue = searchParams.get("locationid") || "";
   // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
   function _convertImageToBase64(imgUrl, callback) {
@@ -82,20 +83,20 @@ export default function Write() {
   }, [queryValue]);
 
 
-  function convert(imgUrl, callback) {
-    const image = new Image();
-    image.crossOrigin='anonymous';
-    image.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.height = image.naturalHeight;
-      canvas.width = image.naturalWidth;
-      ctx.drawImage(image, 0, 0);
-      const dataUrl = canvas.toDataURL();
-      callback && callback(dataUrl)
-    }
-    image.src = imgUrl;
-  }
+  // function convert(imgUrl, callback) {
+  //   const image = new Image();
+  //   image.crossOrigin='anonymous';
+  //   image.onload = () => {
+  //     const canvas = document.createElement('canvas');
+  //     const ctx = canvas.getContext('2d');
+  //     canvas.height = image.naturalHeight;
+  //     canvas.width = image.naturalWidth;
+  //     ctx.drawImage(image, 0, 0);
+  //     const dataUrl = canvas.toDataURL();
+  //     callback && callback(dataUrl)
+  //   }
+  //   image.src = imgUrl;
+  // }
 
   function convert2(imageUrl, callback) {
     fetch(imageUrl, {
@@ -194,7 +195,7 @@ export default function Write() {
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
           {
             type: "post",
-            fileName: "update", // 저장할 파일명
+            fileName: fileName, // 저장할 파일명
             file: JSON.stringify(selectedImageBase64), // 파일 값
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
