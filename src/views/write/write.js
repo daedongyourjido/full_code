@@ -116,12 +116,8 @@ export default function Write() {
   }
 
   useEffect(() => {
-    convert(previewImage, (base64Image) => {
-      console.log("convert 1 : ", base64Image);
-    })
     convert2(previewImage, (base64Image) => {
       setBase64(base64Image);
-      console.log("convert 2 : ", base64Image);
     })
   }, [previewImage])
 
@@ -168,7 +164,7 @@ export default function Write() {
     setOpen(true);
 
     if (queryValue !== "") {  // 업데이트
-      console.log("update", queryValue);
+      console.log("update", previewImage);
       axios
         .post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
@@ -199,7 +195,7 @@ export default function Write() {
           {
             type: "post",
             fileName: "update", // 저장할 파일명
-            file: JSON.stringify(base64), // 파일 값
+            file: JSON.stringify(selectedImageBase64), // 파일 값
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
