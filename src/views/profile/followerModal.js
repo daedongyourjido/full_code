@@ -28,7 +28,7 @@ export default function FollowerModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const follower = props.follower;
-  const navigate = useNavigate
+  const navigate = useNavigate;
 
   return (
     <div>

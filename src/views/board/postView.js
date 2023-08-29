@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./postView.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -14,8 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import { 
-  setDeleteDialogOpen } from "../../redux/actions";
+import { setDeleteDialogOpen } from "../../redux/actions";
 
 export default function PostView(props) {
   const navigate = useNavigate();
@@ -27,53 +26,48 @@ export default function PostView(props) {
   const [likeFlag, setLikeFlag] = useState(false);
   const [imageSet, setImageSet] = useState("");
 
-  // const location = useLocation();
-  const lastPath = useParams();
-
-
   async function handleLike(e) {
-    try{
+    try {
       e.preventDefault();
-      if(likeFlag) {
+      if (likeFlag) {
         await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-            {
-              DML: "UPDATE",
-              table: "location",
-              set: `like_count = '${likeCount - 1}'`,
-              where: `id=${props.info.id}`,
-            },
-        )
+          {
+            DML: "UPDATE",
+            table: "location",
+            set: `like_count = '${likeCount - 1}'`,
+            where: `id=${props.info.id}`,
+          },
+        );
         await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-              {
-                DML: "DELETE",
-                table: "heart",
-                where: `from_id='${sessionStorage.id}' and to_id='${props.info.email}' and post_id=${props.info.id}`,
-              },
-        )
+          {
+            DML: "DELETE",
+            table: "heart",
+            where: `from_id='${sessionStorage.id}' and to_id='${props.info.email}' and post_id=${props.info.id}`,
+          },
+        );
         setLikeFlag(!likeFlag);
         setLikeCount(likeCount - 1);
-      }
-      else {
+      } else {
         await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-            {
-              DML: "UPDATE",
-              table: "location",
-              set: `like_count = '${likeCount + 1}'`,
-              where: `id=${props.info.id}`,
-            },
-        )
+          {
+            DML: "UPDATE",
+            table: "location",
+            set: `like_count = '${likeCount + 1}'`,
+            where: `id=${props.info.id}`,
+          },
+        );
         await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-            {
-              DML: "INSERT",
-              table: "heart",
-              columns: "from_id, to_id, post_id",
-              values: `'${sessionStorage.id}', '${props.info.email}', ${props.info.id}`,
-            },
-        )
+          {
+            DML: "INSERT",
+            table: "heart",
+            columns: "from_id, to_id, post_id",
+            values: `'${sessionStorage.id}', '${props.info.email}', ${props.info.id}`,
+          },
+        );
         setLikeFlag(!likeFlag);
         setLikeCount(likeCount + 1);
       }
@@ -81,18 +75,16 @@ export default function PostView(props) {
       // @알림 - 좋아요
       // eslint-disable-next-line
       const likeAlarm = {
-        type: 'like',
-        postId: props.info.id,  // 게시물 아이디
-        receiverId: props.info.user_id,   // 수신자 아이디
-        receiverName: props.info.nickname,    // 수신자 닉네임
-        senderId: sessionStorage.id,    // 발신자 아이디
-        senderName: sessionStorage.name,    // 발신자 닉네임
-      }
-    }
-    catch(err) {
+        type: "like",
+        postId: props.info.id, // 게시물 아이디
+        receiverId: props.info.user_id, // 수신자 아이디
+        receiverName: props.info.nickname, // 수신자 닉네임
+        senderId: sessionStorage.id, // 발신자 아이디
+        senderName: sessionStorage.name, // 발신자 닉네임
+      };
+    } catch (err) {
       console.log(err);
     }
-
   }
 
   useEffect(() => {
@@ -151,7 +143,7 @@ export default function PostView(props) {
   }, []);
 
   async function addComment() {
-    try{
+    try {
       const newComment = {
         nickname: sessionStorage.getItem("name"),
         user_id: sessionStorage.getItem("id"),
@@ -159,15 +151,15 @@ export default function PostView(props) {
         date: new Date(),
         picture: sessionStorage.getItem("picture"),
       };
-  
+
       setComments([...comments, newComment]);
       document.getElementById("comment_ipt").value = "";
-  
+
       if (sessionStorage._key === undefined) {
         alert("로그인 후 댓글 작성 가능합니다");
         return null;
       }
-  
+
       await axios.post(
         "https://8ymn2iwfoj.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-add-comment",
         {
@@ -176,47 +168,41 @@ export default function PostView(props) {
           to_id: props.info.user_id,
           comment: comment,
         },
-      )
-  
+      );
+
       // @알림 - 댓글
       // eslint-disable-next-line
-      const commentAlarm = 
-        {
-          type: "comment",
-          postId: props.info.id,   // 게시물 아이디
-          msg: comment,   // 댓글 내용
-          receiverId: props.info.user_id,   // 수신자 아이디
-          receiverName: props.info.nickname,   // 수신자 닉네임
-          senderId: sessionStorage.id,    // 발신자 아이디
-          senderName: sessionStorage.name,   // 발신자 닉네임
-        }
-    }
-    catch(err) {
+      const commentAlarm = {
+        type: "comment",
+        postId: props.info.id, // 게시물 아이디
+        msg: comment, // 댓글 내용
+        receiverId: props.info.user_id, // 수신자 아이디
+        receiverName: props.info.nickname, // 수신자 닉네임
+        senderId: sessionStorage.id, // 발신자 아이디
+        senderName: sessionStorage.name, // 발신자 닉네임
+      };
+    } catch (err) {
       console.log(err);
     }
   }
 
   async function handleDelete() {
     try {
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "DELETE",
+          table: "location",
+          where: `id=${props.info.id}`,
+        },
+      );
       dispatch(setDeleteDialogOpen(true));
       props.closeModal();
-      await axios
-        .post(
-          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-          {
-            DML: "DELETE",
-            table: "location",
-            where: `id=${props.info.id}`,
-          },
-        )
       window.location.reload();
-      navigate(`/board/${lastPath.place}`);
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
-
 
   useEffect(() => {
     const image = new Image();
@@ -246,10 +232,12 @@ export default function PostView(props) {
         <>
           <div className="cover">
             <div className="main_con">
-              <div className="gallery">     
-                <img src={props.info.image} 
-                    className={`${imageSet}`}
-                    alt='...' />
+              <div className="gallery">
+                <img
+                  src={props.info.image}
+                  className={`${imageSet}`}
+                  alt="..."
+                />
               </div>
 
               <hr id="line"></hr>
@@ -402,12 +390,12 @@ export default function PostView(props) {
                         }}
                       />
                       <DeleteIcon
-                            sx={{
-                              color: "black",
-                              marginTop: "1.4vh",
-                              cursor: "pointer",
-                            }}
-                            onClick={handleDelete}
+                        sx={{
+                          color: "black",
+                          marginTop: "1.4vh",
+                          cursor: "pointer",
+                        }}
+                        onClick={handleDelete}
                       />
                     </>
                   ) : (

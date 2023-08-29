@@ -11,7 +11,7 @@ import {
   DialogContentText,
   Button,
   Input,
-  Paper
+  Paper,
 } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import Bar from "../../modules/layout/bar";
@@ -34,61 +34,10 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
-// const imageUrl = 'https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg'
-
-// function convert(url, callback) {
-//   const img = new Image();
-//   img.crossOrigin = 'Anonymous'; 
-//   img.onload = function () {
-//     const canvas = document.createElement('canvas');
-//     canvas.width = img.width;
-//     canvas.height = img.height;
-
-//     const ctx = canvas.getContext('2d');
-//     ctx.drawImage(img, 0, 0, img.width, img.height);
-
-//     const base64Data = canvas.toDataURL('image/png'); 
-
-//     callback(base64Data);
-//   };
-//   img.src = url;
-// }
-
-// useEffect(() => {
-//   convert(imageUrl, function (base64Data) {
-//     console.log('Base64 이미지 데이터:', base64Data);
-//   });
-// }, [])
-
-const imageUrl = 'https://2023-c-capstone.s3.us-east-2.amazonaws.com/location/sjhong98@icloud.com/IMG_6095-2.jpg';
-
-function convert(file, callback) {
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const base64Data = event.target.result;
-    console.log("FileReader : ", base64Data)
-    callback(base64Data);
-  };
-  reader.readAsDataURL(file);
-}
-
-useEffect(() => {
-  fetch(imageUrl)
-    .then(response => response.blob()) // 이미지 URL을 Blob으로 변환
-    .then(blob => {
-      const file = new File([blob], 'image.jpg', { type: blob.type }); // Blob을 File로 변환
-      convert(file, function (base64Data) {
-        console.log('Base64 이미지 데이터:', base64Data);
-      });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}, []);
-
 
   useEffect(() => {
-    if (queryValue !== "") {  // 게시물 수정 시 기존 게시물 내용 가져오기
+    if (queryValue !== "") {
+      // 게시물 수정 시 기존 게시물 내용 가져오기
       axios
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -105,14 +54,12 @@ useEffect(() => {
           setTitle(res.data[0].title);
           setContent(res.data[0].content);
           setLocation(res.data[0].name);
-
         })
         .catch((error) => {
           console.log(error);
         });
     }
   }, [queryValue]);
-
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -147,16 +94,17 @@ useEffect(() => {
       return;
     }
 
-    if(queryValue === "") {
+    if (queryValue === "") {
       selectedImageBase64 = await convertImageToBase64(selectedImage);
       console.log("photo:", JSON.stringify(selectedImageBase64));
       fileName = selectedImage.name;
-      console.log('filename:', fileName);
+      console.log("filename:", fileName);
     }
 
     setOpen(true);
 
-    if (queryValue !== "") {  // 업데이트
+    if (queryValue !== "") {
+      // 업데이트
       axios
         .post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
@@ -164,26 +112,32 @@ useEffect(() => {
             /**API JSON 형식 참조하여 post 요청을 보내주세요**/
             type: "post-update",
             fileName: "updateFile", // 저장할 파일명
-            file: previewImage,  
+            file: previewImage,
             name: location, // 지역명(seoul, jeju...)
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
             content: content, // 게시글 내용
-          }, 10000
+          },
+          10000,
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("===== update =====", 
-                      "\n수정된 제목 : ", title, 
-                      "\n수정된 내용 : ", content, 
-                      "\nPreviewImage : ", JSON.stringify(base64));
+          console.log(
+            "===== update =====",
+            "\n수정된 제목 : ",
+            title,
+            "\n수정된 내용 : ",
+            content,
+            "\nPreviewImage : ",
+            JSON.stringify(base64),
+          );
           navigate(`/board/${location}`);
         })
         .catch((error) => {
           console.log("error : ", error);
         });
-
-    } else {  // 새로운 글 작성
+    } else {
+      // 새로운 글 작성
       axios
         .post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
@@ -195,7 +149,8 @@ useEffect(() => {
             user_id: sessionStorage.id, // 사용자 id(test@test.com...)
             title: title, // 게시글 제목
             content: content, // 게시글 내용
-          }, 10000
+          },
+          10000,
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
@@ -209,7 +164,7 @@ useEffect(() => {
 
   const convertImageToBase64 = (image) => {
     return new Promise((resolve, reject) => {
-      if(queryValue === "") {
+      if (queryValue === "") {
         const reader = new FileReader();
         reader.onload = (event) => {
           resolve(event.target.result.split(",")[1]);
@@ -219,7 +174,6 @@ useEffect(() => {
         };
         reader.readAsDataURL(image);
       }
-
     });
   };
 
@@ -250,39 +204,35 @@ useEffect(() => {
             <div className="top">
               <h4 style={{ margin: "auto", display: "flex" }}>새 게시물</h4>
               <div
-                  style={{
-                    display: "flex",
-                    marginTop: "10px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Stack direction="row" spacing={2}>
-                    <Dialog
-                      open={open}
+                style={{
+                  display: "flex",
+                  marginTop: "10px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Stack direction="row" spacing={2}>
+                  <Dialog open={open}>
+                    <DialogContent
+                      className="row-center"
+                      sx={{ width: "15vw", height: "15vh" }}
                     >
-                      <DialogContent
-                        className="row-center"
-                        sx={{width: "15vw",
-                              height: "15vh" }}>
-                        <DialogContentText>
-                          게시물 업로드 중
-                        </DialogContentText>
-                      </DialogContent>
-                    </Dialog>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "#FFF",
-                        backgroundColor: "#045369",
-                        width: "10vw",
-                      }}
-                      onClick={handleUpload}
-                    >
-                      업로드
-                    </Button>
-                  </Stack>
-                </div>
+                      <DialogContentText>게시물 업로드 중</DialogContentText>
+                    </DialogContent>
+                  </Dialog>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      color: "#FFF",
+                      backgroundColor: "#045369",
+                      width: "10vw",
+                    }}
+                    onClick={handleUpload}
+                  >
+                    업로드
+                  </Button>
+                </Stack>
+              </div>
             </div>
             <hr />
 
@@ -303,9 +253,7 @@ useEffect(() => {
               )}
             </div>
             <Box>
-              <LocationSelect 
-                location={location} 
-                setLocation={setLocation} />
+              <LocationSelect location={location} setLocation={setLocation} />
               <Textarea
                 onInput={(e) => {
                   setTitle(e.target.value);
@@ -331,4 +279,3 @@ useEffect(() => {
     </div>
   );
 }
-

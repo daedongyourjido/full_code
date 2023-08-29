@@ -19,7 +19,7 @@ import { Notifications, PersonAdd } from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
-import Popover from '@mui/material/Popover';
+import Popover from "@mui/material/Popover";
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
@@ -63,8 +63,6 @@ function AfterLogin(props) {
   async function handleAlarm() {
     // @알림 - 나의 알림 수신
   }
-
-
 
   const openModal = (info) => {
     axios
@@ -137,9 +135,7 @@ function AfterLogin(props) {
   };
 
   const noteOpen = Boolean(anchorEl);
-  const noteId = noteOpen ? 'simple-popover' : undefined;
-
-
+  const noteId = noteOpen ? "simple-popover" : undefined;
 
   return (
     <div
@@ -152,31 +148,28 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-      
       <Notifications
-        onClick={handleNoteClick} 
+        onClick={handleNoteClick}
         sx={{
-          marginRight: '2vw',
-          color: 'red' }} />
+          marginRight: "2vw",
+          color: "red",
+        }}
+      />
       <Popover
         id={noteId}
         open={noteOpen}
         anchorEl={anchorEl}
         onClose={handleNoteClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
       >
-        <div>
-
-          {/* @알림 - 알림 객체배열 map으로 띄우는 곳 */}
-
-        </div>
+        <div>{/* @알림 - 알림 객체배열 map으로 띄우는 곳 */}</div>
       </Popover>
 
       <Button
@@ -184,7 +177,7 @@ function AfterLogin(props) {
         sx={{ backgroundColor: "#6EA4B4", marginRight: "20px" }}
         onClick={() => {
           // window.open("/write", "_blank");
-          navigate('/write');
+          navigate("/write");
           window.location.reload();
         }}
       >
@@ -197,11 +190,11 @@ function AfterLogin(props) {
           display: "flex",
           alignItems: "center",
           width: "15vw",
-          height: '32px'
+          height: "32px",
         }}
       >
         <InputBase
-          sx={{ ml: 1, flex: 1}}
+          sx={{ ml: 1, flex: 1 }}
           placeholder="검색"
           inputProps={{ "aria-label": "search google maps" }}
           onInput={(e) => {
@@ -286,7 +279,6 @@ function AfterLogin(props) {
           </Typography>
 
           <ImageCollection userLocationInfo={searchLocationResult} />
-
         </Box>
       </Modal>
       <img
@@ -325,12 +317,11 @@ export default function Bar(props) {
   const [accordion, setAccordion] = useState("#FFFFFF");
 
   useEffect(() => {
-    if(props.main) {
+    if (props.main) {
       setBackground("#045369");
       setFont("#FFFFFF");
       setAccordion("#045369");
     }
-      
   }, [props.main]);
 
   useEffect(() => {
@@ -339,20 +330,16 @@ export default function Bar(props) {
   }, []);
 
   return (
-    <div 
-      className="header" 
-      style={{
-      }} >
-      <Box 
-        sx={{ flexGrow: 1, whiteSpace: "nowrap"}} 
-        className="header">
-        <AppBar 
-          position="static" 
-          sx={{ 
+    <div className="header" style={{}}>
+      <Box sx={{ flexGrow: 1, whiteSpace: "nowrap" }} className="header">
+        <AppBar
+          position="static"
+          sx={{
             backgroundColor: background,
             color: font,
-            boxShadow: 'none',
-           }}>
+            boxShadow: "none",
+          }}
+        >
           <Toolbar>
             <Typography
               variant="h4"
@@ -367,21 +354,17 @@ export default function Bar(props) {
               }}
               onClick={() => {
                 // window.open("/", "_blank");
-                navigate('/');
+                navigate("/");
                 window.location.reload();
               }}
             >
               대동유어지도
             </Typography>
-            {login ? 
-            <AfterLogin 
-              location={"/"}
-              accordion={accordion}
-              /> 
-            : 
-            <BeforeLogin
-              font={font} 
-              />}
+            {login ? (
+              <AfterLogin location={"/"} accordion={accordion} />
+            ) : (
+              <BeforeLogin font={font} />
+            )}
           </Toolbar>
         </AppBar>
       </Box>

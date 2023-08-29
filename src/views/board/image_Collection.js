@@ -18,7 +18,6 @@ function Image_Collection(props) {
   const [modalInfo, setModalInfo] = useState(null);
   const [activePost, setActivePost] = useState(null);
 
-  
   const handleMouseOver = (index) => {
     setActivePost(index);
   };
@@ -82,10 +81,7 @@ function Image_Collection(props) {
         overlayClassName="modal-overlay"
         style={customOverlayStyle} // 오버레이 스타일을 적용
       >
-        <PostView 
-          info={modalInfo} 
-          open={isModalOpen} 
-          closeModal={closeModal} />
+        <PostView info={modalInfo} open={isModalOpen} closeModal={closeModal} />
       </Modal>
     </div>
   );
