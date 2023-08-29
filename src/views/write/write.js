@@ -181,7 +181,7 @@ export default function Write() {
         )
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
         .then((res) => {
-          console.log("update", title, content);
+          console.log("===== update =====", "\n수정된 제목 : ", title, "\n수정된 내용 : ", content);
           navigate(`/board/${location}`);
         })
         .catch((error) => {
