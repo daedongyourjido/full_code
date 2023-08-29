@@ -83,22 +83,7 @@ export default function Write() {
   }, [queryValue]);
 
 
-  // function convert(imgUrl, callback) {
-  //   const image = new Image();
-  //   image.crossOrigin='anonymous';
-  //   image.onload = () => {
-  //     const canvas = document.createElement('canvas');
-  //     const ctx = canvas.getContext('2d');
-  //     canvas.height = image.naturalHeight;
-  //     canvas.width = image.naturalWidth;
-  //     ctx.drawImage(image, 0, 0);
-  //     const dataUrl = canvas.toDataURL();
-  //     callback && callback(dataUrl)
-  //   }
-  //   image.src = imgUrl;
-  // }
-
-  function convert2(imageUrl, callback) {
+  function convert(imageUrl, callback) {
     fetch(imageUrl, {
       method: 'GET',
       mode: 'cors',
@@ -117,7 +102,8 @@ export default function Write() {
   }
 
   useEffect(() => {
-    convert2(previewImage, (base64Image) => {
+    convert(previewImage, (base64Image) => {
+      console.log(base64Image);
       setBase64(base64Image);
     })
   }, [previewImage])
