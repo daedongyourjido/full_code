@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogContentText,
   Button,
-  Input,
   Paper,
 } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
@@ -120,17 +119,8 @@ export default function Write() {
           },
           10000,
         )
-        // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
-        .then((res) => {
-          console.log(
-            "===== update =====",
-            "\n수정된 제목 : ",
-            title,
-            "\n수정된 내용 : ",
-            content,
-            "\nPreviewImage : ",
-            JSON.stringify(base64),
-          );
+        .then((res) => {  // 수정된 내용 확인
+          console.log(res);
           navigate(`/board/${location}`);
         })
         .catch((error) => {
@@ -221,6 +211,7 @@ export default function Write() {
                     </DialogContent>
                   </Dialog>
                   <Button
+                    data-cy="upload-btn"
                     variant="contained"
                     sx={{
                       color: "#FFF",
@@ -237,11 +228,18 @@ export default function Write() {
             <hr />
 
             <div className={"middle"}>
-              <Input
+              <input
+                data-cy="file-upload"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
               />
+              {/* <Input
+                data-cy="file-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              /> */}
               {previewImage && (
                 <Paper sx={{ height: "100%" }} elevation={3}>
                   <img
@@ -253,8 +251,11 @@ export default function Write() {
               )}
             </div>
             <Box>
-              <LocationSelect location={location} setLocation={setLocation} />
+              <LocationSelect 
+                location={location} 
+                setLocation={setLocation} />
               <Textarea
+                data-cy="title-input"
                 onInput={(e) => {
                   setTitle(e.target.value);
                 }}
@@ -266,6 +267,7 @@ export default function Write() {
             </Box>
 
             <Textarea
+            data-cy="content-input"
               onInput={(e) => {
                 setContent(e.target.value);
               }}

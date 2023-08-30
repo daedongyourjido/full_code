@@ -234,9 +234,10 @@ export default function PostView(props) {
             <div className="main_con">
               <div className="gallery">
                 <img
+                  data-cy="post-img"
                   src={props.info.image}
                   className={`${imageSet}`}
-                  alt="..."
+                  alt={props.info.name}
                 />
               </div>
 
@@ -394,6 +395,7 @@ export default function PostView(props) {
                           color: "black",
                           marginTop: "1.4vh",
                           cursor: "pointer",
+                          marginRight: "1vw"
                         }}
                         onClick={handleDelete}
                       />

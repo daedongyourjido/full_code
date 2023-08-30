@@ -16,6 +16,7 @@ export default function InputField(props) {
     >
       <div>
         <TextField
+          data-cy={props.dataId}
           id={props.id}
           label={props.label}
           type={props.type}
