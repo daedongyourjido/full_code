@@ -379,6 +379,7 @@ export default function PostView(props) {
                   {props.info.user_id === sessionStorage.id ? (
                     <>
                       <SettingsIcon
+                        data-cy="post-update"
                         sx={{
                           color: "black",
                           marginTop: "1.4vh",
@@ -391,6 +392,7 @@ export default function PostView(props) {
                         }}
                       />
                       <DeleteIcon
+                        data-cy="post-delete"
                         sx={{
                           color: "black",
                           marginTop: "1.4vh",

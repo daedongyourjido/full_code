@@ -22,7 +22,9 @@ export default function LocationSelect(props) {
         <MenuItem 
           data-cy="seoul"
           value={"seoul"}>서울</MenuItem>
-        <MenuItem value={"jeju"}>제주</MenuItem>
+        <MenuItem 
+          data-cy="jeju"
+          value={"jeju"}>제주</MenuItem>
         <MenuItem value={"busan"}>부산</MenuItem>
         <MenuItem value={"daegu"}>대구</MenuItem>
         <MenuItem value={"gyeonggi"}>경기</MenuItem>

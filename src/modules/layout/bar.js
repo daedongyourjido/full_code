@@ -194,6 +194,7 @@ function AfterLogin(props) {
         }}
       >
         <InputBase
+          data-cy="search"
           sx={{ ml: 1, flex: 1 }}
           placeholder="검색"
           inputProps={{ "aria-label": "search google maps" }}
@@ -202,6 +203,7 @@ function AfterLogin(props) {
           }}
         />
         <IconButton
+          data-cy="search-btn"
           onClick={openModal}
           type="button"
           sx={{ p: "10px" }}
