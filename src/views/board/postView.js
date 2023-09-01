@@ -29,6 +29,16 @@ export default function PostView(props) {
   async function handleLike(e) {
     try {
       e.preventDefault();
+      // @알림 - 좋아요
+      // eslint-disable-next-line
+      const likeAlarm = {
+        type: "like",
+        postId: props.info.id, // 게시물 아이디
+        receiverId: props.info.user_id, // 수신자 아이디
+        receiverName: props.info.nickname, // 수신자 닉네임
+        senderId: sessionStorage.id, // 발신자 아이디
+        senderName: sessionStorage.name, // 발신자 닉네임
+      };
       if (likeFlag) {
         await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -68,20 +78,18 @@ export default function PostView(props) {
             values: `'${sessionStorage.id}', '${props.info.email}', ${props.info.id}`,
           },
         );
+        await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "INSERT",
+            table: "notification",
+            columns: "user_id, data",
+            values: `'${props.info.user_id}', '${JSON.stringify(likeAlarm)}'`,
+          },
+        );
         setLikeFlag(!likeFlag);
         setLikeCount(likeCount + 1);
       }
-
-      // @알림 - 좋아요
-      // eslint-disable-next-line
-      const likeAlarm = {
-        type: "like",
-        postId: props.info.id, // 게시물 아이디
-        receiverId: props.info.user_id, // 수신자 아이디
-        receiverName: props.info.nickname, // 수신자 닉네임
-        senderId: sessionStorage.id, // 발신자 아이디
-        senderName: sessionStorage.name, // 발신자 닉네임
-      };
     } catch (err) {
       console.log(err);
     }
@@ -144,6 +152,17 @@ export default function PostView(props) {
 
   async function addComment() {
     try {
+      // @알림 - 댓글
+      // eslint-disable-next-line
+      const commentAlarm = {
+        type: "comment",
+        postId: props.info.id, // 게시물 아이디
+        msg: comment, // 댓글 내용
+        receiverId: props.info.user_id, // 수신자 아이디
+        receiverName: props.info.nickname, // 수신자 닉네임
+        senderId: sessionStorage.id, // 발신자 아이디
+        senderName: sessionStorage.name, // 발신자 닉네임
+      };
       const newComment = {
         nickname: sessionStorage.getItem("name"),
         user_id: sessionStorage.getItem("id"),
@@ -170,17 +189,15 @@ export default function PostView(props) {
         },
       );
 
-      // @알림 - 댓글
-      // eslint-disable-next-line
-      const commentAlarm = {
-        type: "comment",
-        postId: props.info.id, // 게시물 아이디
-        msg: comment, // 댓글 내용
-        receiverId: props.info.user_id, // 수신자 아이디
-        receiverName: props.info.nickname, // 수신자 닉네임
-        senderId: sessionStorage.id, // 발신자 아이디
-        senderName: sessionStorage.name, // 발신자 닉네임
-      };
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "notification",
+          columns: "user_id, data",
+          values: `'${props.info.user_id}', '${JSON.stringify(commentAlarm)}'`,
+        },
+      );
     } catch (err) {
       console.log(err);
     }
@@ -397,7 +414,7 @@ export default function PostView(props) {
                           color: "black",
                           marginTop: "1.4vh",
                           cursor: "pointer",
-                          marginRight: "1vw"
+                          marginRight: "1vw",
                         }}
                         onClick={handleDelete}
                       />

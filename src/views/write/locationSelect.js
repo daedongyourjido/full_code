@@ -12,19 +12,19 @@ export default function LocationSelect(props) {
     <FormControl fullWidth sx={{ marginTop: "40px" }}>
       <InputLabel id="demo-simple-select-label">지역</InputLabel>
       <Select
-        data-cy='location-select'
+        data-cy="location-select"
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={props.location}
         label="지역"
         onChange={(e) => handleChange(e)}
       >
-        <MenuItem 
-          data-cy="seoul"
-          value={"seoul"}>서울</MenuItem>
-        <MenuItem 
-          data-cy="jeju"
-          value={"jeju"}>제주</MenuItem>
+        <MenuItem data-cy="seoul" value={"seoul"}>
+          서울
+        </MenuItem>
+        <MenuItem data-cy="jeju" value={"jeju"}>
+          제주
+        </MenuItem>
         <MenuItem value={"busan"}>부산</MenuItem>
         <MenuItem value={"daegu"}>대구</MenuItem>
         <MenuItem value={"gyeonggi"}>경기</MenuItem>

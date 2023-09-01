@@ -72,18 +72,6 @@ export default function Profile() {
 
   async function handleFollow(targetId) {
     try {
-      await axios.post(
-        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-        {
-          DML: "INSERT",
-          table: "following",
-          columns: "follower_id, following_id",
-          values: `${sessionStorage._key}, ${user.id}`,
-        },
-      );
-      alert("팔로우되었습니다");
-      setIsFollowing(true);
-
       // @알림 - 팔로우
       // eslint-disable-next-line
       const followAlarm = {
@@ -93,6 +81,27 @@ export default function Profile() {
         senderId: sessionStorage.id, // 발신자 아이디
         senderName: sessionStorage.name, // 발신자 닉네임
       };
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "following",
+          columns: "follower_id, following_id",
+          values: `${sessionStorage._key}, ${user.id}`,
+        },
+      );
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "notification",
+          columns: "user_id, data",
+          values: `'${targetId}', '${JSON.stringify(followAlarm)}'`,
+        },
+      );
+      alert("팔로우되었습니다");
+      setIsFollowing(true);
+
       window.location.reload();
     } catch (err) {
       console.log(err);

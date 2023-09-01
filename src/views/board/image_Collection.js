@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import PostView from "./postView";
 import Grid from "@mui/material/Grid";
@@ -52,8 +52,7 @@ function Image_Collection(props) {
             >
               {/* 여기서 각 게시물 info 넘어감 */}
               {activePost === index ? (
-                <div
-                  className="post-mouseover">
+                <div className="post-mouseover">
                   <div className="post-title">
                     <ChatBubbleIcon sx={{ height: "2vh", marginTop: "2vh" }} />
                     <p>{info.title}</p>
@@ -70,11 +69,12 @@ function Image_Collection(props) {
               ) : (
                 <></>
               )}
-              <img 
-                src={info.image} 
-                className="post-thumbnail" 
+              <img
+                src={info.image}
+                className="post-thumbnail"
                 postId={info.id}
-                alt="..." />
+                alt="..."
+              />
             </Grid>
           </>
         ))}

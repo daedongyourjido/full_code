@@ -33,7 +33,6 @@ export default function Write() {
   // eslint-disable-next-line
   const [base64, setBase64] = useState("");
 
-
   useEffect(() => {
     if (queryValue !== "") {
       // 게시물 수정 시 기존 게시물 내용 가져오기
@@ -68,64 +67,96 @@ export default function Write() {
       const reader = new FileReader();
       reader.onload = (e) => {
         setPreviewImage(e.target.result);
-        console.log("test : ", e.target.result)
+        console.log("test : ", e.target.result);
       };
       reader.readAsDataURL(selectedFile);
     }
   };
 
   const handleUpload = async (e) => {
+    console.log("upload1");
     e.preventDefault();
     let selectedImageBase64, fileName;
-
     if (!previewImage && queryValue === "") {
       alert("사진을 업로드 해주세요");
       return;
     }
-
     if (!title) {
       alert("제목을 입력해주세요");
       return;
     }
-
     if (!location) {
       alert("지역을 선택해주세요");
       return;
     }
-
-    if (queryValue === "") {
-      selectedImageBase64 = await convertImageToBase64(selectedImage);
-      console.log("photo:", JSON.stringify(selectedImageBase64));
+    selectedImageBase64 = await convertImageToBase64(selectedImage);
+    if (selectedImage !== null) {
       fileName = selectedImage.name;
-      console.log("filename:", fileName);
     }
 
     setOpen(true);
-
     if (queryValue !== "") {
-      // 업데이트
-      axios
-        .post(
-          "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
-          {
-            /**API JSON 형식 참조하여 post 요청을 보내주세요**/
-            type: "post-update",
-            fileName: "updateFile", // 저장할 파일명
-            file: previewImage,
-            name: location, // 지역명(seoul, jeju...)
-            user_id: sessionStorage.id, // 사용자 id(test@test.com...)
-            title: title, // 게시글 제목
-            content: content, // 게시글 내용
-          },
-          10000,
-        )
-        .then((res) => {  // 수정된 내용 확인
-          console.log(res);
-          navigate(`/board/${location}`);
-        })
-        .catch((error) => {
-          console.log("error : ", error);
+      if (selectedImageBase64 === undefined) {
+        // 업데이트
+        console.log({
+          /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+          id: queryValue,
+          type: "post-update",
+          name: location, // 지역명(seoul, jeju...)
+          user_id: sessionStorage.id, // 사용자 id(test@test.com...)
+          title: title, // 게시글 제목
+          content: content, // 게시글 내용
         });
+        axios
+          .post(
+            "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
+            {
+              /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+              id: queryValue,
+              type: "post-update",
+              name: location, // 지역명(seoul, jeju...)
+              user_id: sessionStorage.id, // 사용자 id(test@test.com...)
+              title: title, // 게시글 제목
+              content: content, // 게시글 내용
+            },
+            10000,
+          )
+          .then((res) => {
+            // 수정된 내용 확인
+            console.log(res);
+            navigate(`/board/${location}`);
+          })
+          .catch((error) => {
+            console.log("error : ", error);
+          });
+      } else {
+        console.log();
+        // 업데이트
+        axios
+          .post(
+            "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
+            {
+              /**API JSON 형식 참조하여 post 요청을 보내주세요**/
+              type: "post-update",
+              id: queryValue,
+              fileName: fileName, // 저장할 파일명
+              file: JSON.stringify(selectedImageBase64), // 파일 값
+              name: location, // 지역명(seoul, jeju...)
+              user_id: sessionStorage.id, // 사용자 id(test@test.com...)
+              title: title, // 게시글 제목
+              content: content, // 게시글 내용
+            },
+            10000,
+          )
+          .then((res) => {
+            // 수정된 내용 확인
+            console.log(res);
+            navigate(`/board/${location}`);
+          })
+          .catch((error) => {
+            console.log("error : ", error);
+          });
+      }
     } else {
       // 새로운 글 작성
       axios
@@ -154,7 +185,9 @@ export default function Write() {
 
   const convertImageToBase64 = (image) => {
     return new Promise((resolve, reject) => {
-      if (queryValue === "") {
+      if (image === null) {
+        resolve(undefined);
+      } else {
         const reader = new FileReader();
         reader.onload = (event) => {
           resolve(event.target.result.split(",")[1]);
@@ -251,9 +284,7 @@ export default function Write() {
               )}
             </div>
             <Box>
-              <LocationSelect 
-                location={location} 
-                setLocation={setLocation} />
+              <LocationSelect location={location} setLocation={setLocation} />
               <Textarea
                 data-cy="title-input"
                 onInput={(e) => {
@@ -267,7 +298,7 @@ export default function Write() {
             </Box>
 
             <Textarea
-            data-cy="content-input"
+              data-cy="content-input"
               onInput={(e) => {
                 setContent(e.target.value);
               }}

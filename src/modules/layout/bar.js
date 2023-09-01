@@ -20,6 +20,9 @@ import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
 import Popover from "@mui/material/Popover";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ImageIcon from "@mui/icons-material/Image";
+import { ListItemButton } from "@mui/joy";
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
@@ -53,6 +56,7 @@ function AfterLogin(props) {
   const [searchText, setSearchText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [searchLocationResult, setSearchLocationResult] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const customOverlayStyle = {
     overlay: {
       zIndex: 9999, // 모달을 최상위 레이어에 표시
@@ -63,7 +67,30 @@ function AfterLogin(props) {
   async function handleAlarm() {
     // @알림 - 나의 알림 수신
   }
-
+  useEffect(() => {
+    const getNotifications = async () => {
+      try {
+        const res = await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "notification",
+            where: `user_id = '${sessionStorage.id}'`,
+          },
+        );
+        return new Promise((resolve, reject) => {
+          resolve(res.data);
+          reject("error");
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getNotifications().then((res) => {
+      setNotifications(res);
+    });
+  }, []);
   const openModal = (info) => {
     axios
       .post(
@@ -148,13 +175,16 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-      <Notifications
+      <IconButton
         onClick={handleNoteClick}
         sx={{
           marginRight: "2vw",
-          color: "red",
+          color: notifications.length === 0 ? "white" : "#ffcc00",
         }}
-      />
+      >
+        <Notifications />
+      </IconButton>
+
       <Popover
         id={noteId}
         open={noteOpen}
@@ -169,7 +199,21 @@ function AfterLogin(props) {
           horizontal: "center",
         }}
       >
-        <div>{/* @알림 - 알림 객체배열 map으로 띄우는 곳 */}</div>
+        <List
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        >
+          {notifications.map((ele) => (
+            <ListItemButton clickable={true}>
+              <ListItemAvatar>
+                <Avatar>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
+              {JSON.stringify(ele)}
+              <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+            </ListItemButton>
+          ))}
+        </List>
       </Popover>
 
       <Button
