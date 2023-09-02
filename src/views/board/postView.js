@@ -188,7 +188,7 @@ export default function PostView(props) {
           comment: comment,
         },
       );
-
+        console.log('notification comment')
       await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
