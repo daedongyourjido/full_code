@@ -224,16 +224,29 @@ function AfterLogin(props) {
       }
   }
     const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
-    const [modalInfo, setModalInfo] = useState(null);
+    const [modalInfo, setModalInfo] = useState({});
     // 모달 열기 함수
-    const openPostModal = (data) => {
-        setIsPostModalOpen(true);
-        setModalInfo({
-            id: data.postId,
-            user_id: data.receiverId,
-            email: data.receiverId,
-            nickname: data.receiverName
-        });
+    const openPostModal = async (data) => {
+        try {
+            const res = await axios.post(
+                "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+                {
+                    DML: "SELECT",
+                    columns: "*",
+                    table: "location",
+                    where: `id = ${data.postId}`,
+                },
+            );
+            setModalInfo({
+                ...res.data[0],
+                email: data.receiverId,
+            });
+            setIsPostModalOpen(true);
+        }
+        catch (e) {
+            console.log('openPostModal error', e)
+        }
+
     };
 
     // 모달 닫기 함수
@@ -258,10 +271,10 @@ function AfterLogin(props) {
       }
       switch (userData.type) {
           case 'like':
-              openPostModal(userData)
+              await openPostModal(userData)
               break
           case 'comment':
-              openPostModal(userData)
+              await openPostModal(userData)
               break
           case 'follow':
               navigate(`/profile?user=${userData.senderId}`);
@@ -321,9 +334,7 @@ function AfterLogin(props) {
         >
           {notifications.map((ele) => (
             <ListItemButton clickable={true} onClick={() => {handleNotificationEvent(ele)}}>
-                {
-                    notificationListItem(ele)
-                }
+                {notificationListItem(ele)}
             </ListItemButton>
           ))}
         </List>
