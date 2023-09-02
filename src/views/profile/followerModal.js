@@ -28,7 +28,7 @@ export default function FollowerModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const follower = props.follower;
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -63,7 +63,7 @@ export default function FollowerModal(props) {
                       src={ele.picture}
                       onClick={() => {
                         // window.open(`/profile?user=${ele.email}`, "_blank");
-                        navigate(`profile?user=${ele.email}`);
+                        navigate(`/profile?user=${ele.email}`);
                         window.location.reload();
                       }}
                     />
