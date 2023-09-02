@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from "@mui/material";
-import {Chat, Notifications, PersonAdd, Recommend} from "@mui/icons-material";
+import { Chat, Notifications, PersonAdd, Recommend } from "@mui/icons-material";
 import "./search.css";
 import "../../views/board/board.css";
 import ImageCollection from "../../views/board/image_Collection";
@@ -88,7 +88,7 @@ function AfterLogin(props) {
       }
     };
     getNotifications().then((res) => {
-        console.log(res)
+      console.log(res);
       setNotifications(res);
     });
   }, []);
@@ -132,42 +132,39 @@ function AfterLogin(props) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const handleFollow = async  (target) => {
-      const followAlarm = {
-          type: "follow",
-          receiverId: target.email, // 수신자 아이디
-          receiverName: target.nickname, // 수신자 닉네임
-          senderId: sessionStorage.id, // 발신자 아이디
-          senderName: sessionStorage.name, // 발신자 닉네임
-      };
-      try {
-          await axios
-              .post(
-                  "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-                  {
-                      DML: "INSERT",
-                      table: "following",
-                      columns: "follower_id, following_id",
-                      values: `${sessionStorage._key}, ${target.id}`,
-                  },
-              )
-          target['type'] = 'follow'
-          await axios.post(
-              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-              {
-                  DML: "INSERT",
-                  table: "notification",
-                  columns: "user_id, data",
-                  values: `'${target.email}', '${JSON.stringify(followAlarm)}'`,
-              },
-          );
-          navigate(`/profile?user=${target.email}`);
-          window.location.reload();
-      }
-      catch (e) {
-          console.log('follow error', e)
-      }
-
+  const handleFollow = async (target) => {
+    const followAlarm = {
+      type: "follow",
+      receiverId: target.email, // 수신자 아이디
+      receiverName: target.nickname, // 수신자 닉네임
+      senderId: sessionStorage.id, // 발신자 아이디
+      senderName: sessionStorage.name, // 발신자 닉네임
+    };
+    try {
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "following",
+          columns: "follower_id, following_id",
+          values: `${sessionStorage._key}, ${target.id}`,
+        },
+      );
+      target["type"] = "follow";
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "INSERT",
+          table: "notification",
+          columns: "user_id, data",
+          values: `'${target.email}', '${JSON.stringify(followAlarm)}'`,
+        },
+      );
+      navigate(`/profile?user=${target.email}`);
+      window.location.reload();
+    } catch (e) {
+      console.log("follow error", e);
+    }
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -183,107 +180,112 @@ function AfterLogin(props) {
   const noteOpen = Boolean(anchorEl);
   const noteId = noteOpen ? "simple-popover" : undefined;
   const notificationListItem = (data) => {
-      const userData = JSON.parse(data.data)
-      switch (userData.type) {
-          case 'like':
-              return (
-                  <>
-                      <ListItemAvatar>
-                          <Avatar>
-                              <Recommend color={'red'}/>
-                          </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={`${userData.senderName} 님이`} secondary={`좋아요를 눌렀어요!`}/>
-                  </>
-          )
-          case 'comment':
-              return (
-                  <>
-                      <ListItemAvatar >
-                          <Avatar>
-                              <Chat color={'yellow'} />
-                          </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={`${userData.senderName} 님이`} secondary={`댓글을 달았어요!`}/>
-                  </>
-              )
-          case 'follow':
-              return (
-                  <>
-                      <ListItemAvatar >
-                          <Avatar>
-                              <PersonAdd color={'blue'} />
-                          </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={`${userData.senderName} 님이`} secondary={`팔로우했어요!`}/>
-                  </>
+    const userData = JSON.parse(data.data);
+    switch (userData.type) {
+      case "like":
+        return (
+          <>
+            <ListItemAvatar>
+              <Avatar>
+                <Recommend color={"red"} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${userData.senderName} 님이`}
+              secondary={`좋아요를 눌렀어요!`}
+            />
+          </>
+        );
+      case "comment":
+        return (
+          <>
+            <ListItemAvatar>
+              <Avatar>
+                <Chat color={"yellow"} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${userData.senderName} 님이`}
+              secondary={`댓글을 달았어요!`}
+            />
+          </>
+        );
+      case "follow":
+        return (
+          <>
+            <ListItemAvatar>
+              <Avatar>
+                <PersonAdd color={"blue"} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${userData.senderName} 님이`}
+              secondary={`팔로우했어요!`}
+            />
+          </>
+        );
+      default:
+        throw new Error("something went worng");
+    }
+  };
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
+  const [modalInfo, setModalInfo] = useState({});
+  // 모달 열기 함수
+  const openPostModal = async (data) => {
+    try {
+      const res = await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "SELECT",
+          columns: "*",
+          table: "location",
+          where: `id = ${data.postId}`,
+        },
+      );
+      setModalInfo({
+        ...res.data[0],
+        email: data.receiverId,
+      });
+      setIsPostModalOpen(true);
+    } catch (e) {
+      console.log("openPostModal error", e);
+    }
+  };
 
-              )
-          default:
-              throw new Error('something went worng')
-      }
-  }
-    const [isPostModalOpen, setIsPostModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
-    const [modalInfo, setModalInfo] = useState({});
-    // 모달 열기 함수
-    const openPostModal = async (data) => {
-        try {
-            const res = await axios.post(
-                "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-                {
-                    DML: "SELECT",
-                    columns: "*",
-                    table: "location",
-                    where: `id = ${data.postId}`,
-                },
-            );
-            setModalInfo({
-                ...res.data[0],
-                email: data.receiverId,
-            });
-            setIsPostModalOpen(true);
-        }
-        catch (e) {
-            console.log('openPostModal error', e)
-        }
-
-    };
-
-    // 모달 닫기 함수
-    const closePostModal = () => {
-        setIsPostModalOpen(false);
-        window.location.reload();
-    };
+  // 모달 닫기 함수
+  const closePostModal = () => {
+    setIsPostModalOpen(false);
+    window.location.reload();
+  };
   const handleNotificationEvent = async (data) => {
-      const userData = JSON.parse(data.data)
-      try {
-          await axios.post(
-              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-              {
-                  DML: "DELETE",
-                  table: "notification",
-                  where: `id=${data.id}`,
-              },
-          );
-      }
-      catch (e) {
-          console.log('notification click error', e)
-      }
-      switch (userData.type) {
-          case 'like':
-              await openPostModal(userData)
-              break
-          case 'comment':
-              await openPostModal(userData)
-              break
-          case 'follow':
-              navigate(`/profile?user=${userData.senderId}`);
-              window.location.reload()
-              break
-          default:
-              throw new Error('something went wrong')
-      }
-  }
+    const userData = JSON.parse(data.data);
+    try {
+      await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "DELETE",
+          table: "notification",
+          where: `id=${data.id}`,
+        },
+      );
+    } catch (e) {
+      console.log("notification click error", e);
+    }
+    switch (userData.type) {
+      case "like":
+        await openPostModal(userData);
+        break;
+      case "comment":
+        await openPostModal(userData);
+        break;
+      case "follow":
+        navigate(`/profile?user=${userData.senderId}`);
+        window.location.reload();
+        break;
+      default:
+        throw new Error("something went wrong");
+    }
+  };
 
   return (
     <div
@@ -296,15 +298,19 @@ function AfterLogin(props) {
         padding: "10px",
       }}
     >
-        <Modal
-            isOpen={isPostModalOpen}
-            onRequestClose={closePostModal}
-            className="modal-content"
-            overlayClassName="modal-overlay"
-            style={customOverlayStyle} // 오버레이 스타일을 적용
-        >
-            <PostView info={modalInfo} open={isPostModalOpen} closeModal={closePostModal} />
-        </Modal>
+      <Modal
+        isOpen={isPostModalOpen}
+        onRequestClose={closePostModal}
+        className="modal-content"
+        overlayClassName="modal-overlay"
+        style={customOverlayStyle} // 오버레이 스타일을 적용
+      >
+        <PostView
+          info={modalInfo}
+          open={isPostModalOpen}
+          closeModal={closePostModal}
+        />
+      </Modal>
       <IconButton
         onClick={handleNoteClick}
         sx={{
@@ -333,8 +339,13 @@ function AfterLogin(props) {
           sx={{ width: "240px", maxWidth: 360, bgcolor: "background.paper" }}
         >
           {notifications.map((ele) => (
-            <ListItemButton clickable={true} onClick={() => {handleNotificationEvent(ele)}}>
-                {notificationListItem(ele)}
+            <ListItemButton
+              clickable={true}
+              onClick={() => {
+                handleNotificationEvent(ele);
+              }}
+            >
+              {notificationListItem(ele)}
             </ListItemButton>
           ))}
         </List>
@@ -400,12 +411,10 @@ function AfterLogin(props) {
             }}
           >
             {searchResult.length > 0 ? (
-
               searchResult.map((value, index) => {
                 const labelId = `checkbox-list-label-${value}`;
 
                 return (
-
                   <ListItem
                     key={value}
                     secondaryAction={

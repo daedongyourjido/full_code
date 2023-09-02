@@ -28,7 +28,7 @@ export default function FollowingModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  console.log(props.following)
+  console.log(props.following);
   return (
     <div>
       <div id="modalbtn">
