@@ -140,10 +140,16 @@ export default function PostView(props) {
         },
       )
       .then((res) => {
+        for(let i=0; i<res.data.length; i++) {  // res에 내가 좋아요 누른 부분이 있다면 -> setLikeFlag true
+          if(res.data[i].email === sessionStorage.getItem("id")) {
+            setLikeFlag(true);
+            break;
+          }
+        }
         // if (res.data.length > 0) {
         //   setLikeFlag(true);
         // }
-        console.log(res);
+        console.log("likes : ", res);
       })
       .catch((error) => {
         console.log(error);
