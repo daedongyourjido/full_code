@@ -140,9 +140,10 @@ export default function PostView(props) {
         },
       )
       .then((res) => {
-        if (res.data.length > 0) {
-          setLikeFlag(!likeFlag);
-        }
+        // if (res.data.length > 0) {
+        //   setLikeFlag(true);
+        // }
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
