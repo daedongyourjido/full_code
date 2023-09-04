@@ -100,7 +100,7 @@ export const KakaoMap = (props) => {
           console.log(error);
         });
     }
-  }, [])
+  }, [heatMap])
 
   useEffect(() => {
     let data = geo.features; // 제대로 받아와짐
