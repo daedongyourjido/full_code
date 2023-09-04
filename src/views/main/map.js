@@ -11,6 +11,24 @@ export const KakaoMap = (props) => {
   const [lat, setLat] = useState(36);
   const [lng, setLng] = useState(127.9);
   const [scale, setScale] = useState(12.8);
+  const [heatMap, setHeatMap] = useState([
+    {location: 'seoul', num: 100},
+    {location: 'gyeonggi', num: 100},
+    {location: 'incheon', num: 100},
+    {location: 'daejeon', num: 100},
+    {location: 'busan', num: 100},
+    {location: 'jeonnam', num: 100},
+    {location: 'jeonbuk', num: 100},
+    {location: 'chungbuk', num: 100},
+    {location: 'chungnam', num: 100},
+    {location: 'gangwon', num: 100},
+    {location: 'gyeongnam', num: 100},
+    {location: 'gyeongbuk', num: 100},
+    {location: 'jeju', num: 100},
+    {location: 'daegu', num: 100},
+    {location: 'ulsan', num: 100},
+    {location: 'sejong', num: 100}
+  ]);
 
   // 1336 x 843
 
@@ -61,30 +79,28 @@ export const KakaoMap = (props) => {
     [],
   );
 
-  axios("") // 히트맵 정보 받기
-    .then()
-    .catch();
-
-  const heatMap = useMemo(() => {
-    return {
-      seoul: 100,
-      gyeonggi: 70,
-      incheon: 80,
-      daejeon: 10,
-      busan: 80,
-      jeonnam: 20,
-      jeonbuk: 40,
-      chungbuk: 50,
-      chungnam: 60,
-      gangwon: 70,
-      gyeongnam: 30,
-      gyeongbuk: 60,
-      jeju: 90,
-      daegu: 60,
-      ulsan: 20,
-      sejong: 30,
-    };
-  }, []);
+  useEffect(() => {  // 히트맵 정보 가져오기
+    for(let i=0; i<16; i++) {
+      axios
+        .post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user, location",
+            where: `user.email = location.user_id and name='${heatMap[i].location}' ORDER BY location.created_at desc`,
+          },
+        )
+        .then((res) => {
+          const temp = [...heatMap];
+          temp[i].num = res.data.length;
+          setHeatMap(temp);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [])
 
   useEffect(() => {
     let data = geo.features; // 제대로 받아와짐
@@ -121,6 +137,7 @@ export const KakaoMap = (props) => {
       });
 
       let polygon;
+
       if (name === an) {
         polygon = new kakao.maps.Polygon({
           map: map,
@@ -133,7 +150,7 @@ export const KakaoMap = (props) => {
           fillOpacity: 1,
         });
       } else {
-        if (heatMap[name] >= 90) {
+        if (heatMap.find(item => item.location === name).num >= 20) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -144,7 +161,7 @@ export const KakaoMap = (props) => {
             fillColor: "#C1E2EC",
             fillOpacity: 1,
           });
-        } else if (heatMap[name] >= 70) {
+        } else if (heatMap.find(item => item.location === name).num >= 10) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -155,7 +172,7 @@ export const KakaoMap = (props) => {
             fillColor: "#8EC2D1",
             fillOpacity: 1,
           });
-        } else if (heatMap[name] >= 50) {
+        } else if (heatMap.find(item => item.location === name).num >= 9) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -166,7 +183,7 @@ export const KakaoMap = (props) => {
             fillColor: "#3E8A9E",
             fillOpacity: 1,
           });
-        } else if (heatMap[name] >= 30) {
+        } else if (heatMap.find(item => item.location === name).num >= 5) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -190,6 +207,7 @@ export const KakaoMap = (props) => {
           });
         }
       }
+  
       polygons.push(polygon);
 
       if (name !== an) {
@@ -212,16 +230,18 @@ export const KakaoMap = (props) => {
         );
 
         kakao.maps.event.addListener(polygon, "mouseout", function () {
-          if (heatMap[name] >= 90) {
-            polygon.setOptions({ fillColor: "#C1E2EC" });
-          } else if (heatMap[name] >= 70) {
-            polygon.setOptions({ fillColor: "#8EC2D1" });
-          } else if (heatMap[name] >= 50) {
-            polygon.setOptions({ fillColor: "#3E8A9E" });
-          } else if (heatMap[name] >= 30) {
-            polygon.setOptions({ fillColor: "#1B7389" });
-          } else {
-            polygon.setOptions({ fillColor: "#12596C" });
+          for(let i=0; i<16; i++) {
+            if (heatMap.find(item => item.location === name).num >= 20) {
+              polygon.setOptions({ fillColor: "#C1E2EC" });
+            } else if (heatMap.find(item => item.location === name).num >= 10) {
+              polygon.setOptions({ fillColor: "#8EC2D1" });
+            } else if (heatMap.find(item => item.location === name).num >= 9) {
+              polygon.setOptions({ fillColor: "#3E8A9E" });
+            } else if (heatMap.find(item => item.location === name).num >= 5) {
+              polygon.setOptions({ fillColor: "#1B7389" });
+            } else {
+              polygon.setOptions({ fillColor: "#12596C" });
+            }
           }
 
           customOverlay.setMap(null);
