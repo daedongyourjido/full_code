@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import PostView from "./postView";
 import Grid from "@mui/material/Grid";
