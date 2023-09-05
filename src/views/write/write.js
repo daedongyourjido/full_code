@@ -97,16 +97,6 @@ export default function Write() {
     setOpen(true);
     if (queryValue !== "") {
       if (selectedImageBase64 === undefined) {
-        // 업데이트
-        console.log({
-          /**API JSON 형식 참조하여 post 요청을 보내주세요**/
-          id: queryValue,
-          type: "post-update",
-          name: location, // 지역명(seoul, jeju...)
-          user_id: sessionStorage.id, // 사용자 id(test@test.com...)
-          title: title, // 게시글 제목
-          content: content, // 게시글 내용
-        });
         axios
           .post(
             "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",

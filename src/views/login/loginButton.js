@@ -29,9 +29,9 @@ export default function LoginButton(props) {
             )
             .then((res) => {
               let statusCode = 0;
-              if(localStorage.getItem(`${props.id}`) === null)
+              if (localStorage.getItem(`${props.id}`) === null)
                 statusCode = res.status;
-                
+
               switch (statusCode) {
                 case 0:
                   alert("아이디 혹은 패스워드 오류");

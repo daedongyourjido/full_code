@@ -140,8 +140,9 @@ export default function PostView(props) {
         },
       )
       .then((res) => {
-        for(let i=0; i<res.data.length; i++) {  // res에 내가 좋아요 누른 부분이 있다면 -> setLikeFlag true
-          if(res.data[i].email === sessionStorage.getItem("id")) {
+        for (let i = 0; i < res.data.length; i++) {
+          // res에 내가 좋아요 누른 부분이 있다면 -> setLikeFlag true
+          if (res.data[i].email === sessionStorage.getItem("id")) {
             console.log("내가 누른 좋아요");
             setLikeFlag(true);
             break;
@@ -391,7 +392,11 @@ export default function PostView(props) {
                     {
                       <IconButton
                         onClick={handleLike}
-                        style={!likeFlag ? { color: "grey", marginLeft:"1vw"} : { color: "red", marginLeft:"1vw"}}
+                        style={
+                          !likeFlag
+                            ? { color: "grey", marginLeft: "1vw" }
+                            : { color: "red", marginLeft: "1vw" }
+                        }
                         aria-label="delete"
                         size="large"
                       >

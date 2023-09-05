@@ -12,22 +12,22 @@ export const KakaoMap = (props) => {
   const [lng, setLng] = useState(127.9);
   const [scale, setScale] = useState(12.8);
   const [heatMap, setHeatMap] = useState([
-    {location: 'seoul', num: 100},
-    {location: 'gyeonggi', num: 100},
-    {location: 'incheon', num: 100},
-    {location: 'daejeon', num: 100},
-    {location: 'busan', num: 100},
-    {location: 'jeonnam', num: 100},
-    {location: 'jeonbuk', num: 100},
-    {location: 'chungbuk', num: 100},
-    {location: 'chungnam', num: 100},
-    {location: 'gangwon', num: 100},
-    {location: 'gyeongnam', num: 100},
-    {location: 'gyeongbuk', num: 100},
-    {location: 'jeju', num: 100},
-    {location: 'daegu', num: 100},
-    {location: 'ulsan', num: 100},
-    {location: 'sejong', num: 100}
+    { location: "seoul", num: 100 },
+    { location: "gyeonggi", num: 100 },
+    { location: "incheon", num: 100 },
+    { location: "daejeon", num: 100 },
+    { location: "busan", num: 100 },
+    { location: "jeonnam", num: 100 },
+    { location: "jeonbuk", num: 100 },
+    { location: "chungbuk", num: 100 },
+    { location: "chungnam", num: 100 },
+    { location: "gangwon", num: 100 },
+    { location: "gyeongnam", num: 100 },
+    { location: "gyeongbuk", num: 100 },
+    { location: "jeju", num: 100 },
+    { location: "daegu", num: 100 },
+    { location: "ulsan", num: 100 },
+    { location: "sejong", num: 100 },
   ]);
 
   // 1336 x 843
@@ -79,8 +79,9 @@ export const KakaoMap = (props) => {
     [],
   );
 
-  useEffect(() => {  // 히트맵 정보 가져오기
-    for(let i=0; i<16; i++) {
+  useEffect(() => {
+    // 히트맵 정보 가져오기
+    for (let i = 0; i < 16; i++) {
       axios
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -100,7 +101,7 @@ export const KakaoMap = (props) => {
           console.log(error);
         });
     }
-  }, [heatMap])
+  }, [heatMap]);
 
   useEffect(() => {
     let data = geo.features; // 제대로 받아와짐
@@ -150,7 +151,7 @@ export const KakaoMap = (props) => {
           fillOpacity: 1,
         });
       } else {
-        if (heatMap.find(item => item.location === name).num >= 20) {
+        if (heatMap.find((item) => item.location === name).num >= 20) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -161,7 +162,7 @@ export const KakaoMap = (props) => {
             fillColor: "#C1E2EC",
             fillOpacity: 1,
           });
-        } else if (heatMap.find(item => item.location === name).num >= 10) {
+        } else if (heatMap.find((item) => item.location === name).num >= 10) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -172,7 +173,7 @@ export const KakaoMap = (props) => {
             fillColor: "#8EC2D1",
             fillOpacity: 1,
           });
-        } else if (heatMap.find(item => item.location === name).num >= 9) {
+        } else if (heatMap.find((item) => item.location === name).num >= 9) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -183,7 +184,7 @@ export const KakaoMap = (props) => {
             fillColor: "#3E8A9E",
             fillOpacity: 1,
           });
-        } else if (heatMap.find(item => item.location === name).num >= 5) {
+        } else if (heatMap.find((item) => item.location === name).num >= 5) {
           polygon = new kakao.maps.Polygon({
             map: map,
             path: path,
@@ -207,7 +208,7 @@ export const KakaoMap = (props) => {
           });
         }
       }
-  
+
       polygons.push(polygon);
 
       if (name !== an) {
@@ -230,14 +231,20 @@ export const KakaoMap = (props) => {
         );
 
         kakao.maps.event.addListener(polygon, "mouseout", function () {
-          for(let i=0; i<16; i++) {
-            if (heatMap.find(item => item.location === name).num >= 20) {
+          for (let i = 0; i < 16; i++) {
+            if (heatMap.find((item) => item.location === name).num >= 20) {
               polygon.setOptions({ fillColor: "#C1E2EC" });
-            } else if (heatMap.find(item => item.location === name).num >= 10) {
+            } else if (
+              heatMap.find((item) => item.location === name).num >= 10
+            ) {
               polygon.setOptions({ fillColor: "#8EC2D1" });
-            } else if (heatMap.find(item => item.location === name).num >= 9) {
+            } else if (
+              heatMap.find((item) => item.location === name).num >= 9
+            ) {
               polygon.setOptions({ fillColor: "#3E8A9E" });
-            } else if (heatMap.find(item => item.location === name).num >= 5) {
+            } else if (
+              heatMap.find((item) => item.location === name).num >= 5
+            ) {
               polygon.setOptions({ fillColor: "#1B7389" });
             } else {
               polygon.setOptions({ fillColor: "#12596C" });

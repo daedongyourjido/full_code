@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Bar from "../../modules/layout/bar.js";
 import InputField from "../../modules/components/inputField.js";
 import Button from "@mui/material/Button";
@@ -30,21 +30,19 @@ function WithdrawButton(props) {
           }}
           onClick={() => {
             if (!props.id) props.setIdEmpty(true);
-            else if(props.id !== sessionStorage.getItem("id")) {
+            else if (props.id !== sessionStorage.getItem("id")) {
               props.setWrongId(true);
               props.setIdEmpty(false);
-            } 
-            else if (!props.pw) {
-              props.setPwEmpty(true); 
+            } else if (!props.pw) {
+              props.setPwEmpty(true);
               props.setWrongId(false);
               props.setIdEmpty(false);
-            }
-            else {
+            } else {
               props.setWrongId(false);
               props.setIdEmpty(false);
               props.setPwEmpty(false);
               props.setChanged(true);
-              
+
               localStorage.setItem(`${props.id}`, true);
               alert("탈퇴되었습니다");
               sessionStorage.clear();
@@ -84,19 +82,19 @@ function Withdraw() {
               setPwEmpty={setPwEmpty}
               setIdEmpty={setIdEmpty}
               setChanged={setChanged}
-              setWrongId = {setWrongId}
+              setWrongId={setWrongId}
               id={id}
               pw={pw}
             />
             {wrongId ? (
               <p className="input_error">아이디가 일치하지 않습니다</p>
-              ) : (
-                <p></p>
+            ) : (
+              <p></p>
             )}
             {idEmpty ? (
               <p className="input_error">아이디를 입력해주세요</p>
-              ) : (
-                <p></p>
+            ) : (
+              <p></p>
             )}
             {pwEmpty ? (
               <p className="input_error">비밀번호를 입력해주세요</p>
@@ -110,15 +108,15 @@ function Withdraw() {
   }
 
   return (
-    <div style={{ 
-          display: "flex", 
-          flexDirection: "column" 
-      }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Bar setting={true} />
       <div className="withdraw-container">
-        <SettingContainer 
-          component={WithdrawBox} 
-          menu="withdraw" />
+        <SettingContainer component={WithdrawBox} menu="withdraw" />
       </div>
     </div>
   );
