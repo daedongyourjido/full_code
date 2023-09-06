@@ -251,6 +251,7 @@ export const ProfileLocationSelect = (props) => {
 
       displayArea(coordinates, name);
     });
+    // eslint-disable-next-line
   }, [
     customStyle,
     heatMap,
