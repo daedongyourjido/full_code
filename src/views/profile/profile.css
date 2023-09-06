@@ -54,3 +54,20 @@
   color: gray;
   margin-left: 1vw;
 } */
+
+
+.profile-location-select {
+  background-color: firebrick;
+  width: 30vw;
+  height: 60vh;
+}
+
+.profile-map-container {
+  width: 30vw;
+  height: 60vh;
+}
+
+.profile-map {
+  width: 30vw;
+  height: 60vh;
+}

@@ -15,6 +15,7 @@ import { setLogin } from "../../redux/actions";
 import Bar from "../../modules/layout/bar.js";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Button from "@mui/material/Button";
+import { ProfileLocationSelect } from "./profileLocationSelect.js";
 import "./profile.css";
 
 function a11yProps(index) {
@@ -63,12 +64,29 @@ export default function Profile() {
   // eslint-disable-next-line
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [searchLocation, setSearchLocation] = useState("seoul");
+  const [userLocationInfoLoc, setUserLocationInfoLoc] = useState([
+      {loc:"seoul", data:[]}, 
+      {loc:"busan", data:[]}, 
+      {loc:"gyeonggi", data:[]}, 
+      {loc:"incheon", data:[]}, 
+      {loc:"daejeon", data:[]}, 
+      {loc:"jeonnam", data:[]}, 
+      {loc:"jeonbuk", data:[]}, 
+      {loc:"chungbuk", data:[]}, 
+      {loc:"chungnam", data:[]}, 
+      {loc:"gangwon", data:[]}, 
+      {loc:"gyeongnam", data:[]}, 
+      {loc:"gyeongbuk", data:[]}, 
+      {loc:"jeju", data:[]}, 
+      {loc:"daegu", data:[]}, 
+      {loc:"ulsan", data:[]}, 
+      {loc:"sejong", data:[]}, 
+    ]);
 
   useEffect(() => {
     if (sessionStorage.id === queryParams.get("user")) setIsMyProfile(true);
   }, [queryParams]);
-
-  useEffect(() => {});
 
   async function handleFollow(targetId) {
     try {
@@ -115,7 +133,7 @@ export default function Profile() {
       setUser({
         picture: sessionStorage.picture,
       });
-      axios
+      axios   // 최신순
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
@@ -131,7 +149,7 @@ export default function Profile() {
         .catch((error) => {
           console.log(error);
         });
-      axios
+      axios   // 추천순
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
@@ -147,6 +165,28 @@ export default function Profile() {
         .catch((error) => {
           console.log(error);
         });
+      for(let i=0; i<16; i++) {
+        axios   // 위치별
+        .post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user, location",
+            where: `user.email = location.user_id and user_id='${sessionStorage.id}' and name='${userLocationInfoLoc[i].loc}' ORDER BY like_count desc`,
+          },
+        )
+        .then((res) => {
+          const temp = [...userLocationInfoLoc]
+          temp.find(post => post.loc === userLocationInfoLoc[i].loc).data = res.data;
+          setUserLocationInfoLoc(temp);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+      
+
       // get my following
       axios
         .post(
@@ -185,6 +225,7 @@ export default function Profile() {
           console.log(err);
         });
     }
+
     // 다른사람 페이지
     else {
       // eslint-disable-next-line
@@ -216,7 +257,7 @@ export default function Profile() {
       };
       isRelated();
 
-      axios
+      axios   // 최신순
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
@@ -233,7 +274,7 @@ export default function Profile() {
             setUserLocationInfoLikeDesc(res.data);
           }
 
-          axios
+          axios   // 추천순
             .post(
               "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
               {
@@ -249,6 +290,27 @@ export default function Profile() {
               } else {
                 setUserLocationInfoDataDesc(res.data);
               }
+
+              for(let i=0; i<16; i++) {
+                axios   // 위치별
+                .post(
+                  "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+                  {
+                    DML: "SELECT",
+                    columns: "*",
+                    table: "user, location",
+                    where: `user.email = location.user_id and user_id='${queryParams.get("user")}' and name='${userLocationInfoLoc[i].loc}' ORDER BY like_count desc`,
+                  },
+                )
+                .then((res) => {
+                  const temp = [...userLocationInfoLoc]
+                  temp.find(post => post.loc === userLocationInfoLoc[i].loc).data = res.data;
+                  setUserLocationInfoLoc(temp);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+              }
             })
             .catch((error) => {
               console.log(error);
@@ -257,6 +319,8 @@ export default function Profile() {
         .catch((error) => {
           console.log(error);
         });
+
+
       axios
         .post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -301,6 +365,7 @@ export default function Profile() {
     }
     // eslint-disable-next-line
   }, []);
+
   useEffect(() => {
     // token 여부에 반응하여 로그인 여부 판단
     const token = sessionStorage.getItem("id");
@@ -521,6 +586,13 @@ export default function Profile() {
                   onChange={handleImageChange}
                 />
               </div>
+
+              <div className="profile-location-select">
+                <ProfileLocationSelect 
+                  setSearchLocation={setSearchLocation} 
+                  />
+
+              </div>
             </div>
           </Box>
 
@@ -575,6 +647,19 @@ export default function Profile() {
                   iconPosition="start"
                   label="추천순"
                 />
+                <Tab
+                  sx={{ color: "white" }}
+                  icon={
+                    <TbBuildingCommunity
+                      color={"white"}
+                      {...a11yProps(2)}
+                      id="icon3"
+                      size="50px"
+                    />
+                  }
+                  iconPosition="start"
+                  label="위치별"
+                />
               </Tabs>
 
               <CustomTabPanel
@@ -602,6 +687,19 @@ export default function Profile() {
                 ) : (
                   <ImageCollection
                     userLocationInfo={userLocationInfoLikeDesc}
+                  />
+                )}
+              </CustomTabPanel>
+              <CustomTabPanel
+                value={value}
+                index={2}
+                style={{ overflow: "auto" }}
+              >
+                {userLocationInfoLoc.length === 0 ? (
+                  ""
+                ) : (
+                  <ImageCollection
+                    userLocationInfo={userLocationInfoLoc.find(item => item.loc === searchLocation).data}
                   />
                 )}
               </CustomTabPanel>
