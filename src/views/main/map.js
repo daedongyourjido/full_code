@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import geo from "../../assets/data/geo.json";
 import MainRandom from "./mainRandom.js";
 import "./mainPageButton";
+import { useDispatch } from "react-redux";
+import { setLoadingEnd } from "../../redux/actions";
 
 export const KakaoMap = (props) => {
   const { kakao } = window;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [lat, setLat] = useState(36);
   const [lng, setLng] = useState(127.9);
   const [scale, setScale] = useState(12.8);
@@ -32,8 +35,7 @@ export const KakaoMap = (props) => {
 
   // 1336 x 843
 
-  useEffect(() => {
-    // 지도 크기 동적 지정
+  useEffect(() => {  // 지도 크기 동적 지정
     const handleResize = () => {
       if (window.innerWidth < 1350 && window.innerHeight < 860) {
         // 너비 높이 둘다 줄어들떄
@@ -62,7 +64,6 @@ export const KakaoMap = (props) => {
   }, [lat, lng]);
 
   const [name, setName] = useState("대동YOUR지도");
-  // const [msg, setMsg] = useState('');
 
   const customStyle = useMemo(
     () => [
@@ -79,8 +80,7 @@ export const KakaoMap = (props) => {
     [],
   );
 
-  useEffect(() => {
-    // 히트맵 정보 가져오기
+  useEffect(() => {  // 히트맵 정보 가져오기
     for (let i = 0; i < 16; i++) {
       axios
         .post(
@@ -96,12 +96,15 @@ export const KakaoMap = (props) => {
           const temp = [...heatMap];
           temp[i].num = res.data.length;
           setHeatMap(temp);
+          dispatch(setLoadingEnd(true));
+          console.log("heatmap loading end");
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, [heatMap]);
+    // eslint-disable-next-line 
+  }, []);
 
   useEffect(() => {
     let data = geo.features; // 제대로 받아와짐

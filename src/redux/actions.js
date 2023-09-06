@@ -39,3 +39,10 @@ export const setLikeChangePost = (item) => {
     payload: item,
   };
 };
+
+export const setLoadingEnd = (item) => {
+  return { 
+    type: "SET_LOADING_END",
+    payload: item,
+  }
+}

@@ -4,6 +4,7 @@ const initialState = {
   deleteDialogOpen: false,
   likeChange: -1,
   likeChangePost: -1,
+  loadingEnd: false,
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -37,6 +38,12 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         likeChangePost: action.payload,
       };
+
+    case "SET_LOADING_END":
+      return {
+        ...state,
+        loadingEnd: action.payload,
+      }
 
     default:
       return {

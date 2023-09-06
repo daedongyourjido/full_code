@@ -105,6 +105,7 @@ function MainRandom(props) {
   const [name, setName] = useState("Welcome to 대동유어지도");
   const [infos, setInfos] = useState({});
   // const [login, setLogin] = useState('false');
+  const loadingEnd = useSelector(state => state.loadingEnd);
   const _name = props.name;
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -136,6 +137,7 @@ function MainRandom(props) {
       console.log("dispatched");
       return;
     }
+
     const fetchData = async () => {
       return new Promise(async (resolve, reject) => {
         let infos = {};
@@ -153,11 +155,15 @@ function MainRandom(props) {
         reject(new Error("error"));
       });
     };
-    fetchData().catch((err) => {
-      console.log(err);
-    });
-    setIsLoading(false);
-  }, [dispatch, _location, infos]);
+
+    if(loadingEnd) {
+      fetchData().catch((err) => {
+        console.log(err);
+      });
+      setIsLoading(false);
+    }
+    
+  }, [dispatch, _location, infos, loadingEnd]);
 
   useEffect(() => {
     if (_name === "seoul") setName("서울");
