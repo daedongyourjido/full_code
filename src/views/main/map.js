@@ -4,13 +4,10 @@ import { useNavigate } from "react-router-dom";
 import geo from "../../assets/data/geo.json";
 import MainRandom from "./mainRandom.js";
 import "./mainPageButton";
-import { useDispatch } from "react-redux";
-import { setLoadingEnd } from "../../redux/actions";
 
 export const KakaoMap = (props) => {
   const { kakao } = window;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [lat, setLat] = useState(36);
   const [lng, setLng] = useState(127.9);
   const [scale, setScale] = useState(12.8);
@@ -96,7 +93,6 @@ export const KakaoMap = (props) => {
           const temp = [...heatMap];
           temp[i].num = res.data.length;
           setHeatMap(temp);
-          dispatch(setLoadingEnd(true));
           console.log("heatmap loading end");
         })
         .catch((error) => {

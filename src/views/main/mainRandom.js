@@ -156,12 +156,10 @@ function MainRandom(props) {
       });
     };
 
-    if(loadingEnd) {
       fetchData().catch((err) => {
         console.log(err);
       });
       setIsLoading(false);
-    }
     
   }, [dispatch, _location, infos, loadingEnd]);
 
