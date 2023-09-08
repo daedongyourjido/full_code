@@ -6,6 +6,7 @@ export default function LoginPageButton(props) {
 
   return (
     <Button
+      data-cy="login-btn"
       variant="outlined"
       sx={{
         borderColor: props.font,

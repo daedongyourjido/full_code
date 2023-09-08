@@ -10,7 +10,7 @@ describe("2. 게시물 확인", () => {
     let ImageUrl = "";
     let newImageUrl = "";
 
-    cy.get('[data-cy="main"]').click(1040, 220);
+    cy.get(".bar > img").click();
     // 기존 thumbnail 저장
     cy.get(":nth-child(1) > .post-thumbnail")
       .should("be.visible")

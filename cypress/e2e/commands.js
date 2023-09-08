@@ -1,7 +1,7 @@
 Cypress.Commands.add("login", (id, pw) => {
-  cy.contains("Sign In").click();
-  cy.get('[data-cy="login-id"]').type("sjhong98@icloud.com");
-  cy.get('[data-cy="login-pw"]').type("mango");
+  cy.get('[data-cy="login-btn"]').click();
+  cy.get('[data-cy="login-id"]').type(id);
+  cy.get('[data-cy="login-pw"]').type(pw);
   cy.get(".css-1lm3qma-MuiButtonBase-root-MuiButton-root").click();
 });
 
