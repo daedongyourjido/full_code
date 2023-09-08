@@ -13,12 +13,12 @@ Cypress.Commands.add("readPost", () => {
   cy.get(".detail > h3")
     .invoke("text")
     .then((uploadedPostContent) => {
-      expect(uploadedPostContent.trim()).to.equal("test");
+      expect(uploadedPostContent.trim()).to.equal("create-test");
     });
   // content 테스트
   cy.get(".detail > p")
     .invoke("text")
     .then((uploadedPostContent) => {
-      expect(uploadedPostContent.trim()).to.equal("test");
+      expect(uploadedPostContent.trim()).to.equal("create-test");
     });
 });
