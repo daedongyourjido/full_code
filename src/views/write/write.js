@@ -35,9 +35,9 @@ export default function Write() {
 
   useEffect(() => {
     if (queryValue !== "") {
-      // 게시물 수정 시 기존 게시물 내용 가져오기
-      axios
-        .post(
+      const getPost = async () => {
+        // 게시물 수정 시 기존 게시물 내용 가져오기
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -45,17 +45,18 @@ export default function Write() {
             table: "location",
             where: `id=${queryValue}`,
           },
-        )
-        .then((res) => {
-          console.log(res);
-          setPreviewImage(res.data[0].image);
-          setTitle(res.data[0].title);
-          setContent(res.data[0].content);
-          setLocation(res.data[0].name);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        );
+        console.log(res);
+        setPreviewImage(res.data[0].image);
+        setTitle(res.data[0].title);
+        setContent(res.data[0].content);
+        setLocation(res.data[0].name);
+      };
+      try {
+        getPost();
+      } catch (e) {
+        console.error(e);
+      }
     }
   }, [queryValue]);
 
@@ -97,8 +98,8 @@ export default function Write() {
     setOpen(true);
     if (queryValue !== "") {
       if (selectedImageBase64 === undefined) {
-        axios
-          .post(
+        try {
+          await axios.post(
             "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
             {
               /**API JSON 형식 참조하여 post 요청을 보내주세요**/
@@ -110,20 +111,15 @@ export default function Write() {
               content: content, // 게시글 내용
             },
             10000,
-          )
-          .then((res) => {
-            // 수정된 내용 확인
-            console.log(res);
-            navigate(`/board/${location}`);
-          })
-          .catch((error) => {
-            console.log("error : ", error);
-          });
+          );
+          navigate(`/board/${location}`);
+        } catch (e) {
+          console.error(e);
+        }
       } else {
-        console.log();
-        // 업데이트
-        axios
-          .post(
+        try {
+          // 업데이트
+          await axios.post(
             "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
             {
               /**API JSON 형식 참조하여 post 요청을 보내주세요**/
@@ -137,20 +133,16 @@ export default function Write() {
               content: content, // 게시글 내용
             },
             10000,
-          )
-          .then((res) => {
-            // 수정된 내용 확인
-            console.log(res);
-            navigate(`/board/${location}`);
-          })
-          .catch((error) => {
-            console.log("error : ", error);
-          });
+          );
+          navigate(`/board/${location}`);
+        } catch (e) {
+          console.error(e);
+        }
       }
     } else {
-      // 새로운 글 작성
-      axios
-        .post(
+      try {
+        // 새로운 글 작성
+        await axios.post(
           "https://r9d6nxucae.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-upload",
           {
             type: "post",
@@ -162,14 +154,12 @@ export default function Write() {
             content: content, // 게시글 내용
           },
           10000,
-        )
+        );
         // 문제가 없을 경우 이전 페이지(지역 페이지)로 라우팅
-        .then((res) => {
-          navigate(`/board/${location}`);
-        })
-        .catch((error) => {
-          console.log("error 2 : ", error);
-        });
+        navigate(`/board/${location}`);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 

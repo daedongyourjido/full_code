@@ -50,29 +50,31 @@ export const ProfileLocationSelect = (props) => {
     [],
   );
 
-  useEffect(() => {  // 히트맵 정보 가져오기
-    for (let i = 0; i < 16; i++) {
-      axios
-        .post(
-          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-          {
-            DML: "SELECT",
-            columns: "*",
-            table: "user, location",
-            where: `user.email = location.user_id and name='${heatMap[i].location}' and location.user_id = '${id}' ORDER BY location.created_at desc`,
-          },
-        )
-        .then((res) => {
+  useEffect(() => {
+    // 히트맵 정보 가져오기
+    const getHitMap = async () => {
+      for (let i = 0; i < 16; i++) {
+        try {
+          const res = await axios.post(
+            "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+            {
+              DML: "SELECT",
+              columns: "*",
+              table: "user, location",
+              where: `user.email = location.user_id and name='${heatMap[i].location}' and location.user_id = '${id}' ORDER BY location.created_at desc`,
+            },
+          );
           const temp = [...heatMap];
           temp[i].num = res.data.length;
           setHeatMap(temp);
           console.log("heatmap loading end");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    // eslint-disable-next-line 
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    getHitMap();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -202,7 +204,7 @@ export const ProfileLocationSelect = (props) => {
 
         kakao.maps.event.addListener(polygon, "mouseout", function () {
           for (let i = 0; i < 16; i++) {
-            if (heatMap.find((item) => item.location === name).num >=10) {
+            if (heatMap.find((item) => item.location === name).num >= 10) {
               polygon.setOptions({ fillColor: "#C1E2EC" });
             } else if (
               heatMap.find((item) => item.location === name).num >= 7
@@ -226,7 +228,7 @@ export const ProfileLocationSelect = (props) => {
 
         // route path 동적 지정
         kakao.maps.event.addListener(polygon, "click", function () {
-            setSearchLocation(name);
+          setSearchLocation(name);
         });
       }
     };
@@ -268,9 +270,7 @@ export const ProfileLocationSelect = (props) => {
 
   return (
     <div className="profile-map-container">
-      <div 
-        className="profile-map" 
-        id="kakao-map" />
+      <div className="profile-map" id="kakao-map" />
     </div>
   );
 };

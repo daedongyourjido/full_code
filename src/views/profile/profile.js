@@ -66,23 +66,23 @@ export default function Profile() {
   const [isFollowing, setIsFollowing] = useState(false);
   const [searchLocation, setSearchLocation] = useState("seoul");
   const [userLocationInfoLoc, setUserLocationInfoLoc] = useState([
-      {loc:"seoul", data:[]}, 
-      {loc:"busan", data:[]}, 
-      {loc:"gyeonggi", data:[]}, 
-      {loc:"incheon", data:[]}, 
-      {loc:"daejeon", data:[]}, 
-      {loc:"jeonnam", data:[]}, 
-      {loc:"jeonbuk", data:[]}, 
-      {loc:"chungbuk", data:[]}, 
-      {loc:"chungnam", data:[]}, 
-      {loc:"gangwon", data:[]}, 
-      {loc:"gyeongnam", data:[]}, 
-      {loc:"gyeongbuk", data:[]}, 
-      {loc:"jeju", data:[]}, 
-      {loc:"daegu", data:[]}, 
-      {loc:"ulsan", data:[]}, 
-      {loc:"sejong", data:[]}, 
-    ]);
+    { loc: "seoul", data: [] },
+    { loc: "busan", data: [] },
+    { loc: "gyeonggi", data: [] },
+    { loc: "incheon", data: [] },
+    { loc: "daejeon", data: [] },
+    { loc: "jeonnam", data: [] },
+    { loc: "jeonbuk", data: [] },
+    { loc: "chungbuk", data: [] },
+    { loc: "chungnam", data: [] },
+    { loc: "gangwon", data: [] },
+    { loc: "gyeongnam", data: [] },
+    { loc: "gyeongbuk", data: [] },
+    { loc: "jeju", data: [] },
+    { loc: "daegu", data: [] },
+    { loc: "ulsan", data: [] },
+    { loc: "sejong", data: [] },
+  ]);
 
   useEffect(() => {
     if (sessionStorage.id === queryParams.get("user")) setIsMyProfile(true);
@@ -127,14 +127,15 @@ export default function Profile() {
   }
 
   // eslint-disable-next-line
-  useEffect(async () => {
+  useEffect(() => {
     // 마이페이지
     if (queryParams.get("user") === sessionStorage.id) {
       setUser({
         picture: sessionStorage.picture,
       });
-      axios   // 최신순
-        .post(
+      // 최신순
+      const getUserLocationInfoDataDesc = async () => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -142,15 +143,12 @@ export default function Profile() {
             table: "user, location",
             where: `user.email = location.user_id and location.user_id='${sessionStorage.id}' ORDER BY location.created_at desc`,
           },
-        )
-        .then((res) => {
-          setUserLocationInfoDataDesc(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      axios   // 추천순
-        .post(
+        );
+        setUserLocationInfoDataDesc(res.data);
+      };
+      // 추천순
+      const getUserLocationInfoLikeDesc = async () => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -158,38 +156,30 @@ export default function Profile() {
             table: "user, location",
             where: `user.email = location.user_id and user_id='${sessionStorage.id}' ORDER BY like_count desc`,
           },
-        )
-        .then((res) => {
-          setUserLocationInfoLikeDesc(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      for(let i=0; i<16; i++) {
-        axios   // 위치별
-        .post(
-          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-          {
-            DML: "SELECT",
-            columns: "*",
-            table: "user, location",
-            where: `user.email = location.user_id and user_id='${sessionStorage.id}' and name='${userLocationInfoLoc[i].loc}' ORDER BY like_count desc`,
-          },
-        )
-        .then((res) => {
-          const temp = [...userLocationInfoLoc]
-          temp.find(post => post.loc === userLocationInfoLoc[i].loc).data = res.data;
+        );
+        setUserLocationInfoLikeDesc(res.data);
+      };
+      const getUserLocationInfoLoc = async () => {
+        for (let i = 0; i < 16; i++) {
+          const res = await axios // 위치별
+            .post(
+              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+              {
+                DML: "SELECT",
+                columns: "*",
+                table: "user, location",
+                where: `user.email = location.user_id and user_id='${sessionStorage.id}' and name='${userLocationInfoLoc[i].loc}' ORDER BY like_count desc`,
+              },
+            );
+          const temp = [...userLocationInfoLoc];
+          temp.find((post) => post.loc === userLocationInfoLoc[i].loc).data =
+            res.data;
           setUserLocationInfoLoc(temp);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-      
-
+        }
+      };
       // get my following
-      axios
-        .post(
+      const getFollowing = async () => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -197,18 +187,13 @@ export default function Profile() {
             table: "user",
             where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, // 수정 필요
           },
-        )
-        .then((res) => {
-          console.log("following", res.data);
-          if (res.data === "") setFollowing([]);
-          else setFollowing(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        );
+        if (res.data === "") setFollowing([]);
+        else setFollowing(res.data);
+      };
       // get follower
-      axios
-        .post(
+      const getFollower = async () => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -216,32 +201,46 @@ export default function Profile() {
             table: "user",
             where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`,
           },
-        )
-        .then((res) => {
-          if (res.data === "") setFollower([]);
-          else setFollower(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
+        );
+        if (res.data === "") setFollower([]);
+        else setFollower(res.data);
+      };
+      try {
+        getUserLocationInfoLoc().then(() => {
+          getUserLocationInfoDataDesc();
+          getUserLocationInfoLikeDesc();
+          getFollowing();
+          getFollower();
         });
+      } catch (e) {
+        console.error(e);
+      }
     }
-
     // 다른사람 페이지
     else {
+      const getUserInfo = async () => {
+        return new Promise(async (resolve, reject) => {
+          try {
+            const res = (
+              await axios.post(
+                "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+                {
+                  DML: "SELECT",
+                  columns: "*",
+                  table: "user",
+                  where: `email='${queryParams.get("user")}'`,
+                },
+              )
+            ).data;
+            resolve(res[0]);
+          } catch (e) {
+            reject("error!");
+          }
+        });
+      };
+
       // eslint-disable-next-line
-      const userInfo = (
-        await axios.post(
-          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-          {
-            DML: "SELECT",
-            columns: "*",
-            table: "user",
-            where: `email='${queryParams.get("user")}'`,
-          },
-        )
-      ).data[0];
-      setUser(userInfo);
-      const isRelated = async () => {
+      const isRelated = async (userInfo) => {
         const relationship = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
@@ -255,10 +254,9 @@ export default function Profile() {
           setIsFollowing(true);
         }
       };
-      isRelated();
-
-      axios   // 최신순
-        .post(
+      // 추천순
+      const getUserLocationInfoLikeDesc = async (userInfo) => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -266,63 +264,53 @@ export default function Profile() {
             table: "user, location",
             where: `user.email = location.user_id and location.user_id='${userInfo.email}' ORDER BY like_count desc`,
           },
-        )
-        .then((res) => {
-          if (res.data === []) {
-            setUserLocationInfoLikeDesc(undefined);
-          } else {
-            setUserLocationInfoLikeDesc(res.data);
-          }
-
-          axios   // 추천순
-            .post(
-              "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-              {
-                DML: "SELECT",
-                columns: "*",
-                table: "user, location",
-                where: `user.email = location.user_id and location.user_id='${userInfo.email}' ORDER BY location.created_at desc`,
-              },
-            )
-            .then((res) => {
-              if (res.data === []) {
-                setUserLocationInfoDataDesc(undefined);
-              } else {
-                setUserLocationInfoDataDesc(res.data);
-              }
-
-              for(let i=0; i<16; i++) {
-                axios   // 위치별
-                .post(
-                  "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-                  {
-                    DML: "SELECT",
-                    columns: "*",
-                    table: "user, location",
-                    where: `user.email = location.user_id and user_id='${queryParams.get("user")}' and name='${userLocationInfoLoc[i].loc}' ORDER BY like_count desc`,
-                  },
-                )
-                .then((res) => {
-                  const temp = [...userLocationInfoLoc]
-                  temp.find(post => post.loc === userLocationInfoLoc[i].loc).data = res.data;
-                  setUserLocationInfoLoc(temp);
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-
-      axios
-        .post(
+        );
+        if (res.data === []) {
+          setUserLocationInfoLikeDesc(undefined);
+        } else {
+          setUserLocationInfoLikeDesc(res.data);
+        }
+      };
+      // 최신순
+      const getUserLocationInfoDataDesc = async (userInfo) => {
+        const res = await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user, location",
+            where: `user.email = location.user_id and location.user_id='${userInfo.email}' ORDER BY location.created_at desc`,
+          },
+        );
+        if (res.data === []) {
+          setUserLocationInfoDataDesc(undefined);
+        } else {
+          setUserLocationInfoDataDesc(res.data);
+        }
+      };
+      const getUserLocationInfoLoc = async () => {
+        for (let i = 0; i < 16; i++) {
+          const res = await axios.post(
+            "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+            {
+              DML: "SELECT",
+              columns: "*",
+              table: "user, location",
+              where: `user.email = location.user_id and user_id='${queryParams.get(
+                "user",
+              )}' and name='${
+                userLocationInfoLoc[i].loc
+              }' ORDER BY like_count desc`,
+            },
+          );
+          const temp = [...userLocationInfoLoc];
+          temp.find((post) => post.loc === userLocationInfoLoc[i].loc).data =
+            res.data;
+          setUserLocationInfoLoc(temp);
+        }
+      };
+      const getFollowing = async (userInfo) => {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -330,20 +318,16 @@ export default function Profile() {
             table: "user",
             where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${userInfo.id} and user.id = ${userInfo.id})`, // 수정 필요
           },
-        )
-        .then((res) => {
-          if (res.data === "") {
-            setFollowing([]);
-          } else {
-            setFollowing(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      // get follower
-      axios
-        .post(
+        );
+        if (res.data === "") {
+          setFollowing([]);
+        } else {
+          setFollowing(res.data);
+        }
+      };
+      const getFollower = async (userInfo) => {
+        // get follower
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -351,17 +335,26 @@ export default function Profile() {
             table: "user",
             where: `id in(SELECT follower_id FROM following, user WHERE following.following_id = ${userInfo.id} and user.id = ${userInfo.id})`, // 수정 필요
           },
-        )
-        .then((res) => {
-          if (res.data === "") {
-            setFollower([]);
-          } else {
-            setFollower(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
+        );
+        if (res.data === "") {
+          setFollower([]);
+        } else {
+          setFollower(res.data);
+        }
+      };
+      try {
+        getUserInfo().then((userInfo) => {
+          setUser(userInfo);
+          isRelated(userInfo);
+          getUserLocationInfoLikeDesc(userInfo);
+          getUserLocationInfoDataDesc(userInfo);
+          getUserLocationInfoLoc();
+          getFollowing(userInfo);
+          getFollower(userInfo);
         });
+      } catch (e) {
+        console.error(e);
+      }
     }
     // eslint-disable-next-line
   }, []);
@@ -514,9 +507,7 @@ export default function Profile() {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          handleFollow(queryParams.get("user")).then((res) =>
-                            console.log(res),
-                          );
+                          handleFollow(queryParams.get("user"));
                         }}
                         sx={{
                           fontSize: "0.8vh",
@@ -540,7 +531,6 @@ export default function Profile() {
                         }}
                         onClick={() => {
                           navigate("/setting/change");
-                          window.location.reload();
                         }}
                       />
                     ) : (
@@ -588,10 +578,7 @@ export default function Profile() {
               </div>
 
               <div className="profile-location-select">
-                <ProfileLocationSelect 
-                  setSearchLocation={setSearchLocation} 
-                  />
-
+                <ProfileLocationSelect setSearchLocation={setSearchLocation} />
               </div>
             </div>
           </Box>
@@ -699,7 +686,11 @@ export default function Profile() {
                   ""
                 ) : (
                   <ImageCollection
-                    userLocationInfo={userLocationInfoLoc.find(item => item.loc === searchLocation).data}
+                    userLocationInfo={
+                      userLocationInfoLoc.find(
+                        (item) => item.loc === searchLocation,
+                      ).data
+                    }
                   />
                 )}
               </CustomTabPanel>

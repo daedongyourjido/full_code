@@ -47,8 +47,8 @@ function SimpleSlider(props) {
   return (
     <div className="board-slider">
       <Slider {...settings}>
-        {props.userLocationInfo.map((info) => (
-          <div>
+        {props.userLocationInfo.map((info, index) => (
+          <div key={index}>
             <img
               src={info.image}
               className="slider-image"

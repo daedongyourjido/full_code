@@ -60,7 +60,8 @@ export default function SignUpButton(props) {
                   const timeout = 10000;
                   async function fetchData() {
                     try {
-                      const res = await axios.post(
+                      // eslint-disable-next-line
+                      await axios.post(
                         "https://iclveynbwf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-signin",
                         {
                           // 로그인 API의 경우 type: 'signup'
@@ -71,7 +72,6 @@ export default function SignUpButton(props) {
                         },
                         { timeout },
                       );
-                      console.log(res);
                       navigate("/");
                     } catch (error) {
                       console.log("signup error : ", error);

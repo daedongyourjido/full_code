@@ -43,7 +43,7 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         loadingEnd: action.payload,
-      }
+      };
 
     default:
       return {

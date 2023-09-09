@@ -110,8 +110,8 @@ function Place() {
   };
 
   useEffect(() => {
-    axios
-      .post(
+    const getUserLocationInfoDesc = async () => {
+      const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
@@ -119,16 +119,11 @@ function Place() {
           table: "user, location",
           where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.created_at desc`,
         },
-      )
-      .then((res) => {
-        console.log("desc", res.data);
-        setUserLocationInfoDesc(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .post(
+      );
+      setUserLocationInfoDesc(res.data);
+    };
+    const getUserLocationInfoAsc = async () => {
+      const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
@@ -136,15 +131,11 @@ function Place() {
           table: "user, location",
           where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.created_at asc`,
         },
-      )
-      .then((res) => {
-        setUserLocationInfoAsc(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .post(
+      );
+      setUserLocationInfoAsc(res.data);
+    };
+    const getUserLocationInfo = async () => {
+      const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
@@ -152,14 +143,17 @@ function Place() {
           table: "user, location",
           where: `user.email = location.user_id and name='${lastPath}' ORDER BY location.like_count desc`,
         },
-      )
-      .then((res) => {
-        setUserLocationInfo(res.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      );
+      setUserLocationInfo(res.data);
+    };
+    try {
+      getUserLocationInfoDesc();
+      getUserLocationInfoAsc();
+      getUserLocationInfo();
+    } catch (e) {
+      console.error(e);
+    }
+    setIsLoading(false);
   }, [lastPath, isLoading]);
 
   return (
@@ -248,10 +242,14 @@ function Place() {
                     index={0}
                     className="post-tab-container"
                   >
-                    <ImageCollection
-                      userLocationInfo={userLocationInfoDesc}
-                      lastPath={lastPath}
-                    />
+                    {userLocationInfoDesc === undefined ? (
+                      ""
+                    ) : (
+                      <ImageCollection
+                        userLocationInfo={userLocationInfoDesc}
+                        lastPath={lastPath}
+                      />
+                    )}
                   </CustomTabPanel>
 
                   <CustomTabPanel // 오래된순
@@ -259,10 +257,14 @@ function Place() {
                     index={1}
                     className="post-tab-container"
                   >
-                    <ImageCollection
-                      userLocationInfo={userLocationInfoAsc}
-                      lastPath={lastPath}
-                    />
+                    {userLocationInfoAsc === undefined ? (
+                      ""
+                    ) : (
+                      <ImageCollection
+                        userLocationInfo={userLocationInfoAsc}
+                        lastPath={lastPath}
+                      />
+                    )}
                   </CustomTabPanel>
 
                   <CustomTabPanel // 추천순
@@ -270,10 +272,14 @@ function Place() {
                     index={2}
                     className="post-tab-container"
                   >
-                    <ImageCollection
-                      userLocationInfo={userLocationInfo}
-                      lastPath={lastPath}
-                    />
+                    {userLocationInfo === undefined ? (
+                      ""
+                    ) : (
+                      <ImageCollection
+                        userLocationInfo={userLocationInfo}
+                        lastPath={lastPath}
+                      />
+                    )}
                   </CustomTabPanel>
                 </div>
               )}

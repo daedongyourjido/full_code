@@ -103,34 +103,31 @@ export default function PostView(props) {
     if (props.open) {
       countRef.current = 1;
     }
-    axios
-      .post(
+    const getComments = async () => {
+      const res = await axios.post(
         "https://qnsxbq7cjf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-getComments",
         {
           location_id: props.info.id,
         },
-      )
-      .then((res) => {
-        let apiComments = [];
-        for (let i = 0; i < res.data.length; i++) {
-          apiComments.push({
-            user_id: res.data[i].from_id, // 댓글 작성자 id
-            nickname: res.data[i].nickname,
-            comment: res.data[i].content,
-            date: res.data[i].comment_time,
-            picture: res.data[i].picture,
-          });
-        }
-        setComments((prevComments) => [...prevComments, ...apiComments]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+      let apiComments = [];
+      for (let i = 0; i < res.data.length; i++) {
+        apiComments.push({
+          user_id: res.data[i].from_id, // 댓글 작성자 id
+          nickname: res.data[i].nickname,
+          comment: res.data[i].content,
+          date: res.data[i].comment_time,
+          picture: res.data[i].picture,
+        });
+      }
+      setComments((prevComments) => [...prevComments, ...apiComments]);
+    };
+    getComments();
   }, [props.open, props.info]);
 
   useEffect(() => {
-    axios
-      .post(
+    const getLikes = async () => {
+      const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
@@ -138,24 +135,17 @@ export default function PostView(props) {
           table: "user, heart",
           where: `user.email = heart.from_id and heart.post_id=${props.info.id}`,
         },
-      )
-      .then((res) => {
-        for (let i = 0; i < res.data.length; i++) {
-          // res에 내가 좋아요 누른 부분이 있다면 -> setLikeFlag true
-          if (res.data[i].email === sessionStorage.getItem("id")) {
-            console.log("내가 누른 좋아요");
-            setLikeFlag(true);
-            break;
-          }
+      );
+      for (let i = 0; i < res.data.length; i++) {
+        // res에 내가 좋아요 누른 부분이 있다면 -> setLikeFlag true
+        if (res.data[i].email === sessionStorage.getItem("id")) {
+          console.log("내가 누른 좋아요");
+          setLikeFlag(true);
+          break;
         }
-        // if (res.data.length > 0) {
-        //   setLikeFlag(true);
-        // }
-        console.log("likes : ", res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    };
+    getLikes();
     // eslint-disable-next-line
   }, []);
 
@@ -290,9 +280,6 @@ export default function PostView(props) {
                     className="profile_img"
                     src={props.info.picture}
                     onClick={() => {
-                      // window.open(
-                      //   `/profile?user=${props.info.email}`,
-                      //   "_blank",);
                       navigate(`/profile?user=${props.info.email}`);
                       window.location.reload();
                     }}
@@ -301,9 +288,6 @@ export default function PostView(props) {
                   <span
                     id="pro_p"
                     onClick={() => {
-                      // window.open(
-                      //   `/profile?user=${props.info.email}`,
-                      //   "_blank",);
                       navigate(`/profile?user=${props.info.email}`);
                       window.location.reload();
                     }}
@@ -331,19 +315,15 @@ export default function PostView(props) {
                     overflow: "auto",
                   }}
                 >
-                  {comments.map((info) => (
+                  {comments.map((info, index) => (
                     <>
-                      <ListItem alignItems="flex-start">
+                      <ListItem alignItems="flex-start" key={index}>
                         <ListItemAvatar>
                           <Avatar
                             alt="inpic"
                             src={info.picture}
                             className="comment-profile"
                             onClick={() => {
-                              // window.open(
-                              //   `/profile?user=${info.user_id}`,
-                              //   "_blank",
-                              // );
                               navigate(`/profile?user=${info.user_id}`);
                               window.location.reload();
                             }}
@@ -389,6 +369,7 @@ export default function PostView(props) {
                   <div className="like_and_location">
                     {
                       <IconButton
+                        disabled={sessionStorage.id === undefined}
                         onClick={handleLike}
                         style={
                           !likeFlag

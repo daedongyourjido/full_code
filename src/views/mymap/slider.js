@@ -29,8 +29,8 @@ export default function A(props) {
   useEffect(() => {
     if (props.placeImages) {
       setComponents(
-        props.placeImages.map((item) => () => (
-          <div style={{ height: "550px", width: "550px" }}>
+        props.placeImages.map((item, index) => () => (
+          <div key={index} style={{ height: "550px", width: "550px" }}>
             <div className="container">
               <img className="iimg" alt="iPhone_01" src={item} />
             </div>

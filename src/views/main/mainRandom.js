@@ -84,8 +84,8 @@ function Content(props) {
   ) : (
     <Slider {...settings}>
       {images[_name] ? (
-        images[_name].map((ele) => (
-          <div>
+        images[_name].map((ele, index) => (
+          <div key={index}>
             <img
               className="randomImages"
               src={ele.image}
@@ -105,7 +105,7 @@ function MainRandom(props) {
   const [name, setName] = useState("Welcome to 대동유어지도");
   const [infos, setInfos] = useState({});
   // const [login, setLogin] = useState('false');
-  const loadingEnd = useSelector(state => state.loadingEnd);
+  const loadingEnd = useSelector((state) => state.loadingEnd);
   const _name = props.name;
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -156,11 +156,10 @@ function MainRandom(props) {
       });
     };
 
-      fetchData().catch((err) => {
-        console.log(err);
-      });
-      setIsLoading(false);
-    
+    fetchData().catch((err) => {
+      console.log(err);
+    });
+    setIsLoading(false);
   }, [dispatch, _location, infos, loadingEnd]);
 
   useEffect(() => {

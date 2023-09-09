@@ -92,40 +92,49 @@ function AfterLogin(props) {
       setNotifications(res);
     });
   }, []);
-  const openModal = (info) => {
-    axios
-      .post(
+  const openModal = async (info) => {
+    try {
+      let a = (
+        await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user",
+            where: `email like '%${searchText}%' or nickname like '%${searchText}%'`,
+          },
+        )
+      ).data;
+      let b = (
+        await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "following",
+          },
+        )
+      ).data;
+      a = a.filter(function (itemA) {
+        return !b.some(function (itemB) {
+          return itemA.id === itemB.following_id;
+        });
+      });
+      setSearchResult(a);
+      let c = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
           columns: "*",
-          table: "user",
-          where: `email like '%${searchText}%' or nickname like '%${searchText}%'`,
+          table: "location",
+          where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
         },
-      )
-      .then((res) => {
-        setSearchResult(res.data);
-        axios
-          .post(
-            "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-            {
-              DML: "SELECT",
-              columns: "*",
-              table: "location",
-              where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
-            },
-          )
-          .then((res) => {
-            setSearchLocationResult(res.data);
-            setIsModalOpen(true);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+      setSearchLocationResult(c.data);
+      setIsModalOpen(true);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   // 모달 닫기 함수
@@ -163,7 +172,7 @@ function AfterLogin(props) {
       navigate(`/profile?user=${target.email}`);
       window.location.reload();
     } catch (e) {
-      console.log("follow error", e);
+      console.error("follow error", e);
     }
   };
 
@@ -355,9 +364,7 @@ function AfterLogin(props) {
         variant="contained"
         sx={{ backgroundColor: "#6EA4B4", marginRight: "20px" }}
         onClick={() => {
-          // window.open("/write", "_blank");
           navigate("/write");
-          window.location.reload();
         }}
       >
         게시물 올리기
@@ -469,7 +476,6 @@ function AfterLogin(props) {
         }}
         onClick={() => {
           navigate(`/profile?user=${sessionStorage.id}`);
-          window.location.reload();
         }}
         alt={"..."}
       />
@@ -529,9 +535,7 @@ export default function Bar(props) {
                 width: "100px",
               }}
               onClick={() => {
-                // window.open("/", "_blank");
                 navigate("/");
-                window.location.reload();
               }}
             >
               대동유어지도

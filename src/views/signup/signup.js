@@ -30,31 +30,29 @@ function SignUpDupCheckButton(props) {
             color: "#045369",
             width: "35ch",
           }}
-          onClick={() => {
+          onClick={async () => {
             /** 계정 중복 확인 api 추가 **/
-            axios
-              .post(
+            try {
+              const res = await axios.post(
                 "https://iclveynbwf.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-signin",
                 {
                   // 중복 확인 API의 경우 type: 'duplication'
                   type: "duplication",
                   id: props.id,
                 },
-              )
-              .then((res) => {
-                // 계정이 DB에 존재함
-                if (res.data.duplicated) {
-                  props.setIdDupCheck(true); // 중복일 경우 true
-                }
-                // 계정이 DB에 존재하지 않음
-                else {
-                  props.setIdDupCheck(false); // 중복 아닐 경우 false
-                  props.setIdFix(true);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+              );
+              // 계정이 DB에 존재함
+              if (res.data.duplicated) {
+                props.setIdDupCheck(true); // 중복일 경우 true
+              }
+              // 계정이 DB에 존재하지 않음
+              else {
+                props.setIdDupCheck(false); // 중복 아닐 경우 false
+                props.setIdFix(true);
+              }
+            } catch (e) {
+              console.error(e);
+            }
           }}
         >
           중복체크

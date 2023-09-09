@@ -62,7 +62,6 @@ export default function FollowerModal(props) {
                       alt="Remy Sharp"
                       src={ele.picture}
                       onClick={() => {
-                        // window.open(`/profile?user=${ele.email}`, "_blank");
                         navigate(`/profile?user=${ele.email}`);
                         window.location.reload();
                       }}

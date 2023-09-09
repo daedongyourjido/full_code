@@ -32,7 +32,8 @@ export const KakaoMap = (props) => {
 
   // 1336 x 843
 
-  useEffect(() => {  // 지도 크기 동적 지정
+  useEffect(() => {
+    // 지도 크기 동적 지정
     const handleResize = () => {
       if (window.innerWidth < 1350 && window.innerHeight < 860) {
         // 너비 높이 둘다 줄어들떄
@@ -77,10 +78,11 @@ export const KakaoMap = (props) => {
     [],
   );
 
-  useEffect(() => {  // 히트맵 정보 가져오기
-    for (let i = 0; i < 16; i++) {
-      axios
-        .post(
+  useEffect(() => {
+    // 히트맵 정보 가져오기
+    const getHitmap = async () => {
+      for (let i = 0; i < 16; i++) {
+        const res = await axios.post(
           "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
           {
             DML: "SELECT",
@@ -88,18 +90,14 @@ export const KakaoMap = (props) => {
             table: "user, location",
             where: `user.email = location.user_id and name='${heatMap[i].location}' ORDER BY location.created_at desc`,
           },
-        )
-        .then((res) => {
-          const temp = [...heatMap];
-          temp[i].num = res.data.length;
-          setHeatMap(temp);
-          console.log("heatmap loading end");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    // eslint-disable-next-line 
+        );
+        const temp = [...heatMap];
+        temp[i].num = res.data.length;
+        setHeatMap(temp);
+      }
+    };
+    getHitmap();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
