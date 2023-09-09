@@ -88,7 +88,6 @@ function AfterLogin(props) {
       }
     };
     getNotifications().then((res) => {
-      console.log(res);
       setNotifications(res);
     });
   }, []);
@@ -476,6 +475,7 @@ function AfterLogin(props) {
         }}
         onClick={() => {
           navigate(`/profile?user=${sessionStorage.id}`);
+          window.location.reload();
         }}
         alt={"..."}
       />
