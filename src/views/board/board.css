@@ -170,23 +170,21 @@ body {
 }
 
 .post-title {
-  display: flex;
   flex-direction: row;
   white-space: nowrap;
-  margin-bottom: -3vh;
+  margin: 5px 5px -3vh;
 }
 
 .post-like {
-  display: flex;
+  margin: 10px;
   flex-direction: row;
   white-space: nowrap;
 }
 
 .post-location {
-  display: flex;
   flex-direction: row;
   white-space: nowrap;
-  margin-top: -3vh;
+  margin: -3vh 5px 5px;
 }
 
 /* .post-mouseover p {
