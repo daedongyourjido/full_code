@@ -214,7 +214,6 @@ export const KakaoMap = (props) => {
           "mouseover",
           function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });
-
             setName(name);
           },
         );

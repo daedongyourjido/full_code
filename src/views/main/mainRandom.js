@@ -58,13 +58,13 @@ function Loading() {
 function Content(props) {
   const images = useSelector((state) => state.images);
 
-  useEffect(() => {
-    for(const key in images){
-      if(images[key].length > 2)
-        images[key] = images[key].slice(0, 2);
-    }
-    console.log(images);
-  }, [images]);
+  // useEffect(() => {
+  //   for(const key in images){
+  //     if(images[key].length > 2)
+  //       images[key] = images[key].slice(0, 2);
+  //   }
+  //   console.log(images);
+  // }, [images]);
 
   const settings = {
     infinite: true,
