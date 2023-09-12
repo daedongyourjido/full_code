@@ -121,7 +121,7 @@ export const KakaoMap = (props) => {
     };
 
     const map = new kakao.maps.Map(mapContainer, mapOption);
-    const customOverlay = new kakao.maps.CustomOverlay({});
+    // const customOverlay = new kakao.maps.CustomOverlay({});
 
     const displayArea = (coordinates, name) => {
       let path = [];
