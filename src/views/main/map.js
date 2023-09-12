@@ -62,7 +62,7 @@ export const KakaoMap = (props) => {
   }, [lat, lng]);
 
   const [name, setName] = useState("대동YOUR지도");
-  const [_name, _setName] = useState("");
+  // const [_name, _setName] = useState("");
 
   const customStyle = useMemo(
     () => [
