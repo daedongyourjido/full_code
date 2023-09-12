@@ -65,8 +65,8 @@ function Content(props) {
 
   useEffect(() => {
     for(const key in images){
-      if(images[key].length > 4)
-        images[key] = images[key].slice(0, 4);
+      if(images[key].length > 6)
+        images[key] = images[key].slice(0, 6);
     }
     console.log(images);
   }, [images]);
