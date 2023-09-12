@@ -57,14 +57,19 @@ function Loading() {
 
 function Content(props) {
   const images = useSelector((state) => state.images);
+  // const [images, setImages] = useState([]);
 
-  // useEffect(() => {
-  //   for(const key in images){
-  //     if(images[key].length > 2)
-  //       images[key] = images[key].slice(0, 2);
-  //   }
-  //   console.log(images);
-  // }, [images]);
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
+  useEffect(() => {
+    for(const key in images){
+      if(images[key].length > 4)
+        images[key] = images[key].slice(0, 4);
+    }
+    console.log(images);
+  }, [images]);
 
   const settings = {
     infinite: true,
@@ -86,6 +91,7 @@ function Content(props) {
     boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
   };
   const _name = props.name;
+
 
   return (
     <Slider {...settings}>

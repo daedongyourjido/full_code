@@ -29,6 +29,7 @@ export const KakaoMap = (props) => {
     { location: "ulsan", num: 100 },
     { location: "sejong", num: 100 },
   ]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // 1336 x 843
 
