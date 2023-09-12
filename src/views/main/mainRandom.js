@@ -111,7 +111,6 @@ function MainRandom(props) {
   const [name, setName] = useState("Welcome to 대동유어지도");
   const [infos, setInfos] = useState({});
   // const [login, setLogin] = useState('false');
-  const loadingEnd = useSelector((state) => state.loadingEnd);
   const _name = props.name;
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -168,11 +167,6 @@ function MainRandom(props) {
     console.log("check");
     // eslint-disable-next-line
   }, [dispatch, infos]);
-
-  useEffect(() => {
-    console.log(infos);
-
-  }, [isLoading]);
 
   useEffect(() => {
     if (_name === "seoul") setName("서울");
