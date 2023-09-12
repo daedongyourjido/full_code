@@ -223,13 +223,13 @@ export const KakaoMap = (props) => {
         );
         
 
-        kakao.maps.event.addListener(
-          polygon,
-          "mousemove",
-          function (mouseEvent) {
-            polygon.setOptions({ fillColor: "#09f" });
-          },
-        );
+        // kakao.maps.event.addListener(
+        //   polygon,
+        //   "mousemove",
+        //   function (mouseEvent) {
+        //     polygon.setOptions({ fillColor: "#09f" });
+        //   },
+        // );
 
         kakao.maps.event.addListener(polygon, "mouseout", function () {
           for (let i = 0; i < 16; i++) {
