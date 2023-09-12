@@ -59,18 +59,6 @@ function Content(props) {
   const images = useSelector((state) => state.images);
   // const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
-
-  useEffect(() => {
-    for(const key in images){
-      if(images[key].length > 6)
-        images[key] = images[key].slice(0, 6);
-    }
-    console.log(images);
-  }, [images]);
-
   const settings = {
     infinite: true,
     /**@MARK: 2로 지정하니 이미지 두 번 나와서 1로 바꿔뒀어요**/
@@ -92,6 +80,9 @@ function Content(props) {
   };
   const _name = props.name;
 
+  useEffect(() => {
+    console.log(_name);
+  }, [_name])
 
   return (
     <Slider {...settings}>

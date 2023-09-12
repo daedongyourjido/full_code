@@ -62,6 +62,7 @@ export const KakaoMap = (props) => {
   }, [lat, lng]);
 
   const [name, setName] = useState("대동YOUR지도");
+  const [_name, _setName] = useState("");
 
   const customStyle = useMemo(
     () => [
@@ -214,9 +215,13 @@ export const KakaoMap = (props) => {
           "mouseover",
           function (mouseEvent) {
             polygon.setOptions({ fillColor: "#09f" });
-            setName(name);
+            setTimeout(() => {
+              setName(name);
+            }, 300)
+            
           },
         );
+        
 
         kakao.maps.event.addListener(
           polygon,
