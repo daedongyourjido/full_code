@@ -80,10 +80,6 @@ function Content(props) {
   };
   const _name = props.name;
 
-  useEffect(() => {
-    console.log(_name);
-  }, [_name])
-
   return (
     <Slider {...settings}>
       {images[_name] ? (
@@ -161,7 +157,6 @@ function MainRandom(props) {
       console.log(err);
     });
     setIsLoading(false);
-    console.log("check");
     // eslint-disable-next-line
   }, [dispatch, infos]);
 
