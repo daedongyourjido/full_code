@@ -56,8 +56,16 @@ function Loading() {
 }
 
 function Content(props) {
-  const isLoading = props.isLoading;
   const images = useSelector((state) => state.images);
+
+  useEffect(() => {
+    for(const key in images){
+      if(images[key].length > 5)
+        images[key] = images[key].slice(0, 5);
+    }
+    console.log(images);
+  }, [images]);
+
   const settings = {
     infinite: true,
     /**@MARK: 2로 지정하니 이미지 두 번 나와서 1로 바꿔뒀어요**/
@@ -79,9 +87,7 @@ function Content(props) {
   };
   const _name = props.name;
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <Slider {...settings}>
       {images[_name] ? (
         images[_name].map((ele, index) => (
@@ -134,7 +140,6 @@ function MainRandom(props) {
   useEffect(() => {
     if (Object.keys(infos).length !== 0) {
       dispatch(setImages(infos));
-      console.log("dispatched");
       return;
     }
 
@@ -160,7 +165,14 @@ function MainRandom(props) {
       console.log(err);
     });
     setIsLoading(false);
-  }, [dispatch, _location, infos, loadingEnd]);
+    console.log("check");
+    // eslint-disable-next-line
+  }, [dispatch, infos]);
+
+  useEffect(() => {
+    console.log(infos);
+
+  }, [isLoading]);
 
   useEffect(() => {
     if (_name === "seoul") setName("서울");
