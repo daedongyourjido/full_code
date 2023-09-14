@@ -34,7 +34,6 @@ function Image_Collection(props) {
   // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
-    window.location.reload();
   };
 
   return (

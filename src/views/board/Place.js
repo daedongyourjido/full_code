@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { TbBuildingCommunity } from "react-icons/tb";
 import { BsPinMap } from "react-icons/bs";
 import { MdFoodBank } from "react-icons/md";
+import { RiUserFollowFill } from "react-icons/ri"
 import SimpleSlider from "./slider";
 import ImageCollection from "./image_Collection";
 import axios from "axios";
@@ -17,6 +18,8 @@ import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
 // import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 function a11yProps(index) {
@@ -70,6 +73,8 @@ function Place() {
   const [userLocationInfo, setUserLocationInfo] = useState([]);
   const [userLocationInfoDesc, setUserLocationInfoDesc] = useState([]);
   const [userLocationInfoAsc, setUserLocationInfoAsc] = useState([]);
+  const [userLocationInfoFollow, setUserLocationInfoFollow] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [location, setLocation] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const deleteDialogOpen = useSelector((state) => state.deleteDialogOpen);
@@ -110,6 +115,47 @@ function Place() {
   };
 
   useEffect(() => {
+    const getFollowing = async () => {
+      const res = await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "SELECT",
+          columns: "*",
+          table: "user",
+          where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, 
+        },
+      );
+      if (res.data === "") setFollowing([]);
+      else setFollowing(res.data);
+
+    };
+    getFollowing();
+  }, [])
+
+  useEffect(() => {
+    const getUserLocationInfoFollow = async () => {
+      let temp = [];
+      for(let i=0; i<following.length; i++) {
+          const res = await axios.post(
+            "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+            {
+              DML: "SELECT",
+              columns: "*",
+              table: "user, location",
+              where: `user.email = location.user_id and location.user_id='${following[i].email}' and name='${lastPath}' ORDER BY location.created_at desc`,
+            },
+          );
+          temp = temp.concat(res.data);
+      }
+      setUserLocationInfoFollow(temp);
+    };
+    getUserLocationInfoFollow();
+
+  }, [following]);
+
+  
+
+  useEffect(() => {
     const getUserLocationInfoDesc = async () => {
       const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
@@ -146,10 +192,14 @@ function Place() {
       );
       setUserLocationInfo(res.data);
     };
+
+    
+
     try {
       getUserLocationInfoDesc();
       getUserLocationInfoAsc();
       getUserLocationInfo();
+
     } catch (e) {
       console.error(e);
     }
@@ -230,6 +280,19 @@ function Place() {
                     iconPosition="start"
                     label="추천순"
                   />
+                  <Tab
+                    icon={
+                      <RiUserFollowFill
+                        color={"white"}
+                        {...a11yProps(3)}
+                        id="icon3"
+                        size="45px"
+                      />
+                    }
+                    sx={{ color: "white" }}
+                    iconPosition="start"
+                    label="팔로우"
+                  />
                 </Tabs>
               </div>
 
@@ -277,6 +340,21 @@ function Place() {
                     ) : (
                       <ImageCollection
                         userLocationInfo={userLocationInfo}
+                        lastPath={lastPath}
+                      />
+                    )}
+                  </CustomTabPanel>
+
+                  <CustomTabPanel // 팔로우한 유저 게시물
+                    value={value}
+                    index={3}
+                    className="post-tab-container"
+                  >
+                    {userLocationInfoDesc === undefined ? (
+                      ""
+                    ) : (
+                      <ImageCollection
+                        userLocationInfo={userLocationInfoFollow}
                         lastPath={lastPath}
                       />
                     )}

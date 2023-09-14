@@ -25,7 +25,6 @@ function SimpleSlider(props) {
     prevArrow: <ArrowBackIosNewIcon sx={{ color: "white", width: "2vw" }} />,
     nextArrow: <ArrowForwardIosIcon sx={{ color: "white", width: "2vw" }} />,
   };
-  console.log(props);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태를 저장할 state
   const [modalInfo, setModalInfo] = useState(null);
   // 모달 열기 함수
