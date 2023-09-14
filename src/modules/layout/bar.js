@@ -38,7 +38,6 @@ function BeforeLogin(props) {
         padding: "10px",
       }}
     >
-      <SearchField />
       <LoginPageButton
         className="before-login-btn"
         font={props.font}
