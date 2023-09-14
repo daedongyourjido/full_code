@@ -137,3 +137,7 @@
 .fade-out {
   animation: fadeOut 500ms ease-in-out;
 }
+
+.kakao-map {
+  cursor: pointer;
+}
