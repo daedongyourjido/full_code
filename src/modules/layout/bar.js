@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import SearchField from "../../modules/components/searchField";
 import LoginPageButton from "../../views/login/loginPageButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Modal from "react-modal";

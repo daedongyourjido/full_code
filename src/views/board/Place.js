@@ -18,7 +18,6 @@ import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 // import FiberNewIcon from '@mui/icons-material/FiberNew';
 
@@ -150,7 +149,7 @@ function Place() {
       setUserLocationInfoFollow(temp);
     };
     getUserLocationInfoFollow();
-
+// eslint-disable-next-line
   }, [following]);
 
   
