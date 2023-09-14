@@ -12,6 +12,7 @@ export default function LoginPageButton(props) {
         borderColor: props.font,
         color: props.font,
         height: 40,
+        marginLeft: 1
       }}
       onClick={() => {
         navigate("/login");

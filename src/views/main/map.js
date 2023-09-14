@@ -93,6 +93,7 @@ export const KakaoMap = (props) => {
           },
         );
         const temp = [...heatMap];
+        console.log(res.data);
         temp[i].num = res.data.length;
         setHeatMap(temp);
       }

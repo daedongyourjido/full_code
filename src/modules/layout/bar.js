@@ -25,6 +25,65 @@ import PostView from "../../views/board/postView";
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchLocationResult, setSearchLocationResult] = useState([]);
+  const customOverlayStyle = {
+    overlay: {
+      zIndex: 9999, // 모달을 최상위 레이어에 표시
+    },
+  };
+
+  const openModal = async (info) => {
+    try {
+      let a = (
+        await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user",
+            where: `email like '%${searchText}%' or nickname like '%${searchText}%'`,
+          },
+        )
+      ).data;
+      let b = (
+        await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "following",
+          },
+        )
+      ).data;
+      a = a.filter(function (itemA) {
+        return !b.some(function (itemB) {
+          return itemA.id === itemB.following_id;
+        });
+      });
+      setSearchResult(a);
+      let c = await axios.post(
+        "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+        {
+          DML: "SELECT",
+          columns: "*",
+          table: "location",
+          where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
+        },
+      );
+      setSearchLocationResult(c.data);
+      setIsModalOpen(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // 모달 닫기 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div
@@ -37,6 +96,90 @@ function BeforeLogin(props) {
         padding: "10px",
       }}
     >
+      <Paper
+        component="form"
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+          width: "15vw",
+          height: "32px",
+        }}
+      >
+        <InputBase
+          data-cy="search"
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="검색"
+          inputProps={{ "aria-label": "search google maps" }}
+          onInput={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+        <IconButton
+          data-cy="search-btn"
+          onClick={openModal}
+          type="button"
+          sx={{ p: "10px" }}
+          aria-label="search"
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        className="modal-content"
+        overlayClassName="modal-overlay"
+        style={customOverlayStyle} // 오버레이 스타일을 적용
+      >
+        <Box className="result-container">
+          <Typography variant="h6" gutterBottom>
+            사용자 검색 결과
+          </Typography>
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "background.paper",
+              cursor: "pointer",
+            }}
+          >
+            {searchResult.length > 0 ? (
+              searchResult.map((value, index) => {
+                const labelId = `checkbox-list-label-${value}`;
+
+                return (
+                  <ListItem
+                    key={value}
+                    sx={{ marginBottom: "2vh", width: "35vw" }}
+                    disablePadding
+                  >
+                    <Avatar src={value.picture} />
+                    <ListItemText
+                      id={labelId}
+                      primary={`${value.nickname}`}
+                      sx={{ marginLeft: "1vw", fontSize: "1.5vh" }}
+                    />
+                    <ListItemText
+                      id={labelId}
+                      primary={`${value.email}`}
+                      sx={{ fontSize: "1.5vh" }}
+                    />
+                  </ListItem>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </List>
+
+          <Typography variant="h6" gutterBottom>
+            게시물 검색 결과
+          </Typography>
+
+          <ImageCollection userLocationInfo={searchLocationResult} />
+        </Box>
+      </Modal>
       <LoginPageButton
         className="before-login-btn"
         font={props.font}
