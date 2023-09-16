@@ -24,6 +24,7 @@ export default function LoginButton(props) {
             {
               id: props.id,
               password: props.pw,
+              type: "create",
             },
           );
           let statusCode = 0;
@@ -48,6 +49,7 @@ export default function LoginButton(props) {
                 sessionStorage.setItem("name", res.data.nickname);
                 sessionStorage.setItem("picture", res.data.picture);
                 sessionStorage.setItem("_key", res.data.key);
+                sessionStorage.setItem("token", res.data.token);
                 navigate("/");
               }
               break;

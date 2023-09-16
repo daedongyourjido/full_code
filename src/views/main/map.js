@@ -17,17 +17,17 @@ export const KakaoMap = (props) => {
     { location: "incheon", num: 100, heat: "5" },
     { location: "daejeon", num: 100, heat: "5" },
     { location: "busan", num: 100, heat: "5" },
-    { location: "jeonnam", num: 100, heat: "5"  },
-    { location: "jeonbuk", num: 100, heat: "5"  },
-    { location: "chungbuk", num: 100, heat: "5"  },
-    { location: "chungnam", num: 100, heat: "5"  },
-    { location: "gangwon", num: 100, heat: "5"  },
-    { location: "gyeongnam", num: 100, heat: "5"  },
-    { location: "gyeongbuk", num: 100, heat: "5"  },
-    { location: "jeju", num: 100, heat: "5"  },
-    { location: "daegu", num: 100, heat: "5"  },
-    { location: "ulsan", num: 100, heat: "5"  },
-    { location: "sejong", num: 100, heat: "5"  },
+    { location: "jeonnam", num: 100, heat: "5" },
+    { location: "jeonbuk", num: 100, heat: "5" },
+    { location: "chungbuk", num: 100, heat: "5" },
+    { location: "chungnam", num: 100, heat: "5" },
+    { location: "gangwon", num: 100, heat: "5" },
+    { location: "gyeongnam", num: 100, heat: "5" },
+    { location: "gyeongbuk", num: 100, heat: "5" },
+    { location: "jeju", num: 100, heat: "5" },
+    { location: "daegu", num: 100, heat: "5" },
+    { location: "ulsan", num: 100, heat: "5" },
+    { location: "sejong", num: 100, heat: "5" },
   ]);
 
   // 1336 x 843
@@ -236,9 +236,8 @@ export const KakaoMap = (props) => {
 
         // route path 동적 지정
         kakao.maps.event.addListener(polygon, "click", function () {
-          
-            const url = "/board/" + name;
-            navigate(url);
+          const url = "/board/" + name;
+          navigate(url);
         });
       }
     };

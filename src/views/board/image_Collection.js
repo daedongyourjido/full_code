@@ -54,15 +54,21 @@ function Image_Collection(props) {
                 <div className="post-mouseover">
                   <div className="post-title">
                     <ChatBubbleIcon sx={{ height: "2vh", marginTop: "2vh" }} />
-                    <span style={{position: "relative", bottom: "0.8vh"}}>{info.title}</span>
+                    <span style={{ position: "relative", bottom: "0.8vh" }}>
+                      {info.title}
+                    </span>
                   </div>
                   <div className="post-like">
                     <FavoriteIcon sx={{ height: "2vh", marginTop: "2.1vh" }} />
-                    <span style={{position: "relative", bottom: "0.5vh"}}>{info.like_count}</span>
+                    <span style={{ position: "relative", bottom: "0.5vh" }}>
+                      {info.like_count}
+                    </span>
                   </div>
                   <div className="post-location">
                     <FmdGoodIcon sx={{ height: "2vh", marginTop: "2.2vh" }} />
-                    <span style={{position: "relative", bottom: "0.5vh"}}>{info.name}</span>
+                    <span style={{ position: "relative", bottom: "0.5vh" }}>
+                      {info.name}
+                    </span>
                   </div>
                 </div>
               ) : (
