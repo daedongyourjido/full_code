@@ -18,35 +18,91 @@ import Write from "./views/write/write.js";
 import MyMap from "./views/mymap/mymap.js";
 import ChangeUserInfo from "./views/change-user-info/changeUserInfo.js";
 import { List } from "@mui/material";
+import {useEffect, useState} from "react";
+import { Container, Typography } from '@mui/material';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  const viewStyle = {
+    textAlign: 'center',
+    marginTop: '2rem',
+    color: 'white',
+    fontFamily: 'Arial, sans-serif'
+  };
+
+  const mobileContainer = {
+    display: 'grid',
+    placeItems: 'center',
+    height: '100vh'
+  }
+
+  // 화면 크기를 감지하는 함수
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  // 컴포넌트가 마운트될 때와 화면 크기가 변경될 때 화면 크기를 감지
+  useEffect(() => {
+    handleResize(); // 초기 설정
+
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 리스너를 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/setting" element={<Setting />} />
-        <Route path="/setting/change" element={<ChangePw />} />
-        <Route path="/setting/withdraw" element={<Withdraw />} />
-        <Route
-          path={"/setting/change-user-info"}
-          element={<ChangeUserInfo />}
-        />
-        <Route path="/verify/send" element={<NeedVerify />} />
-        <Route path="/verify" element={<Verify />} />
-        <Route path="/find" element={<FindPw />} />
-        <Route path="find/send" element={<NeedResetPw />} />
-        <Route path="find/reset" element={<ResetPw />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/write" element={<Write />} />
-        <Route path={"/board/:place"} element={<Place />} />
-        <Route path={"/mymap/:List"} element={<List />} />
-        {/* ? */}
-        <Route path="/mymap" element={<MyMap />} />
-      </Routes>
-    </BrowserRouter>
-  );
+      <>
+        {isMobile ? (
+            <div style={mobileContainer}>
+              <Container maxWidth="sm" style={viewStyle}>
+                <Typography variant="h4" gutterBottom>
+                  현재 모바일 환경에서
+                </Typography>
+                <Typography variant="h4" gutterBottom>
+                  실행 중입니다.
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  대동유어지도는 PC 화면에서만 제공됩니다.
+                </Typography>
+              </Container>
+            </div>
+        ) : (
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/setting" element={<Setting />} />
+                  <Route path="/setting/change" element={<ChangePw />} />
+                  <Route path="/setting/withdraw" element={<Withdraw />} />
+                  <Route
+                      path={"/setting/change-user-info"}
+                      element={<ChangeUserInfo />}
+                  />
+                  <Route path="/verify/send" element={<NeedVerify />} />
+                  <Route path="/verify" element={<Verify />} />
+                  <Route path="/find" element={<FindPw />} />
+                  <Route path="find/send" element={<NeedResetPw />} />
+                  <Route path="find/reset" element={<ResetPw />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/write" element={<Write />} />
+                  <Route path={"/board/:place"} element={<Place />} />
+                  <Route path={"/mymap/:List"} element={<List />} />
+                  {/* ? */}
+                  <Route path="/mymap" element={<MyMap />} />
+                </Routes>
+              </BrowserRouter>
+        )}
+      </>
+  )
 }
 
 export default App;

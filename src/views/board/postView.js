@@ -150,6 +150,10 @@ export default function PostView(props) {
   }, []);
 
   async function addComment() {
+    if (sessionStorage._key === undefined) {
+      alert("로그인 후 댓글 작성 가능합니다");
+      return null;
+    }
     try {
       // @알림 - 댓글
       // eslint-disable-next-line
@@ -172,11 +176,6 @@ export default function PostView(props) {
 
       setComments([...comments, newComment]);
       document.getElementById("comment_ipt").value = "";
-
-      if (sessionStorage._key === undefined) {
-        alert("로그인 후 댓글 작성 가능합니다");
-        return null;
-      }
 
       await axios.post(
         "https://8ymn2iwfoj.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-add-comment",
