@@ -57,6 +57,7 @@ export default function FollowingModal(props) {
                       src={ele.picture}
                       onClick={() => {
                         navigate(`/profile?user=${ele.email}`);
+                        window.location.reload()
                       }}
                     />
                   </IconButton>
