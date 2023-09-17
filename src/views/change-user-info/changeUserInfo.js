@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Bar from "../../modules/layout/bar.js";
-import InputField from "../../modules/components/inputField";
-import SettingContainer from "../../views/setting/settingContainer.js";
+import Bar from "@modules/layout/bar.js";
+import InputField from "@modules/components/inputField";
+import SettingContainer from "@views/setting/settingContainer.js";
 import MainPageButton from "../main/mainPageButton.js";
 import ChangeButton from "./changeButton.js";
-import "./change-user-info.css";
+import "@styles/views/change-user-info/change-user-info.css";
 
 function ChangeUserInfo() {
   function ChangeUserInfoBox() {

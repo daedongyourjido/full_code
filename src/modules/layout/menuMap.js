@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import geo from "../../assets/data/geo.json";
+import geo from "@assets/data/geo.json";
 
 export default function MenuMap(props) {
   const { kakao } = window;

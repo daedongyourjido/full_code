@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import LoginPageButton from "../../views/login/loginPageButton";
+import LoginPageButton from "@views/login/loginPageButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Modal from "react-modal";
 import InputBase from "@mui/material/InputBase";
@@ -15,13 +15,13 @@ import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from "@mui/material";
 import { Chat, Notifications, PersonAdd, Recommend } from "@mui/icons-material";
-import "./search.css";
-import "../../views/board/board.css";
-import ImageCollection from "../../views/board/image_Collection";
+import "@styles/modules/layout/search.css";
+import "@styles/views/board/board.css";
+import ImageCollection from "@views/board/image_Collection";
 import Popover from "@mui/material/Popover";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { ListItemButton } from "@mui/joy";
-import PostView from "../../views/board/postView";
+import PostView from "@views/board/postView";
 
 function BeforeLogin(props) {
   const navigate = useNavigate();

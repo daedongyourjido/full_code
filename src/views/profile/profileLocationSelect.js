@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import geo from "../../assets/data/geo.json";
-import "./profile.css";
+import geo from "@assets/data/geo.json";
+import "@styles/views/profile/profile.css";
 
 export const ProfileLocationSelect = (props) => {
   const { kakao } = window;
@@ -67,7 +67,6 @@ export const ProfileLocationSelect = (props) => {
           const temp = [...heatMap];
           temp[i].num = res.data.length;
           setHeatMap(temp);
-          console.log("heatmap loading end");
         } catch (e) {
           console.error(e);
         }

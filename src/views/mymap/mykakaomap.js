@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import geo from "../../assets/data/geo.json";
-import "../main/main.css";
+import geo from "@assets/data/geo.json";
+import "@styles/views/main/main.css";
 
 export const MyKakaoMap = (props) => {
   const { kakao } = window;

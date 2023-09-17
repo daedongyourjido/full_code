@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./postView.css";
+import "@styles/views/board/postView.css";
 import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import { setDeleteDialogOpen } from "../../redux/actions";
+import { setDeleteDialogOpen } from "@redux/actions";
 
 export default function PostView(props) {
   const navigate = useNavigate();

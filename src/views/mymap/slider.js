@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ComponentCarousel from "react-awesome-component-carousel";
-import "./image.css";
+import "@styles/views/mymap/image.css";
 
 const component1 = () => (
   <div style={{ height: "550px", width: "550px" }}>

@@ -1,10 +1,10 @@
-import "./board.css";
-import "../../styles/App.css";
+import "@styles/views/board/board.css";
+import "@styles/App.css";
 import React, { useState, useEffect } from "react";
 import { TbBuildingCommunity } from "react-icons/tb";
 import { BsPinMap } from "react-icons/bs";
 import { MdFoodBank } from "react-icons/md";
-import { RiUserFollowFill } from "react-icons/ri"
+import { RiUserFollowFill } from "react-icons/ri";
 import SimpleSlider from "./slider";
 import ImageCollection from "./image_Collection";
 import axios from "axios";
@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Bar from "../../modules/layout/bar.js";
+import Bar from "@modules/layout/bar.js";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
@@ -121,38 +121,35 @@ function Place() {
           DML: "SELECT",
           columns: "*",
           table: "user",
-          where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`, 
+          where: `id in(SELECT following_id FROM following, user WHERE following.follower_id = ${sessionStorage._key} and user.id = ${sessionStorage._key})`,
         },
       );
       if (res.data === "") setFollowing([]);
       else setFollowing(res.data);
-
     };
     getFollowing();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const getUserLocationInfoFollow = async () => {
       let temp = [];
-      for(let i=0; i<following.length; i++) {
-          const res = await axios.post(
-            "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-            {
-              DML: "SELECT",
-              columns: "*",
-              table: "user, location",
-              where: `user.email = location.user_id and location.user_id='${following[i].email}' and name='${lastPath}' ORDER BY location.created_at desc`,
-            },
-          );
-          temp = temp.concat(res.data);
+      for (let i = 0; i < following.length; i++) {
+        const res = await axios.post(
+          "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
+          {
+            DML: "SELECT",
+            columns: "*",
+            table: "user, location",
+            where: `user.email = location.user_id and location.user_id='${following[i].email}' and name='${lastPath}' ORDER BY location.created_at desc`,
+          },
+        );
+        temp = temp.concat(res.data);
       }
       setUserLocationInfoFollow(temp);
     };
     getUserLocationInfoFollow();
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [following]);
-
-  
 
   useEffect(() => {
     const getUserLocationInfoDesc = async () => {
@@ -192,13 +189,10 @@ function Place() {
       setUserLocationInfo(res.data);
     };
 
-    
-
     try {
       getUserLocationInfoDesc();
       getUserLocationInfoAsc();
       getUserLocationInfo();
-
     } catch (e) {
       console.error(e);
     }

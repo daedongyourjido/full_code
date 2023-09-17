@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import MenuMap from "../../modules/layout/menuMap.js";
+import MenuMap from "@modules/layout/menuMap.js";
 import { useNavigate } from "react-router-dom";
-import InputField from "../../modules/components/inputField.js";
+import InputField from "@modules/components/inputField.js";
 import Button from "@mui/material/Button";
-import "./findPw.css";
-import Bar from "../../modules/layout/bar.js";
+import "@styles/views/findpw/findPw.css";
+import Bar from "@modules/layout/bar.js";
 
 export function IdSearchButton(props) {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import geo from "../../assets/data/geo.json";
+import geo from "@assets/data/geo.json";
 import MainRandom from "./mainRandom.js";
 import "./mainPageButton";
 
@@ -17,17 +17,17 @@ export const KakaoMap = (props) => {
     { location: "incheon", num: 100, heat: "5" },
     { location: "daejeon", num: 100, heat: "5" },
     { location: "busan", num: 100, heat: "5" },
-    { location: "jeonnam", num: 100, heat: "5"  },
-    { location: "jeonbuk", num: 100, heat: "5"  },
-    { location: "chungbuk", num: 100, heat: "5"  },
-    { location: "chungnam", num: 100, heat: "5"  },
-    { location: "gangwon", num: 100, heat: "5"  },
-    { location: "gyeongnam", num: 100, heat: "5"  },
-    { location: "gyeongbuk", num: 100, heat: "5"  },
-    { location: "jeju", num: 100, heat: "5"  },
-    { location: "daegu", num: 100, heat: "5"  },
-    { location: "ulsan", num: 100, heat: "5"  },
-    { location: "sejong", num: 100, heat: "5"  },
+    { location: "jeonnam", num: 100, heat: "5" },
+    { location: "jeonbuk", num: 100, heat: "5" },
+    { location: "chungbuk", num: 100, heat: "5" },
+    { location: "chungnam", num: 100, heat: "5" },
+    { location: "gangwon", num: 100, heat: "5" },
+    { location: "gyeongnam", num: 100, heat: "5" },
+    { location: "gyeongbuk", num: 100, heat: "5" },
+    { location: "jeju", num: 100, heat: "5" },
+    { location: "daegu", num: 100, heat: "5" },
+    { location: "ulsan", num: 100, heat: "5" },
+    { location: "sejong", num: 100, heat: "5" },
   ]);
 
   // 1336 x 843
@@ -93,7 +93,6 @@ export const KakaoMap = (props) => {
           },
         );
         const temp = [...heatMap];
-        console.log(res.data);
         temp[i].num = res.data.length;
         setHeatMap(temp);
       }
@@ -236,9 +235,8 @@ export const KakaoMap = (props) => {
 
         // route path 동적 지정
         kakao.maps.event.addListener(polygon, "click", function () {
-          
-            const url = "/board/" + name;
-            navigate(url);
+          const url = "/board/" + name;
+          navigate(url);
         });
       }
     };

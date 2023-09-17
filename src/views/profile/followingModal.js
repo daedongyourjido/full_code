@@ -28,7 +28,6 @@ export default function FollowingModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  console.log(props.following);
   return (
     <div>
       <div id="modalbtn">
@@ -58,7 +57,6 @@ export default function FollowingModal(props) {
                       src={ele.picture}
                       onClick={() => {
                         navigate(`/profile?user=${ele.email}`);
-                        window.location.reload();
                       }}
                     />
                   </IconButton>

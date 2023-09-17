@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import InputField from "../../modules/components/inputField.js";
+import InputField from "@modules/components/inputField.js";
 import ResetPwButton from "./resetPwButton.js";
 import LoginPageButton from "../login/loginPageButton.js";
-import "./resetPw.css";
-import Bar from "../../modules/layout/bar.js";
+import "@styles/views/resetpw/resetPw.css";
+import Bar from "@modules/layout/bar.js";
 
 function ResetPwBox() {
   const [pw, setPw] = useState("");

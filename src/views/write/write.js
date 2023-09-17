@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./write.css";
-import "../../styles/App.css";
+import "@styles/views/write/write.css";
+import "@styles/App.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import axios from "axios";

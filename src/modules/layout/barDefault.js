@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import SignUpPageButton from "../../views/signup/signupPageButton.js";
+import SignUpPageButton from "@views/signup/signupPageButton.js";
 
 export default function Bar() {
   const navigate = useNavigate();

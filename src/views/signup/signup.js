@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MenuMap from "../../modules/layout/menuMap.js";
-import InputField from "../../modules/components/inputField.js";
+import MenuMap from "@modules/layout/menuMap.js";
+import InputField from "@modules/components/inputField.js";
 import SignUpButton from "./signupButton.js";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -8,8 +8,8 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import LoginPageButton from "../login/loginPageButton.js";
-import "./signup.css";
-import Bar from "../../modules/layout/bar.js";
+import "@styles/views/signup/signup.css";
+import Bar from "@modules/layout/bar.js";
 
 // 아이디 중복 확인 버튼
 function SignUpDupCheckButton(props) {

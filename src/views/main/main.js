@@ -1,6 +1,8 @@
 import { KakaoMap } from "./map.js";
-import "./main.css";
-import Bar from "../../modules/layout/bar.js";
+import "@styles/views/main/main.css";
+// import Bar from "../../modules/layout/bar.js";
+import Bar from "@modules/layout/bar";
+
 
 function Main() {
   return (

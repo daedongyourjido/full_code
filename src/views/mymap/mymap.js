@@ -1,12 +1,10 @@
-// import StandardImageList from './profile';
-import BasicButtons from "../../modules/components/Button";
-import ImageAvatars from "../../modules/components/avatar";
+import BasicButtons from "@modules/components/Button";
+import ImageAvatars from "@modules/components/avatar";
 import A from "./slider";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { Link } from 'react-router-dom';
 import FollowingModal from "../profile/followingModal";
 import FollowerModal from "../profile/followerModal";
 import { MyKakaoMap } from "./mykakaomap";

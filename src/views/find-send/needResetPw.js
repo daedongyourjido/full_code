@@ -1,7 +1,7 @@
 import React from "react";
-import MenuMap from "../../modules/layout/menuMap.js";
+import MenuMap from "@modules/layout/menuMap.js";
 import MainPageButton from "../main/mainPageButton.js";
-import Bar from "../../modules/layout/bar.js";
+import Bar from "@modules/layout/bar.js";
 
 function NeedResetPwBox() {
   return (

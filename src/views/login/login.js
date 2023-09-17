@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpPageButton from "../signup/signupPageButton.js";
-import MenuMap from "../../modules/layout/menuMap.js";
+import MenuMap from "@modules/layout/menuMap.js";
 import Button from "@mui/material/Button";
 import LoginButton from "./loginButton.js";
-import InputField from "../../modules/components/inputField.js";
-import "./login.css";
-import Bar from "../../modules/layout/bar.js";
+import InputField from "@modules/components/inputField.js";
+import "@styles/views/login/login.css";
+import Bar from "@modules/layout/bar.js";
 
 function FindPwPageButton() {
   const navigate = useNavigate();

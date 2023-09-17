@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MenuMap from "../../modules/layout/menuMap.js";
+import MenuMap from "@modules/layout/menuMap.js";
 import MainPageButton from "../main/mainPageButton";
 
 function Text() {

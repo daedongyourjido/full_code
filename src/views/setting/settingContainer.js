@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./setting.css";
+import "@styles/views/setting/setting.css";
 
 export default function SettingContainer(props) {
   const navigate = useNavigate();

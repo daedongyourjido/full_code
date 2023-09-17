@@ -11,12 +11,12 @@ import { TbBuildingCommunity } from "react-icons/tb";
 import ImageCollection from "../board/image_Collection";
 import { Avatar, Grid, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../../redux/actions";
-import Bar from "../../modules/layout/bar.js";
+import { setLogin } from "@redux/actions";
+import Bar from "@modules/layout/bar.js";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Button from "@mui/material/Button";
 import { ProfileLocationSelect } from "./profileLocationSelect.js";
-import "./profile.css";
+import "@styles/views/profile/profile.css";
 
 function a11yProps(index) {
   return {
