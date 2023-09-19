@@ -4,7 +4,7 @@ import "./commands";
 
 describe("2. 게시물 수정", () => {
   beforeEach(() => {
-    cy.visit("localhost:3000/");
+    cy.visit("localhost:9000/");
   });
 
   it("UPDATE(board에서 접근)", () => {
