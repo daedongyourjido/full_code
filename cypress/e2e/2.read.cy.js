@@ -21,7 +21,8 @@ describe("2. 게시물 확인", () => {
     cy.log("===== profile read 테스트 통과 =====");
   });
 
-  it("READ(profile)", () => {
+  it("READ(search)", () => {
+    cy.wait(1500);
     cy.get('[data-cy="search"]').type("test");
     cy.get('[data-cy="search-btn"]').click();
     cy.readPost();

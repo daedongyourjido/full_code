@@ -1,6 +1,6 @@
 import "./commands";
 
-describe("2. 게시물 확인", () => {
+describe("4. 게시물 삭제", () => {
   beforeEach(() => {
     cy.visit("localhost:9000/");
     cy.login("sjhong98@icloud.com", "mango");

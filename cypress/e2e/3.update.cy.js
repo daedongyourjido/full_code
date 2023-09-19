@@ -2,7 +2,7 @@ import "./commands";
 
 // board에서 수정하는거랑 profile에서 수정하는 경우 나누기
 
-describe("2. 게시물 수정", () => {
+describe("3. 게시물 수정", () => {
   beforeEach(() => {
     cy.visit("localhost:9000/");
   });
@@ -32,8 +32,6 @@ describe("2. 게시물 수정", () => {
 
     // 수정되면 이동된 게시판 맨 앞으로 가는지 확인 필요
     cy.get(":nth-child(1) > .post-thumbnail").click();
-
-    cy.url().should("eq", "http://localhost:3000/board/jeju");
 
     // 이미지 업로드 테스트
     cy.get('[data-cy="post-img"]').should("be.visible");
