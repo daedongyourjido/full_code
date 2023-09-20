@@ -4,7 +4,7 @@ import "cypress-file-upload";
 
 describe("1. 게시물 업로드", () => {
   before(() => {
-    cy.visit("localhost:9000/");
+    cy.visit("https://dyz.co.kr/");
   });
 
   it("CREATE", () => {
