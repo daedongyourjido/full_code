@@ -4,7 +4,7 @@ import "./commands";
 
 describe("2. 게시물 확인", () => {
   beforeEach(() => {
-    cy.visit("localhost:9000/");
+    cy.visit("https://dyz.co.kr/");
     cy.login("sjhong98@icloud.com", "mango");
   });
 

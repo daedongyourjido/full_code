@@ -2,7 +2,7 @@ import "./commands";
 
 describe("4. 게시물 삭제", () => {
   beforeEach(() => {
-    cy.visit("localhost:9000/");
+    cy.visit("https://dyz.co.kr/");
     cy.login("sjhong98@icloud.com", "mango");
   });
 
