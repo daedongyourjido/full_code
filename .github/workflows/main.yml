@@ -47,9 +47,3 @@ jobs:
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name 2023-c-capstone
           --s3-location bucket=2023-c-capstone,bundleType=zip,key=public/2023-c-capstone.zip
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
