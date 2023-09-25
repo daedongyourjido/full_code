@@ -38,7 +38,7 @@ function LoginBox() {
   return (
     <div className="login-box-css">
       <div className="login-upper-box">
-        <h1 style={{ color: "#000000" }}>대동유어지도 TEST</h1>
+        <h1 style={{ color: "#000000" }}>대동유어지도</h1>
         <InputField
           dataId="login-id"
           setData={setId}
