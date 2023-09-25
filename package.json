@@ -45,8 +45,8 @@
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --hot",
+    "build": "npx prettier --write . && react-scripts build",
+    "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "e2e": "cypress run",
