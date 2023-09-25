@@ -55,7 +55,6 @@ function LoginBox() {
         {empty ? <p className="input_error">모두 입력해주세요</p> : <p></p>}
         <LoginButton setEmpty={setEmpty} id={id} pw={pw} />
         <div className="gap" />
-        <FindPwPageButton />
       </div>
 
       <div className="login-lower-box">
