@@ -153,6 +153,9 @@ function BeforeLogin(props) {
                     key={value}
                     sx={{ marginBottom: "2vh", width: "35vw" }}
                     disablePadding
+                    onClick={() => {
+                      navigate(`/profile?user=${value.email}`);
+                    }}
                   >
                     <Avatar src={value.picture} />
                     <ListItemText
@@ -577,6 +580,9 @@ function AfterLogin(props) {
                     }
                     sx={{ marginBottom: "2vh", width: "35vw" }}
                     disablePadding
+                    onClick={() => {
+                      navigate(`/profile?user=${value.email}`);
+                    }}
                   >
                     <Avatar src={value.picture} />
                     <ListItemText
