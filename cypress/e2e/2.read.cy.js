@@ -10,7 +10,7 @@ describe("2. 게시물 확인", () => {
 
   it("READ(board)", () => {
     // /board/seoul로 이동
-    cy.get('[data-cy="main"]').click(1040, 220);
+    cy.visit("https://dyz.co.kr/board/seoul");
     cy.readPost();
     cy.log("===== board read 테스트 통과 =====");
   });
