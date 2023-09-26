@@ -129,6 +129,8 @@ function MainRandom(props) {
     ];
   }, []);
 
+  
+
   useEffect(() => {
     if (Object.keys(infos).length !== 0) {
       dispatch(setImages(infos));
@@ -160,24 +162,46 @@ function MainRandom(props) {
     // eslint-disable-next-line
   }, [dispatch, infos]);
 
+  function throttle(func, delay) {
+    let throttling = false;
+    return function (...args) {
+      if (!throttling) {
+        throttling = true;
+        func.apply(this, args);
+        setTimeout(() => {
+          throttling = false;
+        }, delay);
+      }
+    };
+  }
+  
+    // throttle 함수를 사용하여 setName을 호출합니다.
+    const throttledSetName = throttle((value) => {
+      if (_name === "seoul") setName("서울");
+      else if (_name === "gyeonggi") setName("경기");
+      else if (_name === "incheon") setName("인천");
+      else if (_name === "daejeon") setName("대전");
+      else if (_name === "busan") setName("부산");
+      else if (_name === "jeonnam") setName("전라남도");
+      else if (_name === "jeonbuk") setName("전라북도");
+      else if (_name === "chungbuk") setName("충청북도");
+      else if (_name === "chungnam") setName("충청남도");
+      else if (_name === "gangwon") setName("강원");
+      else if (_name === "gyeongnam") setName("경상남도");
+      else if (_name === "gyeongbuk") setName("경상북도");
+      else if (_name === "jeju") setName("제주");
+      else if (_name === "daegu") setName("대구");
+      else if (_name === "ulsan") setName("울산");
+      else if (_name === "sejong") setName("세종");
+    }, 1000); // 1초 동안 한 번만 호출합니다.
+
   useEffect(() => {
-    if (_name === "seoul") setName("서울");
-    else if (_name === "gyeonggi") setName("경기");
-    else if (_name === "incheon") setName("인천");
-    else if (_name === "daejeon") setName("대전");
-    else if (_name === "busan") setName("부산");
-    else if (_name === "jeonnam") setName("전라남도");
-    else if (_name === "jeonbuk") setName("전라북도");
-    else if (_name === "chungbuk") setName("충청북도");
-    else if (_name === "chungnam") setName("충청남도");
-    else if (_name === "gangwon") setName("강원");
-    else if (_name === "gyeongnam") setName("경상남도");
-    else if (_name === "gyeongbuk") setName("경상북도");
-    else if (_name === "jeju") setName("제주");
-    else if (_name === "daegu") setName("대구");
-    else if (_name === "ulsan") setName("울산");
-    else if (_name === "sejong") setName("세종");
-  }, [_name]); // props.name 값이 바뀔 때만 useEffect 실행
+    throttledSetName(_name);
+  }, [_name]);
+
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
 
   return (
     <div className="main-random">
