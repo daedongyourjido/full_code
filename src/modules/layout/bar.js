@@ -622,6 +622,7 @@ function AfterLogin(props) {
         }}
         onClick={() => {
           navigate(`/profile?user=${sessionStorage.id}`);
+          window.location.reload();
         }}
         alt={"..."}
       />
