@@ -230,43 +230,9 @@ export const KakaoMap = (props) => {
           polygon,
           "mouseover",
           function (mouseEvent) {
-            polygon.setOptions({ fillColor: "#09f" });
             setName(name);
           },
         );
-
-        kakao.maps.event.addListener(
-          polygon,
-          "mousemove",
-          function (mouseEvent) {
-            polygon.setOptions({ fillColor: "#09f" });
-          },
-        );
-
-        kakao.maps.event.addListener(polygon, "mouseout", function () {
-          for (let i = 0; i < 16; i++) {
-            if (heatMap.find((item) => item.location === name).num >= 20) {
-              polygon.setOptions({ fillColor: "#C1E2EC" });
-            } else if (
-              heatMap.find((item) => item.location === name).num >= 10
-            ) {
-              polygon.setOptions({ fillColor: "#8EC2D1" });
-            } else if (
-              heatMap.find((item) => item.location === name).num >= 9
-            ) {
-              polygon.setOptions({ fillColor: "#3E8A9E" });
-            } else if (
-              heatMap.find((item) => item.location === name).num >= 5
-            ) {
-              polygon.setOptions({ fillColor: "#1B7389" });
-            } else {
-              polygon.setOptions({ fillColor: "#12596C" });
-            }
-          }
-
-          customOverlay.setMap(null);
-        });
-
         // route path 동적 지정
         kakao.maps.event.addListener(polygon, "click", function () {
           const url = "/board/" + name;
