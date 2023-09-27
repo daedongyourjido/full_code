@@ -68,9 +68,9 @@ function BeforeLogin(props) {
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
-          columns: "*",
-          table: "location",
-          where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
+          columns: "location.id as id, name, location.created_at as created_at,  location.updated_at as updated_at, image, like_count, title, content, email, picture, nickname",
+          table: "location, user",
+          where: `location.user_id = user.email and (name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%')`,
         },
       );
       setSearchLocationResult(c.data);
