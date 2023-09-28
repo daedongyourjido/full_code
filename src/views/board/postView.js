@@ -26,6 +26,10 @@ export default function PostView(props) {
   const [likeFlag, setLikeFlag] = useState(false);
   const [imageSet, setImageSet] = useState("");
 
+  useEffect(() => {
+    console.log("==== postView Test ====\n", props.info);
+  }, []);
+
   async function handleLike(e) {
     try {
       e.preventDefault();

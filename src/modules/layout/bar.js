@@ -22,6 +22,7 @@ import Popover from "@mui/material/Popover";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { ListItemButton } from "@mui/joy";
 import PostView from "@views/board/postView";
+// import personImage from '../../assets/image/personImage.png';
 
 function BeforeLogin(props) {
   const navigate = useNavigate();
@@ -68,9 +69,9 @@ function BeforeLogin(props) {
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
-          columns: "*",
-          table: "location",
-          where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
+          columns: "location.id as id, name, location.created_at as created_at,  location.updated_at as updated_at, image, like_count, title, content, email, picture, nickname",
+          table: "location, user",
+          where: `location.user_id = user.email and (name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%')`,
         },
       );
       setSearchLocationResult(c.data);
@@ -207,10 +208,7 @@ function AfterLogin(props) {
     },
   };
 
-  // eslint-disable-next-line
-  async function handleAlarm() {
-    // @알림 - 나의 알림 수신
-  }
+
   useEffect(() => {
     const getNotifications = async () => {
       try {
@@ -235,6 +233,7 @@ function AfterLogin(props) {
       setNotifications(res);
     });
   }, []);
+
   const openModal = async (info) => {
     try {
       let a = (
@@ -268,11 +267,12 @@ function AfterLogin(props) {
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
         {
           DML: "SELECT",
-          columns: "*",
-          table: "location",
-          where: `name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%'`,
+          columns: "location.id as id, name, location.created_at as created_at,  location.updated_at as updated_at, image, like_count, title, content, email, picture, nickname",
+          table: "location, user",
+          where: `location.user_id = user.email and (name like '%${searchText}%' or title like '%${searchText}%' or content like '%${searchText}%')`,
         },
       );
+
       setSearchLocationResult(c.data);
       setIsModalOpen(true);
     } catch (e) {

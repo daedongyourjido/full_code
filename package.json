@@ -19,6 +19,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.8.1",
     "cypress-file-upload": "^5.0.8",
+    "file-loader": "^6.2.0",
     "google-map-react": "^2.2.0",
     "google-maps": "^4.3.3",
     "html-loader": "^4.2.0",
