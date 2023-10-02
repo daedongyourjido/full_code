@@ -27,7 +27,7 @@ function Pages() {
   useEffect(() => {
     const getTokenData = async () => {
       try {
-        await axios.post(
+        const res = await axios.post(
           "https://h8viqjk6ob.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-login",
           {
             type: "verify",
@@ -35,7 +35,6 @@ function Pages() {
           },
         );
       } catch (e) {
-        // 세션 만료시 로그아웃 처리
         sessionStorage.clear();
         window.location.reload();
       }

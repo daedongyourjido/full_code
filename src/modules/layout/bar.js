@@ -626,7 +626,6 @@ function AfterLogin(props) {
         }}
         alt={"..."}
       />
-      {/* <p style={{fontSize:'18px', cursor: 'pointer'}} onClick={()=>{navigate('/profile')}} >{sessionStorage.getItem('name')}</p> */}
       <LogoutIcon
         style={{ marginLeft: "15px", cursor: "pointer" }}
         onClick={() => {

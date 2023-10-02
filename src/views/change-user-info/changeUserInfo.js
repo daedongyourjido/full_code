@@ -21,7 +21,7 @@ function ChangeUserInfo() {
           </div>
         ) : (
           <div className="change-user-info-box">
-            <p style={{ fontSize: "20px" }}>프로필 수정</p>
+            <p style={{ fontSize: "20px" }}>닉네임 수정</p>
             <InputField setData={setName} label="닉네임 변경" type="text" />
             <ChangeButton
               name={name}
