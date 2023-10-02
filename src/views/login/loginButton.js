@@ -58,6 +58,7 @@ export default function LoginButton(props) {
               alert("아이디 혹은 패스워드 오류");
               break;
             default:
+              alert("아이디 혹은 패스워드 오류");
               break;
           }
         }
