@@ -25,7 +25,6 @@ function Pages() {
   const location = useLocation();
 
   useEffect(() => {
-      console.log(sessionStorage.token)
     const getTokenData = async () => {
         const res = await axios.post(
             "https://h8viqjk6ob.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-login",

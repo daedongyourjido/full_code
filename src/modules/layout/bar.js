@@ -387,12 +387,12 @@ function AfterLogin(props) {
     try {
       const res = await axios.post(
         "https://beyhjxqxv3.execute-api.us-east-2.amazonaws.com/default/2023-c-capstone-DAO",
-        {
-          DML: "SELECT",
-          columns: "*",
-          table: "location",
-          where: `id = ${data.postId}`,
-        },
+          {
+              DML: "SELECT",
+              columns: "location.id as id, name, location.created_at as created_at,  location.updated_at as updated_at, image, like_count, title, content, email, picture, nickname",
+              table: "location, user",
+              where: `location.user_id = user.email and location.id = ${data.postId}`
+          },
       );
       setModalInfo({
         ...res.data[0],
